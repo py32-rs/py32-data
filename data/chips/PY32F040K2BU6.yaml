@@ -1,0 +1,110 @@
+name: PY32F040K2BU6
+family: Mainstream
+line: PY32F040
+device_id: 1047
+keywords:
+  - DMA
+  - GPTM
+  - ADTM
+  - BasicTM
+  - Systic
+  - LPTIMER
+  - PWM
+  - WDG
+  - RTC
+  - USART
+  - I2C
+  - SPI
+  - I2S
+  - 12bitADCUnitsCHs
+  - LCD
+  - TempSensor
+  - CMP
+  - OPA
+packages:
+  - name: PY32F040K2BU6
+    package: QFN32(4*4)
+    pins: '28'
+memory:
+  - address: 134217728
+    kind: flash
+    name: BANK_1
+    settings:
+      erase_size: 128
+      erase_value: 0
+      write_size: 4
+    size: 131072
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 16384
+docs:
+  - name: PY32F040系列数据手册_Rev.0.7.pdf
+    title: Datasheet
+    type: datasheet
+    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F040系列数据手册_Rev.0.7.pdf
+cores:
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 0
+      - name: AES_LPUART1
+        number: 29
+    max_clock: 72000000
+    name: cm0p
+    nvic_priority_bits: 2
+    peripherals:
+      - address: 1342177280
+        name: GPIOA
+        rcc:
+          bus_clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          kernel_clock: GPIO
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          kind: gpio
+          version: common
+_raw:
+  12bitADCUnitsCHs: 1(10+5)
+  12bitDACUnitsCHs: '-'
+  ADTM: '1'
+  BasicTM: '2'
+  CAN20: '-'
+  CMP: '2'
+  DMA: 1/7
+  ESMC: '-'
+  FlashkB: '128'
+  GPTM: '6'
+  I2C: '2'
+  I2S: '2'
+  IO: '28'
+  LCD: 8*36/6*38
+  LED: '-'
+  LPTIMER: '1'
+  MaxCLKMHz: '72'
+  OPA: '2'
+  OperationTemp: -40~85
+  PWM: '16'
+  PackageSizemm: 4*4*0.75
+  PackageType: QFN32(4*4)
+  PartNo: PY32F040K2BU6
+  RTC: '1'
+  SDIO: '-'
+  SPI: '2'
+  SRAMkB: '16'
+  Systic: '1'
+  TempSensor: '1'
+  USART: '4'
+  USB20: '-'
+  WDG: '2'
+  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F040系列数据手册_Rev.0.7.pdf
+  id: 1047
+  pro_status: MP

@@ -1,0 +1,106 @@
+name: PY32F030K18T6
+family: Mainstream
+line: PY32F030
+device_id: 1233
+keywords:
+  - DMA
+  - GPTM
+  - ADTM
+  - Systic
+  - LPTIMER
+  - PWM
+  - WDG
+  - RTC
+  - USART
+  - I2C
+  - SPI
+  - 12bitADCUnitsCHs
+  - TempSensor
+  - CMP
+packages:
+  - name: PY32F030K18T6
+    package: LQFP32
+    pins: '28'
+memory:
+  - address: 134217728
+    kind: flash
+    name: BANK_1
+    settings:
+      erase_size: 128
+      erase_value: 0
+      write_size: 4
+    size: 65536
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 8192
+docs:
+  - name: PY32F030 系列数据手册_Rev1.18.pdf
+    title: Datasheet
+    type: datasheet
+    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F030 系列数据手册_Rev1.18.pdf
+cores:
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 0
+      - name: AES_LPUART1
+        number: 29
+    max_clock: 48000000
+    name: cm0p
+    nvic_priority_bits: 2
+    peripherals:
+      - address: 1342177280
+        name: GPIOA
+        rcc:
+          bus_clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          kernel_clock: GPIO
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          kind: gpio
+          version: common
+_raw:
+  12bitADCUnitsCHs: 1（10+2）
+  12bitDACUnitsCHs: '-'
+  ADTM: '1'
+  BasicTM: '-'
+  CAN20: '-'
+  CMP: '2'
+  DMA: 1/3
+  ESMC: '-'
+  FlashkB: '64'
+  GPTM: '4'
+  I2C: '1'
+  I2S: '-'
+  IO: '28'
+  LCD: '-'
+  LED: '-'
+  LPTIMER: '1'
+  MaxCLKMHz: '48'
+  OPA: '-'
+  OperationTemp: -40~85
+  PWM: '11'
+  PackageSizemm: 9*9*1.6
+  PackageType: LQFP32
+  PartNo: PY32F030K18T6
+  RTC: '1'
+  SDIO: '-'
+  SPI: '2'
+  SRAMkB: '8'
+  Systic: '1'
+  TempSensor: '1'
+  USART: '2'
+  USB20: '-'
+  WDG: '2'
+  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F030 系列数据手册_Rev1.18.pdf
+  id: 1233
+  pro_status: MP

@@ -21,7 +21,7 @@ keywords:
 packages:
   - name: PY32F030E18U6
     package: QFN24
-    pins: '23'
+    pins: 23
 memory:
   - address: 134217728
     kind: flash

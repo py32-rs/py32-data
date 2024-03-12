@@ -20,7 +20,7 @@ keywords:
 packages:
   - name: PY32F003W18S6
     package: SOP16
-    pins: '14'
+    pins: 14
 memory:
   - address: 134217728
     kind: flash

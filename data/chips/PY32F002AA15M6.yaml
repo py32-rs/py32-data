@@ -18,7 +18,7 @@ keywords:
 packages:
   - name: PY32F002AA15M6
     package: ESSOP10
-    pins: '8'
+    pins: 8
 memory:
   - address: 134217728
     kind: flash

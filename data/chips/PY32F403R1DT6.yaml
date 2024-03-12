@@ -24,7 +24,7 @@ keywords:
 packages:
   - name: PY32F403R1DT6
     package: LQFP64
-    pins: '51'
+    pins: 51
 memory:
   - address: 134217728
     kind: flash

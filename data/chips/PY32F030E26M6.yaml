@@ -21,7 +21,7 @@ keywords:
 packages:
   - name: PY32F030E26M6
     package: SSOP24
-    pins: '22'
+    pins: 22
 memory:
   - address: 134217728
     kind: flash

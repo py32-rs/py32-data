@@ -21,7 +21,7 @@ keywords:
 packages:
   - name: PY32F030K18U6
     package: QFN32(5*5)
-    pins: '30'
+    pins: 30
 memory:
   - address: 134217728
     kind: flash

@@ -18,7 +18,7 @@ keywords:
 packages:
   - name: PY32F002AL15S6
     package: SOP8
-    pins: '6'
+    pins: 6
 memory:
   - address: 134217728
     kind: flash

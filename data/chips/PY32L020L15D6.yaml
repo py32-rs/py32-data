@@ -17,7 +17,7 @@ keywords:
 packages:
   - name: PY32L020L15D6
     package: DFN8 (1.5*1.5)
-    pins: '7'
+    pins: 7
 memory:
   - address: 134217728
     kind: flash

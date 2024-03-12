@@ -18,7 +18,7 @@ keywords:
 packages:
   - name: PY32F002AF15U6
     package: QFN20
-    pins: '15'
+    pins: 15
 memory:
   - address: 134217728
     kind: flash

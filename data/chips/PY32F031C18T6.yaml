@@ -24,7 +24,7 @@ keywords:
 packages:
   - name: PY32F031C18T6
     package: LQFP48
-    pins: '44'
+    pins: 44
 memory:
   - address: 134217728
     kind: flash

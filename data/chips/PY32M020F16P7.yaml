@@ -20,7 +20,7 @@ keywords:
 packages:
   - name: PY32M020F16P7
     package: TSSOP20
-    pins: '18'
+    pins: 18
 memory:
   - address: 134217728
     kind: flash

@@ -20,7 +20,7 @@ keywords:
 packages:
   - name: PY32F003L28D6
     package: DFN8(2*3)
-    pins: '7'
+    pins: 7
 memory:
   - address: 134217728
     kind: flash

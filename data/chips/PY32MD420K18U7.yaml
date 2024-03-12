@@ -23,7 +23,7 @@ keywords:
 packages:
   - name: PY32MD420K18U7
     package: QFN32(4*4)
-    pins: '12'
+    pins: 12
 memory:
   - address: 134217728
     kind: flash

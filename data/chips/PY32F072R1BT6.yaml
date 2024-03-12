@@ -27,7 +27,7 @@ keywords:
 packages:
   - name: PY32F072R1BT6
     package: LQFP64
-    pins: '58'
+    pins: 58
 memory:
   - address: 134217728
     kind: flash

@@ -20,7 +20,7 @@ keywords:
 packages:
   - name: PY32MD310K18U7
     package: QFN32(5*5)
-    pins: '16'
+    pins: 16
 memory:
   - address: 134217728
     kind: flash

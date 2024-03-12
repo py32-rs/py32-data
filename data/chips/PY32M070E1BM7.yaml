@@ -25,7 +25,7 @@ keywords:
 packages:
   - name: PY32M070E1BM7
     package: SSOP24
-    pins: '22'
+    pins: 22
 memory:
   - address: 134217728
     kind: flash

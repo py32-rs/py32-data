@@ -25,7 +25,7 @@ keywords:
 packages:
   - name: PY32M070K1BU7
     package: QFN32(4*4)
-    pins: '28'
+    pins: 28
 memory:
   - address: 134217728
     kind: flash

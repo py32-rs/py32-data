@@ -26,7 +26,7 @@ keywords:
 packages:
   - name: PY32F071C1BU6
     package: QFN48
-    pins: '42'
+    pins: 42
 memory:
   - address: 134217728
     kind: flash

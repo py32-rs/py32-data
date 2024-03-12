@@ -24,7 +24,7 @@ keywords:
 packages:
   - name: PY32F403K1BU6
     package: QFN32(4*4)
-    pins: '28'
+    pins: 28
 memory:
   - address: 134217728
     kind: flash

@@ -18,7 +18,7 @@ keywords:
 packages:
   - name: PY32T020G16S7TU
     package: SOP28
-    pins: '26'
+    pins: 26
 memory:
   - address: 134217728
     kind: flash

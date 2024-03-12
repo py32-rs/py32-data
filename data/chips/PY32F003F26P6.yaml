@@ -20,7 +20,7 @@ keywords:
 packages:
   - name: PY32F003F26P6
     package: TSSOP20
-    pins: '18'
+    pins: 18
 memory:
   - address: 134217728
     kind: flash

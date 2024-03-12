@@ -1,0 +1,112 @@
+name: PY32F031H18
+family: Mainstream
+line: PY32F031
+device_id: 1547
+keywords:
+  - DMA
+  - GPTM
+  - ADTM
+  - BasicTM
+  - Systic
+  - LPTIMER
+  - PWM
+  - WDG
+  - RTC
+  - USART
+  - I2C
+  - SPI
+  - I2S
+  - 12bitADCUnitsCHs
+  - LCD
+  - TempSensor
+  - CMP
+  - OPA
+packages:
+  - name: PY32F031H18U6
+    package: QFN40
+    pins: 38
+memory:
+  - address: 134217728
+    kind: flash
+    name: BANK_1
+    settings:
+      erase_size: 128
+      erase_value: 0
+      write_size: 4
+    size: 65536
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 8192
+docs:
+  - name: PY32F031系列数据手册_Rev0.9 .pdf
+    title: Datasheet
+    type: datasheet
+    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F031系列数据手册_Rev0.9
+      .pdf
+cores:
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 0
+      - name: AES_LPUART1
+        number: 29
+    max_clock: 72000000
+    name: cm0p
+    nvic_priority_bits: 2
+    peripherals:
+      - address: 1342177280
+        name: GPIOA
+        rcc:
+          bus_clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          kernel_clock: GPIO
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          kind: gpio
+          version: common
+_raw:
+  12bitADCUnitsCHs: 1(10+5)
+  12bitDACUnitsCHs: '-'
+  ADTM: '1'
+  BasicTM: '1'
+  CAN20: '-'
+  CMP: '2'
+  DMA: 1/3
+  ESMC: '-'
+  FlashkB: '64'
+  GPTM: '4'
+  I2C: '2'
+  I2S: '1'
+  IO: '38'
+  LCD: 4*18/8*14
+  LED: '-'
+  LPTIMER: '1'
+  MaxCLKMHz: '72'
+  OPA: '2'
+  OperationTemp: -40~85
+  PWM: '11'
+  PackageSizemm: 5*5*0.75
+  PackageType: QFN40
+  PartNo: PY32F031H18U6
+  RTC: '1'
+  SDIO: '-'
+  SPI: '2'
+  SRAMkB: '8'
+  Systic: '1'
+  TempSensor: '1'
+  USART: '3'
+  USB20: '-'
+  WDG: '2'
+  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F031系列数据手册_Rev0.9
+    .pdf
+  id: 1547
+  pro_status: ES

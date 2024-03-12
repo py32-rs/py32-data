@@ -1,7 +1,7 @@
-name: PY32F002Ax15
-family: Low-Cost
-line: PY32F002A
-device_id: 1455
+name: PY32L020F15
+family: Low-Power
+line: PY32L020
+device_id: 1030
 keywords:
   - GPTM
   - ADTM
@@ -16,30 +16,12 @@ keywords:
   - TempSensor
   - CMP
 packages:
-  - name: PY32F002AA15M6
-    package: ESSOP10
-    pins: 8
-  - name: PY32F002AA15N6
-    package: MSOP10
-    pins: 8
-  - name: PY32F002AF15P6
+  - name: PY32L020F15P6
     package: TSSOP20
     pins: 18
-  - name: PY32F002AF15U6
+  - name: PY32L020F15U6
     package: QFN20
-    pins: 15
-  - name: PY32F002AL15S6
-    package: SOP8
-    pins: 6
-  - name: PY32F002AW15S6
-    package: SOP16
-    pins: 6
-  - name: PY32F002AW15U6
-    package: QFN16
-    pins: 15
-  - name: PY32F002BW15S6
-    package: SOP16
-    pins: 14
+    pins: 18
 memory:
   - address: 134217728
     kind: flash
@@ -48,16 +30,16 @@ memory:
       erase_size: 128
       erase_value: 0
       write_size: 4
-    size: 20480
+    size: 24576
   - address: 536870912
     kind: ram
     name: SRAM
     size: 3072
 docs:
-  - name: PY32F002A 系列数据手册_Rev1.0.pdf
+  - name: PY32L020系列数据手册_Rev1.1.pdf
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F002A 系列数据手册_Rev1.0.pdf
+    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32L020系列数据手册_Rev1.1.pdf
 cores:
   - dma_channels:
       - channel: 0
@@ -68,7 +50,7 @@ cores:
         number: 0
       - name: AES_LPUART1
         number: 29
-    max_clock: 24000000
+    max_clock: 48000000
     name: cm0p
     nvic_priority_bits: 2
     peripherals:
@@ -88,7 +70,7 @@ cores:
           kind: gpio
           version: common
 _raw:
-  12bitADCUnitsCHs: 1（5+2）
+  12bitADCUnitsCHs: 1(7+2)
   12bitDACUnitsCHs: '-'
   ADTM: '1'
   BasicTM: '-'
@@ -96,21 +78,21 @@ _raw:
   CMP: '2'
   DMA: '-'
   ESMC: '-'
-  FlashkB: '20'
+  FlashkB: '24'
   GPTM: '1'
   I2C: '1'
   I2S: '-'
-  IO: '8'
+  IO: '18'
   LCD: '-'
   LED: '-'
   LPTIMER: '1'
-  MaxCLKMHz: '24'
+  MaxCLKMHz: '48'
   OPA: '-'
   OperationTemp: -40~85
-  PWM: '7'
-  PackageSizemm: 4.9*6*1.6
-  PackageType: ESSOP10
-  PartNo: PY32F002AA15M6
+  PWM: '5'
+  PackageSizemm: 6.5*6.4*1.2
+  PackageType: TSSOP20
+  PartNo: PY32L020F15P6
   RTC: '-'
   SDIO: '-'
   SPI: '1'
@@ -120,6 +102,6 @@ _raw:
   USART: '1'
   USB20: '-'
   WDG: '1'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F002A 系列数据手册_Rev1.0.pdf
-  id: 1455
-  pro_status: MP
+  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32L020系列数据手册_Rev1.1.pdf
+  id: 1030
+  pro_status: ES

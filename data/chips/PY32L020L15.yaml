@@ -1,0 +1,103 @@
+name: PY32L020L15
+family: Low-Power
+line: PY32L020
+device_id: 1499
+keywords:
+  - GPTM
+  - ADTM
+  - Systic
+  - LPTIMER
+  - PWM
+  - WDG
+  - USART
+  - I2C
+  - SPI
+  - 12bitADCUnitsCHs
+  - TempSensor
+packages:
+  - name: PY32L020L15D6
+    package: DFN8 (1.5*1.5)
+    pins: 7
+memory:
+  - address: 134217728
+    kind: flash
+    name: BANK_1
+    settings:
+      erase_size: 128
+      erase_value: 0
+      write_size: 4
+    size: 24576
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 3072
+docs:
+  - name: PY32L020系列数据手册_Rev1.1.pdf
+    title: Datasheet
+    type: datasheet
+    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32L020系列数据手册_Rev1.1.pdf
+cores:
+  - dma_channels:
+      - channel: 0
+        dma: DMA1
+        name: DMA1_CH1
+    interrupts:
+      - name: WWDG
+        number: 0
+      - name: AES_LPUART1
+        number: 29
+    max_clock: 48000000
+    name: cm0p
+    nvic_priority_bits: 2
+    peripherals:
+      - address: 1342177280
+        name: GPIOA
+        rcc:
+          bus_clock: GPIO
+          enable:
+            field: GPIOAEN
+            register: GPIOENR
+          kernel_clock: GPIO
+          reset:
+            field: GPIOARST
+            register: GPIORSTR
+        registers:
+          block: GPIO
+          kind: gpio
+          version: common
+_raw:
+  12bitADCUnitsCHs: 1(4+2)
+  12bitDACUnitsCHs: '-'
+  ADTM: '1'
+  BasicTM: '-'
+  CAN20: '-'
+  CMP: '-'
+  DMA: '-'
+  ESMC: '-'
+  FlashkB: '24'
+  GPTM: '1'
+  I2C: '1'
+  I2S: '-'
+  IO: '7'
+  LCD: '-'
+  LED: '-'
+  LPTIMER: '1'
+  MaxCLKMHz: '48'
+  OPA: '-'
+  OperationTemp: -40~85
+  PWM: '4'
+  PackageSizemm: 1.5*1.5*0.55
+  PackageType: DFN8 (1.5*1.5)
+  PartNo: PY32L020L15D6
+  RTC: '-'
+  SDIO: '-'
+  SPI: '1'
+  SRAMkB: '3'
+  Systic: '1'
+  TempSensor: '1'
+  USART: '1'
+  USB20: '-'
+  WDG: '1'
+  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32L020系列数据手册_Rev1.1.pdf
+  id: 1499
+  pro_status: MP

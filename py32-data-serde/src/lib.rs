@@ -19,7 +19,7 @@ pub struct Chip {
     pub name: String,
     pub family: String,
     pub line: String,
-    pub die: String,
+    // pub die: String,
     pub device_id: u16,
     pub packages: Vec<chip::Package>,
     pub memory: Vec<chip::Memory>,

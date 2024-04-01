@@ -1,13 +1,13 @@
 use std::path::Path;
 
-mod chips;
-mod dma;
-mod docs;
-mod gpio_af;
-mod header;
-mod interrupts;
-mod memory;
-mod rcc;
+// mod chips;
+// mod dma;
+// mod docs;
+// mod gpio_af;
+// mod header;
+// mod interrupts;
+// mod memory;
+// mod rcc;
 mod registers;
 
 #[macro_export]
@@ -83,11 +83,19 @@ fn main() -> anyhow::Result<()> {
 
     std::fs::create_dir_all("build/data/chips")?;
 
-    //for name in &chip_meta_files {
-    //    let meta_yaml_path = data_dir.join(&format!("chips/{}.yaml", name));
-    //    let content = std::fs::read_to_string(&meta_yaml_path)?;
-    //    let mut chip: py32_data_serde::Chip = serde_yaml::from_str(&content)?;
-    //}
+    for name in &chip_meta_files {
+        let meta_yaml_path = data_dir.join(&format!("chips/{}.yaml", name));
+        let content = std::fs::read_to_string(&meta_yaml_path)?;
+        let mut chip: py32_data_serde::Chip = serde_yaml::from_str(&content)?;
+
+        println!(
+            "chip: {}, peripherals: {}",
+            chip.name,
+            chip.cores[0].peripherals.len()
+        );
+        let dump = serde_json::to_string_pretty(&chip)?;
+        std::fs::write(format!("build/data/chips/{name}.json"), dump)?;
+    }
 
     /*
     stopwatch.section("Parsing headers");
@@ -132,9 +140,9 @@ fn main() -> anyhow::Result<()> {
         memories,
         docs,
     )?;
+    */
 
     stopwatch.stop();
-    */
 
     Ok(())
 }

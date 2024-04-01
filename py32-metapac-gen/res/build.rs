@@ -33,8 +33,8 @@ fn main() {
         .get_one()
     {
         Ok(x) => x,
-        Err(GetOneError::None) => panic!("No stm32xx Cargo feature enabled"),
-        Err(GetOneError::Multiple) => panic!("Multiple stm32xx Cargo features enabled"),
+        Err(GetOneError::None) => panic!("No py32xx Cargo feature enabled"),
+        Err(GetOneError::Multiple) => panic!("Multiple py32xx Cargo features enabled"),
     }
     .strip_prefix("CARGO_FEATURE_")
     .unwrap()
@@ -54,9 +54,9 @@ fn main() {
         crate_dir.display(),
         chip_core_name
     );
-    println!("cargo:rustc-env=py32_METAPAC_PAC_PATH=chips/{}/pac.rs", chip_core_name);
+    println!("cargo:rustc-env=PY32_METAPAC_PAC_PATH=chips/{}/pac.rs", chip_core_name);
     println!(
-        "cargo:rustc-env=py32_METAPAC_METADATA_PATH=chips/{}/metadata.rs",
+        "cargo:rustc-env=PY32_METAPAC_METADATA_PATH=chips/{}/metadata.rs",
         chip_core_name
     );
 

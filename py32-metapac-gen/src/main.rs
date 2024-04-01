@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use py32_metapac_gen::*;
 
 fn main() {
-    let out_dir = PathBuf::from("build/stm32-metapac");
+    let out_dir = PathBuf::from("build/py32-metapac");
     let data_dir = PathBuf::from("build/data");
 
     let args: Vec<String> = args().collect();
@@ -19,7 +19,7 @@ fn main() {
             .filter(|s| s.ends_with(".json"))
             .map(|s| s.strip_suffix(".json").unwrap().to_string())
             .collect(),
-        _ => panic!("usage: stm32-metapac-gen [chip?]"),
+        _ => panic!("usage: py32-metapac-gen [chip?]"),
     };
 
     chips.sort();

@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = [
+    "py32-data-gen",
+    "py32-data-serde",
+    "py32-metapac-gen",
+    "py32-data-macros",
+]
+exclude = [
+    "build"
+]

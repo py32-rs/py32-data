@@ -1,0 +1,45 @@
+- name: GPIOA
+  address: 0x50000000
+  registers:
+    block: GPIO
+    kind: gpio
+    version: common
+  rcc:
+    bus_clock: GPIO
+    kernel_clock: GPIO
+    enable:
+      register: IOPENR
+      field: GPIOAEN
+    reset:
+      register: IOPRSTR
+      field: GPIOARST
+- name: GPIOB
+  address: 0x50000400
+  registers:
+    block: GPIO
+    kind: gpio
+    version: common
+  rcc:
+    bus_clock: GPIO
+    kernel_clock: GPIO
+    enable:
+      register: IOPENR
+      field: GPIOBEN
+    reset:
+      register: IOPRSTR
+      field: GPIOBRST
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    block: RCC
+    kind: rcc
+    version: f030
+  pins:
+    - pin: PA1
+      signal: MCO
+      af: 0 # TODO
+
+
+
+

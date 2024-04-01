@@ -28,6 +28,8 @@ pub struct Chip {
 }
 
 pub mod chip {
+    use std::collections::BTreeMap;
+
     use serde::{Deserialize, Serialize};
 
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -80,6 +82,14 @@ pub mod chip {
         pub nvic_priority_bits: Option<u8>,
         pub interrupts: Vec<core::Interrupt>,
         pub dma_channels: Vec<core::DmaChannels>,
+
+        // include directives, the same as the ch32-data project
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub include_interrupts: Option<String>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub include_dma_channels: Option<BTreeMap<String, String>>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub include_peripherals: Option<Vec<String>>,
     }
 
     pub mod core {
@@ -105,14 +115,18 @@ pub mod chip {
         pub mod peripheral {
             use serde::{Deserialize, Serialize};
 
-            #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+            #[derive(
+                Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+            )]
             pub struct Registers {
                 pub kind: String,
                 pub version: String,
                 pub block: String,
             }
 
-            #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+            #[derive(
+                Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+            )]
             pub struct Rcc {
                 pub bus_clock: String,
                 pub kernel_clock: rcc::KernelClock,
@@ -126,20 +140,35 @@ pub mod chip {
             pub mod rcc {
                 use serde::{Deserialize, Serialize};
 
-                #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+                #[derive(
+                    Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+                )]
                 pub struct Field {
                     pub register: String,
                     pub field: String,
                 }
 
-                #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+                #[derive(
+                    Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+                )]
                 #[serde(untagged)]
                 pub enum KernelClock {
                     Clock(String),
                     Mux(Field),
                 }
 
-                #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize, Default)]
+                #[derive(
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                    Hash,
+                    PartialOrd,
+                    Ord,
+                    Serialize,
+                    Deserialize,
+                    Default,
+                )]
                 pub enum StopMode {
                     #[default]
                     Stop1, // Peripheral prevents chip from entering Stop1
@@ -196,13 +225,17 @@ pub mod chip {
                 }
             }
 
-            #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+            #[derive(
+                Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+            )]
             pub struct Interrupt {
                 pub signal: String,
                 pub interrupt: String,
             }
 
-            #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+            #[derive(
+                Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize,
+            )]
             pub struct DmaChannel {
                 pub signal: String,
                 #[serde(skip_serializing_if = "Option::is_none")]
@@ -284,8 +317,12 @@ mod tests {
     fn test_all() {
         use rayon::prelude::*;
 
-        Path::new(CHIPS_DIR).read_dir().unwrap().par_bridge().for_each(|chip| {
-            check_file(chip.unwrap().path());
-        });
+        Path::new(CHIPS_DIR)
+            .read_dir()
+            .unwrap()
+            .par_bridge()
+            .for_each(|chip| {
+                check_file(chip.unwrap().path());
+            });
     }
 }

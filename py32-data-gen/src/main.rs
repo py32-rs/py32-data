@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 // mod chips;
 // mod dma;
@@ -88,6 +88,36 @@ fn main() -> anyhow::Result<()> {
         let content = std::fs::read_to_string(&meta_yaml_path)?;
         let mut chip: py32_data_serde::Chip = serde_yaml::from_str(&content)?;
 
+        // handle include_x
+        for core in &mut chip.cores {
+            if let Some(inc_path) = core.include_interrupts.take() {
+                let interrupts_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
+                let content = std::fs::read_to_string(&interrupts_yaml_path)?;
+                let interrupts: HashMap<String, u8> = serde_yaml::from_str(&content)?;
+                let mut interrupts: Vec<(String, u8)> = interrupts.into_iter().collect();
+                interrupts.sort_by_key(|(_, number)| *number);
+
+                // println!("interrupts: {:#?}", interrupts);
+                for (name, number) in interrupts {
+                    core.interrupts
+                        .push(py32_data_serde::chip::core::Interrupt { name, number });
+                }
+                // core.interrupts.extend(interrupts.interrupts);
+            }
+
+            // append peripherals from includes
+            if let Some(inc_paths) = &mut core.include_peripherals.take() {
+                for inc_path in inc_paths {
+                    let peripheral_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
+                    let content = std::fs::read_to_string(&peripheral_yaml_path)?;
+                    let peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
+                        serde_yaml::from_str(&content)?;
+                    core.peripherals.extend(peripherals);
+                }
+            }
+        }
+
+        // generate chip json
         println!(
             "chip: {}, peripherals: {}",
             chip.name,

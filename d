@@ -47,7 +47,6 @@ case "$CMD" in
     ;;
     gen)
         rm -rf build/data
-        echo "TODO: More chips to be added"
         cargo run -p py32-data-gen && cargo run -p py32-metapac-gen
     ;;
     ci)

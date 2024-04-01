@@ -77,7 +77,7 @@ cores:
           version: common
 _raw:
   12bitADCUnitsCHs: 1(10+8)
-  12bitDACUnitsCHs: 1（2）
+  12bitDACUnitsCHs: 1(2)
   ADTM: '1'
   BasicTM: '2'
   CAN20: CAN 2.0

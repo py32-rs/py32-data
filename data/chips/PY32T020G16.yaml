@@ -65,9 +65,9 @@ cores:
         registers:
           block: GPIO
           kind: gpio
-          version: common
+          version: t020
 _raw:
-  12bitADCUnitsCHs: 1（10+3）
+  12bitADCUnitsCHs: 1(10+3)
   12bitDACUnitsCHs: '-'
   ADTM: '1'
   BasicTM: '-'

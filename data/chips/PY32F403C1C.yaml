@@ -73,7 +73,7 @@ cores:
           kind: gpio
           version: common
 _raw:
-  12bitADCUnitsCHs: 3（10+3）
+  12bitADCUnitsCHs: 3(10+3)
   12bitDACUnitsCHs: '-'
   ADTM: '2'
   BasicTM: '2'

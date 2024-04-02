@@ -28,6 +28,22 @@
     reset:
       register: IOPRSTR
       field: GPIOBRST
+- name: GPIOF
+  address: 0x50001400
+  registers:
+    block: GPIO
+    kind: gpio
+    version: common
+  rcc:
+    bus_clock: GPIO
+    kernel_clock: GPIO
+    enable:
+      register: IOPENR
+      field: GPIOFEN
+    reset:
+      register: IOPRSTR
+      field: GPIOFRST
+
 
 - name: RCC
   address: 0x40021000
@@ -40,6 +56,179 @@
       signal: MCO
       af: 0 # TODO
 
+# — 1 个 16 位高级控制定时器（TIM1）
+# 4 个通用的 16 位定时器 （TIM3/TIM14/TIM16/TIM17）
+# 1 个低功耗定时器(LPTIM)，支持从 stop 模式唤醒
+
+- name: TIM1
+  address: 0x40012C00
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_ADV
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2_TIM
+    enable:
+      register: APB2ENR
+      field: TIM1EN
+    reset:
+      register: APB2RSTR
+      field: TIM1RST
+  pins:
+  interrupts:
+  - signal: BRK
+    interrupt: TIM1_BRK_UP_TRG
+  - signal: CC
+    interrupt: TIM1_CC
+  - signal: COM
+    interrupt: TIM1_BRK_UP_TRG
+  - signal: TRG
+    interrupt: TIM1_BRK_UP_TRG
+  - signal: UP
+    interrupt: TIM1_BRK_UP_TRG
+  dma_channels:
 
 
+- name: TIM3
+  address: 1073742848 # 0x40000400
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_GP16
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APB1ENR
+      field: TIM3EN
+    reset:
+      register: APB1RSTR
+      field: TIM3RST
+  pins:
+  interrupts:
+  - signal: BRK
+    interrupt: TIM3
+  - signal: CC
+    interrupt: TIM3
+  - signal: COM
+    interrupt: TIM3
+  - signal: TRG
+    interrupt: TIM3
+  - signal: UP
+    interrupt: TIM3
+  dma_channels:
+  - signal: CH3
+    channel: DMA1_CH2
+  - signal: CH4
+    channel: DMA1_CH3
+  - signal: UP
+    channel: DMA1_CH3
+  - signal: CH1
+    channel: DMA1_CH6
+  - signal: TRIG
+    channel: DMA1_CH6
 
+- name: TIM14
+  address: 1073750016 # 0x40002000
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APB1ENR
+      field: TIM14EN
+    reset:
+      register: APB1RSTR
+      field: TIM14RST
+  pins:
+  interrupts:
+  - signal: BRK
+    interrupt: TIM14
+  - signal: CC
+    interrupt: TIM14
+  - signal: COM
+    interrupt: TIM14
+  - signal: TRG
+    interrupt: TIM14
+  - signal: UP
+    interrupt: TIM14
+
+- name: TIM16
+  address: 1073824768
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH_CMP
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2_TIM
+    enable:
+      register: APB2ENR
+      field: TIM16EN
+    reset:
+      register: APB2RSTR
+      field: TIM16RST
+  pins:
+  interrupts:
+  - signal: BRK
+    interrupt: TIM16
+  - signal: CC
+    interrupt: TIM16
+  - signal: COM
+    interrupt: TIM16
+  - signal: TRG
+    interrupt: TIM16
+  - signal: UP
+    interrupt: TIM16
+  dma_channels:
+
+- name: TIM17
+  address: 1073825792 # 0x40014800
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH_CMP
+  rcc:
+    bus_clock: PCLK2
+    kernel_clock: PCLK2_TIM
+    enable:
+      register: APB2ENR
+      field: TIM17EN
+    reset:
+      register: APB2RSTR
+      field: TIM17RST
+  pins:
+  interrupts:
+  - signal: BRK
+    interrupt: TIM17
+  - signal: CC
+    interrupt: TIM17
+  - signal: COM
+    interrupt: TIM17
+  - signal: TRG
+    interrupt: TIM17
+  - signal: UP
+    interrupt: TIM17
+  dma_channels:
+  - signal: CH1
+    channel: DMA1_CH1
+    request: 7
+  - signal: UP
+    channel: DMA1_CH1
+    request: 7
+  - signal: CH1
+    channel: DMA1_CH2
+    request: 7
+  - signal: UP
+    channel: DMA1_CH2
+    request: 7
+  - signal: CH1
+    channel: DMA1_CH7
+    request: 7
+  - signal: UP
+    channel: DMA1_CH7
+    request: 7

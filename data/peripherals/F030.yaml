@@ -78,15 +78,15 @@
   pins:
   interrupts:
   - signal: BRK
-    interrupt: TIM1_BRK_UP_TRG
+    interrupt: TIM1_BRK_UP_TRG_COM
   - signal: CC
     interrupt: TIM1_CC
   - signal: COM
-    interrupt: TIM1_BRK_UP_TRG
+    interrupt: TIM1_BRK_UP_TRG_COM
   - signal: TRG
-    interrupt: TIM1_BRK_UP_TRG
+    interrupt: TIM1_BRK_UP_TRG_COM
   - signal: UP
-    interrupt: TIM1_BRK_UP_TRG
+    interrupt: TIM1_BRK_UP_TRG_COM
   dma_channels:
 
 

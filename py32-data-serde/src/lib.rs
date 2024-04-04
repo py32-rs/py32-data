@@ -182,7 +182,7 @@ pub mod chip {
                 pub pin: String,
                 pub signal: String,
                 #[serde(skip_serializing_if = "Option::is_none")]
-                pub af: Option<u16>, // PY32 uses u16 for AF, max 14
+                pub af: Option<u8>,
             }
 
             fn extract_port_and_pin(pin: &str) -> (char, u8) {

@@ -1,0 +1,546 @@
+I2C:
+  - af: 12
+    pin: PA2
+    signal: SDA
+  - af: 12
+    pin: PA3
+    signal: SCL
+  - af: 12
+    pin: PA7
+    signal: SDA
+  - af: 12
+    pin: PA8
+    signal: SCL
+  - af: 6
+    pin: PA9
+    signal: SCL
+  - af: 12
+    pin: PA9
+    signal: SDA
+  - af: 6
+    pin: PA10
+    signal: SDA
+  - af: 12
+    pin: PA10
+    signal: SCL
+  - af: 6
+    pin: PA11
+    signal: SCL
+  - af: 6
+    pin: PA12
+    signal: SDA
+  - af: 6
+    pin: PB6
+    signal: SCL
+  - af: 6
+    pin: PB7
+    signal: SDA
+  - af: 6
+    pin: PB8
+    signal: SCL
+  - af: 12
+    pin: PB8
+    signal: SDA
+  - af: 12
+    pin: PF0
+    signal: SDA
+  - af: 12
+    pin: PF1
+    signal: SCL
+IR:
+  - af: 15
+    pin: PA0
+    signal: OUT
+  - af: 1
+    pin: PA13
+    signal: OUT
+  - af: 15
+    pin: PB8
+    signal: OUT
+LED:
+  - af: 3
+    pin: PA0
+    signal: DATA
+  - af: 3
+    pin: PA1
+    signal: DATA
+  - af: 3
+    pin: PA2
+    signal: DATA
+  - af: 3
+    pin: PA3
+    signal: DATA
+  - af: 3
+    pin: PA4
+    signal: DATA
+  - af: 3
+    pin: PA5
+    signal: DATA
+  - af: 3
+    pin: PA6
+    signal: DATA
+  - af: 6
+    pin: PA15
+    signal: COM0
+  - af: 6
+    pin: PB3
+    signal: COM1
+  - af: 6
+    pin: PB4
+    signal: COM2
+  - af: 6
+    pin: PB5
+    signal: COM3
+  - af: 3
+    pin: PB8
+    signal: DATA
+LPTIM:
+  - af: 5
+    pin: PB5
+    signal: IN1
+  - af: 5
+    pin: PB6
+    signal: ETR
+LPTIM1:
+  - af: 5
+    pin: PA5
+    signal: ETR
+RTC:
+  - af: 15
+    pin: PA4
+    signal: OUT
+  - af: 15
+    pin: PA6
+    signal: OUT
+  - af: 15
+    pin: PF3
+    signal: OUT
+SPI1:
+  - af: 10
+    pin: PA0
+    signal: MISO
+  - af: 0
+    pin: PA1
+    signal: SCK
+  - af: 10
+    pin: PA1
+    signal: MOSI
+  - af: 0
+    pin: PA2
+    signal: MOSI
+  - af: 10
+    pin: PA2
+    signal: SCK
+  - af: 10
+    pin: PA3
+    signal: MOSI
+  - af: 0
+    pin: PA4
+    signal: NSS
+  - af: 0
+    pin: PA5
+    signal: SCK
+  - af: 0
+    pin: PA6
+    signal: MISO
+  - af: 0
+    pin: PA7
+    signal: MOSI
+  - af: 10
+    pin: PA7
+    signal: MISO
+  - af: 10
+    pin: PA8
+    signal: MOSI
+  - af: 10
+    pin: PA9
+    signal: SCK
+  - af: 10
+    pin: PA10
+    signal: NSS
+  - af: 0
+    pin: PA11
+    signal: MISO
+  - af: 0
+    pin: PA12
+    signal: MOSI
+  - af: 10
+    pin: PA13
+    signal: MISO
+  - af: 0
+    pin: PA15
+    signal: NSS
+  - af: 0
+    pin: PB0
+    signal: NSS
+  - af: 0
+    pin: PB3
+    signal: SCK
+  - af: 0
+    pin: PB4
+    signal: MISO
+  - af: 0
+    pin: PB5
+    signal: MOSI
+  - af: 10
+    pin: PF1
+    signal: NSS
+  - af: 10
+    pin: PF3
+    signal: NSS
+SPI2:
+  - af: 0
+    pin: PA0
+    signal: SCK
+  - af: 0
+    pin: PA3
+    signal: MISO
+  - af: 2
+    pin: PA4
+    signal: MOSI
+  - af: 0
+    pin: PA8
+    signal: NSS
+  - af: 0
+    pin: PA9
+    signal: MISO
+  - af: 0
+    pin: PA10
+    signal: MOSI
+  - af: 1
+    pin: PB2
+    signal: SCK
+  - af: 3
+    pin: PB6
+    signal: MISO
+  - af: 1
+    pin: PB7
+    signal: MOSI
+  - af: 1
+    pin: PB8
+    signal: SCK
+  - af: 11
+    pin: PB8
+    signal: NSS
+  - af: 3
+    pin: PF0
+    signal: SCK
+  - af: 3
+    pin: PF1
+    signal: MISO
+  - af: 3
+    pin: PF2
+    signal: MOSI
+  - af: 3
+    pin: PF3
+    signal: MISO
+TIM1:
+  - af: 13
+    pin: PA0
+    signal: CH3
+  - af: 14
+    pin: PA0
+    signal: CH1N
+  - af: 13
+    pin: PA1
+    signal: CH4
+  - af: 14
+    pin: PA1
+    signal: CH2N
+  - af: 13
+    pin: PA3
+    signal: CH1
+  - af: 2
+    pin: PA6
+    signal: BKIN
+  - af: 2
+    pin: PA7
+    signal: CH1N
+  - af: 2
+    pin: PA8
+    signal: CH1
+  - af: 2
+    pin: PA9
+    signal: CH2
+  - af: 13
+    pin: PA9
+    signal: BKIN
+  - af: 2
+    pin: PA10
+    signal: CH3
+  - af: 2
+    pin: PA11
+    signal: CH4
+  - af: 2
+    pin: PA12
+    signal: ETR
+  - af: 13
+    pin: PA13
+    signal: CH2
+  - af: 2
+    pin: PB0
+    signal: CH2N
+  - af: 2
+    pin: PB1
+    signal: CH3N
+  - af: 1
+    pin: PB3
+    signal: CH2
+  - af: 1
+    pin: PB6
+    signal: CH3
+TIM14:
+  - af: 4
+    pin: PA4
+    signal: CH1
+  - af: 4
+    pin: PA7
+    signal: CH1
+  - af: 0
+    pin: PB1
+    signal: CH1
+  - af: 2
+    pin: PF0
+    signal: CH1
+  - af: 13
+    pin: PF1
+    signal: CH1
+TIM16:
+  - af: 5
+    pin: PA6
+    signal: CH1
+  - af: 2
+    pin: PB5
+    signal: BKIN
+  - af: 2
+    pin: PB6
+    signal: CH1N
+  - af: 2
+    pin: PB8
+    signal: CH1
+TIM17:
+  - af: 5
+    pin: PA7
+    signal: CH1
+  - af: 5
+    pin: PA10
+    signal: BKIN
+  - af: 5
+    pin: PB4
+    signal: BKIN
+  - af: 2
+    pin: PB7
+    signal: CH1N
+  - af: 13
+    pin: PB8
+    signal: CH1
+TIM3:
+  - af: 13
+    pin: PA2
+    signal: CH1
+  - af: 13
+    pin: PA4
+    signal: CH3
+  - af: 13
+    pin: PA5
+    signal: CH2
+  - af: 1
+    pin: PA6
+    signal: CH1
+  - af: 1
+    pin: PA7
+    signal: CH2
+  - af: 1
+    pin: PB0
+    signal: CH3
+  - af: 1
+    pin: PB1
+    signal: CH4
+  - af: 1
+    pin: PB4
+    signal: CH1
+  - af: 1
+    pin: PB5
+    signal: CH2
+  - af: 13
+    pin: PF3
+    signal: CH3
+USART1:
+  - af: 1
+    pin: PA0
+    signal: CTS
+  - af: 1
+    pin: PA1
+    signal: RTS
+  - af: 1
+    pin: PA2
+    signal: TX
+  - af: 1
+    pin: PA3
+    signal: RX
+  - af: 1
+    pin: PA4
+    signal: CK
+  - af: 8
+    pin: PA6
+    signal: CK
+  - af: 8
+    pin: PA7
+    signal: TX
+  - af: 1
+    pin: PA8
+    signal: CK
+  - af: 8
+    pin: PA8
+    signal: RX
+  - af: 1
+    pin: PA9
+    signal: TX
+  - af: 8
+    pin: PA9
+    signal: RX
+  - af: 1
+    pin: PA10
+    signal: RX
+  - af: 8
+    pin: PA10
+    signal: TX
+  - af: 1
+    pin: PA11
+    signal: CTS
+  - af: 1
+    pin: PA12
+    signal: RTS
+  - af: 8
+    pin: PA13
+    signal: RX
+  - af: 1
+    pin: PA14
+    signal: TX
+  - af: 1
+    pin: PA15
+    signal: RX
+  - af: 0
+    pin: PB2
+    signal: RX
+  - af: 3
+    pin: PB3
+    signal: RTS
+  - af: 3
+    pin: PB4
+    signal: CTS
+  - af: 3
+    pin: PB5
+    signal: CK
+  - af: 0
+    pin: PB6
+    signal: TX
+  - af: 0
+    pin: PB7
+    signal: RX
+  - af: 8
+    pin: PB8
+    signal: TX
+  - af: 8
+    pin: PF0
+    signal: RX
+  - af: 8
+    pin: PF1
+    signal: TX
+  - af: 0
+    pin: PF3
+    signal: TX
+USART2:
+  - af: 4
+    pin: PA0
+    signal: CTS
+  - af: 9
+    pin: PA0
+    signal: TX
+  - af: 4
+    pin: PA1
+    signal: RTS
+  - af: 9
+    pin: PA1
+    signal: RX
+  - af: 4
+    pin: PA2
+    signal: TX
+  - af: 4
+    pin: PA3
+    signal: RX
+  - af: 5
+    pin: PA4
+    signal: CK
+  - af: 9
+    pin: PA4
+    signal: TX
+  - af: 9
+    pin: PA5
+    signal: RX
+  - af: 9
+    pin: PA7
+    signal: TX
+  - af: 4
+    pin: PA8
+    signal: CK
+  - af: 9
+    pin: PA8
+    signal: RX
+  - af: 4
+    pin: PA9
+    signal: TX
+  - af: 4
+    pin: PA10
+    signal: RX
+  - af: 4
+    pin: PA11
+    signal: CTS
+  - af: 4
+    pin: PA12
+    signal: RTS
+  - af: 4
+    pin: PA14
+    signal: TX
+  - af: 4
+    pin: PA15
+    signal: RX
+  - af: 3
+    pin: PB2
+    signal: RX
+  - af: 4
+    pin: PB3
+    signal: RTS
+  - af: 4
+    pin: PB4
+    signal: CTS
+  - af: 4
+    pin: PB5
+    signal: CK
+  - af: 4
+    pin: PB6
+    signal: TX
+  - af: 4
+    pin: PB7
+    signal: RX
+  - af: 4
+    pin: PB8
+    signal: TX
+  - af: 4
+    pin: PF0
+    signal: RX
+  - af: 9
+    pin: PF0
+    signal: TX
+  - af: 4
+    pin: PF1
+    signal: TX
+  - af: 9
+    pin: PF1
+    signal: RX
+  - af: 4
+    pin: PF2
+    signal: RX
+  - af: 4
+    pin: PF3
+    signal: TX

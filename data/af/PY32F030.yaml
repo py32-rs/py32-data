@@ -1,4 +1,4 @@
-I2C:
+I2C1:
   - af: 12
     pin: PA2
     signal: SDA
@@ -94,14 +94,13 @@ LED:
   - af: 3
     pin: PB8
     signal: DATA
-LPTIM:
+LPTIM1:
   - af: 5
     pin: PB5
     signal: IN1
   - af: 5
     pin: PB6
     signal: ETR
-LPTIM1:
   - af: 5
     pin: PA5
     signal: ETR

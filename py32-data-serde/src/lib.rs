@@ -77,10 +77,13 @@ pub mod chip {
     #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
     pub struct Core {
         pub name: String,
+        #[serde(default)]
         pub peripherals: Vec<core::Peripheral>,
         #[serde(skip_serializing_if = "Option::is_none")]
         pub nvic_priority_bits: Option<u8>,
+        #[serde(default)]
         pub interrupts: Vec<core::Interrupt>,
+        #[serde(default)]
         pub dma_channels: Vec<core::DmaChannels>,
 
         // include directives, the same as the ch32-data project

@@ -93,6 +93,8 @@ pub mod chip {
         pub include_dma_channels: Option<BTreeMap<String, String>>,
         #[serde(skip_serializing_if = "Option::is_none")]
         pub include_peripherals: Option<Vec<String>>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub include_afs: Option<String>,
     }
 
     pub mod core {

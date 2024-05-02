@@ -3,7 +3,6 @@ use std::{collections::{HashMap, BTreeMap}, path::Path};
 // mod chips;
 // mod dma;
 // mod docs;
-// mod gpio_af;
 // mod header;
 // mod interrupts;
 // mod memory;

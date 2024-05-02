@@ -89,6 +89,8 @@ fn main() -> anyhow::Result<()> {
 
         // handle include_x
         for core in &mut chip.cores {
+            let mut peripheral_afs = None;
+
             if let Some(inc_path) = core.include_interrupts.take() {
                 let interrupts_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
                 let content = std::fs::read_to_string(&interrupts_yaml_path)?;
@@ -111,7 +113,7 @@ fn main() -> anyhow::Result<()> {
                 let afs: BTreeMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> =
                     serde_yaml::from_str(&content)?;
 
-                core.peripheral_afs = afs;
+                peripheral_afs = Some(afs);
             }
 
             // append peripherals from includes
@@ -122,10 +124,12 @@ fn main() -> anyhow::Result<()> {
                     let mut peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
                         serde_yaml::from_str(&content)?;
 
-                    for peripheral in &mut peripherals {
-                        if let Some(pins) = core.peripheral_afs.get(&peripheral.name) {
-                            // println!("successufully matched AF with peri: {:#?}", &peripheral.name);
-                            peripheral.pins = pins.clone();
+                    if let Some(peripheral_afs) = peripheral_afs.as_ref() {
+                        for peripheral in &mut peripherals {
+                            if let Some(pins) = peripheral_afs.get(&peripheral.name) {
+                                // println!("successufully matched AF with peri: {:#?}", &peripheral.name);
+                                peripheral.pins = pins.clone();
+                            }
                         }
                     }
 

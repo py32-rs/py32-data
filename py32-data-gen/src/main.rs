@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::Path};
+use std::{collections::{HashMap, BTreeMap}, path::Path};
 
 // mod chips;
 // mod dma;
@@ -105,13 +105,31 @@ fn main() -> anyhow::Result<()> {
                 // core.interrupts.extend(interrupts.interrupts);
             }
 
+            // append AF from includes
+            if let Some(inc_path) = &mut core.include_afs.take() {
+                let afs_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
+                let content = std::fs::read_to_string(&afs_yaml_path)?;
+                let afs: BTreeMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> =
+                    serde_yaml::from_str(&content)?;
+
+                core.peripheral_afs = afs;
+            }
+
             // append peripherals from includes
             if let Some(inc_paths) = &mut core.include_peripherals.take() {
                 for inc_path in inc_paths {
                     let peripheral_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
                     let content = std::fs::read_to_string(&peripheral_yaml_path)?;
-                    let peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
+                    let mut peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
                         serde_yaml::from_str(&content)?;
+
+                    for peripheral in &mut peripherals {
+                        if let Some(pins) = core.peripheral_afs.get(&peripheral.name) {
+                            // println!("successufully matched AF with peri: {:#?}", &peripheral.name);
+                            peripheral.pins = pins.clone();
+                        }
+                    }
+
                     core.peripherals.extend(peripherals);
                 }
             }

@@ -26,3 +26,21 @@ jobs:
         cd build/py32-metapac/
         cargo build --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
         cargo doc --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
+
+  build-win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use nightly Rust
+      run: |
+        rustup default nightly
+        rustup target add thumbv6m-none-eabi
+    - name: Build
+      run: |
+        .\d.ps1 gen
+      shell: powershell
+    - name: Test
+      run: |
+        cd build/py32-metapac/
+        cargo build --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
+        cargo doc --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi    

@@ -43,34 +43,14 @@ docs:
     type: datasheet
     url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F030 系列数据手册_Rev1.18.pdf
 cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 48000000
+  - max_clock: 48000000
     name: cm0p
     nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: common
+    include_interrupts: "../interrupts/PY32F030xx.yaml"
+    include_peripherals:
+      - "../peripherals/F030.yaml"
+    include_afs: "../af/PY32F030.yaml"
+    dma_channels:
 _raw:
   12bitADCUnitsCHs: 1(8+2)
   12bitDACUnitsCHs: '-'

@@ -1,234 +1,510 @@
+- name: ADC
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: common
+    block: ADC
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: ADCEN
+    reset:
+      register: APBRSTR2
+      field: ADCRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: ADC_COMP
+
+- name: COMP1
+  address: 0x40010200
+  registers:
+    kind: comp
+    version: common
+    block: COMP
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: COMP1EN
+    reset:
+      register: APBRSTR2
+      field: COMP1RST
+
+- name: COMP2
+  address: 0x40010210
+  registers:
+    kind: comp
+    version: common
+    block: COMP
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: COMP2EN
+    reset:
+      register: APBRSTR2
+      field: COMP2RST
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: f030
+    block: RCC
+  pins:
+    - pin: PA1
+      signal: MCO
+      af: 0 #TODO
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RCC
+
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: common
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: PWREN
+    reset:
+      register: APBRSTR1
+      field: PWRRST
+
 - name: GPIOA
   address: 0x50000000
   registers:
-    block: GPIO
     kind: gpio
     version: common
+    block: GPIO
   rcc:
-    bus_clock: GPIO
-    kernel_clock: GPIO
+    bus_clock: PCLK1
     enable:
       register: IOPENR
       field: GPIOAEN
     reset:
       register: IOPRSTR
       field: GPIOARST
+
 - name: GPIOB
   address: 0x50000400
   registers:
-    block: GPIO
     kind: gpio
     version: common
+    block: GPIO
   rcc:
-    bus_clock: GPIO
-    kernel_clock: GPIO
+    bus_clock: PCLK1
     enable:
       register: IOPENR
       field: GPIOBEN
     reset:
       register: IOPRSTR
       field: GPIOBRST
+
 - name: GPIOF
   address: 0x50001400
-  registers:
-    block: GPIO
-    kind: gpio
-    version: common
   rcc:
-    bus_clock: GPIO
-    kernel_clock: GPIO
+    bus_clock: PCLK1
     enable:
       register: IOPENR
       field: GPIOFEN
     reset:
       register: IOPRSTR
       field: GPIOFRST
-
-
-- name: RCC
-  address: 0x40021000
   registers:
-    block: RCC
-    kind: rcc
-    version: f030
-  pins:
-    - pin: PA1
-      signal: MCO
-      af: 0 # TODO
+    kind: gpio
+    version: common
+    block: GPIO
 
-# — 1 个 16 位高级控制定时器（TIM1）
-# 4 个通用的 16 位定时器 （TIM3/TIM14/TIM16/TIM17）
-# 1 个低功耗定时器(LPTIM)，支持从 stop 模式唤醒
+- name: EXTI
+  address: 0x40021800
+  registers:
+    kind: exti
+    version: common
+    block: EXTI
+  interrupts:
+    - signal: GLOBAL
+      interrupt: PVD
+    - signal: GLOBAL
+      interrupt: EXTI0_1
+    - signal: GLOBAL
+      interrupt: EXTI2_3
+    - signal: GLOBAL
+      interrupt: EXTI4_15
+
+- name: LPTIM
+  address: 0x40007c00
+  registers:
+    kind: lptim
+    version: common
+    block: LPTIM
+  rcc:
+    bus_clock: PCLK1_TIM
+    enable:
+      register: APBENR1
+      field: LPTIMEN
+    reset:
+      register: APBRSTR1
+      field: LPTIMRST
+
+- name: USART1
+  address: 0x40013800
+  registers:
+    kind: usart
+    version: common
+    block: USART
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: USART1EN
+    reset:
+      register: APBRSTR2
+      field: USART1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART1
+
+- name: USART2
+  address: 0x40004400
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: USART2EN
+    reset:
+      register: APBRSTR1
+      field: USART2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: USART2
+  registers:
+    kind: usart
+    version: common
+    block: USART
+
+- name: RTC
+  address: 0x40002800
+  registers:
+    kind: rtc
+    version: common
+    block: RTC
+  rcc:
+    enable:
+      register: APBENR1
+      field: RTCAPBEN
+    reset: null
+  interrupts:
+    - signal: GLOBAL
+      interrupt: RTC
+
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: common
+    block: IWDG
+
+- name: WWDG
+  address: 0x40002c00
+  registers:
+    kind: wwdg
+    version: common
+    block: WWDG
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: WWDGEN
+    reset: null
+  interrupts:
+    - signal: GLOBAL
+      interrupt: WWDG
 
 - name: TIM1
-  address: 0x40012C00
+  address: 0x40012c00
   registers:
     kind: timer
     version: v1
     block: TIM_ADV
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2_TIM
+    bus_clock: PCLK1_TIM
     enable:
-      register: APB2ENR
+      register: APBENR2
       field: TIM1EN
     reset:
-      register: APB2RSTR
+      register: APBRSTR2
       field: TIM1RST
-  pins:
   interrupts:
-  - signal: BRK
-    interrupt: TIM1_BRK_UP_TRG_COM
-  - signal: CC
-    interrupt: TIM1_CC
-  - signal: COM
-    interrupt: TIM1_BRK_UP_TRG_COM
-  - signal: TRG
-    interrupt: TIM1_BRK_UP_TRG_COM
-  - signal: UP
-    interrupt: TIM1_BRK_UP_TRG_COM
-  dma_channels:
-
+    - signal: BRK
+      interrupt: TIM1_BRK_UP_TRG_COM
+    - signal: UP
+      interrupt: TIM1_BRK_UP_TRG_COM
+    - signal: TRG
+      interrupt: TIM1_BRK_UP_TRG_COM
+    - signal: COM
+      interrupt: TIM1_BRK_UP_TRG_COM
+    - signal: CC
+      interrupt: TIM1_CC
 
 - name: TIM3
-  address: 1073742848 # 0x40000400
+  address: 0x40000400
   registers:
     kind: timer
     version: v1
     block: TIM_GP16
+  dma_channels:
+    - signal: CH3
+      channel: DMA1_CH2
+    - signal: CH4
+      channel: DMA1_CH3
+    - signal: UP
+      channel: DMA1_CH3
+    - signal: CH1
+      channel: DMA1_CH6
+    - signal: TRIG
+      channel: DMA1_CH6
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1_TIM
+    bus_clock: PCLK1_TIM
     enable:
-      register: APB1ENR
+      register: APBENR1
       field: TIM3EN
     reset:
-      register: APB1RSTR
+      register: APBRSTR1
       field: TIM3RST
-  pins:
   interrupts:
-  - signal: BRK
-    interrupt: TIM3
-  - signal: CC
-    interrupt: TIM3
-  - signal: COM
-    interrupt: TIM3
-  - signal: TRG
-    interrupt: TIM3
-  - signal: UP
-    interrupt: TIM3
-  dma_channels:
-  - signal: CH3
-    channel: DMA1_CH2
-  - signal: CH4
-    channel: DMA1_CH3
-  - signal: UP
-    channel: DMA1_CH3
-  - signal: CH1
-    channel: DMA1_CH6
-  - signal: TRIG
-    channel: DMA1_CH6
+    - signal: BRK
+      interrupt: TIM3
+    - signal: UP
+      interrupt: TIM3
+    - signal: TRG
+      interrupt: TIM3
+    - signal: COM
+      interrupt: TIM3
+    - signal: CC
+      interrupt: TIM3
 
 - name: TIM14
-  address: 1073750016 # 0x40002000
+  address: 0x40002000
   registers:
     kind: timer
     version: v1
     block: TIM_1CH
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1_TIM
+    bus_clock: PCLK1_TIM
     enable:
-      register: APB1ENR
+      register: APBENR2
       field: TIM14EN
     reset:
-      register: APB1RSTR
+      register: APBRSTR2
       field: TIM14RST
-  pins:
   interrupts:
-  - signal: BRK
-    interrupt: TIM14
-  - signal: CC
-    interrupt: TIM14
-  - signal: COM
-    interrupt: TIM14
-  - signal: TRG
-    interrupt: TIM14
-  - signal: UP
-    interrupt: TIM14
+    - signal: BRK
+      interrupt: TIM14
+    - signal: UP
+      interrupt: TIM14
+    - signal: TRG
+      interrupt: TIM14
+    - signal: COM
+      interrupt: TIM14
+    - signal: CC
+      interrupt: TIM14
 
 - name: TIM16
-  address: 1073824768
+  address: 0x40014400
   registers:
     kind: timer
     version: v1
     block: TIM_1CH_CMP
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2_TIM
+    bus_clock: PCLK1_TIM
     enable:
-      register: APB2ENR
+      register: APBENR2
       field: TIM16EN
     reset:
-      register: APB2RSTR
+      register: APBRSTR2
       field: TIM16RST
-  pins:
   interrupts:
-  - signal: BRK
-    interrupt: TIM16
-  - signal: CC
-    interrupt: TIM16
-  - signal: COM
-    interrupt: TIM16
-  - signal: TRG
-    interrupt: TIM16
-  - signal: UP
-    interrupt: TIM16
-  dma_channels:
+    - signal: BRK
+      interrupt: TIM16
+    - signal: UP
+      interrupt: TIM16
+    - signal: TRG
+      interrupt: TIM16
+    - signal: COM
+      interrupt: TIM16
+    - signal: CC
+      interrupt: TIM16
 
 - name: TIM17
-  address: 1073825792 # 0x40014800
+  address: 0x40014800
+  rcc:
+    bus_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM17EN
+    reset:
+      register: APBRSTR2
+      field: TIM17RST
+  interrupts:
+    - signal: BRK
+      interrupt: TIM17
+    - signal: UP
+      interrupt: TIM17
+    - signal: TRG
+      interrupt: TIM17
+    - signal: COM
+      interrupt: TIM17
+    - signal: CC
+      interrupt: TIM17
   registers:
     kind: timer
     version: v1
     block: TIM_1CH_CMP
+
+- name: SYSCFG
+  address: 0x40010000
+  registers:
+    kind: syscfg
+    version: common
+    block: SYSCFG
   rcc:
-    bus_clock: PCLK2
-    kernel_clock: PCLK2_TIM
+    bus_clock: PCLK1
     enable:
-      register: APB2ENR
-      field: TIM17EN
+      register: APBENR2
+      field: SYSCFGEN
     reset:
-      register: APB2RSTR
-      field: TIM17RST
-  pins:
+      register: APBRSTR2
+      field: SYSCFGRST
+
+- name: DMA
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: common
+    block: DMA
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: AHBENR
+      field: DMAEN
+    reset:
+      register: AHBRSTR
+      field: DMARST
   interrupts:
-  - signal: BRK
-    interrupt: TIM17
-  - signal: CC
-    interrupt: TIM17
-  - signal: COM
-    interrupt: TIM17
-  - signal: TRG
-    interrupt: TIM17
-  - signal: UP
-    interrupt: TIM17
-  dma_channels:
-  - signal: CH1
-    channel: DMA1_CH1
-    request: 7
-  - signal: UP
-    channel: DMA1_CH1
-    request: 7
-  - signal: CH1
-    channel: DMA1_CH2
-    request: 7
-  - signal: UP
-    channel: DMA1_CH2
-    request: 7
-  - signal: CH1
-    channel: DMA1_CH7
-    request: 7
-  - signal: UP
-    channel: DMA1_CH7
-    request: 7
+    - signal: GLOBAL
+      interrupt: DMA_Channel1
+    - signal: GLOBAL
+      interrupt: DMA_Channel2_3
+
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: common
+    block: FLASH
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: AHBENR
+      field: FLASHEN
+    reset:
+      register: AHBRSTR
+      field: FLASHRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: FLASH
+
+- name: CRC
+  address: 0x40023000
+  registers:
+    kind: crc
+    version: common
+    block: CRC
+
+- name: SPI1
+  address: 0x40013000
+  registers:
+    kind: spi
+    version: common
+    block: SPI
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: SPI1EN
+    reset:
+      register: APBRSTR2
+      field: SPI1RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI1
+
+- name: SPI2
+  address: 0x40003800
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: SPI2EN
+    reset:
+      register: APBRSTR1
+      field: SPI2RST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: SPI2
+  registers:
+    kind: spi
+    version: common
+    block: SPI
+
+- name: I2C
+  address: 0x40005400
+  registers:
+    kind: i2c
+    version: common
+    block: I2C
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: I2CEN
+    reset:
+      register: APBRSTR1
+      field: I2CRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: I2C1
+
+- name: LED
+  address: 0x40002400
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: LEDEN
+    reset:
+      register: APBRSTR2
+      field: LEDRST
+  interrupts:
+    - signal: GLOBAL
+      interrupt: LED
+
+- name: DBGMCU
+  address: 0x40015800
+  registers:
+    kind: dbgmcu
+    version: common
+    block: DBGMCU
+  rcc:
+    bus_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: DBGEN
+    reset:
+      register: APBRSTR1
+      field: DBGRST

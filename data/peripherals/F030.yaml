@@ -361,6 +361,25 @@
     kind: timer
     version: v1
     block: TIM_1CH_CMP
+  dma_channels:
+    - signal: CH1
+      channel: DMA1_CH1
+      request: 7
+    - signal: UP
+      channel: DMA1_CH1
+      request: 7
+    - signal: CH1
+      channel: DMA1_CH2
+      request: 7
+    - signal: UP
+      channel: DMA1_CH2
+      request: 7
+    - signal: CH1
+      channel: DMA1_CH7
+      request: 7
+    - signal: UP
+      channel: DMA1_CH7
+      request: 7
   rcc:
     bus_clock: PCLK1_TIM
     kernel_clock: PCLK1_TIM

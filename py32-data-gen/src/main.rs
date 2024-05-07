@@ -124,6 +124,19 @@ fn main() -> anyhow::Result<()> {
                     let mut peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
                         serde_yaml::from_str(&content)?;
 
+                    // remove unused peripherals
+                    for i in (0..(peripherals.len())).rev() {
+                        if let Some(registers) = &peripherals[i].registers {
+                            let path = Path::new(data_dir)
+                                .join("registers")
+                                .join(&format!("{}_{}.yaml", registers.kind, registers.version));
+                            if !path.exists() {
+                                // Remove the peripheral if the register file does not exist
+                                peripherals.remove(i);
+                            }
+                        }
+                    }
+
                     if let Some(peripheral_afs) = peripheral_afs.as_ref() {
                         for peripheral in &mut peripherals {
                             if let Some(pins) = peripheral_afs.get(&peripheral.name) {

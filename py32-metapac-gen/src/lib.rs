@@ -57,12 +57,7 @@ impl Gen {
 
         let mut peripheral_versions: BTreeMap<String, String> = BTreeMap::new();
 
-        let gpio_base = core
-            .peripherals
-            .iter()
-            .find(|p| p.name == "GPIOA")
-            .unwrap()
-            .address as u32;
+        let gpio_base = core.peripherals.iter().find(|p| p.name == "GPIOA").unwrap().address as u32;
         let gpio_stride = 0x400;
 
         for p in &core.peripherals {
@@ -76,27 +71,18 @@ impl Gen {
             };
 
             if let Some(bi) = &p.registers {
-                // test if peripheral reg blocks file exists
-                if Path::new(&self.opts.data_dir)
-                    .join("registers")
-                    .join(&format!("{}_{}.json", bi.kind, bi.version))
-                    .exists()
-                {
-                    if let Some(old_version) =
-                        peripheral_versions.insert(bi.kind.clone(), bi.version.clone())
-                    {
-                        if old_version != bi.version {
-                            panic!(
-                                "Peripheral {} has multiple versions: {} and {}",
-                                bi.kind, old_version, bi.version
-                            );
-                        }
+                if let Some(old_version) = peripheral_versions.insert(bi.kind.clone(), bi.version.clone()) {
+                    if old_version != bi.version {
+                        panic!(
+                            "Peripheral {} has multiple versions: {} and {}",
+                            bi.kind, old_version, bi.version
+                        );
                     }
-                    ir_peri.block = Some(format!("{}::{}", bi.kind, bi.block));
+                }
+                ir_peri.block = Some(format!("{}::{}", bi.kind, bi.block));
 
-                    if bi.kind == "gpio" {
-                        assert_eq!(0, (p.address as u32 - gpio_base) % gpio_stride);
-                    }
+                if bi.kind == "gpio" {
+                    assert_eq!(0, (p.address as u32 - gpio_base) % gpio_stride);
                 }
             }
 
@@ -121,14 +107,13 @@ impl Gen {
         );
 
         for (module, version) in &peripheral_versions {
-            self.all_peripheral_versions
-                .insert((module.clone(), version.clone()));
+            self.all_peripheral_versions.insert((module.clone(), version.clone()));
             writeln!(
                 &mut extra,
                 "#[path=\"../../peripherals/{}_{}.rs\"] pub mod {};",
                 module, version, module
             )
-            .unwrap();
+                .unwrap();
         }
         writeln!(&mut extra, "pub const CORE_INDEX: usize = {};", core_index).unwrap();
 
@@ -144,18 +129,8 @@ impl Gen {
             .reduce(|acc, item| acc + item)
             .unwrap();
 
-        writeln!(
-            &mut extra,
-            "pub const FLASH_BASE: usize = {};",
-            first_flash.address
-        )
-        .unwrap();
-        writeln!(
-            &mut extra,
-            "pub const FLASH_SIZE: usize = {};",
-            total_flash_size
-        )
-        .unwrap();
+        writeln!(&mut extra, "pub const FLASH_BASE: usize = {};", first_flash.address).unwrap();
+        writeln!(&mut extra, "pub const FLASH_SIZE: usize = {};", total_flash_size).unwrap();
 
         let write_sizes: HashSet<_> = flash_regions
             .iter()
@@ -167,7 +142,7 @@ impl Gen {
             "pub const WRITE_SIZE: usize = {};",
             write_sizes.iter().next().unwrap()
         )
-        .unwrap();
+            .unwrap();
 
         // Cleanups!
         transform::sort::Sort {}.run(&mut ir).unwrap();
@@ -219,7 +194,7 @@ impl Gen {
             stringify(&core.interrupts),
             stringify(&core.dma_channels),
         )
-        .unwrap();
+            .unwrap();
 
         let out_dir = self.opts.out_dir.clone();
         let n = self.metadata_dedup.len();
@@ -233,7 +208,7 @@ impl Gen {
                     "#[path=\"../registers/{}_{}.rs\"] pub mod {};",
                     module, version, module
                 )
-                .unwrap();
+                    .unwrap();
             }
 
             let file = format!("metadata_{:04}.rs", n);
@@ -281,11 +256,7 @@ impl Gen {
     }
 
     fn load_chip(&mut self, name: &str) -> Chip {
-        let chip_path = self
-            .opts
-            .data_dir
-            .join("chips")
-            .join(format!("{}.json", name));
+        let chip_path = self.opts.data_dir.join("chips").join(format!("{}.json", name));
         let chip = fs::read(chip_path).unwrap_or_else(|_| panic!("Could not load chip {}", name));
         serde_json::from_slice(&chip).unwrap()
     }
@@ -337,72 +308,66 @@ impl Gen {
                 .join("registers")
                 .join(&format!("{}_{}.json", module, version));
 
-            if let Ok(rdr) = File::open(regs_path) {
-                let mut ir: ir::IR = serde_json::from_reader(rdr).unwrap();
+            let mut ir: ir::IR = serde_json::from_reader(File::open(regs_path).unwrap()).unwrap();
 
-                transform::expand_extends::ExpandExtends {}
-                    .run(&mut ir)
-                    .unwrap();
+            transform::expand_extends::ExpandExtends {}.run(&mut ir).unwrap();
 
-                transform::map_names(&mut ir, |k, s| match k {
-                    transform::NameKind::Block => *s = s.to_string(),
-                    transform::NameKind::Fieldset => *s = format!("regs::{}", s),
-                    transform::NameKind::Enum => *s = format!("vals::{}", s),
-                    _ => {}
-                });
+            transform::map_names(&mut ir, |k, s| match k {
+                transform::NameKind::Block => *s = s.to_string(),
+                transform::NameKind::Fieldset => *s = format!("regs::{}", s),
+                transform::NameKind::Enum => *s = format!("vals::{}", s),
+                _ => {}
+            });
 
-                transform::sort::Sort {}.run(&mut ir).unwrap();
-                transform::Sanitize {}.run(&mut ir).unwrap();
+            transform::sort::Sort {}.run(&mut ir).unwrap();
+            transform::Sanitize {}.run(&mut ir).unwrap();
 
-                let items = generate::render(&ir, &gen_opts()).unwrap();
-                let mut file = File::create(
-                    self.opts
-                        .out_dir
-                        .join("src/peripherals")
-                        .join(format!("{}_{}.rs", module, version)),
-                )
+            let items = generate::render(&ir, &gen_opts()).unwrap();
+            let mut file = File::create(
+                self.opts
+                    .out_dir
+                    .join("src/peripherals")
+                    .join(format!("{}_{}.rs", module, version)),
+            )
                 .unwrap();
 
-                // Allow a few warning
-                file.write_all(
-                    b"#![allow(clippy::missing_safety_doc)]
+            // Allow a few warning
+            file.write_all(
+                b"#![allow(clippy::missing_safety_doc)]
                 #![allow(clippy::identity_op)]
                 #![allow(clippy::unnecessary_cast)]
                 #![allow(clippy::erasing_op)]",
-                )
+            )
                 .unwrap();
 
-                let data = items.to_string().replace("] ", "]\n");
+            let data = items.to_string().replace("] ", "]\n");
 
-                // Remove inner attributes like #![no_std]
-                let re = Regex::new("# *! *\\[.*\\]").unwrap();
-                let data = re.replace_all(&data, "");
-                file.write_all(data.as_bytes()).unwrap();
+            // Remove inner attributes like #![no_std]
+            let re = Regex::new("# *! *\\[.*\\]").unwrap();
+            let data = re.replace_all(&data, "");
+            file.write_all(data.as_bytes()).unwrap();
 
-                let ir = crate::data::ir::IR::from_chiptool(ir);
-                let mut data = String::new();
+            let ir = crate::data::ir::IR::from_chiptool(ir);
+            let mut data = String::new();
 
-                write!(
-                    &mut data,
-                    "
+            write!(
+                &mut data,
+                "
                     use crate::metadata::ir::*;
                     pub(crate) static REGISTERS: IR = {};
                 ",
-                    stringify(&ir),
-                )
+                stringify(&ir),
+            )
                 .unwrap();
 
-                let mut file = File::create(
-                    self.opts
-                        .out_dir
-                        .join("src/registers")
-                        .join(format!("{}_{}.rs", module, version)),
-                )
+            let mut file = File::create(
+                self.opts
+                    .out_dir
+                    .join("src/registers")
+                    .join(format!("{}_{}.rs", module, version)),
+            )
                 .unwrap();
-                file.write_all(data.as_bytes()).unwrap();
-            } else {
-                println!("warn: unable to find reg block: {} {}", module, version);
-            }
+            file.write_all(data.as_bytes()).unwrap();
         }
 
         // Generate Cargo.toml
@@ -413,26 +378,22 @@ impl Gen {
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();
 
         // copy misc files
-        fs::write(
-            self.opts.out_dir.join("build.rs"),
-            include_bytes!("../res/build.rs"),
-        )
-        .unwrap();
+        fs::write(self.opts.out_dir.join("build.rs"), include_bytes!("../res/build.rs")).unwrap();
         fs::write(
             self.opts.out_dir.join("src/lib.rs"),
             include_bytes!("../res/src/lib.rs"),
         )
-        .unwrap();
+            .unwrap();
         fs::write(
             self.opts.out_dir.join("src/common.rs"),
             chiptool::generate::COMMON_MODULE,
         )
-        .unwrap();
+            .unwrap();
         fs::write(
             self.opts.out_dir.join("src/metadata.rs"),
             include_bytes!("../res/src/metadata.rs"),
         )
-        .unwrap();
+            .unwrap();
     }
 }
 
@@ -463,11 +424,7 @@ fn gen_memory_x(out_dir: &Path, chip: &Chip) {
         .map(|r| (r.address, r.size))
         .reduce(|acc, el| (u32::min(acc.0, el.0), acc.1 + el.1))
         .unwrap();
-    let ram = chip
-        .memory
-        .iter()
-        .find(|r| r.kind == MemoryRegionKind::Ram)
-        .unwrap();
+    let ram = chip.memory.iter().find(|r| r.kind == MemoryRegionKind::Ram).unwrap();
     let otp = chip
         .memory
         .iter()
@@ -479,26 +436,23 @@ fn gen_memory_x(out_dir: &Path, chip: &Chip) {
         "    FLASH : ORIGIN = 0x{:08x}, LENGTH = {:>4}K /* {} */",
         flash_address,
         flash_size / 1024,
-        flash
-            .map(|x| x.name.as_ref())
-            .collect::<Vec<&str>>()
-            .join(" + ")
+        flash.map(|x| x.name.as_ref()).collect::<Vec<&str>>().join(" + ")
     )
-    .unwrap();
+        .unwrap();
     writeln!(
         memory_x,
         "    RAM   : ORIGIN = 0x{:08x}, LENGTH = {:>4}K",
         ram.address,
         ram.size / 1024,
     )
-    .unwrap();
+        .unwrap();
     if let Some(otp) = otp {
         writeln!(
             memory_x,
             "    OTP   : ORIGIN = 0x{:08x}, LENGTH = {:>4}",
             otp.address, otp.size,
         )
-        .unwrap();
+            .unwrap();
     }
     write!(memory_x, "}}").unwrap();
 

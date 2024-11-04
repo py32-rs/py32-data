@@ -71,7 +71,7 @@ cores:
         registers:
           block: GPIO
           kind: gpio
-          version: common
+          version: v1
 _raw:
   12bitADCUnitsCHs: 3(16+3)
   12bitDACUnitsCHs: '-'

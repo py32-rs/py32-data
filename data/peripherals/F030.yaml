@@ -83,7 +83,7 @@
   address: 0x50000000
   registers:
     kind: gpio
-    version: common
+    version: v1
     block: GPIO
   rcc:
     bus_clock: PCLK1
@@ -99,7 +99,7 @@
   address: 0x50000400
   registers:
     kind: gpio
-    version: common
+    version: v1
     block: GPIO
   rcc:
     bus_clock: PCLK1
@@ -115,7 +115,7 @@
   address: 0x50001400
   registers:
     kind: gpio
-    version: common
+    version: v1
     block: GPIO
   rcc:
     bus_clock: PCLK1

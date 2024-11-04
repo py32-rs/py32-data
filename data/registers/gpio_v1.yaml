@@ -10,11 +10,11 @@ block/GPIO:
     byte_offset: 4
     fieldset: OTYPER
   - name: OSPEEDR
-    description: GPIO port output speed. register.
+    description: GPIO port output speed register.
     byte_offset: 8
     fieldset: OSPEEDR
   - name: PUPDR
-    description: GPIO port pull-up/pull-down. register.
+    description: GPIO port pull-up/pull-down register.
     byte_offset: 12
     fieldset: PUPDR
   - name: IDR
@@ -27,69 +27,48 @@ block/GPIO:
     byte_offset: 20
     fieldset: ODR
   - name: BSRR
-    description: GPIO port bit set/reset. register.
+    description: GPIO port bit set/reset register.
     byte_offset: 24
     access: Write
     fieldset: BSRR
   - name: LCKR
-    description: GPIO port configuration lock. register.
+    description: GPIO port configuration lock register.
     byte_offset: 28
     fieldset: LCKR
-  - name: AFRL
-    description: GPIO alternate function low. register.
+  - name: AFR
+    description: GPIO alternate function registers. The register described in the datasheet as AFRL is index 0 in this array, and AFRH is index 1. Note that when operating on AFRH, you need to subtract 8 from any operations on the field array it contains -- the alternate function for pin 9 is at index 1, for instance.
+    array:
+      len: 2
+      stride: 4
     byte_offset: 32
-    fieldset: AFRL
-  - name: AFRH
-    description: GPIO alternate function high. register.
-    byte_offset: 36
-    fieldset: AFRH
+    fieldset: AFR
   - name: BRR
     description: port bit reset register.
     byte_offset: 40
     access: Write
     fieldset: BRR
-fieldset/AFRH:
-  description: GPIO alternate function high. register.
+fieldset/AFR:
+  description: GPIO alternate function register. This contains an array of 8 fields, which correspond to pins 0-7 of the port (for AFRL) or pins 8-15 of the port (for AFRH).
   fields:
-  - name: AFSEL
-    description: Alternate function selection for port x. bit y (y = 8..15).
+  - name: AFR
+    description: Alternate function selection for one of the pins controlled by this register (0-7).
     bit_offset: 0
     bit_size: 4
     array:
       len: 8
       stride: 4
-fieldset/AFRL:
-  description: GPIO alternate function low. register.
-  fields:
-  - name: AFSEL
-    description: Alternate function selection for port x. bit y (y = 0..7).
-    bit_offset: 0
-    bit_size: 4
-    array:
-      len: 8
-      stride: 4
-fieldset/BRR:
-  description: port bit reset register.
-  fields:
-  - name: BR
-    description: Port Reset bit.
-    bit_offset: 0
-    bit_size: 1
-    array:
-      len: 16
-      stride: 1
 fieldset/BSRR:
-  description: GPIO port bit set/reset. register.
+  description: GPIO port bit set/reset register.
   fields:
   - name: BS
-    description: Port x set bit y (y=. 0..15).
+    description: Port x set bit y (y= 0..15)
     bit_offset: 0
     bit_size: 1
     array:
       len: 16
       stride: 1
   - name: BR
-    description: Port x set bit y (y=. 0..15).
+    description: Port x set bit y (y= 0..15)
     bit_offset: 16
     bit_size: 1
     array:
@@ -98,32 +77,33 @@ fieldset/BSRR:
 fieldset/IDR:
   description: GPIO port input data register.
   fields:
-  - name: ID
-    description: Port input data (y =. 0..15).
+  - name: IDR
+    description: Port input data (y = 0..15)
     bit_offset: 0
     bit_size: 1
     array:
       len: 16
       stride: 1
+    enum: IDR
 fieldset/LCKR:
-  description: GPIO port configuration lock. register.
+  description: GPIO port configuration lock register.
   fields:
   - name: LCK
-    description: Port x lock bit y (y=. 0..15).
+    description: Port configuration locked
     bit_offset: 0
     bit_size: 1
     array:
       len: 16
       stride: 1
   - name: LCKK
-    description: Port x lock bit y (y=. 0..15).
+    description: Port x lock bit y (y= 0..15).
     bit_offset: 16
     bit_size: 1
 fieldset/MODER:
   description: GPIO port mode register.
   fields:
-  - name: MODE
-    description: Port x configuration bits (y =. 0..15).
+  - name: MODER
+    description: Port x configuration bits (y = 0..15)
     bit_offset: 0
     bit_size: 2
     array:
@@ -133,18 +113,19 @@ fieldset/MODER:
 fieldset/ODR:
   description: GPIO port output data register.
   fields:
-  - name: OD
-    description: Port output data (y =. 0..15).
+  - name: ODR
+    description: Port output data (y = 0..15)
     bit_offset: 0
     bit_size: 1
     array:
       len: 16
       stride: 1
+    enum: ODR
 fieldset/OSPEEDR:
-  description: GPIO port output speed. register.
+  description: GPIO port output speed register.
   fields:
-  - name: OSPEED
-    description: Port x configuration bits (y =. 0..15).
+  - name: OSPEEDR
+    description: Port x configuration bits (y = 0..15)
     bit_offset: 0
     bit_size: 2
     array:
@@ -155,7 +136,7 @@ fieldset/OTYPER:
   description: GPIO port output type register.
   fields:
   - name: OT
-    description: Port x configuration bits (y =. 0..15).
+    description: Port x configuration bits (y = 0..15)
     bit_offset: 0
     bit_size: 1
     array:
@@ -163,16 +144,35 @@ fieldset/OTYPER:
       stride: 1
     enum: OT
 fieldset/PUPDR:
-  description: GPIO port pull-up/pull-down. register.
+  description: GPIO port pull-up/pull-down register.
   fields:
-  - name: PUPD
-    description: Port x configuration bits (y =. 0..15).
+  - name: PUPDR
+    description: Port x configuration bits (y = 0..15)
     bit_offset: 0
     bit_size: 2
     array:
       len: 16
       stride: 2
     enum: PUPDR
+fieldset/BRR:
+  description: port bit reset register.
+  fields:
+  - name: BR
+    description: Reset bit
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+enum/IDR:
+  bit_size: 1
+  variants:
+  - name: Low
+    description: Input is logic low
+    value: 0
+  - name: High
+    description: Input is logic high
+    value: 1
 enum/MODER:
   bit_size: 2
   variants:
@@ -188,6 +188,15 @@ enum/MODER:
   - name: Analog
     description: Analog mode
     value: 3
+enum/ODR:
+  bit_size: 1
+  variants:
+  - name: Low
+    description: Set output to logic low
+    value: 0
+  - name: High
+    description: Set output to logic high
+    value: 1
 enum/OSPEEDR:
   bit_size: 2
   variants:

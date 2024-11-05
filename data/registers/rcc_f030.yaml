@@ -6,7 +6,7 @@ block/RCC:
     byte_offset: 0
     fieldset: CR
   - name: ICSCR
-    description: Internal clock sources calibration. register.
+    description: Internal clock sources calibration register.
     byte_offset: 4
     fieldset: ICSCR
   - name: CFGR
@@ -22,7 +22,7 @@ block/RCC:
     byte_offset: 16
     fieldset: ECSCR
   - name: CIER
-    description: Clock interrupt enable. register.
+    description: Clock interrupt enable register.
     byte_offset: 24
     fieldset: CIER
   - name: CIFR
@@ -56,7 +56,7 @@ block/RCC:
     byte_offset: 52
     fieldset: IOPENR
   - name: AHBENR
-    description: AHB peripheral clock enable. register.
+    description: AHB peripheral clock enable register.
     byte_offset: 56
     fieldset: AHBENR
   - name: APBENR1
@@ -68,7 +68,7 @@ block/RCC:
     byte_offset: 64
     fieldset: APBENR2
   - name: CCIPR
-    description: Peripherals independent clock configuration. register.
+    description: Peripherals independent clock configuration register.
     byte_offset: 84
     fieldset: CCIPR
   - name: BDCR
@@ -80,7 +80,7 @@ block/RCC:
     byte_offset: 96
     fieldset: CSR
 fieldset/AHBENR:
-  description: AHB peripheral clock enable. register.
+  description: AHB peripheral clock enable register.
   fields:
   - name: DMAEN
     description: DMA clock enable.
@@ -230,7 +230,7 @@ fieldset/APBRSTR2:
   description: APB peripheral reset register. 2.
   fields:
   - name: SYSCFGRST
-    description: SYSCFG and COMP. reset.
+    description: SYSCFG and COMP reset.
     bit_offset: 0
     bit_size: 1
   - name: TIM1RST
@@ -300,6 +300,7 @@ fieldset/BDCR:
     description: RTC clock source selection.
     bit_offset: 8
     bit_size: 2
+    enum: RTCSEL
   - name: RTCEN
     description: RTC clock source enable.
     bit_offset: 15
@@ -309,32 +310,36 @@ fieldset/BDCR:
     bit_offset: 16
     bit_size: 1
   - name: LSCOEN
-    description: Low-speed clock output (LSCO). enable.
+    description: Low-speed clock output (LSCO) enable.
     bit_offset: 24
     bit_size: 1
   - name: LSCOSEL
-    description: Low-speed clock output. selection.
+    description: Low-speed clock output selection.
     bit_offset: 25
     bit_size: 1
 fieldset/CCIPR:
-  description: Peripherals independent clock configuration. register.
+  description: Peripherals independent clock configuration register.
   fields:
   - name: PVDSEL
-    description: PVD detect clock source. selection.
+    description: PVD detect clock source selection.
     bit_offset: 7
     bit_size: 1
+    enum: PVDSEL
   - name: COMP1SEL
-    description: COMP1 clock source. selection.
+    description: COMP1 clock source selection.
     bit_offset: 8
     bit_size: 1
+    enum: COMP1SEL
   - name: COMP2SEL
-    description: COMP2 clock source. selection.
+    description: COMP2 clock source selection.
     bit_offset: 9
     bit_size: 1
+    enum: COMP2SEL
   - name: LPTIM1SEL
-    description: LPTIM1 clock source. selection.
+    description: LPTIM1 clock source selection.
     bit_offset: 18
     bit_size: 2
+    enum: LPTIM1SEL
 fieldset/CFGR:
   description: Clock configuration register.
   fields:
@@ -342,26 +347,32 @@ fieldset/CFGR:
     description: System clock switch.
     bit_offset: 0
     bit_size: 3
+    enum: SW
   - name: SWS
     description: System clock switch status.
     bit_offset: 3
     bit_size: 3
+    enum: SW
   - name: HPRE
     description: AHB prescaler.
     bit_offset: 8
     bit_size: 4
+    enum: HPRE
   - name: PPRE
     description: APB prescaler.
     bit_offset: 12
     bit_size: 3
+    enum: PPRE
   - name: MCOSEL
     description: Microcontroller clock. output.
     bit_offset: 24
     bit_size: 3
+    enum: MCOSEL
   - name: MCOPRE
     description: Microcontroller clock output. prescaler.
     bit_offset: 28
     bit_size: 3
+    enum: MCOPRE
 fieldset/CICR:
   description: Clock interrupt clear register.
   fields:
@@ -394,7 +405,7 @@ fieldset/CICR:
     bit_offset: 9
     bit_size: 1
 fieldset/CIER:
-  description: Clock interrupt enable. register.
+  description: Clock interrupt enable register.
   fields:
   - name: LSIRDYIE
     description: LSI ready interrupt enable.
@@ -536,12 +547,14 @@ fieldset/ECSCR:
     description: HSE clock freqency selection.
     bit_offset: 2
     bit_size: 2
+    enum: HSE_FREQ
   - name: LSE_DRIVER
     description: LSE clock driver selection.
     bit_offset: 16
     bit_size: 2
+    enum: LSE_DRIVER
 fieldset/ICSCR:
-  description: Internal clock sources calibration. register.
+  description: Internal clock sources calibration register.
   fields:
   - name: HSI_TRIM
     description: HSI clock trimming.
@@ -551,6 +564,7 @@ fieldset/ICSCR:
     description: HSI frequency selection.
     bit_offset: 13
     bit_size: 3
+    enum: HSI_FS
   - name: LSI_TRIM
     description: LSI clock trimming.
     bit_offset: 16
@@ -559,6 +573,7 @@ fieldset/ICSCR:
     description: LSI startup time.
     bit_offset: 26
     bit_size: 2
+    enum: LSI_STARTUP
 fieldset/IOPENR:
   description: GPIO clock enable register.
   fields:
@@ -589,6 +604,7 @@ fieldset/IOPRSTR:
     description: I/O port F reset.
     bit_offset: 5
     bit_size: 1
+
 fieldset/PLLCFGR:
   description: PLL configuration register.
   fields:
@@ -596,3 +612,272 @@ fieldset/PLLCFGR:
     description: PLL clock source selection.
     bit_offset: 0
     bit_size: 1
+    enum: PLLSRC
+
+enum/SW:
+  bit_size: 3
+  variants:
+  - name: HSI
+    description: HSI oscillator used as system clock
+    value: 0
+  - name: HSE
+    description: HSE oscillator used as system clock
+    value: 1
+  - name: PLL
+    description: PLL used as system clock
+    value: 2
+  - name: LSI
+    description: LSI oscillator used as system clock
+    value: 3
+  - name: LSE
+    description: LSE oscillator used as system clock
+    value: 4
+
+enum/HPRE:
+  bit_size: 4
+  variants:
+  - name: Div1
+    description: SYSCLK not divided
+    value: 0
+  - name: Div2
+    description: SYSCLK divided by 2
+    value: 8
+  - name: Div4
+    description: SYSCLK divided by 4
+    value: 9
+  - name: Div8
+    description: SYSCLK divided by 8
+    value: 10
+  - name: Div16
+    description: SYSCLK divided by 16
+    value: 11
+  - name: Div64
+    description: SYSCLK divided by 64
+    value: 12
+  - name: Div128
+    description: SYSCLK divided by 128
+    value: 13
+  - name: Div256
+    description: SYSCLK divided by 256
+    value: 14
+  - name: Div512
+    description: SYSCLK divided by 512
+    value: 15
+
+enum/PLLSRC:
+  bit_size: 1
+  variants:
+  - name: HSI
+    value: 0
+  - name: HSE
+    value: 1
+
+enum/RTCSEL:
+  bit_size: 2
+  variants:
+  - name: DISABLE
+    description: No clock
+    value: 0
+  - name: LSE
+    description: LSE oscillator clock used as RTC clock
+    value: 1
+  - name: LSI
+    description: LSI oscillator clock used as RTC clock
+    value: 2
+  - name: HSE_DIV128
+    description: HSE oscillator clock divided by a prescaler used as RTC clock
+    value: 3
+  
+enum/PPRE:
+  bit_size: 3
+  variants:
+  - name: Div1
+    description: HCLK not divided
+    value: 0
+  - name: Div2
+    description: HCLK divided by 2
+    value: 4
+  - name: Div4
+    description: HCLK divided by 4
+    value: 5
+  - name: Div8
+    description: HCLK divided by 8
+    value: 6
+  - name: Div16
+    description: HCLK divided by 16
+    value: 7
+
+enum/MCOSEL:
+  bit_size: 3
+  variants:
+  - name: NONE
+    description: No clock, MCO output disabled
+    value: 0
+  - name: SYSCLK
+    description: System clock selected
+    value: 1
+  - name: RESERVED
+    description: Reserved
+    value: 2
+  - name: HSI
+    description: HSI clock selected
+    value: 3
+  - name: HSE
+    description: HSE clock selected
+    value: 4
+  - name: PLL_CLK
+    description: PLL clock selected
+    value: 5
+  - name: LSI
+    description: LSI clock selected
+    value: 6
+  - name: LSE
+    description: LSE clock selected
+    value: 7
+
+enum/MCOPRE:
+  bit_size: 3
+  variants:
+  - name: Div1
+    description: MCO clock not divided
+    value: 0
+  - name: Div2
+    description: MCO clock divided by 2
+    value: 1
+  - name: Div4
+    description: MCO clock divided by 4
+    value: 2
+  - name: Div8
+    description: MCO clock divided by 8
+    value: 3
+  - name: Div16
+    description: MCO clock divided by 16
+    value: 4
+  - name: Div32
+    description: MCO clock divided by 32
+    value: 5
+  - name: Div64
+    description: MCO clock divided by 64
+    value: 6
+  - name: Div128
+    description: MCO clock divided by 128
+    value: 7
+
+enum/LSE_DRIVER:
+  bit_size: 2
+  variants:
+  - name: OFF
+    description: LSE disabled
+    value: 0
+  - name: LOW_POWER
+    description: Weak drive capability (default)
+    value: 1
+  - name: MEDIUM_POWER
+    description: Medium drive capability (recommended)
+    value: 2
+  - name: HIGH_POWER
+    description: Strong drive capability
+    value: 3
+
+enum/HSE_FREQ:
+  bit_size: 2
+  variants:
+  - name: OFF
+    description: HSE disabled
+    value: 0
+  - name: RANGE1
+    description: 4MHz to 8MHz
+    value: 1
+  - name: RANGE2
+    description: 8MHz to 16MHz
+    value: 2
+  - name: RANGE3
+    description: 16MHz to 32MHz
+    value: 3
+
+enum/LPTIM1SEL:
+  bit_size: 2
+  variants:
+  - name: PCLK
+    description: PCLK selected as LPTIM1 clock source
+    value: 0
+  - name: LSI
+    description: LSI selected as LPTIM1 clock source
+    value: 1
+  - name: NONE
+    description: No clock
+    value: 2
+  - name: LSE
+    description: LSE selected as LPTIM1 clock source
+    value: 3
+
+enum/COMP2SEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as COMP2 clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as COMP2 clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/COMP1SEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as COMP1 clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as COMP1 clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/PVDSEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as PVD detection clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as PVD detection clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/LSI_STARTUP:
+  bit_size: 2
+  variants:
+  - name: CYCLES_4
+    description: 4 LSI clock cycles startup time
+    value: 0
+  - name: CYCLES_16
+    description: 16 LSI clock cycles startup time
+    value: 1
+  - name: CYCLES_64
+    description: 64 LSI clock cycles startup time
+    value: 2
+  - name: CYCLES_256
+    description: 256 LSI clock cycles startup time
+    value: 3
+
+enum/HSI_FS:
+  bit_size: 3
+  offset: 13
+  access: RW
+  reset: 0
+  variants:
+  - name: HSI_4MHZ
+    description: 4MHz HSI frequency
+    value: 0
+  - name: HSI_8MHZ
+    description: 8MHz HSI frequency
+    value: 1
+  - name: HSI_16MHZ
+    description: 16MHz HSI frequency
+    value: 2
+  - name: HSI_22_12MHZ
+    description: 22.12MHz HSI frequency
+    value: 3
+  - name: HSI_24MHZ
+    description: 24MHz HSI frequency
+    value: 4
+  # - name: HSI_4MHZ_FALLBACK
+  #   description: Fallback to 4MHz for invalid values
+  #   value: 5

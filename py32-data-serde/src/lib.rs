@@ -187,6 +187,7 @@ pub mod chip {
                 pub pin: String,
                 pub signal: String,
                 #[serde(skip_serializing_if = "Option::is_none")]
+                #[serde(default)]
                 pub af: Option<u8>,
             }
 

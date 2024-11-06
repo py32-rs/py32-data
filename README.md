@@ -1,24 +1,22 @@
-# py32-data
+# py32-data & py32-metapac
 
-Puya MCU Series metapac.
+[![Crates.io][badge-license]][crates]
+[![Crates.io][badge-version]][crates]
+[![docs.rs][badge-docsrs]][docsrs]
+
+[badge-license]: https://img.shields.io/crates/l/py32-metapac?style=for-the-badge
+[badge-version]: https://img.shields.io/crates/v/py32-metapac?style=for-the-badge
+[badge-docsrs]: https://img.shields.io/docsrs/py32-metapac?style=for-the-badge
+[crates]: https://crates.io/crates/py32-metapac
+[docsrs]: https://docs.rs/py32-metapac
+
+All-in-one Rust PAC(Peripheral Access Crate) for Puya MCU Series.
 
 This repo is adapted from [embassy-rs/stm32-data](https://github.com/embassy-rs/stm32-data).
 
 Contributions are welcome!
 
 You can check the peripheral version corresponding to the microcontroller [here](peripheral_version.md).
-
-## Contirbute
-
-You can refer to the relevant descriptions and explanations in[embassy-rs/stm32-data](https://github.com/embassy-rs/stm32-data) repo. 
-
-The difference is that our data sources are fewer. In addition to the content already present in this repo, the data can come from the processing of the PY32 C language SDK header files, datasheets, and  Reference Manual, etc. 
-
-In fact, the IPs of peripherals in different PY32 series may be consistent, and different series can refer to each other. 
-
-Moreover, some series use the same die(e.g. F003, F002A, F030 use same die), so support a new serie might not require much work.
-
-[Rust 嵌入式开发中的外设寄存器访问：从 svd2rust 到 chiptool 和 metapac - 以 hpm-data 为例 | 猫·仁波切](https://andelf.github.io/2024/08/23/embedded-rust-peripheral-register-access-svdtools-chiptool-and-metapac-approach/)
 
 ## Families
 
@@ -46,3 +44,25 @@ Date: 20240312
   - PY32MD
 - Touch Control
   - PY32T020
+
+## License
+
+This project is licensed under either of
+
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or
+  <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
+
+at your option.
+
+## Contirbute
+
+You can refer to the relevant descriptions and explanations in[embassy-rs/stm32-data](https://github.com/embassy-rs/stm32-data) repo.
+
+The difference is that our data sources are fewer. In addition to the content already present in this repo, the data can come from the processing of the PY32 C language SDK header files, datasheets, and  Reference Manual, etc.
+
+In fact, the IPs of peripherals in different PY32 series may be consistent, and different series can refer to each other.
+
+Moreover, some series use the same die(e.g. F003, F002A, F030 use same die), so support a new serie might not require much work.
+
+[Rust 嵌入式开发中的外设寄存器访问：从 svd2rust 到 chiptool 和 metapac - 以 hpm-data 为例 | 猫·仁波切](https://andelf.github.io/2024/08/23/embedded-rust-peripheral-register-access-svdtools-chiptool-and-metapac-approach/)

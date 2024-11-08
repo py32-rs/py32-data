@@ -511,11 +511,11 @@
     - signal: GLOBAL
       interrupt: SPI2
 
-- name: I2C
+- name: I2C1
   address: 0x40005400
   registers:
     kind: i2c
-    version: common
+    version: v1
     block: I2C
   rcc:
     bus_clock: PCLK1

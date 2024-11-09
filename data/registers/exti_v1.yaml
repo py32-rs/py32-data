@@ -1,0 +1,54 @@
+block/EXTI:
+  description: External interrupt/event. controller.
+  items:
+  - name: RTSR
+    description: Rising Trigger selection register
+    byte_offset: 0
+    fieldset: LINES
+  - name: FTSR
+    description: Falling Trigger selection register
+    byte_offset: 4
+    fieldset: LINES
+  - name: SWIER
+    description: Software interrupt event register
+    byte_offset: 8
+    fieldset: LINES
+  - name: PR
+    description: EXTI pending register.
+    byte_offset: 12
+    fieldset: LINES
+  - name: EXTICR
+    description: EXTI external interrupt selection register.
+    array:
+      len: 3
+      stride: 4
+    byte_offset: 96
+    fieldset: EXTICR
+  - name: IMR
+    description: EXTI CPU wakeup with interrupt mask register.
+    byte_offset: 128
+    fieldset: LINES
+  - name: EMR
+    description: EXTI CPU wakeup with event mask. register.
+    byte_offset: 132
+    fieldset: LINES
+fieldset/LINES:
+  description: EXTI lines register, 1 bit per line
+  fields:
+  - name: LINE
+    description: EXTI line
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 32
+      stride: 1
+fieldset/EXTICR:
+  description: external interrupt configuration register 1
+  fields:
+  - name: EXTI
+    description: EXTI configuration bits
+    bit_offset: 0
+    bit_size: 2
+    array:
+      len: 4
+      stride: 8

@@ -134,13 +134,39 @@
     version: v1
     block: EXTI
   interrupts:
-    - signal: GLOBAL
+    - signal: PVD
       interrupt: PVD
-    - signal: GLOBAL
+    - signal: EXTI0
       interrupt: EXTI0_1
-    - signal: GLOBAL
+    - signal: EXTI1
+      interrupt: EXTI0_1
+    - signal: EXTI2
       interrupt: EXTI2_3
-    - signal: GLOBAL
+    - signal: EXTI3
+      interrupt: EXTI2_3
+    - signal: EXTI4
+      interrupt: EXTI4_15
+    - signal: EXTI5
+      interrupt: EXTI4_15
+    - signal: EXTI6
+      interrupt: EXTI4_15
+    - signal: EXTI7
+      interrupt: EXTI4_15
+    - signal: EXTI8
+      interrupt: EXTI4_15
+    - signal: EXTI9
+      interrupt: EXTI4_15
+    - signal: EXTI10
+      interrupt: EXTI4_15
+    - signal: EXTI11
+      interrupt: EXTI4_15
+    - signal: EXTI12
+      interrupt: EXTI4_15
+    - signal: EXTI13
+      interrupt: EXTI4_15
+    - signal: EXTI14
+      interrupt: EXTI4_15
+    - signal: EXTI15
       interrupt: EXTI4_15
 
 - name: LPTIM

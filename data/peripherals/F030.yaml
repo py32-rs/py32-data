@@ -131,7 +131,7 @@
   address: 0x40021800
   registers:
     kind: exti
-    version: common
+    version: v1
     block: EXTI
   interrupts:
     - signal: GLOBAL

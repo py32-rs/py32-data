@@ -189,7 +189,7 @@
   address: 0x40013800
   registers:
     kind: usart
-    version: common
+    version: v1
     block: USART
   rcc:
     bus_clock: PCLK1
@@ -208,7 +208,7 @@
   address: 0x40004400
   registers:
     kind: usart
-    version: common
+    version: v1
     block: USART
   rcc:
     bus_clock: PCLK1

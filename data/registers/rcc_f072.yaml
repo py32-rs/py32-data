@@ -1,0 +1,1044 @@
+block/RCC:
+  description: Reset and clock control.
+  items:
+  - name: CR
+    description: Clock control register.
+    byte_offset: 0
+    fieldset: CR
+  - name: ICSCR
+    description: Internal clock sources calibration register.
+    byte_offset: 4
+    fieldset: ICSCR
+  - name: CFGR
+    description: Clock configuration register.
+    byte_offset: 8
+    fieldset: CFGR
+  - name: PLLCFGR
+    description: PLL configuration register.
+    byte_offset: 12
+    fieldset: PLLCFGR
+  - name: ECSCR
+    description: External clock source control register.
+    byte_offset: 16
+    fieldset: ECSCR
+  - name: CIER
+    description: Clock interrupt enable register.
+    byte_offset: 24
+    fieldset: CIER
+  - name: CIFR
+    description: Clock interrupt flag register.
+    byte_offset: 28
+    access: Read
+    fieldset: CIFR
+  - name: CICR
+    description: Clock interrupt clear register.
+    byte_offset: 32
+    access: Write
+    fieldset: CICR
+  - name: IOPRSTR
+    description: GPIO reset register.
+    byte_offset: 36
+    fieldset: IOPRSTR
+  - name: AHBRSTR
+    description: AHB peripheral reset register.
+    byte_offset: 40
+    fieldset: AHBRSTR
+  - name: APBRSTR1
+    description: APB peripheral reset register 1.
+    byte_offset: 44
+    fieldset: APBRSTR1
+  - name: APBRSTR2
+    description: APB peripheral reset register 2.
+    byte_offset: 48
+    fieldset: APBRSTR2
+  - name: IOPENR
+    description: GPIO clock enable register.
+    byte_offset: 52
+    fieldset: IOPENR
+  - name: AHBENR
+    description: AHB peripheral clock enable register.
+    byte_offset: 56
+    fieldset: AHBENR
+  - name: APBENR1
+    description: APB peripheral clock enable register 1.
+    byte_offset: 60
+    fieldset: APBENR1
+  - name: APBENR2
+    description: APB peripheral clock enable register 2.
+    byte_offset: 64
+    fieldset: APBENR2
+  - name: CCIPR
+    description: Peripherals independent clock configuration register.
+    byte_offset: 84
+    fieldset: CCIPR
+  - name: BDCR
+    description: RTC domain control register.
+    byte_offset: 92
+    fieldset: BDCR
+  - name: CSR
+    description: Control/status register.
+    byte_offset: 96
+    fieldset: CSR
+fieldset/AHBENR:
+  description: AHB peripheral clock enable register.
+  fields:
+  - name: DMAEN
+    description: DMA clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: FLASHEN
+    description: Flash memory interface clock enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: SRAMEN
+    description: SRAM memory interface clock enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: CRCEN
+    description: CRC clock enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: DIVEN
+    description: DIVEN.
+    bit_offset: 24
+    bit_size: 1
+fieldset/AHBRSTR:
+  description: AHB peripheral reset register.
+  fields:
+  - name: DMARST
+    description: DMA reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: CRCRST
+    description: CRC reset.
+    bit_offset: 12
+    bit_size: 1
+  - name: DIVRST
+    description: DIV reset.
+    bit_offset: 24
+    bit_size: 1
+fieldset/APBENR1:
+  description: APB peripheral clock enable register 1.
+  fields:
+  - name: TIM2EN
+    description: TIM2 timer clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: TIM3EN
+    description: TIM3 timer clock enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: TIM6EN
+    description: TIM6 timer clock enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: TIM7EN
+    description: TIM7 timer clock enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: RTCAPBEN
+    description: RTC APB clock enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: WWDGEN
+    description: WWDG clock enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI2EN
+    description: SPI2 clock enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: USART2EN
+    description: USART2 clock enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: USART3EN
+    description: USART3 clock enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: USART4EN
+    description: USART4 clock enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: I2C1EN
+    description: I2C1 clock enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: I2C2EN
+    description: I2C2 clock enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: USBEN
+    description: USB clock enable.
+    bit_offset: 23
+    bit_size: 1
+  - name: CANEN
+    description: CAN clock enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: CTCEN
+    description: CTC clock enable.
+    bit_offset: 27
+    bit_size: 1
+  - name: PWREN
+    description: Power interface clock enable.
+    bit_offset: 28
+    bit_size: 1
+  - name: DACEN
+    description: DAC clock enable.
+    bit_offset: 29
+    bit_size: 1
+  - name: OPAEN
+    description: OPA clock enable.
+    bit_offset: 30
+    bit_size: 1
+  - name: LPTIMEN
+    description: LPTIM clock enable.
+    bit_offset: 31
+    bit_size: 1
+fieldset/APBENR2:
+  description: APB peripheral clock enable register 2.
+  fields:
+  - name: SYSCFGEN
+    description: SYSCFG, COMP and VREFBUF clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADCEN
+    description: ADCEN clock enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: DBGEN
+    description: DBG clock enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: TIM1EN
+    description: TIM1 clock enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI1EN
+    description: SPI1 clock enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: USART1EN
+    description: USART1 clock enable.
+    bit_offset: 14
+    bit_size: 1
+  - name: TIM14EN
+    description: TIM14 clock enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: TIM15EN
+    description: TIM15 clock enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: TIM16EN
+    description: TIM16 clock enable.
+    bit_offset: 17
+    bit_size: 1
+  - name: TIM17EN
+    description: TIM17 clock enable.
+    bit_offset: 18
+    bit_size: 1
+  - name: COMP1EN
+    description: COMP1 clock enable.
+    bit_offset: 20
+    bit_size: 1
+  - name: COMP2EN
+    description: COMP2 clock enable.
+    bit_offset: 21
+    bit_size: 1
+  - name: COMP3EN
+    description: COMP3 clock enable.
+    bit_offset: 22
+    bit_size: 1
+  - name: LCDEN
+    description: LCD clock enable.
+    bit_offset: 23
+    bit_size: 1
+fieldset/APBRSTR1:
+  description: APB peripheral reset register 1.
+  fields:
+  - name: TIM2RST
+    description: TIM2 timer reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: TIM3RST
+    description: TIM3 timer reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: TIM6RST
+    description: TIM6 timer reset.
+    bit_offset: 4
+    bit_size: 1
+  - name: TIM7RST
+    description: TIM7 timer reset.
+    bit_offset: 5
+    bit_size: 1
+  - name: RTCAPBRST
+    description: RTCAPB reset.
+    bit_offset: 10
+    bit_size: 1
+  - name: WWDGRST
+    description: WWDG reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI2RST
+    description: SPI2 reset.
+    bit_offset: 14
+    bit_size: 1
+  - name: USART2RST
+    description: USART2 reset.
+    bit_offset: 17
+    bit_size: 1
+  - name: USART3RST
+    description: USART3 reset.
+    bit_offset: 18
+    bit_size: 1
+  - name: USART4RST
+    description: USART4 reset.
+    bit_offset: 19
+    bit_size: 1
+  - name: I2C1RST
+    description: I2C1 reset.
+    bit_offset: 21
+    bit_size: 1
+  - name: I2C2RST
+    description: I2C2 reset.
+    bit_offset: 22
+    bit_size: 1
+  - name: USBRST
+    description: USB reset.
+    bit_offset: 23
+    bit_size: 1
+  - name: CANRST
+    description: CANRST.
+    bit_offset: 25
+    bit_size: 1
+  - name: CTCRST
+    description: CTCRST.
+    bit_offset: 27
+    bit_size: 1
+  - name: PWRRST
+    description: Power interface reset.
+    bit_offset: 28
+    bit_size: 1
+  - name: DACRST
+    description: DACRST.
+    bit_offset: 29
+    bit_size: 1
+  - name: OPARST
+    description: OPARST.
+    bit_offset: 30
+    bit_size: 1
+  - name: LPTIMRST
+    description: Low Power Timer reset.
+    bit_offset: 31
+    bit_size: 1
+fieldset/APBRSTR2:
+  description: APB peripheral reset register 2.
+  fields:
+  - name: SYSCFGRST
+    description: SYSCFG reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADCRST
+    description: ADC reset.
+    bit_offset: 9
+    bit_size: 1
+  - name: DBGRST
+    description: DBG reset.
+    bit_offset: 10
+    bit_size: 1
+  - name: TIM1RST
+    description: TIM1 reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPI1RST
+    description: SPI1 reset.
+    bit_offset: 12
+    bit_size: 1
+  - name: USART1RST
+    description: USART1 reset.
+    bit_offset: 14
+    bit_size: 1
+  - name: TIM14RST
+    description: TIM14 reset.
+    bit_offset: 15
+    bit_size: 1
+  - name: TIM15RST
+    description: TIM15 reset.
+    bit_offset: 16
+    bit_size: 1
+  - name: TIM16RST
+    description: TIM16 reset.
+    bit_offset: 17
+    bit_size: 1
+  - name: TIM17RST
+    description: TIM17 reset.
+    bit_offset: 18
+    bit_size: 1
+  - name: COMP1RST
+    description: COMP1 reset.
+    bit_offset: 20
+    bit_size: 1
+  - name: COMP2RST
+    description: COMP2 reset.
+    bit_offset: 21
+    bit_size: 1
+  - name: COMP3RST
+    description: COMP3 reset.
+    bit_offset: 22
+    bit_size: 1
+  - name: LCDRST
+    description: LCD reset.
+    bit_offset: 23
+    bit_size: 1
+fieldset/BDCR:
+  description: RTC domain control register.
+  fields:
+  - name: LSEON
+    description: LSE oscillator enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDY
+    description: LSE oscillator ready.
+    bit_offset: 1
+    bit_size: 1
+  - name: LSEBYP
+    description: LSE oscillator bypass.
+    bit_offset: 2
+    bit_size: 1
+  - name: LSECSSON
+    description: LSE CSS enable.
+    bit_offset: 5
+    bit_size: 1
+  - name: LSECSSD
+    description: LSE CSS detect.
+    bit_offset: 6
+    bit_size: 1
+  - name: RTCSEL
+    description: RTC clock source selection.
+    bit_offset: 8
+    bit_size: 2
+    enum: RTCSEL
+  - name: RTCEN
+    description: RTC clock source enable.
+    bit_offset: 15
+    bit_size: 1
+  - name: BDRST
+    description: RTC domain software reset.
+    bit_offset: 16
+    bit_size: 1
+  - name: LSCOEN
+    description: Low-speed clock output (LSCO) enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: LSCOSEL
+    description: Low-speed clock output selection.
+    bit_offset: 25
+    bit_size: 1
+fieldset/CCIPR:
+  description: Peripherals independent clock configuration register.
+  fields:
+  - name: CANSEL
+    description: CAN detect clock source selection.
+    bit_offset: 6
+    bit_size: 1
+  - name: PVDSEL
+    description: PVD detect clock source selection.
+    bit_offset: 7
+    bit_size: 1
+    enum: PVDSEL
+  - name: COMP1SEL
+    description: COMP1 clock source selection.
+    bit_offset: 8
+    bit_size: 1
+    enum: COMP1SEL
+  - name: COMP2SEL
+    description: COMP2 clock source selection.
+    bit_offset: 9
+    bit_size: 1
+    enum: COMP2SEL
+  - name: COMP3SEL
+    description: COMP3 clock source selection.
+    bit_offset: 10
+    bit_size: 1
+    enum: COMP3SEL
+  - name: LPTIM1SEL
+    description: LPTIM1 clock source selection.
+    bit_offset: 18
+    bit_size: 2
+    enum: LPTIM1SEL
+fieldset/CFGR:
+  description: Clock configuration register.
+  fields:
+  - name: SW
+    description: System clock switch.
+    bit_offset: 0
+    bit_size: 3
+    enum: SW
+  - name: SWS
+    description: System clock switch status.
+    bit_offset: 3
+    bit_size: 3
+    enum: SW
+  - name: HPRE
+    description: AHB prescaler.
+    bit_offset: 8
+    bit_size: 4
+    enum: HPRE
+  - name: PPRE
+    description: APB prescaler.
+    bit_offset: 12
+    bit_size: 3
+    enum: PPRE
+  - name: MCOSEL
+    description: Microcontroller clock output.
+    bit_offset: 24
+    bit_size: 3
+    enum: MCOSEL
+  - name: MCOPRE
+    description: Microcontroller clock output prescaler.
+    bit_offset: 28
+    bit_size: 3
+    enum: MCOPRE
+fieldset/CICR:
+  description: Clock interrupt clear register.
+  fields:
+  - name: LSIRDYC
+    description: LSI ready interrupt clear.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYC
+    description: LSE ready interrupt clear.
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYC
+    description: HSI ready interrupt clear.
+    bit_offset: 3
+    bit_size: 1
+  - name: HSERDYC
+    description: HSE ready interrupt clear.
+    bit_offset: 4
+    bit_size: 1
+  - name: PLLRDYC
+    description: PLL ready interrupt clear.
+    bit_offset: 5
+    bit_size: 1
+  - name: CSSC
+    description: clock secure system interrupt flag clear.
+    bit_offset: 8
+    bit_size: 1
+  - name: LSECSSC
+    description: LSE clock secure system interrupt flag clear.
+    bit_offset: 9
+    bit_size: 1
+fieldset/CIER:
+  description: Clock interrupt enable register.
+  fields:
+  - name: LSIRDYIE
+    description: LSI ready interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYIE
+    description: LSE ready interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYIE
+    description: HSI ready interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: HSERDYIE
+    description: HSE ready interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+  - name: PLLRDYIE
+    description: PLL ready interrupt enable.
+    bit_offset: 5
+    bit_size: 1
+fieldset/CIFR:
+  description: Clock interrupt flag register.
+  fields:
+  - name: LSIRDYF
+    description: LSI ready interrupt flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYF
+    description: LSE ready interrupt flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYF
+    description: HSI ready interrupt flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: HSERDYF
+    description: HSE ready interrupt flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: PLLRDYF
+    description: PLL ready interrupt flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: CSSF
+    description: HSE clock secure system interrupt flag.
+    bit_offset: 8
+    bit_size: 1
+  - name: LSECSSF
+    description: LSE clock secure system interrupt flag.
+    bit_offset: 9
+    bit_size: 1
+fieldset/CR:
+  description: Clock control register.
+  fields:
+  - name: HSION
+    description: HSI16 clock enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: HSIRDY
+    description: HSI16 clock ready flag.
+    bit_offset: 10
+    bit_size: 1
+  - name: HSIDIV
+    description: HSI16 clock division factor.
+    bit_offset: 11
+    bit_size: 3
+  - name: HSEON
+    description: HSE clock enable.
+    bit_offset: 16
+    bit_size: 1
+  - name: HSERDY
+    description: HSE clock ready flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: HSEBYP
+    description: HSE crystal oscillator bypass.
+    bit_offset: 18
+    bit_size: 1
+  - name: CSSON
+    description: Clock security system enable.
+    bit_offset: 19
+    bit_size: 1
+  - name: ADC_DIV
+    description: ADC Frequency Division.
+    bit_offset: 21
+    bit_size: 2
+  - name: PLLON
+    description: PLL enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: PLLRDY
+    description: PLL clock ready flag.
+    bit_offset: 25
+    bit_size: 1
+fieldset/CSR:
+  description: Control/status register.
+  fields:
+  - name: LSION
+    description: LSI oscillator enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: LSIRDY
+    description: LSI oscillator ready.
+    bit_offset: 1
+    bit_size: 1
+  - name: NRST_FLTDIS
+    description: NRST_FLTDIS oscillator ready.
+    bit_offset: 8
+    bit_size: 1
+  - name: RMVF
+    description: Remove reset flags.
+    bit_offset: 23
+    bit_size: 1
+  - name: OBLRSTF
+    description: Option byte loader reset flag.
+    bit_offset: 25
+    bit_size: 1
+  - name: PINRSTF
+    description: Pin reset flag.
+    bit_offset: 26
+    bit_size: 1
+  - name: PWRRSTF
+    description: BOR or POR/PDR flag.
+    bit_offset: 27
+    bit_size: 1
+  - name: SFTRSTF
+    description: Software reset flag.
+    bit_offset: 28
+    bit_size: 1
+  - name: IWDGRSTF
+    description: Independent window watchdog reset flag.
+    bit_offset: 29
+    bit_size: 1
+  - name: WWDGRSTF
+    description: Window watchdog reset flag.
+    bit_offset: 30
+    bit_size: 1
+fieldset/ECSCR:
+  description: External clock source control register.
+  fields:
+  - name: HSE_DRIVER
+    description: HSE_DRIVER.
+    bit_offset: 0
+    bit_size: 2
+    # todoenum
+  - name: HSE_STARTUP
+    description: HSE_STARTUP.
+    bit_offset: 3
+    bit_size: 2
+    #todoenum
+  - name: LSE_DRIVER
+    description: LSE clock driver selection.
+    bit_offset: 16
+    bit_size: 2
+    enum: LSE_DRIVER
+  - name: LSE_STARTUP
+    description: LSE_STARTUP.
+    bit_offset: 20
+    bit_size: 2
+    enum: LSI_STARTUP
+fieldset/ICSCR:
+  description: Internal clock sources calibration register.
+  fields:
+  - name: HSI_TRIM
+    description: HSI clock trimming.
+    bit_offset: 0
+    bit_size: 13
+  - name: HSI_FS
+    description: HSI frequency selection.
+    bit_offset: 13
+    bit_size: 3
+    enum: HSI_FS
+  - name: LSI_TRIM
+    description: LSI clock trimming.
+    bit_offset: 16
+    bit_size: 9
+    #todoenum
+fieldset/IOPENR:
+  description: GPIO clock enable register.
+  fields:
+  - name: GPIOAEN
+    description: I/O port A clock enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: GPIOBEN
+    description: I/O port B clock enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: GPIOCEN
+    description: I/O port C clock enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: GPIOFEN
+    description: I/O port F clock enable.
+    bit_offset: 5
+    bit_size: 1
+fieldset/IOPRSTR:
+  description: GPIO reset register.
+  fields:
+  - name: GPIOARST
+    description: I/O port A reset.
+    bit_offset: 0
+    bit_size: 1
+  - name: GPIOBRST
+    description: I/O port B reset.
+    bit_offset: 1
+    bit_size: 1
+  - name: GPIOCRST
+    description: I/O port F reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: GPIOFRST
+    description: I/O port F reset.
+    bit_offset: 5
+    bit_size: 1
+fieldset/PLLCFGR:
+  description: PLL configuration register.
+  fields:
+  - name: PLLSRC
+    description: PLL clock source selection.
+    bit_offset: 0
+    bit_size: 2
+    enum: PLLSRC
+  - name: PLLMUL
+    description: PLLMUL.
+    bit_offset: 2
+    bit_size: 2
+    #todoenum
+
+enum/SW:
+  bit_size: 3
+  variants:
+  - name: HSI
+    description: HSI oscillator used as system clock
+    value: 0
+  - name: HSE
+    description: HSE oscillator used as system clock
+    value: 1
+  - name: PLL
+    description: PLL used as system clock
+    value: 2
+  - name: LSI
+    description: LSI oscillator used as system clock
+    value: 3
+  - name: LSE
+    description: LSE oscillator used as system clock
+    value: 4
+
+enum/HPRE:
+  bit_size: 4
+  variants:
+  - name: Div1
+    description: SYSCLK not divided
+    value: 0
+  - name: Div2
+    description: SYSCLK divided by 2
+    value: 8
+  - name: Div4
+    description: SYSCLK divided by 4
+    value: 9
+  - name: Div8
+    description: SYSCLK divided by 8
+    value: 10
+  - name: Div16
+    description: SYSCLK divided by 16
+    value: 11
+  - name: Div64
+    description: SYSCLK divided by 64
+    value: 12
+  - name: Div128
+    description: SYSCLK divided by 128
+    value: 13
+  - name: Div256
+    description: SYSCLK divided by 256
+    value: 14
+  - name: Div512
+    description: SYSCLK divided by 512
+    value: 15
+
+enum/PLLSRC:
+  bit_size: 2
+  variants:
+  - name: HSI
+    value: 0
+  - name: HSE
+    value: 1
+
+enum/RTCSEL:
+  bit_size: 2
+  variants:
+  - name: DISABLE
+    description: No clock
+    value: 0
+  - name: LSE
+    description: LSE oscillator clock used as RTC clock
+    value: 1
+  - name: LSI
+    description: LSI oscillator clock used as RTC clock
+    value: 2
+  - name: HSE_DIV128
+    description: HSE oscillator clock divided by a prescaler used as RTC clock
+    value: 3
+  
+enum/PPRE:
+  bit_size: 3
+  variants:
+  - name: Div1
+    description: HCLK not divided
+    value: 0
+  - name: Div2
+    description: HCLK divided by 2
+    value: 4
+  - name: Div4
+    description: HCLK divided by 4
+    value: 5
+  - name: Div8
+    description: HCLK divided by 8
+    value: 6
+  - name: Div16
+    description: HCLK divided by 16
+    value: 7
+
+enum/MCOSEL:
+  bit_size: 3
+  variants:
+  - name: NONE
+    description: No clock, MCO output disabled
+    value: 0
+  - name: SYSCLK
+    description: System clock selected
+    value: 1
+  - name: RESERVED
+    description: Reserved
+    value: 2
+  - name: HSI
+    description: HSI clock selected
+    value: 3
+  - name: HSE
+    description: HSE clock selected
+    value: 4
+  - name: PLL_CLK
+    description: PLL clock selected
+    value: 5
+  - name: LSI
+    description: LSI clock selected
+    value: 6
+  - name: LSE
+    description: LSE clock selected
+    value: 7
+
+enum/MCOPRE:
+  bit_size: 3
+  variants:
+  - name: Div1
+    description: MCO clock not divided
+    value: 0
+  - name: Div2
+    description: MCO clock divided by 2
+    value: 1
+  - name: Div4
+    description: MCO clock divided by 4
+    value: 2
+  - name: Div8
+    description: MCO clock divided by 8
+    value: 3
+  - name: Div16
+    description: MCO clock divided by 16
+    value: 4
+  - name: Div32
+    description: MCO clock divided by 32
+    value: 5
+  - name: Div64
+    description: MCO clock divided by 64
+    value: 6
+  - name: Div128
+    description: MCO clock divided by 128
+    value: 7
+
+enum/LSE_DRIVER:
+  bit_size: 2
+  variants:
+  - name: OFF
+    description: LSE disabled
+    value: 0
+  - name: LOW_POWER
+    description: Weak drive capability (default)
+    value: 1
+  - name: MEDIUM_POWER
+    description: Medium drive capability (recommended)
+    value: 2
+  - name: HIGH_POWER
+    description: Strong drive capability
+    value: 3
+
+# enum/HSE_FREQ:
+#   bit_size: 2
+#   variants:
+#   - name: OFF
+#     description: HSE disabled
+#     value: 0
+#   - name: RANGE1
+#     description: 4MHz to 8MHz
+#     value: 1
+#   - name: RANGE2
+#     description: 8MHz to 16MHz
+#     value: 2
+#   - name: RANGE3
+#     description: 16MHz to 32MHz
+#     value: 3
+
+enum/LPTIM1SEL:
+  bit_size: 2
+  variants:
+  - name: PCLK
+    description: PCLK selected as LPTIM1 clock source
+    value: 0
+  - name: LSI
+    description: LSI selected as LPTIM1 clock source
+    value: 1
+  - name: NONE
+    description: No clock
+    value: 2
+  - name: LSE
+    description: LSE selected as LPTIM1 clock source
+    value: 3
+
+enum/COMP2SEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as COMP2 clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as COMP2 clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/COMP1SEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as COMP1 clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as COMP1 clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/COMP3SEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as COMP1 clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as COMP1 clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/PVDSEL:
+  bit_size: 1
+  variants:
+  - name: PCLK
+    description: PCLK selected as PVD detection clock source
+    value: 0
+  - name: LSC
+    description: LSC selected as PVD detection clock source (selected by RCC_BDCR.LSCOSEL)
+    value: 1
+
+enum/LSI_STARTUP:
+  bit_size: 2
+  variants:
+  - name: CYCLES_4
+    description: 4 LSI clock cycles startup time
+    value: 0
+  - name: CYCLES_16
+    description: 16 LSI clock cycles startup time
+    value: 1
+  - name: CYCLES_64
+    description: 64 LSI clock cycles startup time
+    value: 2
+  - name: CYCLES_256
+    description: 256 LSI clock cycles startup time
+    value: 3
+
+enum/HSI_FS:
+  bit_size: 3
+  offset: 13
+  access: RW
+  reset: 0
+  variants:
+  - name: HSI_4MHZ
+    description: 4MHz HSI frequency
+    value: 0
+  - name: HSI_8MHZ
+    description: 8MHz HSI frequency
+    value: 1
+  - name: HSI_16MHZ
+    description: 16MHz HSI frequency
+    value: 2
+  - name: HSI_22_12MHZ
+    description: 22.12MHz HSI frequency
+    value: 3
+  - name: HSI_24MHZ
+    description: 24MHz HSI frequency
+    value: 4
+  # - name: HSI_4MHZ_FALLBACK
+  #   description: Fallback to 4MHz for invalid values
+  #   value: 5

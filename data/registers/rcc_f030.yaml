@@ -857,9 +857,6 @@ enum/LSI_STARTUP:
 
 enum/HSI_FS:
   bit_size: 3
-  offset: 13
-  access: RW
-  reset: 0
   variants:
   - name: HSI_4MHZ
     description: 4MHz HSI frequency

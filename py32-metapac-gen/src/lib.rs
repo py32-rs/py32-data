@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, HashMap, HashSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::fmt::{Debug, Write as _};
 use std::fs;
 use std::fs::File;
@@ -113,7 +113,7 @@ impl Gen {
                 "#[path=\"../../peripherals/{}_{}.rs\"] pub mod {};",
                 module, version, module
             )
-                .unwrap();
+            .unwrap();
         }
         writeln!(&mut extra, "pub const CORE_INDEX: usize = {};", core_index).unwrap();
 
@@ -142,7 +142,7 @@ impl Gen {
             "pub const WRITE_SIZE: usize = {};",
             write_sizes.iter().next().unwrap()
         )
-            .unwrap();
+        .unwrap();
 
         // Cleanups!
         transform::sort::Sort {}.run(&mut ir).unwrap();
@@ -194,7 +194,7 @@ impl Gen {
             stringify(&core.interrupts),
             stringify(&core.dma_channels),
         )
-            .unwrap();
+        .unwrap();
 
         let out_dir = self.opts.out_dir.clone();
         let n = self.metadata_dedup.len();
@@ -208,7 +208,7 @@ impl Gen {
                     "#[path=\"../registers/{}_{}.rs\"] pub mod {};",
                     module, version, module
                 )
-                    .unwrap();
+                .unwrap();
             }
 
             let file = format!("metadata_{:04}.rs", n);
@@ -329,7 +329,7 @@ impl Gen {
                     .join("src/peripherals")
                     .join(format!("{}_{}.rs", module, version)),
             )
-                .unwrap();
+            .unwrap();
 
             // Allow a few warning
             file.write_all(
@@ -338,7 +338,7 @@ impl Gen {
                 #![allow(clippy::unnecessary_cast)]
                 #![allow(clippy::erasing_op)]",
             )
-                .unwrap();
+            .unwrap();
 
             let data = items.to_string().replace("] ", "]\n");
 
@@ -358,7 +358,7 @@ impl Gen {
                 ",
                 stringify(&ir),
             )
-                .unwrap();
+            .unwrap();
 
             let mut file = File::create(
                 self.opts
@@ -366,7 +366,7 @@ impl Gen {
                     .join("src/registers")
                     .join(format!("{}_{}.rs", module, version)),
             )
-                .unwrap();
+            .unwrap();
             file.write_all(data.as_bytes()).unwrap();
         }
 
@@ -377,23 +377,35 @@ impl Gen {
         }
         fs::write(self.opts.out_dir.join("Cargo.toml"), contents).unwrap();
 
+        // Generate src/all_chips.rs
+        {
+            let contents = gen_all_chips(&self.opts.chips);
+            fs::write(self.opts.out_dir.join("src/all_chips.rs"), contents).unwrap();
+        }
+
+        // Generate src/all_peripheral_versions.rs
+        {
+            let contents = gen_all_peripheral_versions(&self.all_peripheral_versions);
+            fs::write(self.opts.out_dir.join("src/all_peripheral_versions.rs"), contents).unwrap();
+        }
+
         // copy misc files
         fs::write(self.opts.out_dir.join("build.rs"), include_bytes!("../res/build.rs")).unwrap();
         fs::write(
             self.opts.out_dir.join("src/lib.rs"),
             include_bytes!("../res/src/lib.rs"),
         )
-            .unwrap();
+        .unwrap();
         fs::write(
             self.opts.out_dir.join("src/common.rs"),
             chiptool::generate::COMMON_MODULE,
         )
-            .unwrap();
+        .unwrap();
         fs::write(
             self.opts.out_dir.join("src/metadata.rs"),
             include_bytes!("../res/src/metadata.rs"),
         )
-            .unwrap();
+        .unwrap();
     }
 }
 
@@ -415,48 +427,89 @@ fn gen_opts() -> generate::Options {
 fn gen_memory_x(out_dir: &Path, chip: &Chip) {
     let mut memory_x = String::new();
 
-    let flash = chip
-        .memory
-        .iter()
-        .filter(|r| r.kind == MemoryRegionKind::Flash && r.name.starts_with("BANK_"));
-    let (flash_address, flash_size) = flash
-        .clone()
-        .map(|r| (r.address, r.size))
-        .reduce(|acc, el| (u32::min(acc.0, el.0), acc.1 + el.1))
-        .unwrap();
-    let ram = chip.memory.iter().find(|r| r.kind == MemoryRegionKind::Ram).unwrap();
-    let otp = chip
-        .memory
-        .iter()
-        .find(|r| r.kind == MemoryRegionKind::Flash && r.name == "OTP");
+    let flash = get_memory_range(chip, MemoryRegionKind::Flash);
+    let ram = get_memory_range(chip, MemoryRegionKind::Ram);
 
     write!(memory_x, "MEMORY\n{{\n").unwrap();
     writeln!(
         memory_x,
         "    FLASH : ORIGIN = 0x{:08x}, LENGTH = {:>4}K /* {} */",
-        flash_address,
-        flash_size / 1024,
-        flash.map(|x| x.name.as_ref()).collect::<Vec<&str>>().join(" + ")
+        flash.0,
+        flash.1 / 1024,
+        flash.2
     )
-        .unwrap();
+    .unwrap();
     writeln!(
         memory_x,
-        "    RAM   : ORIGIN = 0x{:08x}, LENGTH = {:>4}K",
-        ram.address,
-        ram.size / 1024,
+        "    RAM   : ORIGIN = 0x{:08x}, LENGTH = {:>4}K /* {} */",
+        ram.0,
+        ram.1 / 1024,
+        ram.2
     )
-        .unwrap();
-    if let Some(otp) = otp {
-        writeln!(
-            memory_x,
-            "    OTP   : ORIGIN = 0x{:08x}, LENGTH = {:>4}",
-            otp.address, otp.size,
-        )
-            .unwrap();
-    }
+    .unwrap();
     write!(memory_x, "}}").unwrap();
 
     fs::create_dir_all(out_dir.join("memory_x")).unwrap();
     let mut file = File::create(out_dir.join("memory_x").join("memory.x")).unwrap();
     file.write_all(memory_x.as_bytes()).unwrap();
+}
+
+fn get_memory_range(chip: &Chip, kind: MemoryRegionKind) -> (u32, u32, String) {
+    let mut mems: Vec<_> = chip.memory.iter().filter(|m| m.kind == kind && m.size != 0).collect();
+    mems.sort_by_key(|m| m.address);
+
+    let mut start = u32::MAX;
+    let mut end = u32::MAX;
+    let mut names = Vec::new();
+    let mut best: Option<(u32, u32, String)> = None;
+    for m in mems {
+
+        if m.address != end {
+            names = Vec::new();
+            start = m.address;
+            end = m.address;
+        }
+
+        end += m.size;
+        names.push(m.name.to_string());
+
+        if best.is_none() || end - start > best.as_ref().unwrap().1 {
+            best = Some((start, end - start, names.join(" + ")));
+        }
+    }
+
+    best.unwrap()
+}
+
+fn gen_all_chips(chips: &[String]) -> String {
+    let mut contents = String::new();
+    writeln!(&mut contents, "pub static ALL_CHIPS: &[&str] = &[").unwrap();
+    for chip in chips.iter() {
+        writeln!(&mut contents, "    {:?},", chip).unwrap();
+    }
+    writeln!(&mut contents, "];").unwrap();
+    contents
+}
+
+fn gen_all_peripheral_versions(all_versions: &HashSet<(String, String)>) -> String {
+    let mut version_map = BTreeMap::<_, BTreeSet<_>>::new();
+    for (kind, version) in all_versions.iter() {
+        version_map.entry(kind).or_default().insert(version);
+    }
+
+    let mut contents = String::new();
+    writeln!(
+        &mut contents,
+        "pub static ALL_PERIPHERAL_VERSIONS: &[(&str, &[&str])] = &["
+    )
+    .unwrap();
+    for (kind, versions) in version_map.iter() {
+        write!(&mut contents, "    ({:?}, &[", kind).unwrap();
+        for version in versions.iter() {
+            write!(&mut contents, "{:?}, ", version).unwrap();
+        }
+        writeln!(&mut contents, "]),").unwrap();
+    }
+    writeln!(&mut contents, "];").unwrap();
+    contents
 }

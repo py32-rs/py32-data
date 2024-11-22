@@ -430,9 +430,10 @@ TIM15:
   - af: 1
     pin: PB14
     signal: CH1
-  - af: 11
-    pin: PB14
-    signal: CH1
+  # conflicted
+  # - af: 11
+  #   pin: PB14
+  #   signal: CH1
   - af: 1
     pin: PB15
     signal: CH2

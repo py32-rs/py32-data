@@ -429,7 +429,15 @@
 #       register: APBRSTR1
 #       field: TIM2RST
 #   interrupts:
-#   - signal: GLOBAL
+#   - signal: BRK
+#     interrupt: TIM2
+#   - signal: UP
+#     interrupt: TIM2
+#   - signal: TRG
+#     interrupt: TIM2
+#   - signal: COM
+#     interrupt: TIM2
+#   - signal: CC
 #     interrupt: TIM2
 
 - name:  TIM3
@@ -475,7 +483,15 @@
       register: APBRSTR1
       field: TIM6RST
   interrupts:
-  - signal: GLOBAL
+  - signal: BRK
+    interrupt: TIM6_LPTIM1_DAC
+  - signal: UP
+    interrupt: TIM6_LPTIM1_DAC
+  - signal: TRG
+    interrupt: TIM6_LPTIM1_DAC
+  - signal: COM
+    interrupt: TIM6_LPTIM1_DAC
+  - signal: CC
     interrupt: TIM6_LPTIM1_DAC
 
 - name:  TIM7
@@ -494,27 +510,70 @@
       register: APBRSTR1
       field: TIM7RST
   interrupts:
-  - signal: GLOBAL
+  - signal: BRK
+    interrupt: TIM7
+  - signal: UP
+    interrupt: TIM7
+  - signal: TRG
+    interrupt: TIM7
+  - signal: COM
+    interrupt: TIM7
+  - signal: CC
     interrupt: TIM7
 
-# - name:  TIM14
-#   address: 0x40002000
-#   registers:
-#     kind: timer
-#     version: v1
-#     block: TIM_1CH_CMP
-#   rcc:
-#     bus_clock: PCLK1_TIM
-#     kernel_clock: PCLK1_TIM
-#     enable:
-#       register: APBENR2
-#       field: TIM14EN
-#     reset:
-#       register: APBRSTR2
-#       field: TIM14RST
-#   interrupts:
-#   - signal: GLOBAL
-#     interrupt: TIM14
+- name:  TIM14
+  address: 0x40002000
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH_CMP
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM14EN
+    reset:
+      register: APBRSTR2
+      field: TIM14RST
+  interrupts:
+    - signal: BRK
+      interrupt: TIM14
+    - signal: UP
+      interrupt: TIM14
+    - signal: TRG
+      interrupt: TIM14
+    - signal: COM
+      interrupt: TIM14
+    - signal: CC
+      interrupt: TIM14
+
+- name:  TIM15
+  address: 0x40014000
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH_CMP
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM15EN
+    reset:
+      register: APBRSTR2
+      field: TIM15RST
+  interrupts:
+  - signal: BRK
+    interrupt: TIM15
+  - signal: UP
+    interrupt: TIM15
+  - signal: TRG
+    interrupt: TIM15
+  - signal: COM
+    interrupt: TIM15
+  - signal: CC
+    interrupt: TIM15
 
 - name:  TIM16
   address: 0x40014400
@@ -543,24 +602,32 @@
     - signal: CC
       interrupt: TIM16
 
-# - name:  TIM17
-#   address: 0x40014800
-#   registers:
-#     kind: timer
-#     version: v1
-#     block: TIM_1CH_CMP
-#   rcc:
-#     bus_clock: PCLK1_TIM
-#     kernel_clock: PCLK1_TIM
-#     enable:
-#       register: APBENR2
-#       field: TIM17EN
-#     reset:
-#       register: APBRSTR2
-#       field: TIM17RST
-#   interrupts:
-#   - signal: GLOBAL
-#     interrupt: TIM17
+- name:  TIM17
+  address: 0x40014800
+  registers:
+    kind: timer
+    version: v1
+    block: TIM_1CH_CMP
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM17EN
+    reset:
+      register: APBRSTR2
+      field: TIM17RST
+  interrupts:
+    - signal: BRK
+      interrupt: TIM17
+    - signal: UP
+      interrupt: TIM17
+    - signal: TRG
+      interrupt: TIM17
+    - signal: COM
+      interrupt: TIM17
+    - signal: CC
+      interrupt: TIM17
 
 - name:  USART1
   address: 0x40013800

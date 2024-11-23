@@ -620,10 +620,11 @@ fieldset/CR:
     description: Clock security system enable.
     bit_offset: 19
     bit_size: 1
-  - name: ADC_DIV
+  - name: ADCDIV
     description: ADC Frequency Division.
     bit_offset: 21
     bit_size: 2
+    enum: ADCDIV
   - name: PLLON
     description: PLL enable.
     bit_offset: 24
@@ -1069,3 +1070,18 @@ enum/HSIDIV:
   - name: Div128
     description: HSI clock divided by 128
     value: 7
+enum/ADCDIV:
+  bit_size: 2
+  variants:
+  - name: Div2
+    description: PCLK divided by 2
+    value: 0
+  - name: Div4
+    description: PCLK divided by 4
+    value: 1
+  - name: Div6
+    description: PCLK divided by 6
+    value: 2
+  - name: Div8
+    description: PCLK divided by 8
+    value: 3

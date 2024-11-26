@@ -1,0 +1,466 @@
+block/ADC:
+  description: Analog to Digital Converter.
+  items:
+  - name: SR
+    description: status register
+    byte_offset: 0
+    fieldset: SR
+  - name: CR1
+    description: control register 1
+    byte_offset: 4
+    fieldset: CR1
+  - name: CR2
+    description: control register 2
+    byte_offset: 8
+    fieldset: CR2
+  - name: SMPR1
+    description: sample time register 1
+    byte_offset: 12
+    fieldset: SMPR1
+  - name: SMPR2
+    description: sample time register 2
+    byte_offset: 16
+    fieldset: SMPR2
+  - name: SMPR3
+    description: desc SMPR2.
+    byte_offset: 20
+    fieldset: SMPR3
+  - name: JOFR
+    description: injected channel data offset register x
+    array:
+      len: 4
+      stride: 4
+    byte_offset: 20
+    fieldset: JOFR
+  - name: HTR
+    description: watchdog higher threshold register
+    byte_offset: 40
+    fieldset: HTR
+  - name: LTR
+    description: watchdog lower threshold register
+    byte_offset: 44
+    fieldset: LTR
+  - name: SQR1
+    description: regular sequence register 1
+    byte_offset: 48
+    fieldset: SQR1
+  - name: SQR2
+    description: regular sequence register 2
+    byte_offset: 52
+    fieldset: SQR2
+  - name: SQR3
+    description: regular sequence register 3
+    byte_offset: 56
+    fieldset: SQR3
+  - name: JSQR
+    description: injected sequence register
+    byte_offset: 60
+    fieldset: JSQR
+  - name: JDR
+    description: injected data register x
+    array:
+      len: 4
+      stride: 4
+    byte_offset: 64
+    fieldset: JDR
+  - name: DR
+    description: regular data register
+    byte_offset: 80
+    access: Read
+    fieldset: DR
+  - name: CCSR
+    description: desc CCSR.
+    byte_offset: 84
+    fieldset: CCSR
+fieldset/CCSR:
+  description: desc CCSR.
+  fields:
+  - name: CALSEL
+    description: desc CALSEL.
+    bit_offset: 11
+    bit_size: 1
+  - name: CALSMP
+    description: desc CALSMP.
+    bit_offset: 12
+    bit_size: 2
+  - name: CALBYP
+    description: desc CALBYP.
+    bit_offset: 14
+    bit_size: 1
+  - name: CALSET
+    description: desc CALSET.
+    bit_offset: 15
+    bit_size: 1
+  - name: OFFSUC
+    description: desc OFFSUC.
+    bit_offset: 29
+    bit_size: 1
+  - name: CAPSUC
+    description: desc CAPSUC.
+    bit_offset: 30
+    bit_size: 1
+  - name: CALON
+    description: desc CALON.
+    bit_offset: 31
+    bit_size: 1
+fieldset/CR1:
+  description: control register 1
+  fields:
+  - name: AWDCH
+    description: Analog watchdog channel select bits
+    bit_offset: 0
+    bit_size: 5
+  - name: EOCIE
+    description: Interrupt enable for EOC
+    bit_offset: 5
+    bit_size: 1
+  - name: AWDIE
+    description: Analog watchdog interrupt enable
+    bit_offset: 6
+    bit_size: 1
+  - name: JEOCIE
+    description: Interrupt enable for injected channels
+    bit_offset: 7
+    bit_size: 1
+  - name: SCAN
+    description: Scan mode
+    bit_offset: 8
+    bit_size: 1
+  - name: AWDSGL
+    description: Enable the watchdog on a single channel in scan mode
+    bit_offset: 9
+    bit_size: 1
+    enum: AWDSGL
+  - name: JAUTO
+    description: Automatic injected group conversion
+    bit_offset: 10
+    bit_size: 1
+  - name: DISCEN
+    description: Discontinuous mode on regular channels
+    bit_offset: 11
+    bit_size: 1
+  - name: JDISCEN
+    description: Discontinuous mode on injected channels
+    bit_offset: 12
+    bit_size: 1
+  - name: DISCNUM
+    description: Discontinuous mode channel count
+    bit_offset: 13
+    bit_size: 3
+  - name: JAWDEN
+    description: Analog watchdog enable on injected channels
+    bit_offset: 22
+    bit_size: 1
+  - name: AWDEN
+    description: Analog watchdog enable on regular channels
+    bit_offset: 23
+    bit_size: 1
+  - name: RES
+    description: Resolution
+    bit_offset: 24
+    bit_size: 2
+    enum: RES
+  - name: ADSTP
+    description: desc ADSTP.
+    bit_offset: 27
+    bit_size: 1
+  - name: OVETIE
+    description: Overrun interrupt enable
+    bit_offset: 29
+    bit_size: 1
+fieldset/CR2:
+  description: control register 2
+  fields:
+  - name: ADON
+    description: A/D Converter ON / OFF
+    bit_offset: 0
+    bit_size: 1
+  - name: CONT
+    description: Continuous conversion
+    bit_offset: 1
+    bit_size: 1
+  - name: CAL
+    description: desc CAL.
+    bit_offset: 2
+    bit_size: 1
+  - name: RSTCAL
+    description: desc RSTCAL.
+    bit_offset: 3
+    bit_size: 1
+  - name: DMA
+    description: Direct memory access mode (for single ADC mode)
+    bit_offset: 8
+    bit_size: 1
+  - name: ALIGN
+    description: Data alignment
+    bit_offset: 11
+    bit_size: 1
+    enum: ALIGN
+  - name: JEXTSEL
+    description: External event select for injected group
+    bit_offset: 12
+    bit_size: 3
+  - name: JEXTTRIG
+    description: desc JEXTTRIG.
+    bit_offset: 15
+    bit_size: 1
+  - name: EXTSEL
+    description: desc EXTSEL.
+    bit_offset: 17
+    bit_size: 3
+    enum: EXTSEL
+  - name: EXTTRIG
+    description: desc EXTTRIG.
+    bit_offset: 20
+    bit_size: 1
+  - name: JSWSTART
+    description: desc JSWSTART.
+    bit_offset: 21
+    bit_size: 1
+  - name: SWSTART
+    description: desc SWSTART.
+    bit_offset: 22
+    bit_size: 1
+  - name: TSVREFE
+    description: desc TSVREFE.
+    bit_offset: 23
+    bit_size: 1
+  - name: VERFBUFFERE
+    description: desc VERFBUFFERE.
+    bit_offset: 25
+    bit_size: 1
+  - name: VERFBUFFERSEL
+    description: desc VERFBUFFERSEL.
+    bit_offset: 26
+    bit_size: 2
+fieldset/DR:
+  description: regular data register
+  fields:
+  - name: DATA
+    description: Regular data
+    bit_offset: 0
+    bit_size: 16
+fieldset/HTR:
+  description: watchdog higher threshold register
+  fields:
+  - name: HT
+    description: Analog watchdog higher threshold
+    bit_offset: 0
+    bit_size: 12
+fieldset/JDR:
+  description: injected data register x
+  fields:
+  - name: JDATA
+    description: Injected data
+    bit_offset: 0
+    bit_size: 16
+fieldset/JOFR:
+  description: injected channel data offset register x
+  fields:
+  - name: JOFFSET
+    description: Data offset for injected channel x
+    bit_offset: 0
+    bit_size: 12
+fieldset/JSQR:
+  description: desc JSQR.
+  fields:
+  - name: JSQ
+    description: 1st conversion in injected sequence
+    bit_offset: 0
+    bit_size: 5
+    array:
+      len: 4
+      stride: 5
+  - name: JL
+    description: Injected sequence length
+    bit_offset: 20
+    bit_size: 4
+fieldset/LTR:
+  description: watchdog lower threshold register
+  fields:
+  - name: LT
+    description: Analog watchdog lower threshold
+    bit_offset: 0
+    bit_size: 12
+fieldset/SMPR1:
+  description: sample time register 1
+  fields:
+  - name: SMP
+    description:  Channel 20 sampling time selection
+    bit_offset: 0
+    bit_size: 3
+    array:
+      len: 9
+      stride: 3
+    enum: SAMPLE_TIME
+fieldset/SMPR2:
+  description: desc SMPR2.
+  fields:
+  - name: SMP
+    description:  Channel 10 sampling time selection
+    bit_offset: 0
+    bit_size: 3
+    array:
+      len: 9
+      stride: 3
+    enum: SAMPLE_TIME
+fieldset/SMPR3:
+  description: desc SMPR2.
+  fields:
+  - name: SMP
+    description:  Channel 0 sampling time selection
+    bit_offset: 0
+    bit_size: 3
+    array:
+      len: 9
+      stride: 3
+    enum: SAMPLE_TIME
+fieldset/SQR1:
+  description: regular sequence register 1
+  fields:
+  - name: SQ
+    description: 13th conversion in regular sequence
+    bit_offset: 0
+    bit_size: 5
+    array:
+      len: 4
+      stride: 5
+  - name: L
+    description: Regular channel sequence length
+    bit_offset: 20
+    bit_size: 4
+fieldset/SQR2:
+  description: regular sequence register 2
+  fields:
+  - name: SQ
+    description: 7th conversion in regular sequence
+    bit_offset: 0
+    bit_size: 5
+    array:
+      len: 6
+      stride: 5
+fieldset/SQR3:
+  description: regular sequence register 3
+  fields:
+  - name: SQ
+    description: 1st conversion in regular sequence
+    bit_offset: 0
+    bit_size: 5
+    array:
+      len: 6
+      stride: 5
+fieldset/SR:
+  description: status register
+  fields:
+  - name: AWD
+    description: Analog watchdog event occurred
+    bit_offset: 0
+    bit_size: 1
+  - name: EOC
+    description: Regular channel end of conversion
+    bit_offset: 1
+    bit_size: 1
+  - name: JEOC
+    description: Injected channel end of conversion
+    bit_offset: 2
+    bit_size: 1
+  - name: JSTRT
+    description: Injected channel conversion has started
+    bit_offset: 3
+    bit_size: 1
+  - name: STRT
+    description: Regular channel conversion has started
+    bit_offset: 4
+    bit_size: 1
+  - name: OVR
+    description: Overrun occurred
+    bit_offset: 5
+    bit_size: 1
+enum/ALIGN:
+  bit_size: 1
+  variants:
+  - name: Right
+    description: Right alignment
+    value: 0
+  - name: Left
+    description: Left alignment
+    value: 1
+enum/AWDSGL:
+  bit_size: 1
+  variants:
+  - name: AllChannels
+    description: Analog watchdog enabled on all channels
+    value: 0
+  - name: SingleChannel
+    description: Analog watchdog enabled on a single channel
+    value: 1
+enum/RES:
+  bit_size: 2
+  variants:
+  - name: Bits12
+    description: 12-bit (15 ADCCLK cycles)
+    value: 0
+  - name: Bits10
+    description: 10-bit (13 ADCCLK cycles)
+    value: 1
+  - name: Bits8
+    description: 8-bit (11 ADCCLK cycles)
+    value: 2
+  - name: Bits6
+    description: 6-bit (9 ADCCLK cycles)
+    value: 3
+enum/SAMPLE_TIME:
+  bit_size: 3
+  variants:
+  - name: Cycles3_5
+    description: 3.5 cycles
+    value: 0
+  - name: Cycles5_5
+    description: 5.5 cycles
+    value: 1
+  - name: Cycles7_5 
+    description: 7.5 cycles
+    value: 2
+  - name: Cycles13_5
+    description: 13.5 cycles
+    value: 3
+  - name: Cycles28_5
+    description: 28.5 cycles
+    value: 4
+  - name: Cycles41_5
+    description: 41.5 cycles
+    value: 5
+  - name: Cycles71_5
+    description: 71.5 cycles
+    value: 6
+  - name: Cycles239_5
+    description: 239.5 cycles
+    value: 7
+
+enum/EXTSEL:
+  bit_size: 3
+  variants:
+  - name: Timer1Ch1
+    description: Timer1 Channel1 event
+    value: 0
+  - name: Timer1Ch2
+    description: Timer1 Channel2 event
+    value: 1
+  - name: Timer1Ch3
+    description: Timer1 Channel3 event
+    value: 2
+  - name: Timer2Ch2
+    description: Timer2 Channel2 event
+    value: 3
+  - name: Timer3Trgo
+    description: Timer3 TRGO event
+    value: 4
+  - name: Timer15Trgo
+    description: Timer15 TRGO event
+    value: 5
+  - name: Exti11
+    description: External interrupt line 11
+    value: 6
+  - name: SwStart
+    description: Software start trigger
+    value: 7

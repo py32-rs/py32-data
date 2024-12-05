@@ -1,339 +1,429 @@
+# This file was manually completed by Decaday <myDecaday@outlook.com>
+# with assistance from ChatGPT, not automatically generated.
+# This is because USB registers are actually 8-bit, but the manual and SVD group registers as 32-bit.
+#
+# However, the Reference Manual mentions: 
+# When writing to USB registers, operations can only be performed by byte or word,
+# when reading USB registers, operations can only be performed by byte.
+#
+# Moreover, the SVD file contains some errors, and is almost undocumented.
+
 block/USB:
-  description: USB.
+  description: USB control and status registers for managing USB operations.
   items:
-  - name: CR
-    description: CR.
-    byte_offset: 0
-    fieldset: CR
-  - name: INTR
-    description: INTR.
-    byte_offset: 4
-    fieldset: INTR
-  - name: INTRE
-    description: INTRE.
-    byte_offset: 8
-    fieldset: INTRE
+  - name: ADDR
+    description: Function address of the USB device.
+    byte_offset: 0x00
+    bit_size: 8
+    fieldset: ADDR
+  - name: POWER
+    description: USB power management register.
+    byte_offset: 0x01
+    bit_size: 8
+    fieldset: POWER
+  - name: INT_USB
+    description: USB interrupt status register.
+    byte_offset: 0x04
+    bit_size: 8
+    fieldset: INT_USB
+  - name: INT_OUT1
+    description: Interrupt status for OUT endpoint 1.
+    byte_offset: 0x05
+    bit_size: 8
+    fieldset: INT_OUT1
+  - name: INT_IN1
+    description: Interrupt status for IN endpoint 1.
+    byte_offset: 0x06
+    bit_size: 999
+    fieldset: INT_IN1
+  - name: INT_USBE
+    description: USB interrupt enable register.
+    byte_offset: 0x08
+    bit_size: 8
+    fieldset: INT_USB
+  - name: INT_OUT1E
+    description: Interrupt enable for OUT endpoint 1.
+    byte_offset: 0x09
+    bit_size: 8
+    fieldset: INT_OUT1
+  - name: INT_IN1E
+    description: Interrupt enable for IN endpoint 1.
+    byte_offset: 0x0A
+    bit_size: 8
+    fieldset: INT_IN1
   - name: FRAME
-    description: FRAME.
-    byte_offset: 12
-    access: Write
+    description: USB frame number and endpoint index.
+    byte_offset: 0x0C
+    bit_size: 8
     fieldset: FRAME
-  - name: EP0CSR
-    description: EP0CSR.
-    byte_offset: 16
-    access: Write
-    fieldset: EP0CSR
-  - name: INEPxCSR
-    description: INEPxCSR.
-    byte_offset: 20
-    access: Write
-    fieldset: INEPxCSR
-  - name: OUTEPxCSR
-    description: OUTEPxCSR.
-    byte_offset: 24
-    access: Write
-    fieldset: OUTEPxCSR
-  - name: OUTCOUNT
-    description: OUTCOUNT.
-    byte_offset: 28
-    access: Write
-    fieldset: OUTCOUNT
+  - name: INDEX
+    description: Selected endpoint index.
+    byte_offset: 0x0E
+    bit_size: 8
+    fieldset: INDEX
+  - name: EP0_CSR
+    description: Endpoint 0 control and status register.
+    byte_offset: 0x10
+    bit_size: 8
+    fieldset: EP0_CSR
+  - name: EP0_COUNT
+    description: Data count for endpoint 0.
+    byte_offset: 0x11
+    bit_size: 8
+    fieldset: EP0_COUNT
+  - name: IN_CSR2
+    description: Control and status register for IN endpoints.
+    byte_offset: 0x14
+    bit_size: 8
+    fieldset: IN_CSR2
+  - name: IN_CSR1
+    description: Control and status register for IN endpoints.
+    byte_offset: 0x15
+    bit_size: 8
+    fieldset: IN_CSR1
+  - name: MAX_PKT_IN
+    description: Maximum packet size for IN endpoints.
+    byte_offset: 0x16
+    bit_size: 8
+    fieldset: MAX_PKT
+  - name: OUT_CSR2
+    description: Control and status register for OUT endpoints.
+    byte_offset: 0x18
+    bit_size: 8
+    fieldset: OUT_CSR2
+  - name: OUT_CSR1
+    description: Control and status register for OUT endpoints.
+    byte_offset: 0x19
+    bit_size: 8
+    fieldset: OUT_CSR1
+  - name: MAX_PKT_OUT
+    description: Maximum packet size for OUT endpoints.
+    byte_offset: 0x1A
+    bit_size: 8
+    fieldset: MAX_PKT
+  - name: OUT_COUNT
+    description: Data count for OUT endpoints.
+    byte_offset: 0x1C
+    bit_size: 8
+    fieldset: OUT_COUNT
   - name: FIFO
-    description: FIFO.
-    byte_offset: 32
+    description: FIFO for endpoints.
+    byte_offset: 0x20
+    bit_size: 8
     fieldset: FIFO
     array:
       len: 6
-      stride: 4  
-fieldset/FIFO:
-  description: FIFO.
+      stride: 4
+
+
+fieldset/ADDR:
+  bit_size: 8
+  description: USB Address Register.
   fields:
-  - name: FIFO
-    description: FIFO.
-    bit_offset: 0
-    bit_size: 8
-fieldset/CR:
-  description: CR.
-  fields:
-  - name: ADD
-    description: ADD.
+  - name: ADDR
+    description: Function Address.
     bit_offset: 0
     bit_size: 7
   - name: UPDATE
-    description: UPDATE.
+    description: Address update flag. Set when a new address is written, cleared after transfer ends.
     bit_offset: 7
     bit_size: 1
+
+fieldset/POWER:
+  bit_size: 8
+  description: USB Power Management Register.
+  fields:
   - name: Enable_Suspend
-    description: Enable_Suspend.
-    bit_offset: 8
+    description: Enable suspend functionality.
+    bit_offset: 0
     bit_size: 1
   - name: Suspend_Mode
-    description: Suspend_Mode.
-    bit_offset: 9
-    bit_size: 1
-  - name: Resume
-    description: Resume.
-    bit_offset: 10
-    bit_size: 1
-  - name: Reset
-    description: Reset.
-    bit_offset: 11
-    bit_size: 1
-  - name: ISO_Update
-    description: ISO_Update.
-    bit_offset: 15
-    bit_size: 1
-fieldset/EP0CSR:
-  description: EP0CSR.
-  fields:
-  - name: OutPktRdy
-    description: OutPktRdy.
-    bit_offset: 0
-    bit_size: 1
-  - name: InPktRdy
-    description: InPktRdy.
+    description: Indicates if the USB device is in suspend mode.
     bit_offset: 1
     bit_size: 1
-  - name: SentStall
-    description: SentStall.
+  - name: Resume
+    description: Resumes the USB device from suspend mode when set by software.
     bit_offset: 2
     bit_size: 1
-  - name: DataEnd
-    description: DataEnd.
+  - name: Reset
+    description: Indicates if there is a reset signal on the USB bus.
     bit_offset: 3
     bit_size: 1
-  - name: SetupEnd
-    description: SetupEnd.
+  - name: ISO_Update
+    description: Forces the USB controller to wait for a SOF before sending a data packet.
     bit_offset: 4
     bit_size: 1
-  - name: SendStall
-    description: SendStall
-    bit_offset: 5
-    bit_size: 1
-  - name: ServicedOutPktRdy
-    description: ServicedOutPktRdy.
-    bit_offset: 6
-    bit_size: 1
-  - name: ServicedSetupEnd
-    description: ServicedSetupEnd.
-    bit_offset: 7
-    bit_size: 1
-  - name: COUNT0
-    description: COUNT0.
-    bit_offset: 8
-    bit_size: 1
-fieldset/FRAME:
-  description: FRAME.
+
+fieldset/INT_USB:
+  bit_size: 8
+  description: USB Interrupt Status Register.
   fields:
-  - name: FramNUM
-    description: FramNUM.
+  - name: Suspend
+    description: Suspend signal detected on USB bus.
     bit_offset: 0
-    bit_size: 11
-  - name: INDEX
-    description: INDEX.
-    bit_offset: 16
-    bit_size: 4
-fieldset/INEPxCSR:
-  description: INEPxCSR.
-  fields:
-  - name: FrcDataTog
-    description: FrcDataTog.
+    bit_size: 1
+  - name: Resume
+    description: Resume signal detected on USB bus.
+    bit_offset: 1
+    bit_size: 1
+  - name: Reset
+    description: Reset signal detected on USB bus.
+    bit_offset: 2
+    bit_size: 1
+  - name: SOF
+    description: Start-of-frame interrupt.
     bit_offset: 3
     bit_size: 1
-  - name: DMAEnab
-    description: DMAEnab.
+
+fieldset/INT_OUT1:
+  bit_size: 8
+  description: USB OUT Endpoint Interrupt Status Register.
+  fields:
+  - name: EPOUT
+    description: Endpoint n+1 OUT interrupt.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+
+fieldset/INT_IN1:
+  bit_size: 8
+  description: USB IN Endpoint Interrupt Status Register.
+  fields:
+  - name: EP0
+    description: Endpoint 0 interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: EPIN
+    description: Endpoint n+1 IN interrupt.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+
+fieldset/FRAME:
+  bit_size: 8
+  description: USB Frame Register.
+  fields:
+  - name: FRAMENUM
+    description: Frame number of the last received frame.
+    bit_offset: 0
+    # bit_size: 11
+    # assume 8-bit data width
+    bit_size: 8
+
+fieldset/INDEX:
+  bit_size: 8
+  fields:
+  - name: INDEX
+    description: Endpoint selection index.
+    bit_offset: 0
+    bit_size: 4
+
+fieldset/EP0_CSR:
+  bit_size: 8
+  description: USB Endpoint 0 Control and Status Register.
+  fields:
+  - name: Out_Pkt_Rdy
+    description: Indicates that an OUT packet has been received.
+    bit_offset: 0
+    bit_size: 1
+  - name: In_Pkt_Rdy
+    description: Indicates that an IN packet is ready for transmission.
+    bit_offset: 1
+    bit_size: 1
+  - name: Sent_Stall
+    description: Indicates that a STALL handshake was sent.
+    bit_offset: 2
+    bit_size: 1
+  - name: Setup_End
+    description: Indicates the end of a setup stage in control transfer.
+    bit_offset: 3
+    bit_size: 1
+  - name: Data_End
+    description: Indicates the end of data stage in control transfer.
+    bit_offset: 4
+    bit_size: 1
+  - name: Send_Stall
+    description: Sends a STALL handshake.
+    bit_offset: 5
+    bit_size: 1
+  - name: Serviced_Out_Pkt_Rdy
+    description: Clears OutPktRdy flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: Serviced_Setup_End
+    description: Clears SetupEnd flag.
+    bit_offset: 7
+    bit_size: 1
+
+fieldset/EP0_COUNT:
+  bit_size: 8
+  description: USB Endpoint 0 Data Count Register.
+  fields:
+  - name: COUNT
+    description: Length of received data in IN packet.
+    bit_offset: 0
+    bit_size: 7
+
+fieldset/IN_CSR2:
+  bit_size: 8
+  description: IN Endpoint Control Register 2.
+  fields:
+  - name: Frc_Data_Tog
+    description: Force Data Toggle. Forces toggle even without ACK and clears FIFO.
+    bit_offset: 3
+    bit_size: 1
+  - name: DMAE
+    description: DMA request enable for IN endpoint.
     bit_offset: 4
     bit_size: 1
   - name: Mode
-    description: Mode.
+    description: Endpoint mode. 1, IN endpoint, 0, OUT endpoint.
     bit_offset: 5
     bit_size: 1
     enum: Mode
   - name: ISO
-    description: ISO.
+    description: Enable ISO transmission. 1, ISO mode, 0, Bulk or Interrupt mode.
     bit_offset: 6
     bit_size: 1
-  - name: AutoSet
-    description: AutoSet.
+  - name: Auto_Set
+    description: When set, automatically sets InPktRdy when the maximum packet size is written to the FIFO.
     bit_offset: 7
     bit_size: 1
-  - name: InPktRdy
-    description: InPktRdy.
-    bit_offset: 8
-    bit_size: 1
-  - name: FIFONotEmpty
-    description: FIFONotEmpty.
-    bit_offset: 9
-    bit_size: 1
-  - name: UnderRun
-    description: UnderRun.
-    bit_offset: 10
-    bit_size: 1
-  - name: FlushFIFO
-    description: FlushFIFO.
-    bit_offset: 11
-    bit_size: 1
-  - name: SendStall
-    description: SendStall.
-    bit_offset: 12
-    bit_size: 1
-  - name: SentStall
-    description: SentStall.
-    bit_offset: 13
-    bit_size: 1
-  - name: ClrDataTog
-    description: ClrDataTog.
-    bit_offset: 14
-    bit_size: 1
-  - name: INMAXP
-    description: INMAXP.
-    bit_offset: 16
-    bit_size: 1
-fieldset/INTR:
-  description: INTR.
+
+fieldset/IN_CSR1:
+  bit_size: 8
+  description: USB IN Endpoint Control and Status Register 1.
   fields:
-  - name: Suspend
-    description: Suspend.
+  - name: In_Pkt_Rdy
+    description: Indicates that an IN packet is ready to be sent.
     bit_offset: 0
     bit_size: 1
-  - name: Resume
-    description: Resume.
+  - name: FIFO_Not_Empty
+    description: Indicates that the FIFO contains data.
     bit_offset: 1
     bit_size: 1
-  - name: Reset
-    description: Reset.
+  - name: Underrun
+    description: Indicates that an underrun condition occurred.
     bit_offset: 2
     bit_size: 1
-  - name: SOF
-    description: SOF.
+  - name: Flush_FIFO
+    description: Flushes the FIFO content.
     bit_offset: 3
     bit_size: 1
-  - name: EPOUT_NP1
-    description: EPOUT,n+1.
-    bit_offset: 9
+  - name: Send_Stall
+    description: Sends a STALL handshake for the IN endpoint.
+    bit_offset: 4
     bit_size: 1
-    array:
-      len: 5
-      stride: 1
-  - name: EP0
-    description: EP0.
-    bit_offset: 16
+  - name: Sent_Stall
+    description: Indicates that a STALL handshake was sent.
+    bit_offset: 5
     bit_size: 1
-  - name: EPIN_NP1
-    description: EPIN,n+1.
-    bit_offset: 17
+  - name: Clr_Data_Tog
+    description: Clears the endpoint's data toggle bit.
+    bit_offset: 6
     bit_size: 1
-    array:
-      len: 5
-      stride: 1
-fieldset/INTRE:
-  description: INTRE.
+
+fieldset/MAX_PKT:
+  bit_size: 8
+  description: USB Endpoint Maximum Packet Size Register.
   fields:
-  - name: EN_Suspend
-    description: EN_Suspend.
+  - name: MAX_PKT_SIZE
+    description: Maximum packet size for the endpoint.
     bit_offset: 0
-    bit_size: 1
-  - name: EN_Resume
-    description: EN_Resume.
-    bit_offset: 1
-    bit_size: 1
-  - name: EN_Reset
-    description: EN_Reset.
-    bit_offset: 2
-    bit_size: 1
-  - name: EN_SOF
-    description: EN_SOF.
-    bit_offset: 3
-    bit_size: 1
-  - name: EPOUTE_NP1
-    description: EPOUTE,n+1.
-    bit_offset: 9
-    bit_size: 1
-    array:
-      len: 5
-      stride: 1
-  - name: EP0E
-    description: EP0E.
-    bit_offset: 16
-    bit_size: 1
-  - name: EPINE_NP1
-    description: EPINE,n+1.
-    bit_offset: 17
-    bit_size: 1
-    array:
-      len: 5
-      stride: 1
-fieldset/OUTCOUNT:
-  description: OUTCOUNT.
+    bit_size: 8
+
+fieldset/OUT_CSR2:
+  bit_size: 8
+  description: USB OUT Endpoint Control and Status Register 2.
   fields:
-  - name: OUTCOUNT
-    description: OUTCOUNT.
-    bit_offset: 0
-    bit_size: 10
-fieldset/OUTEPxCSR:
-  description: OUTEPxCSR.
-  fields:
-  - name: DMAMode
-    description: DMAMode.
+  - name: DMA_Mode
+    description: DMA mode for the OUT endpoint.
     bit_offset: 4
     bit_size: 1
     enum: DMAMode
-  - name: DMAEnab
-    description: DMAEnab.
+  - name: DMAE
+    description: Enables DMA requests for the OUT endpoint.
     bit_offset: 5
     bit_size: 1
   - name: ISO
-    description: ISO.
+    description: Indicates if the endpoint is configured for ISO transfer.
     bit_offset: 6
     bit_size: 1
-  - name: AutoClear
-    description: AutoClear.
+  - name: Auto_Clear
+    description: Automatically clears OutPktRdy after data is read from the FIFO.
     bit_offset: 7
     bit_size: 1
-  - name: OutPktRdy
-    description: OutPktRdy.
-    bit_offset: 8
+
+fieldset/OUT_CSR1:
+  bit_size: 8
+  description: USB OUT Endpoint Control and Status Register 1.
+  fields:
+  - name: Out_Pkt_Rdy
+    description: Indicates that an OUT packet has been received.
+    bit_offset: 0
     bit_size: 1
-  - name: FIFOFull
-    description: FIFOFull.
-    bit_offset: 9
+  - name: FIFO_Full
+    description: Indicates that the FIFO is full.
+    bit_offset: 1
     bit_size: 1
-  - name: OverRun
-    description: OverRun.
-    bit_offset: 10
+  - name: Overrun
+    description: Indicates that an overrun condition occurred.
+    bit_offset: 2
     bit_size: 1
-  - name: DataError
-    description: DataError.
-    bit_offset: 11
+  - name: DATA_Error
+    description: Indicates that a data error occurred.
+    bit_offset: 3
     bit_size: 1
-  - name: FlushFIFO
-    description: FlushFIFO.
-    bit_offset: 12
+  - name: Flush_FIFO
+    description: Flushes the FIFO content.
+    bit_offset: 4
     bit_size: 1
-  - name: SendStall
-    description: SendStall.
-    bit_offset: 13
+  - name: Send_STALL
+    description: Sends a STALL handshake for the OUT endpoint.
+    bit_offset: 5
     bit_size: 1
-  - name: SentStall
-    description: SentStall.
-    bit_offset: 14
+  - name: Sent_STALL
+    description: Indicates that a STALL handshake was sent.
+    bit_offset: 6
     bit_size: 1
-  - name: ClrDataTog
-    description: ClrDataTog.
-    bit_offset: 15
+  - name: Clr_Data_Tog
+    description: Clears the endpoint's data toggle bit.
+    bit_offset: 7
     bit_size: 1
-  - name: INMAXP
-    description: INMAXP.
-    bit_offset: 16
-    bit_size: 1
+
+fieldset/OUT_COUNT:
+  bit_size: 8
+  description: USB OUT Endpoint Data Count Register.
+  fields:
+  - name: COUNT
+    description: Length of received data in OUT packet.
+    bit_offset: 0
+    # bit_size: 11
+    # assume 8-bit data width
+    bit_size: 8
+    
+
+fieldset/FIFO:
+  bit_size: 8
+  description: USB Endpoint FIFO Register.
+  fields:
+  - name: DATA
+    description: FIFO data for each endpoint.
+    bit_offset: 0
+    bit_size: 8
 
 enum/Mode:
   bit_size: 1
   variants:
-  - name: IN
-    value: 0
   - name: OUT
+    value: 0
+  - name: IN
     value: 1
+
 enum/DMAMode:
   bit_size: 1
   variants:

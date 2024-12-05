@@ -1,0 +1,338 @@
+block/USB:
+  description: USB.
+  items:
+  - name: CR
+    description: CR.
+    byte_offset: 0
+    fieldset: CR
+  - name: INTR
+    description: INTR.
+    byte_offset: 4
+    fieldset: INTR
+  - name: INTRE
+    description: INTRE.
+    byte_offset: 8
+    fieldset: INTRE
+  - name: FRAME
+    description: FRAME.
+    byte_offset: 12
+    fieldset: FRAME
+  - name: EP0CSR
+    description: EP0CSR.
+    byte_offset: 16
+    fieldset: EP0CSR
+  - name: INEPxCSR
+    description: INEPxCSR.
+    byte_offset: 20
+    fieldset: INEPxCSR
+  - name: OUTEPxCSR
+    description: OUTEPxCSR.
+    byte_offset: 24
+    fieldset: OUTEPxCSR
+  - name: OUTCOUNT
+    description: OUTCOUNT.
+    byte_offset: 28
+    fieldset: OUTCOUNT
+  - name: FIFO
+    description: FIFO.
+    byte_offset: 32
+    fieldset: FIFO
+    array:
+      len: 6
+      stride: 4  
+fieldset/FIFO:
+  description: FIFO.
+  fields:
+  - name: FIFO
+    description: FIFO.
+    bit_offset: 0
+    bit_size: 8
+fieldset/CR:
+  description: CR.
+  fields:
+  - name: ADD
+    description: ADD.
+    bit_offset: 0
+    bit_size: 7
+  - name: UPDATE
+    description: UPDATE.
+    bit_offset: 7
+    bit_size: 1
+  - name: Enable_Suspend
+    description: Enable_Suspend.
+    bit_offset: 8
+    bit_size: 1
+  - name: Suspend_Mode
+    description: Suspend_Mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: Resume
+    description: Resume.
+    bit_offset: 10
+    bit_size: 1
+  - name: Reset
+    description: Reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: ISO_Update
+    description: ISO_Update.
+    bit_offset: 15
+    bit_size: 1
+fieldset/EP0CSR:
+  description: EP0CSR.
+  fields:
+  - name: OutPktRdy
+    description: OutPktRdy.
+    bit_offset: 0
+    bit_size: 1
+  - name: InPktRdy
+    description: InPktRdy.
+    bit_offset: 1
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 2
+    bit_size: 1
+  - name: DataEnd
+    description: DataEnd.
+    bit_offset: 3
+    bit_size: 1
+  - name: SetupEnd
+    description: SetupEnd.
+    bit_offset: 4
+    bit_size: 1
+  - name: SendStall
+    description: SendStall
+    bit_offset: 5
+    bit_size: 1
+  - name: ServicedOutPktRdy
+    description: ServicedOutPktRdy.
+    bit_offset: 6
+    bit_size: 1
+  - name: ServicedSetupEnd
+    description: ServicedSetupEnd.
+    bit_offset: 7
+    bit_size: 1
+  - name: COUNT0
+    description: COUNT0.
+    bit_offset: 8
+    bit_size: 1
+fieldset/FRAME:
+  description: FRAME.
+  fields:
+  - name: FramNUM
+    description: FramNUM.
+    bit_offset: 0
+    bit_size: 11
+  - name: INDEX
+    description: INDEX.
+    bit_offset: 16
+    bit_size: 4
+fieldset/INEPxCSR:
+  description: INEPxCSR.
+  fields:
+  - name: FrcDataTog
+    description: FrcDataTog.
+    bit_offset: 3
+    bit_size: 1
+  - name: DMAEnab
+    description: DMAEnab.
+    bit_offset: 4
+    bit_size: 1
+  - name: Mode
+    description: Mode.
+    bit_offset: 5
+    bit_size: 1
+    enum: Mode
+  - name: ISO
+    description: ISO.
+    bit_offset: 6
+    bit_size: 1
+  - name: AutoSet
+    description: AutoSet.
+    bit_offset: 7
+    bit_size: 1
+  - name: InPktRdy
+    description: InPktRdy.
+    bit_offset: 8
+    bit_size: 1
+  - name: FIFONotEmpty
+    description: FIFONotEmpty.
+    bit_offset: 9
+    bit_size: 1
+  - name: UnderRun
+    description: UnderRun.
+    bit_offset: 10
+    bit_size: 1
+  - name: FlushFIFO
+    description: FlushFIFO.
+    bit_offset: 11
+    bit_size: 1
+  - name: SendStall
+    description: SendStall.
+    bit_offset: 12
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 13
+    bit_size: 1
+  - name: ClrDataTog
+    description: ClrDataTog.
+    bit_offset: 14
+    bit_size: 1
+  - name: INMAXP
+    description: INMAXP.
+    bit_offset: 16
+    bit_size: 8
+fieldset/INTR:
+  description: INTR.
+  fields:
+  - name: Suspend
+    description: Suspend.
+    bit_offset: 0
+    bit_size: 1
+  - name: Resume
+    description: Resume.
+    bit_offset: 1
+    bit_size: 1
+  - name: Reset
+    description: Reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: SOF
+    description: SOF.
+    bit_offset: 3
+    bit_size: 1
+  - name: EPOUT_NP1
+    description: EPOUT,n+1.
+    bit_offset: 9
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+  - name: EP0
+    description: EP0.
+    bit_offset: 16
+    bit_size: 1
+  - name: EPIN_NP1
+    description: EPIN,n+1.
+    bit_offset: 17
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+fieldset/INTRE:
+  description: INTRE.
+  fields:
+  - name: EN_Suspend
+    description: EN_Suspend.
+    bit_offset: 0
+    bit_size: 1
+  - name: EN_Resume
+    description: EN_Resume.
+    bit_offset: 1
+    bit_size: 1
+  - name: EN_Reset
+    description: EN_Reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: EN_SOF
+    description: EN_SOF.
+    bit_offset: 3
+    bit_size: 1
+  - name: EPOUTE_NP1
+    description: EPOUTE,n+1.
+    bit_offset: 9
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+  - name: EP0E
+    description: EP0E.
+    bit_offset: 16
+    bit_size: 1
+  - name: EPINE_NP1
+    description: EPINE,n+1.
+    bit_offset: 17
+    bit_size: 1
+    array:
+      len: 5
+      stride: 1
+fieldset/OUTCOUNT:
+  description: OUTCOUNT.
+  fields:
+  - name: OUTCOUNT
+    description: OUTCOUNT.
+    bit_offset: 0
+    bit_size: 10
+fieldset/OUTEPxCSR:
+  description: OUTEPxCSR.
+  fields:
+  - name: DMAMode
+    description: DMAMode.
+    bit_offset: 4
+    bit_size: 1
+    enum: DMAMode
+  - name: DMAEnab
+    description: DMAEnab.
+    bit_offset: 5
+    bit_size: 1
+  - name: ISO
+    description: ISO.
+    bit_offset: 6
+    bit_size: 1
+  - name: AutoClear
+    description: AutoClear.
+    bit_offset: 7
+    bit_size: 1
+  - name: OutPktRdy
+    description: OutPktRdy.
+    bit_offset: 8
+    bit_size: 1
+  - name: FIFOFull
+    description: FIFOFull.
+    bit_offset: 9
+    bit_size: 1
+  - name: OverRun
+    description: OverRun.
+    bit_offset: 10
+    bit_size: 1
+  - name: DataError
+    description: DataError.
+    bit_offset: 11
+    bit_size: 1
+  - name: FlushFIFO
+    description: FlushFIFO.
+    bit_offset: 12
+    bit_size: 1
+  - name: SendStall
+    description: SendStall.
+    bit_offset: 13
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 14
+    bit_size: 1
+  - name: ClrDataTog
+    description: ClrDataTog.
+    bit_offset: 15
+    bit_size: 1
+  - name: OUTMAXP
+    description: OUTMAXP.
+    bit_offset: 16
+    bit_size: 8
+
+enum/Mode:
+  bit_size: 1
+  variants:
+  - name: IN
+    value: 0
+  - name: OUT
+    value: 1
+enum/DMAMode:
+  bit_size: 1
+  variants:
+  - name: DmaAndIt
+    value: 0
+  - name: DmaOrIt
+    value: 1

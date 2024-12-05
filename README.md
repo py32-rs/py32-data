@@ -51,6 +51,8 @@ Date: 20240312
 
 - Set up configurations for cut-down variants such as PY32F003, PY32F002A, and PY32F040.
 
+- Extend USB `FRAMENUM` and `OUTCOUNT` Fields to 11 bits.
+
 ## Contirbute
 
 You can refer to the relevant descriptions and explanations in[embassy-rs/stm32-data](https://github.com/embassy-rs/stm32-data) repo.

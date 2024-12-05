@@ -1,0 +1,364 @@
+block/USB:
+  description: USB.
+  items:
+  - name: CR
+    description: CR.
+    byte_offset: 0
+    fieldset: CR
+  - name: INTR
+    description: INTR.
+    byte_offset: 4
+    fieldset: INTR
+  - name: INTRE
+    description: INTRE.
+    byte_offset: 8
+    fieldset: INTRE
+  - name: FRAME
+    description: FRAME.
+    byte_offset: 12
+    access: Write
+    fieldset: FRAME
+  - name: EP0CSR
+    description: EP0CSR.
+    byte_offset: 16
+    access: Write
+    fieldset: EP0CSR
+  - name: INEPxCSR
+    description: INEPxCSR.
+    byte_offset: 20
+    access: Write
+    fieldset: INEPxCSR
+  - name: OUTEPxCSR
+    description: OUTEPxCSR.
+    byte_offset: 24
+    access: Write
+    fieldset: OUTEPxCSR
+  - name: OUTCOUNT
+    description: OUTCOUNT.
+    byte_offset: 28
+    access: Write
+    fieldset: OUTCOUNT
+fieldset/CR:
+  description: CR.
+  fields:
+  - name: ADD
+    description: ADD.
+    bit_offset: 0
+    bit_size: 7
+  - name: UPDATE
+    description: UPDATE.
+    bit_offset: 7
+    bit_size: 1
+  - name: Enable_Suspend
+    description: Enable_Suspend.
+    bit_offset: 8
+    bit_size: 1
+  - name: Suspend_Mode
+    description: Suspend_Mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: Resume
+    description: Resume.
+    bit_offset: 10
+    bit_size: 1
+  - name: Reset
+    description: Reset.
+    bit_offset: 11
+    bit_size: 1
+  - name: ISO_Update
+    description: ISO_Update.
+    bit_offset: 15
+    bit_size: 1
+fieldset/EP0CSR:
+  description: EP0CSR.
+  fields:
+  - name: OutPktRdy
+    description: OutPktRdy.
+    bit_offset: 0
+    bit_size: 1
+  - name: InPktRdy
+    description: InPktRdy.
+    bit_offset: 1
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 2
+    bit_size: 1
+  - name: DataEnd
+    description: DataEnd.
+    bit_offset: 3
+    bit_size: 1
+  - name: SetupEnd
+    description: SetupEnd.
+    bit_offset: 4
+    bit_size: 1
+  - name: SendStall
+    description: OutPktRdy.
+    bit_offset: 5
+    bit_size: 1
+  - name: ServicedOutPktRdy
+    description: ServicedOutPktRdy.
+    bit_offset: 6
+    bit_size: 1
+  - name: ServicedSetupEnd
+    description: ServicedSetupEnd.
+    bit_offset: 7
+    bit_size: 1
+  - name: COUNT0
+    description: COUNT0.
+    bit_offset: 8
+    bit_size: 1
+fieldset/FRAME:
+  description: FRAME.
+  fields:
+  - name: FramNUM
+    description: FramNUM.
+    bit_offset: 0
+    bit_size: 11
+  - name: INDEX
+    description: INDEX.
+    bit_offset: 16
+    bit_size: 4
+fieldset/INEPxCSR:
+  description: INEPxCSR.
+  fields:
+  - name: FrcDataTog
+    description: FrcDataTog.
+    bit_offset: 3
+    bit_size: 1
+  - name: DMAEnab
+    description: DMAEnab.
+    bit_offset: 4
+    bit_size: 1
+  - name: Mode
+    description: Mode.
+    bit_offset: 5
+    bit_size: 1
+  - name: ISO
+    description: ISO.
+    bit_offset: 6
+    bit_size: 1
+  - name: AutoSet
+    description: AutoSet.
+    bit_offset: 7
+    bit_size: 1
+  - name: InPktRdy
+    description: InPktRdy.
+    bit_offset: 8
+    bit_size: 1
+  - name: FIFONotEmpty
+    description: FIFONotEmpty.
+    bit_offset: 9
+    bit_size: 1
+  - name: UnderRun
+    description: UnderRun.
+    bit_offset: 10
+    bit_size: 1
+  - name: FlushFIFO
+    description: FlushFIFO.
+    bit_offset: 11
+    bit_size: 1
+  - name: SendStall
+    description: SendStall.
+    bit_offset: 12
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 13
+    bit_size: 1
+  - name: ClrDataTog
+    description: ClrDataTog.
+    bit_offset: 14
+    bit_size: 1
+  - name: INMAXP
+    description: INMAXP.
+    bit_offset: 16
+    bit_size: 1
+fieldset/INTR:
+  description: INTR.
+  fields:
+  - name: Suspend
+    description: Suspend.
+    bit_offset: 0
+    bit_size: 1
+  - name: Resume
+    description: Resume.
+    bit_offset: 1
+    bit_size: 1
+  - name: Reset
+    description: Reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: SOF
+    description: SOF.
+    bit_offset: 3
+    bit_size: 1
+  - name: EP1OUT
+    description: EP1OUT.
+    bit_offset: 9
+    bit_size: 1
+  - name: EP2OUT
+    description: EP2OUT.
+    bit_offset: 10
+    bit_size: 1
+  - name: EP3OUT
+    description: EP3OUT.
+    bit_offset: 11
+    bit_size: 1
+  - name: EP4OUT
+    description: EP4OUT.
+    bit_offset: 12
+    bit_size: 1
+  - name: EP5OUT
+    description: EP5OUT.
+    bit_offset: 13
+    bit_size: 1
+  - name: EP0
+    description: EP0.
+    bit_offset: 16
+    bit_size: 1
+  - name: EP1IN
+    description: EP1IN.
+    bit_offset: 17
+    bit_size: 1
+  - name: EP2IN
+    description: EP2IN.
+    bit_offset: 18
+    bit_size: 1
+  - name: EP3IN
+    description: EP3IN.
+    bit_offset: 19
+    bit_size: 1
+  - name: EP4IN
+    description: EP4IN.
+    bit_offset: 20
+    bit_size: 1
+  - name: EP5IN
+    description: EP5IN.
+    bit_offset: 21
+    bit_size: 1
+fieldset/INTRE:
+  description: INTRE.
+  fields:
+  - name: EN_Suspend
+    description: EN_Suspend.
+    bit_offset: 0
+    bit_size: 1
+  - name: EN_Resume
+    description: EN_Resume.
+    bit_offset: 1
+    bit_size: 1
+  - name: EN_Reset
+    description: EN_Reset.
+    bit_offset: 2
+    bit_size: 1
+  - name: EN_SOF
+    description: EN_SOF.
+    bit_offset: 3
+    bit_size: 1
+  - name: EP1OUTE
+    description: EP1OUTE.
+    bit_offset: 9
+    bit_size: 1
+  - name: EP2OUTE
+    description: EP2OUTE.
+    bit_offset: 10
+    bit_size: 1
+  - name: EP3OUTE
+    description: EP3OUTE.
+    bit_offset: 11
+    bit_size: 1
+  - name: EP4OUTE
+    description: EP4OUTE.
+    bit_offset: 12
+    bit_size: 1
+  - name: EP5OUTE
+    description: EP5OUTE.
+    bit_offset: 13
+    bit_size: 1
+  - name: EP0
+    description: EP0.
+    bit_offset: 16
+    bit_size: 1
+  - name: EP1INE
+    description: EP1INE.
+    bit_offset: 17
+    bit_size: 1
+  - name: EP2INE
+    description: EP2INE.
+    bit_offset: 18
+    bit_size: 1
+  - name: EP3INE
+    description: EP3INE.
+    bit_offset: 19
+    bit_size: 1
+  - name: EP4INE
+    description: EP4INE.
+    bit_offset: 20
+    bit_size: 1
+  - name: EP5INE
+    description: EP5INE.
+    bit_offset: 21
+    bit_size: 1
+fieldset/OUTCOUNT:
+  description: OUTCOUNT.
+  fields:
+  - name: OUTCOUNT
+    description: OUTCOUNT.
+    bit_offset: 0
+    bit_size: 10
+fieldset/OUTEPxCSR:
+  description: OUTEPxCSR.
+  fields:
+  - name: DMAMode
+    description: DMAMode.
+    bit_offset: 4
+    bit_size: 1
+  - name: DMAEnab
+    description: DMAEnab.
+    bit_offset: 5
+    bit_size: 1
+  - name: ISO
+    description: ISO.
+    bit_offset: 6
+    bit_size: 1
+  - name: AutoClear
+    description: AutoClear.
+    bit_offset: 7
+    bit_size: 1
+  - name: OutPktRdy
+    description: OutPktRdy.
+    bit_offset: 8
+    bit_size: 1
+  - name: FIFOFull
+    description: FIFOFull.
+    bit_offset: 9
+    bit_size: 1
+  - name: OverRun
+    description: OverRun.
+    bit_offset: 10
+    bit_size: 1
+  - name: DataError
+    description: DataError.
+    bit_offset: 11
+    bit_size: 1
+  - name: FlushFIFO
+    description: FlushFIFO.
+    bit_offset: 12
+    bit_size: 1
+  - name: SendStall
+    description: SendStall.
+    bit_offset: 13
+    bit_size: 1
+  - name: SentStall
+    description: SentStall.
+    bit_offset: 14
+    bit_size: 1
+  - name: ClrDataTog
+    description: ClrDataTog.
+    bit_offset: 15
+    bit_size: 1
+  - name: INMAXP
+    description: INMAXP.
+    bit_offset: 16
+    bit_size: 1

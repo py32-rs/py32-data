@@ -38,6 +38,20 @@ block/USB:
     byte_offset: 28
     access: Write
     fieldset: OUTCOUNT
+  - name: FIFO
+    description: FIFO.
+    byte_offset: 32
+    fieldset: FIFO
+    array:
+      len: 6
+      stride: 4  
+fieldset/FIFO:
+  description: FIFO.
+  fields:
+  - name: FIFO
+    description: FIFO.
+    bit_offset: 0
+    bit_size: 8
 fieldset/CR:
   description: CR.
   fields:
@@ -93,7 +107,7 @@ fieldset/EP0CSR:
     bit_offset: 4
     bit_size: 1
   - name: SendStall
-    description: OutPktRdy.
+    description: SendStall
     bit_offset: 5
     bit_size: 1
   - name: ServicedOutPktRdy
@@ -134,6 +148,7 @@ fieldset/INEPxCSR:
     description: Mode.
     bit_offset: 5
     bit_size: 1
+    enum: Mode
   - name: ISO
     description: ISO.
     bit_offset: 6
@@ -193,50 +208,24 @@ fieldset/INTR:
     description: SOF.
     bit_offset: 3
     bit_size: 1
-  - name: EP1OUT
-    description: EP1OUT.
+  - name: EPOUT_NP1
+    description: EPOUT,n+1.
     bit_offset: 9
     bit_size: 1
-  - name: EP2OUT
-    description: EP2OUT.
-    bit_offset: 10
-    bit_size: 1
-  - name: EP3OUT
-    description: EP3OUT.
-    bit_offset: 11
-    bit_size: 1
-  - name: EP4OUT
-    description: EP4OUT.
-    bit_offset: 12
-    bit_size: 1
-  - name: EP5OUT
-    description: EP5OUT.
-    bit_offset: 13
-    bit_size: 1
+    array:
+      len: 5
+      stride: 1
   - name: EP0
     description: EP0.
     bit_offset: 16
     bit_size: 1
-  - name: EP1IN
-    description: EP1IN.
+  - name: EPIN_NP1
+    description: EPIN,n+1.
     bit_offset: 17
     bit_size: 1
-  - name: EP2IN
-    description: EP2IN.
-    bit_offset: 18
-    bit_size: 1
-  - name: EP3IN
-    description: EP3IN.
-    bit_offset: 19
-    bit_size: 1
-  - name: EP4IN
-    description: EP4IN.
-    bit_offset: 20
-    bit_size: 1
-  - name: EP5IN
-    description: EP5IN.
-    bit_offset: 21
-    bit_size: 1
+    array:
+      len: 5
+      stride: 1
 fieldset/INTRE:
   description: INTRE.
   fields:
@@ -256,50 +245,24 @@ fieldset/INTRE:
     description: EN_SOF.
     bit_offset: 3
     bit_size: 1
-  - name: EP1OUTE
-    description: EP1OUTE.
+  - name: EPOUTE_NP1
+    description: EPOUTE,n+1.
     bit_offset: 9
     bit_size: 1
-  - name: EP2OUTE
-    description: EP2OUTE.
-    bit_offset: 10
-    bit_size: 1
-  - name: EP3OUTE
-    description: EP3OUTE.
-    bit_offset: 11
-    bit_size: 1
-  - name: EP4OUTE
-    description: EP4OUTE.
-    bit_offset: 12
-    bit_size: 1
-  - name: EP5OUTE
-    description: EP5OUTE.
-    bit_offset: 13
-    bit_size: 1
-  - name: EP0
-    description: EP0.
+    array:
+      len: 5
+      stride: 1
+  - name: EP0E
+    description: EP0E.
     bit_offset: 16
     bit_size: 1
-  - name: EP1INE
-    description: EP1INE.
+  - name: EPINE_NP1
+    description: EPINE,n+1.
     bit_offset: 17
     bit_size: 1
-  - name: EP2INE
-    description: EP2INE.
-    bit_offset: 18
-    bit_size: 1
-  - name: EP3INE
-    description: EP3INE.
-    bit_offset: 19
-    bit_size: 1
-  - name: EP4INE
-    description: EP4INE.
-    bit_offset: 20
-    bit_size: 1
-  - name: EP5INE
-    description: EP5INE.
-    bit_offset: 21
-    bit_size: 1
+    array:
+      len: 5
+      stride: 1
 fieldset/OUTCOUNT:
   description: OUTCOUNT.
   fields:
@@ -314,6 +277,7 @@ fieldset/OUTEPxCSR:
     description: DMAMode.
     bit_offset: 4
     bit_size: 1
+    enum: DMAMode
   - name: DMAEnab
     description: DMAEnab.
     bit_offset: 5
@@ -362,3 +326,18 @@ fieldset/OUTEPxCSR:
     description: INMAXP.
     bit_offset: 16
     bit_size: 1
+
+enum/Mode:
+  bit_size: 1
+  variants:
+  - name: IN
+    value: 0
+  - name: OUT
+    value: 1
+enum/DMAMode:
+  bit_size: 1
+  variants:
+  - name: DmaAndIt
+    value: 0
+  - name: DmaOrIt
+    value: 1

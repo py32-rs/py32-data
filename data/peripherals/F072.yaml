@@ -737,6 +737,10 @@
       register: APBRSTR1
       field: USBRST
   interrupts:
-  - signal: GLOBAL
+  - signal: HP
+    interrupt: USB
+  - signal: LP
+    interrupt: USB
+  - signal: WAKEUP
     interrupt: USB
 

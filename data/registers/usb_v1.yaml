@@ -34,7 +34,7 @@ block/USB:
   - name: INT_IN1
     description: Interrupt status for IN endpoint 1.
     byte_offset: 0x06
-    bit_size: 999
+    bit_size: 8
     fieldset: INT_IN1
   - name: INT_USBE
     description: USB interrupt enable register.
@@ -238,12 +238,12 @@ fieldset/EP0_CSR:
     description: Indicates that a STALL handshake was sent.
     bit_offset: 2
     bit_size: 1
-  - name: Setup_End
-    description: Indicates the end of a setup stage in control transfer.
-    bit_offset: 3
-    bit_size: 1
   - name: Data_End
     description: Indicates the end of data stage in control transfer.
+    bit_offset: 3
+    bit_size: 1
+  - name: Setup_End
+    description: Indicates the end of a setup stage in control transfer.
     bit_offset: 4
     bit_size: 1
   - name: Send_Stall

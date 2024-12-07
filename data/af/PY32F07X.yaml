@@ -811,3 +811,8 @@ ADC:
     signal: IN14
   - pin: PC5
     signal: IN15
+USB:
+  - pin: PA11
+    signal: DM
+  - pin: PA12
+    signal: DP

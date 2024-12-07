@@ -720,3 +720,27 @@
   interrupts:
   - signal: GLOBAL
     interrupt: WWDG
+
+- name:  USB
+  address: 0x40005c00
+  registers:
+    kind: usb
+    version: v1
+    block: USB
+  rcc:
+    bus_clock: PLL
+    kernel_clock: PLL
+    enable:
+      register: APBENR1
+      field: USBEN
+    disable:
+      register: APBRSTR1
+      field: USBRST
+  interrupts:
+  - signal: HP
+    interrupt: USB
+  - signal: LP
+    interrupt: USB
+  - signal: WAKEUP
+    interrupt: USB
+

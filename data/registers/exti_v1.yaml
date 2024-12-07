@@ -20,7 +20,7 @@ block/EXTI:
   - name: EXTICR
     description: EXTI external interrupt selection register.
     array:
-      len: 3
+      len: 4
       stride: 4
     byte_offset: 96
     fieldset: EXTICR

@@ -1,0 +1,213 @@
+block/SYSCFG:
+  description: desc SYSCFG.
+  items:
+  - name: CFGR1
+    description: desc CFGR1.
+    byte_offset: 0
+    fieldset: CFGR1
+  - name: CFGR2
+    description: desc CFGR2.
+    byte_offset: 4
+    fieldset: CFGR2
+  - name: CFGR3
+    description: desc CFGR3.
+    byte_offset: 8
+    fieldset: CFGR3
+  - name: CFGR4
+    description: desc CFGR4.
+    byte_offset: 12
+    fieldset: CFGR4
+  - name: PAENS
+    description: desc PAENS.
+    byte_offset: 16
+    fieldset: PAENS
+  - name: PBENS
+    description: desc PBENS.
+    byte_offset: 20
+    fieldset: PBENS
+  - name: PCENS
+    description: desc PCENS.
+    byte_offset: 24
+    fieldset: PCENS
+  - name: PFENS
+    description: desc PFENS.
+    byte_offset: 28
+    fieldset: PFENS
+fieldset/CFGR1:
+  description: desc CFGR1.
+  fields:
+  - name: MEM_MODE
+    description: desc MEM_MODE.
+    bit_offset: 0
+    bit_size: 2
+  - name: TIM1_IC1_SRC
+    description: desc TIM1_IC1_SRC.
+    bit_offset: 2
+    bit_size: 2
+  - name: TIM2_IC4_SRC
+    description: desc TIM2_IC4_SRC.
+    bit_offset: 4
+    bit_size: 2
+  - name: TIM3_IC1_SRC
+    description: desc TIM3_IC1_SRC.
+    bit_offset: 6
+    bit_size: 2
+  - name: ETR_SRC_TIM1
+    description: desc ETR_SRC_TIM1.
+    bit_offset: 8
+    bit_size: 3
+  - name: ETR_SRC_TIM2
+    description: desc ETR_SRC_TIM2.
+    bit_offset: 12
+    bit_size: 3
+  - name: ETR_SRC_TIM3
+    description: desc ETR_SRC_TIM3.
+    bit_offset: 16
+    bit_size: 3
+  - name: GPIO_AHB_SEL
+    description: desc GPIO_AHB_SEL.
+    bit_offset: 24
+    bit_size: 1
+fieldset/CFGR2:
+  description: desc CFGR2.
+  fields:
+  - name: LOCKUP_LOCK
+    description: desc LOCKUP_LOCK.
+    bit_offset: 0
+    bit_size: 1
+  - name: PVD_LOCK
+    description: desc PVD_LOCK.
+    bit_offset: 2
+    bit_size: 1
+  - name: COMP1_BRK_TIM1
+    description: desc COMP1_BRK_TIM1.
+    bit_offset: 3
+    bit_size: 1
+  - name: COMP2_BRK_TIM1
+    description: desc COMP2_BRK_TIM1.
+    bit_offset: 4
+    bit_size: 1
+  - name: COMP3_BRK_TIM1
+    description: desc COMP3_BRK_TIM1.
+    bit_offset: 5
+    bit_size: 1
+  - name: COMP1_BRK_TIM15
+    description: desc COMP1_BRK_TIM15.
+    bit_offset: 6
+    bit_size: 1
+  - name: COMP2_BRK_TIM15
+    description: desc COMP2_BRK_TIM15.
+    bit_offset: 7
+    bit_size: 1
+  - name: COMP3_BRK_TIM15
+    description: desc COMP3_BRK_TIM15.
+    bit_offset: 8
+    bit_size: 1
+  - name: COMP1_BRK_TIM16
+    description: desc COMP1_BRK_TIM16.
+    bit_offset: 9
+    bit_size: 1
+  - name: COMP2_BRK_TIM16
+    description: desc COMP2_BRK_TIM16.
+    bit_offset: 10
+    bit_size: 1
+  - name: COMP3_BRK_TIM16
+    description: desc COMP3_BRK_TIM16.
+    bit_offset: 11
+    bit_size: 1
+  - name: COMP1_BRK_TIM17
+    description: desc COMP1_BRK_TIM17.
+    bit_offset: 12
+    bit_size: 1
+  - name: COMP2_BRK_TIM17
+    description: desc COMP2_BRK_TIM17.
+    bit_offset: 13
+    bit_size: 1
+  - name: COMP3_BRK_TIM17
+    description: desc COMP3_BRK_TIM17.
+    bit_offset: 14
+    bit_size: 1
+  - name: COMP1_OCREF_CLR_TIM1
+    description: desc COMP1_OCREF_CLR_TIM1.
+    bit_offset: 15
+    bit_size: 1
+  - name: COMP1_OCREF_CLR_TIM2
+    description: desc COMP1_OCREF_CLR_TIM2.
+    bit_offset: 16
+    bit_size: 1
+  - name: COMP1_OCREF_CLR_TIM3
+    description: desc COMP1_OCREF_CLR_TIM3.
+    bit_offset: 17
+    bit_size: 1
+  - name: COMP2_OCREF_CLR_TIM1
+    description: desc COMP2_OCREF_CLR_TIM1.
+    bit_offset: 18
+    bit_size: 1
+  - name: COMP2_OCREF_CLR_TIM2
+    description: desc COMP2_OCREF_CLR_TIM2.
+    bit_offset: 19
+    bit_size: 1
+  - name: COMP2_OCREF_CLR_TIM3
+    description: desc COMP2_OCREF_CLR_TIM3.
+    bit_offset: 20
+    bit_size: 1
+  - name: COMP3_OCREF_CLR_TIM1
+    description: desc COMP3_OCREF_CLR_TIM1.
+    bit_offset: 21
+    bit_size: 1
+  - name: COMP3_OCREF_CLR_TIM2
+    description: desc COMP3_OCREF_CLR_TIM2.
+    bit_offset: 22
+    bit_size: 1
+  - name: COMP3_OCREF_CLR_TIM3
+    description: desc COMP3_OCREF_CLR_TIM3.
+    bit_offset: 23
+    bit_size: 1
+fieldset/CFGR3:
+  description: desc CFGR3.
+  fields:
+  - name: DMA_MAP
+    description: DMA channel 1-4 requeset selection.
+    array:
+      len: 4
+      stride: 8
+    bit_offset: 0
+    bit_size: 6
+fieldset/CFGR4:
+  description: desc CFGR4.
+  fields:
+  - name: DMA_MAP
+    description: DMA channel 5-7 requeset selection.
+    array:
+      len: 3
+      stride: 8
+    bit_offset: 0
+    bit_size: 6
+fieldset/PAENS:
+  description: desc PAENS.
+  fields:
+  - name: PA_ENS
+    description: desc PA_ENS.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PBENS:
+  description: desc PBENS.
+  fields:
+  - name: PB_ENS
+    description: desc PB_ENS.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PCENS:
+  description: desc PCENS.
+  fields:
+  - name: PC_ENS
+    description: desc PC_ENS.
+    bit_offset: 0
+    bit_size: 16
+fieldset/PFENS:
+  description: desc PFENS.
+  fields:
+  - name: PF_ENS
+    description: desc PF_ENS.
+    bit_offset: 0
+    bit_size: 16

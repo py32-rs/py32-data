@@ -1,0 +1,123 @@
+block/SYSCFG:
+  description: System configuration controller.
+  items:
+  - name: CFGR1
+    description: SYSCFG configuration register. 1.
+    byte_offset: 0
+    fieldset: CFGR1
+  - name: CFGR2
+    description: SYSCFG configuration register. 2.
+    byte_offset: 24
+    fieldset: CFGR2
+  - name: CFGR3
+    description: SYSCFG configuration register. 3.
+    byte_offset: 28
+    fieldset: CFGR3
+fieldset/CFGR1:
+  description: SYSCFG configuration register. 1.
+  fields:
+  - name: MEM_MODE
+    description: Memory mapping selection. bits.
+    bit_offset: 0
+    bit_size: 2
+  - name: I2C_PA2_ANF
+    description: Analog filter enable control driving capability. activation bits PA2.
+    bit_offset: 18
+    bit_size: 1
+  - name: I2C_PA3_ANF
+    description: Analog filter enable control driving capability. activation bits PA3.
+    bit_offset: 19
+    bit_size: 1
+  - name: I2C_PA7_ANF
+    description: Analog filter enable control driving capability. activation bits PA7.
+    bit_offset: 20
+    bit_size: 1
+  - name: I2C_PA8_ANF
+    description: Analog filter enable control driving capability. activation bits PA8.
+    bit_offset: 21
+    bit_size: 1
+  - name: I2C_PA9_ANF
+    description: Analog filter enable control driving capability. activation bits PA9.
+    bit_offset: 22
+    bit_size: 1
+  - name: I2C_PA10_ANF
+    description: Analog filter enable control driving capability. activation bits PA10.
+    bit_offset: 23
+    bit_size: 1
+  - name: I2C_PA11_ANF
+    description: Analog filter enable control driving capability. activation bits PA11.
+    bit_offset: 24
+    bit_size: 1
+  - name: I2C_PA12_ANF
+    description: Analog filter enable control driving capability. activation bits PA12.
+    bit_offset: 25
+    bit_size: 1
+  - name: I2C_PB6_ANF
+    description: Analog filter enable control driving capability. activation bits PB6.
+    bit_offset: 26
+    bit_size: 1
+  - name: I2C_PB7_ANF
+    description: Analog filter enable control driving capability. activation bits PB7.
+    bit_offset: 27
+    bit_size: 1
+  - name: I2C_PB8_ANF
+    description: Analog filter enable control driving capability. activation bits PB8.
+    bit_offset: 28
+    bit_size: 1
+  - name: I2C_PF0_ANF
+    description: Analog filter enable control driving capability. activation bits PF0.
+    bit_offset: 29
+    bit_size: 1
+  - name: I2C_PF1_ANF
+    description: Analog filter enable control driving capability. activation bits PF1.
+    bit_offset: 30
+    bit_size: 1
+fieldset/CFGR2:
+  description: SYSCFG configuration register. 2.
+  fields:
+  - name: LOCKUP_LOCK
+    description: Cortex-M0+ LOCKUP bit enable. bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: PVD_LOCK
+    description: PVD lock enable bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: COMP1_BRK_TIM1
+    description: COMP1 is enable to input of TIM1 break.
+    bit_offset: 3
+    bit_size: 1
+  - name: COMP2_BRK_TIM1
+    description: COMP2 is enable to input of TIM1 break.
+    bit_offset: 4
+    bit_size: 1
+  - name: COMP1_BRK_TIM16
+    description: COMP1 is enable to input of TIM16 break.
+    bit_offset: 5
+    bit_size: 1
+  - name: COMP2_BRK_TIM16
+    description: COMP2 is enable to input of TIM16 break.
+    bit_offset: 6
+    bit_size: 1
+  - name: COMP1_BRK_TIM17
+    description: COMP1 is enable to input of TIM17 break.
+    bit_offset: 7
+    bit_size: 1
+  - name: COMP2_BRK_TIM17
+    description: COMP2 is enable to input of TIM17 break.
+    bit_offset: 8
+    bit_size: 1
+  - name: ETR_SRC_TIM1
+    description: TIM1 ETR source selection.
+    bit_offset: 9
+    bit_size: 2
+fieldset/CFGR3:
+  description: SYSCFG configuration register 3.
+  fields:
+  - name: DMA_MAP
+    description: DMA channel x requeset selection.
+    array:
+      len: 3
+      stride: 8
+    bit_offset: 0
+    bit_size: 5

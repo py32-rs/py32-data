@@ -374,7 +374,7 @@
   address: 0x40010000
   registers:
     kind: syscfg
-    version: common
+    version: f072
     block: SYSCFG
   rcc:
     bus_clock: PCLK1

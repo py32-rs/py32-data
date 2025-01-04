@@ -1,5 +1,5 @@
 
-- name:  ADC
+- name:  ADC1
   address: 0x40012400
   registers:
     kind: adc

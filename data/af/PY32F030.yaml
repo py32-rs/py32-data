@@ -543,7 +543,7 @@ USART2:
   - af: 4
     pin: PF3
     signal: TX
-ADC:
+ADC1:
   - pin: PA0
     signal: IN0
   - pin: PA1

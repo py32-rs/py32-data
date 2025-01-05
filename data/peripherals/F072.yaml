@@ -159,11 +159,11 @@
   address: 0x40022000
   registers:
     kind: flash
-    version: common
+    version: f072
     block: FLASH
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: FLASHEN

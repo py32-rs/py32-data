@@ -1,0 +1,128 @@
+block/CONFIGBYTES:
+  description: Factory configuration bytes.
+  items:
+  - name: HSI_TRIMMING
+    description: HSI trimming value, 4, 8, 16, 22.12, 24MHz.
+    array:
+      len: 5
+      stride: 8
+    byte_offset: 0
+    fieldset: HSI_TRIMMING
+    access: Read
+  - name: TS_CAL_30C
+    description: Temperature sensor calibration value at 30°C.
+    byte_offset: 40
+    fieldset: TSCAL
+    access: Read
+  - name: TS_CAL_85C
+    description: Temperature sensor calibration value at 85°C.
+    byte_offset: 48
+    fieldset: TSCAL
+    access: Read
+  - name: EPPARA
+    description: FLASH configuration values. 4,8,16,22.12,24MHz.
+    array:
+      len: 5
+      stride: 40
+    byte_offset: 56
+    block: EPPARA
+    access: Read
+
+block/EPPARA:
+  items:
+  - name: EPPARA0
+    description: FLASH_TS0, FLASH_TS1, FLASH_TS3 configuration values.
+    byte_offset: 0
+    fieldset: EPPARA0
+  - name: EPPARA1
+    description: FLASH_TS2P, FLASH_TPS3 configuration values.
+    byte_offset: 8
+    fieldset: EPPARA1
+  - name: EPPARA2
+    description: FLASH_PERTPE configuration values.
+    byte_offset: 16
+    fieldset: EPPARA2
+  - name: EPPARA3
+    description: FLASH_SMERTPE configuration values.
+    byte_offset: 24
+    fieldset: EPPARA3
+  - name: EPPARA4
+    description: FLASH_PRGTPE, FLASH_PRETPE configuration values.
+    byte_offset: 32
+    fieldset: EPPARA4
+
+fieldset/HSI_TRIMMING:
+  description: HSI trimming values.
+  fields:
+  - name: HSI_FS
+    description: HSI frequency selection.
+    bit_offset: 13
+    bit_size: 3
+  - name: HSI_TRIM
+    description: HSI trimming value.
+    bit_offset: 0
+    bit_size: 13
+
+fieldset/TSCAL:
+  description: Temperature sensor calibration values.
+  fields:
+  - name: TSCAL
+    description: Temperature sensor calibration value.
+    bit_offset: 0
+    bit_size: 12
+
+fieldset/EPPARA0:
+  description: FLASH_TSO, FLASH_TS1 configuration values.
+  fields:
+  - name: TS0
+    description: TS0 value.
+    bit_offset: 0
+    bit_size: 8
+  - name: TS3
+    description: TS3 value.
+    bit_offset: 8
+    bit_size: 8
+  - name: TS1
+    description: TS1 value.
+    bit_offset: 16
+    bit_size: 9
+
+fieldset/EPPARA1:
+  description: FLASH_TS2P, FLASH_TPS3 configuration values.
+  fields:
+  - name: TPS3
+    description: TPS3 value.
+    bit_offset: 16
+    bit_size: 11
+  - name: TS2P
+    description: TS2P value.
+    bit_offset: 0
+    bit_size: 8
+
+fieldset/EPPARA2:
+  description: FLASH_PERTPE configuration values.
+  fields:
+  - name: PERTPE
+    description: PERTPE value.
+    bit_offset: 0
+    bit_size: 17
+
+fieldset/EPPARA3:
+  description: FLASH_SMERTPE configuration values.
+  fields:
+  - name: SMERTPE
+    description: SMERTPE value.
+    bit_offset: 0
+    bit_size: 17
+
+fieldset/EPPARA4:
+  description: FLASH_PRGTPE, FLASH_PRETPE configuration values.
+  fields:
+  - name: PRGTPE
+    description: PRGTPE value.
+    bit_offset: 0
+    bit_size: 16
+  - name: PRETPE
+    description: PRETPE value.
+    bit_offset: 16
+    bit_size: 12

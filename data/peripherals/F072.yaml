@@ -744,3 +744,9 @@
   - signal: WAKEUP
     interrupt: USB
 
+- name: CONFIGBYTES
+  address: 0x1fff3200
+  registers:
+    kind: configbytes
+    version: f072
+    block: CONFIGBYTES

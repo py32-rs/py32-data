@@ -103,7 +103,7 @@ fieldset/CR:
     description: Option byte program start.
     bit_offset: 17
     bit_size: 1
-  - name: PGTSTRT
+  - name: PGSTRT
     description: Flash main memory program start.
     bit_offset: 19
     bit_size: 1

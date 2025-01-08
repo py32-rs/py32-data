@@ -60,8 +60,8 @@ pub mod chip {
 
         #[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
         pub struct Settings {
-            pub erase_size: u32,
-            pub write_size: u32,
+            pub page_size: u32,
+            pub sector_size: u32,
             pub erase_value: u8,
         }
     }

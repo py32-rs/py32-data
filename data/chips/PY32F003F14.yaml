@@ -29,9 +29,9 @@ memory:
     kind: flash
     name: BANK_1
     settings:
-      erase_size: 128
+      sector_size: 0x1000
       erase_value: 0
-      write_size: 4
+      page_size: 0x80
     size: 16384
   - address: 536870912
     kind: ram

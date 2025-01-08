@@ -144,8 +144,8 @@ pub struct MemoryRegion {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct FlashSettings {
-    pub erase_size: u32,
-    pub write_size: u32,
+    pub page_size: u32,
+    pub sector_size: u32,
     pub erase_value: u8,
 }
 

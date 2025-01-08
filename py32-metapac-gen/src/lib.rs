@@ -132,15 +132,24 @@ impl Gen {
         writeln!(&mut extra, "pub const FLASH_BASE: usize = {};", first_flash.address).unwrap();
         writeln!(&mut extra, "pub const FLASH_SIZE: usize = {};", total_flash_size).unwrap();
 
-        let write_sizes: HashSet<_> = flash_regions
+        let page_sizes: HashSet<_> = flash_regions
             .iter()
-            .map(|r| r.settings.as_ref().unwrap().write_size)
+            .map(|r| r.settings.as_ref().unwrap().page_size)
             .collect();
-        assert_eq!(1, write_sizes.len());
+        assert_eq!(1, page_sizes.len());
+        
+        let sector_sizes: HashSet<_> = flash_regions
+        .iter()
+        .map(|r| r.settings.as_ref().unwrap().sector_size)
+        .collect();
+            assert_eq!(1, sector_sizes.len());
+
+
         writeln!(
             &mut extra,
-            "pub const WRITE_SIZE: usize = {};",
-            write_sizes.iter().next().unwrap()
+            "pub const PAGE_SIZE: usize = {};\npub const SECTOR_SIZE: usize = {};",
+            page_sizes.iter().next().unwrap(),
+            sector_sizes.iter().next().unwrap()
         )
         .unwrap();
 

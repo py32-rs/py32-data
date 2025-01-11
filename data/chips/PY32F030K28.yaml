@@ -51,7 +51,10 @@ cores:
     include_peripherals:
       - "../peripherals/F030.yaml"
     include_afs: "../af/PY32F030.yaml"
-    dma_channels:
+    include_dma_channels:
+      DMA1_CH1: "../dma_channels/PY32F030.yaml"
+      DMA1_CH2: "../dma_channels/PY32F030.yaml"
+      DMA1_CH3: "../dma_channels/PY32F030.yaml"
 _raw:
   12bitADCUnitsCHs: 1(10+2)
   12bitDACUnitsCHs: '-'

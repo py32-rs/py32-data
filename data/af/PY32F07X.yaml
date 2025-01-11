@@ -778,7 +778,7 @@ USART4:
   - af: 0
     pin: PC12
     signal: CK
-ADC:
+ADC1:
   - pin: PA0
     signal: IN0
   - pin: PA1

@@ -164,7 +164,7 @@ fieldset/CR1:
     description: desc ADSTP.
     bit_offset: 27
     bit_size: 1
-  - name: OVETIE
+  - name: OVRIE
     description: Overrun interrupt enable
     bit_offset: 29
     bit_size: 1

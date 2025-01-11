@@ -49,9 +49,7 @@ Date: 20240312
 
 - Configure the additional registers for peripherals like USART and I2C on the PY32F072, which has more registers compared to version 1 (F030).
 
-- Set up configurations for cut-down variants such as PY32F003, PY32F002A, and PY32F040.
-
-- Extend USB `FRAMENUM` and `OUTCOUNT` Fields to 11 bits.
+- Set up configurations for cut-down variants such as PY32F003, PY32F002A, PY32F040.
 
 ## Contirbute
 

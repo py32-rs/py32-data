@@ -28,6 +28,18 @@ RCC:
     signal: MCO
 SPI1:
   - af: 0
+    pin: PA0
+    signal: MOSI
+  - af: 0
+    pin: PA1
+    signal: MISO
+  - af: 0
+    pin: PA6
+    signal: NSS
+  - af: 0
+    pin: PA7
+    signal: MOSI
+  - af: 0
     pin: PB0
     signal: SCK
   - af: 0

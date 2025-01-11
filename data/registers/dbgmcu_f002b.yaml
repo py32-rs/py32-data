@@ -1,0 +1,48 @@
+block/DBGMCU:
+  description: Debug support.
+  items:
+  - name: IDCODE
+    description: MCU Device ID Code Register.
+    byte_offset: 0
+    access: Read
+    fieldset: IDCODE
+  - name: CR
+    description: Debug MCU Configuration Register.
+    byte_offset: 4
+    fieldset: CR
+  - name: APB_FZ1
+    description: APB Freeze Register1.
+    byte_offset: 8
+    fieldset: APB_FZ1
+  - name: APB_FZ2
+    description: APB Freeze Register2.
+    byte_offset: 12
+    fieldset: APB_FZ2
+fieldset/APB_FZ1:
+  description: APB Freeze Register1.
+  fields:
+  - name: DBG_LPTIM_STOP
+    description: Debug LPTIM stopped when Core is halted.
+    bit_offset: 31
+    bit_size: 1
+fieldset/APB_FZ2:
+  description: APB Freeze Register2.
+  fields:
+  - name: DBG_TIMER1_STOP
+    description: Debug Timer 1 stopped when Core is halted.
+    bit_offset: 11
+    bit_size: 1
+  - name: DBG_TIMER14_STOP
+    description: Debug Timer 14 stopped when Core is halted.
+    bit_offset: 15
+    bit_size: 1
+fieldset/CR:
+  description: Debug MCU Configuration Register.
+  fields:
+  - name: DBG_STOP
+    description: Debug Stop Mode.
+    bit_offset: 1
+    bit_size: 1
+fieldset/IDCODE:
+  description: MCU Device ID Code Register.
+  fields: []

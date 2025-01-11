@@ -744,3 +744,34 @@
   - signal: WAKEUP
     interrupt: USB
 
+- name:  DMA1
+  address: 0x40020000
+  registers:
+    kind: dma
+    version: f072
+    block: DMA
+  rcc:
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
+    enable:
+      register: AHBENR
+      field: DMAEN
+    reset:
+      register: AHBRSTR
+      field: DMARST
+  interrupts:
+  - signal: CH1
+    interrupt: DMA1_Channel1
+  - signal: CH2
+    interrupt: DMA1_Channel2_3
+  - signal: CH3
+    interrupt: DMA1_Channel2_3
+  - signal: CH4
+    interrupt: DMA1_Channel4_5_6_7
+  - signal: CH5
+    interrupt: DMA1_Channel4_5_6_7
+  - signal: CH6
+    interrupt: DMA1_Channel4_5_6_7
+  - signal: CH7
+    interrupt: DMA1_Channel4_5_6_7
+

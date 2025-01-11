@@ -103,7 +103,7 @@ fieldset/IXR:
       - 8
   - name: TCIF
     description: Channel x Transfer Complete. flag.
-    bit_offset: 1
+    bit_offset: 0
     bit_size: 1
     array:
       offsets:
@@ -112,7 +112,7 @@ fieldset/IXR:
       - 9
   - name: HTIF
     description: Channel x Half Transfer Complete. flag.
-    bit_offset: 2
+    bit_offset: 0
     bit_size: 1
     array:
       offsets:
@@ -121,7 +121,7 @@ fieldset/IXR:
       - 10
   - name: TEIF
     description: Channel x Transfer Error. flag.
-    bit_offset: 3
+    bit_offset: 0
     bit_size: 1
     array:
       offsets:

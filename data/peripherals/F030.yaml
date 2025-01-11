@@ -387,25 +387,7 @@
     kind: timer
     version: v1
     block: TIM_1CH_CMP
-  dma_channels:
-    - signal: CH1
-      channel: DMA1_CH1
-      request: 7
-    - signal: UP
-      channel: DMA1_CH1
-      request: 7
-    - signal: CH1
-      channel: DMA1_CH2
-      request: 7
-    - signal: UP
-      channel: DMA1_CH2
-      request: 7
-    - signal: CH1
-      channel: DMA1_CH7
-      request: 7
-    - signal: UP
-      channel: DMA1_CH7
-      request: 7
+    
   rcc:
     bus_clock: PCLK1_TIM
     kernel_clock: PCLK1_TIM
@@ -443,15 +425,15 @@
       register: APBRSTR2
       field: SYSCFGRST
 
-- name: DMA
+- name: DMA1
   address: 0x40020000
   registers:
     kind: dma
-    version: common
+    version: f030
     block: DMA
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: DMAEN
@@ -459,10 +441,12 @@
       register: AHBRSTR
       field: DMARST
   interrupts:
-    - signal: GLOBAL
-      interrupt: DMA_Channel1
-    - signal: GLOBAL
-      interrupt: DMA_Channel2_3
+  - signal: CH1
+    interrupt: DMA_Channel1
+  - signal: CH2
+    interrupt: DMA_Channel2_3
+  - signal: CH3
+    interrupt: DMA_Channel2_3
 
 - name: FLASH
   address: 0x40022000

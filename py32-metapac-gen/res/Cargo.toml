@@ -1,6 +1,6 @@
 [package]
 name = "py32-metapac"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/py32-rs/py32-data"
@@ -15,7 +15,7 @@ include = [
 ]
 
 [package.metadata.docs.rs]
-features = ["py32f030k28", "pac", "metadata"]
+features = ["py32f072c1b", "pac", "metadata"]
 default-target = "thumbv6m-none-eabi"
 targets = []
 

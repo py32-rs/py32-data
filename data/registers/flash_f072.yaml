@@ -1,0 +1,277 @@
+block/FLASH:
+  description: desc FLASH.
+  items:
+  - name: ACR
+    description: desc ACR.
+    byte_offset: 0
+    fieldset: ACR
+  - name: KEYR
+    description: desc KEYR.
+    byte_offset: 8
+    access: Write
+  - name: OPTKEYR
+    description: desc OPTKEYR.
+    byte_offset: 12
+    access: Write
+  - name: SR
+    description: desc SR.
+    byte_offset: 16
+    fieldset: SR
+  - name: CR
+    description: desc CR.
+    byte_offset: 20
+    fieldset: CR
+  - name: OPTR
+    description: desc OPTR.
+    byte_offset: 32
+    access: Read
+    fieldset: OPTR
+  - name: SDKR
+    description: desc SDKR.
+    byte_offset: 36
+    access: Read
+    fieldset: SDKR
+  - name: WRPR
+    description: desc WRPR.
+    byte_offset: 44
+    fieldset: WRPR
+  - name: STCR
+    description: desc STCR.
+    byte_offset: 144
+    fieldset: STCR
+  - name: TS0
+    description: desc TS0.
+    byte_offset: 256
+    fieldset: TS0
+  - name: TS1
+    description: desc TS1.
+    byte_offset: 260
+    fieldset: TS1
+  - name: TS2P
+    description: desc TS2P.
+    byte_offset: 264
+    fieldset: TS2P
+  - name: TPS3
+    description: desc TPS3.
+    byte_offset: 268
+    fieldset: TPS3
+  - name: TS3
+    description: desc TS3.
+    byte_offset: 272
+    fieldset: TS3
+  - name: PERTPE
+    description: desc PERTPE.
+    byte_offset: 276
+    fieldset: PERTPE
+  - name: SMERTPE
+    description: desc SMERTPE.
+    byte_offset: 280
+    fieldset: SMERTPE
+  - name: PRGTPE
+    description: desc PRGTPE.
+    byte_offset: 284
+    fieldset: PRGTPE
+  - name: PRETPE
+    description: desc PRETPE.
+    byte_offset: 288
+    fieldset: PRETPE
+fieldset/ACR:
+  description: desc ACR.
+  fields:
+  - name: LATENCY
+    description: desc LATENCY.
+    bit_offset: 0
+    bit_size: 2
+fieldset/CR:
+  description: desc CR.
+  fields:
+  - name: PG
+    description: desc PG.
+    bit_offset: 0
+    bit_size: 1
+  - name: PER
+    description: desc PER.
+    bit_offset: 1
+    bit_size: 1
+  - name: MER
+    description: desc MER.
+    bit_offset: 2
+    bit_size: 1
+  - name: SER
+    description: desc SER.
+    bit_offset: 11
+    bit_size: 1
+  - name: OPTSTRT
+    description: desc OPTSTRT.
+    bit_offset: 17
+    bit_size: 1
+  - name: PGSTRT
+    description: desc PGSTRT.
+    bit_offset: 19
+    bit_size: 1
+  - name: EOPIE
+    description: desc EOPIE.
+    bit_offset: 24
+    bit_size: 1
+  - name: ERRIE
+    description: desc ERRIE.
+    bit_offset: 25
+    bit_size: 1
+  - name: OBL_LAUNCH
+    description: desc OBL_LAUNCH.
+    bit_offset: 27
+    bit_size: 1
+  - name: OPTLOCK
+    description: desc OPTLOCK.
+    bit_offset: 30
+    bit_size: 1
+  - name: LOCK
+    description: desc LOCK.
+    bit_offset: 31
+    bit_size: 1
+fieldset/OPTR:
+  description: desc OPTR.
+  fields:
+  - name: RDP
+    description: desc RDP.
+    bit_offset: 0
+    bit_size: 8
+  - name: IWDG_SW
+    description: desc IWDG_SW.
+    bit_offset: 11
+    bit_size: 1
+  - name: WWDG_SW
+    description: desc WWDG_SW.
+    bit_offset: 12
+    bit_size: 1
+  - name: NRST_MODE
+    description: desc NRST_MODE.
+    bit_offset: 13
+    bit_size: 1
+  - name: NBOOT1
+    description: desc nBOOT1.
+    bit_offset: 14
+    bit_size: 1
+  - name: IWDG_STOP
+    description: desc IWDG_STOP.
+    bit_offset: 15
+    bit_size: 1
+fieldset/PERTPE:
+  description: desc PERTPE.
+  fields:
+  - name: PERTPE
+    description: desc PERTPE.
+    bit_offset: 0
+    bit_size: 17
+fieldset/PRETPE:
+  description: desc PRETPE.
+  fields:
+  - name: PRETPE
+    description: desc PRETPE.
+    bit_offset: 0
+    bit_size: 14
+fieldset/PRGTPE:
+  description: desc PRGTPE.
+  fields:
+  - name: PRGTPE
+    description: desc PRGTPE.
+    bit_offset: 0
+    bit_size: 16
+fieldset/SDKR:
+  description: desc SDKR.
+  fields:
+  - name: SDK_STRT
+    description: desc SDK_STRT.
+    bit_offset: 0
+    bit_size: 5
+  - name: BOR_EN
+    description: desc BOR_EN.
+    bit_offset: 5
+    bit_size: 1
+  - name: SDK_END
+    description: desc SDK_END.
+    bit_offset: 8
+    bit_size: 5
+  - name: BOR_LEV
+    description: desc BOR_LEV.
+    bit_offset: 13
+    bit_size: 3
+fieldset/SMERTPE:
+  description: desc SMERTPE.
+  fields:
+  - name: SMERTPE
+    description: desc SMERTPE.
+    bit_offset: 0
+    bit_size: 17
+fieldset/SR:
+  description: desc SR.
+  fields:
+  - name: EOP
+    description: desc EOP.
+    bit_offset: 0
+    bit_size: 1
+  - name: WRPERR
+    description: desc WRPERR.
+    bit_offset: 4
+    bit_size: 1
+  - name: OPTVERR
+    description: desc OPTVERR.
+    bit_offset: 15
+    bit_size: 1
+  - name: BSY
+    description: desc BSY.
+    bit_offset: 16
+    bit_size: 1
+fieldset/STCR:
+  description: desc STCR.
+  fields:
+  - name: SLEEP_EN
+    description: desc SLEEP_EN.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLEEP_TIME
+    description: desc SLEEP_TIME.
+    bit_offset: 8
+    bit_size: 8
+fieldset/TPS3:
+  description: desc TPS3.
+  fields:
+  - name: TPS3
+    description: desc TPS3.
+    bit_offset: 0
+    bit_size: 11
+fieldset/TS0:
+  description: desc TS0.
+  fields:
+  - name: TS0
+    description: desc TS0.
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS1:
+  description: desc TS1.
+  fields:
+  - name: TS1
+    description: desc TS1.
+    bit_offset: 0
+    bit_size: 9
+fieldset/TS2P:
+  description: desc TS2P.
+  fields:
+  - name: TS2P
+    description: desc TS2P.
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS3:
+  description: desc TS3.
+  fields:
+  - name: TS3
+    description: desc TS3.
+    bit_offset: 0
+    bit_size: 8
+fieldset/WRPR:
+  description: desc WRPR.
+  fields:
+  - name: WRP
+    description: desc WRP.
+    bit_offset: 0
+    bit_size: 16

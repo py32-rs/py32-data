@@ -1,0 +1,271 @@
+block/FLASH:
+  description: Flash.
+  items:
+  - name: ACR
+    description: Access control register.
+    byte_offset: 0
+    fieldset: ACR
+  - name: KEYR
+    description: Flash key register.
+    byte_offset: 8
+    access: Write
+  - name: OPTKEYR
+    description: Option byte key register.
+    byte_offset: 12
+    access: Write
+  - name: SR
+    description: Status register.
+    byte_offset: 16
+    fieldset: SR
+  - name: CR
+    description: Flash control register.
+    byte_offset: 20
+    fieldset: CR
+  - name: OPTR
+    description: Flash option register.
+    byte_offset: 32
+    fieldset: OPTR
+  - name: SDKR
+    description: Flash SDK address. register.
+    byte_offset: 36
+    fieldset: SDKR
+  - name: WRPR
+    description: Flash WRP address. register.
+    byte_offset: 44
+    fieldset: WRPR
+  - name: STCR
+    description: Flash sleep time config. register.
+    byte_offset: 144
+    fieldset: STCR
+  - name: TS0
+    description: Flash TS0. register.
+    byte_offset: 256
+    fieldset: TS0
+  - name: TS1
+    description: Flash TS1. register.
+    byte_offset: 260
+    fieldset: TS1
+  - name: TS2P
+    description: Flash TS2P. register.
+    byte_offset: 264
+    fieldset: TS2P
+  - name: TPS3
+    description: Flash TPS3. register.
+    byte_offset: 268
+    fieldset: TPS3
+  - name: TS3
+    description: Flash TS3. register.
+    byte_offset: 272
+    fieldset: TS3
+  - name: PERTPE
+    description: Flash PERTPE. register.
+    byte_offset: 276
+    fieldset: PERTPE
+  - name: SMERTPE
+    description: Flash SMERTPE. register.
+    byte_offset: 280
+    fieldset: SMERTPE
+  - name: PRGTPE
+    description: Flash PRGTPE. register.
+    byte_offset: 284
+    fieldset: PRGTPE
+  - name: PRETPE
+    description: Flash PRETPE. register.
+    byte_offset: 288
+    fieldset: PRETPE
+fieldset/ACR:
+  description: Access control register.
+  fields:
+  - name: LATENCY
+    description: Latency.
+    bit_offset: 0
+    bit_size: 1
+fieldset/CR:
+  description: Flash control register.
+  fields:
+  - name: PG
+    description: Programming.
+    bit_offset: 0
+    bit_size: 1
+  - name: PER
+    description: Page erase.
+    bit_offset: 1
+    bit_size: 1
+  - name: MER
+    description: Mass erase.
+    bit_offset: 2
+    bit_size: 1
+  - name: SER
+    description: Sector erase.
+    bit_offset: 11
+    bit_size: 1
+  - name: OPTSTRT
+    description: Option byte program start.
+    bit_offset: 17
+    bit_size: 1
+  - name: PGSTRT
+    description: Flash main memory program start.
+    bit_offset: 19
+    bit_size: 1
+  - name: EOPIE
+    description: End of operation interrupt. enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 25
+    bit_size: 1
+  - name: OBL_LAUNCH
+    description: Force the option byte. loading.
+    bit_offset: 27
+    bit_size: 1
+  - name: OPTLOCK
+    description: Options Lock.
+    bit_offset: 30
+    bit_size: 1
+  - name: LOCK
+    description: FLASH_CR Lock.
+    bit_offset: 31
+    bit_size: 1
+fieldset/OPTR:
+  description: Flash option register.
+  fields:
+  - name: RDP
+    description: Read Protection.
+    bit_offset: 0
+    bit_size: 8
+  - name: BOREN
+    description: BOR reset Level.
+    bit_offset: 8
+    bit_size: 1
+  - name: BORF_LEV
+    description: These bits contain the VDD supply level. threshold that activates the reset.
+    bit_offset: 9
+    bit_size: 3
+  - name: IDWG_SW
+    description: Independent watchdog. selection.
+    bit_offset: 12
+    bit_size: 1
+  - name: WWDG_SW
+    description: Window watchdog selection.
+    bit_offset: 13
+    bit_size: 1
+  - name: NRST_MODE
+    description: NRST_MODE.
+    bit_offset: 14
+    bit_size: 1
+  - name: nBOOT1
+    description: Boot configuration.
+    bit_offset: 15
+    bit_size: 1
+fieldset/PERTPE:
+  description: Flash PERTPE. register.
+  fields:
+  - name: PERTPE
+    description: FLash PERTPE register.
+    bit_offset: 0
+    bit_size: 17
+fieldset/PRETPE:
+  description: Flash PRETPE. register.
+  fields:
+  - name: PRETPE
+    description: FLash PRETPE register.
+    bit_offset: 0
+    bit_size: 13
+fieldset/PRGTPE:
+  description: Flash PRGTPE. register.
+  fields:
+  - name: PRGTPE
+    description: FLash PRGTPE register.
+    bit_offset: 0
+    bit_size: 16
+fieldset/SDKR:
+  description: Flash SDK address. register.
+  fields:
+  - name: SDK_STRT
+    description: SDK area start address.
+    bit_offset: 0
+    bit_size: 5
+  - name: SDK_END
+    description: SDK area end address.
+    bit_offset: 8
+    bit_size: 5
+fieldset/SMERTPE:
+  description: Flash SMERTPE. register.
+  fields:
+  - name: SMERTPE
+    description: FLash SMERTPE register.
+    bit_offset: 0
+    bit_size: 17
+fieldset/SR:
+  description: Status register.
+  fields:
+  - name: EOP
+    description: End of operation.
+    bit_offset: 0
+    bit_size: 1
+  - name: WRPERR
+    description: Write protected error.
+    bit_offset: 4
+    bit_size: 1
+  - name: OPTVERR
+    description: Option and Engineering bits loading. validity error.
+    bit_offset: 15
+    bit_size: 1
+  - name: BSY
+    description: Busy.
+    bit_offset: 16
+    bit_size: 1
+fieldset/STCR:
+  description: Flash sleep time config. register.
+  fields:
+  - name: SLEEP_EN
+    description: FLash sleep enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: SLEEP_TIME
+    description: FLash sleep time configuration(counter based on HSI_10M).
+    bit_offset: 8
+    bit_size: 8
+fieldset/TPS3:
+  description: Flash TPS3. register.
+  fields:
+  - name: TPS3
+    description: FLash TPS3 register.
+    bit_offset: 0
+    bit_size: 11
+fieldset/TS0:
+  description: Flash TS0. register.
+  fields:
+  - name: TS0
+    description: FLash TS0 register.
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS1:
+  description: Flash TS1. register.
+  fields:
+  - name: TS1
+    description: FLash TS1 register.
+    bit_offset: 0
+    bit_size: 9
+fieldset/TS2P:
+  description: Flash TS2P. register.
+  fields:
+  - name: TS2P
+    description: FLash TS2P register.
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS3:
+  description: Flash TS3. register.
+  fields:
+  - name: TS3
+    description: FLash TS3 register.
+    bit_offset: 0
+    bit_size: 8
+fieldset/WRPR:
+  description: Flash WRP address. register.
+  fields:
+  - name: WRP
+    description: WRP address.
+    bit_offset: 0
+    bit_size: 16

@@ -452,17 +452,14 @@
   address: 0x40022000
   registers:
     kind: flash
-    version: common
+    version: f030
     block: FLASH
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: FLASHEN
-    reset:
-      register: AHBRSTR
-      field: FLASHRST
   interrupts:
     - signal: GLOBAL
       interrupt: FLASH
@@ -474,8 +471,8 @@
     version: common
     block: CRC
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: CRCEN
@@ -574,3 +571,10 @@
     reset:
       register: APBRSTR1
       field: DBGRST
+
+- name: CONFIGBYTES
+  address: 0x1FFF0F00
+  registers:
+    kind: configbytes
+    version: f030
+    block: CONFIGBYTES

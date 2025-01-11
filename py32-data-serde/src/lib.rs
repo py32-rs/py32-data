@@ -248,9 +248,6 @@ pub mod chip {
                 pub dma: Option<String>,
                 #[serde(skip_serializing_if = "Option::is_none")]
                 pub channel: Option<String>,
-                #[serde(skip_serializing_if = "Option::is_none")]
-                pub dmamux: Option<String>,
-                #[serde(skip_serializing_if = "Option::is_none")]
                 pub request: Option<u8>,
             }
         }
@@ -266,12 +263,6 @@ pub mod chip {
             pub name: String,
             pub dma: String,
             pub channel: u8,
-            #[serde(skip_serializing_if = "Option::is_none")]
-            pub dmamux: Option<String>,
-            #[serde(skip_serializing_if = "Option::is_none")]
-            pub dmamux_channel: Option<u8>,
-            #[serde(skip_serializing_if = "Option::is_none")]
-            pub supports_2d: Option<bool>,
         }
     }
 }

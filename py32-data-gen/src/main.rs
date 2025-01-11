@@ -1,7 +1,9 @@
-use std::{collections::{HashMap, BTreeMap}, path::Path};
+use std::collections::HashMap;
+use std::path::Path;
+
+use py32_data_serde::chip::core;
 
 // mod chips;
-// mod dma;
 // mod docs;
 // mod header;
 // mod interrupts;
@@ -91,6 +93,9 @@ fn main() -> anyhow::Result<()> {
         for core in &mut chip.cores {
             let mut peripheral_afs = None;
 
+            // peripheral name: Vec<(signal, remap)>
+            let mut peripheral_dma_channels = None;
+
             if let Some(inc_path) = core.include_interrupts.take() {
                 let interrupts_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
                 let content = std::fs::read_to_string(&interrupts_yaml_path)?;
@@ -110,10 +115,53 @@ fn main() -> anyhow::Result<()> {
             if let Some(inc_path) = &mut core.include_afs.take() {
                 let afs_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
                 let content = std::fs::read_to_string(&afs_yaml_path)?;
-                let afs: BTreeMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> =
+                let afs: HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> =
                     serde_yaml::from_str(&content)?;
 
                 peripheral_afs = Some(afs);
+            }
+
+            // append DMA channels from includes
+            if let Some(dma_channels_inc) = &mut core.include_dma_channels.take() {
+                let mut dma_channels = HashMap::new();
+                for (channel_name, inc_path) in dma_channels_inc {
+                    let dma_channels_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
+                    let content = std::fs::read_to_string(&dma_channels_yaml_path)?;
+                    let dma_channel_map: HashMap<String, u8> = serde_yaml::from_str(&content)?;
+
+                    for (signal, &remap) in &dma_channel_map {
+                        let parts: Vec<&str> = signal.split('_').collect();
+
+                        // e.g USART1_TX, ADC1
+                        let (peripheral, signal) = if parts.len() == 1 {
+                            (parts[0].to_string(), parts[0].to_string())
+                        } else if parts.len() == 2 {
+                            (parts[0].to_string(), parts[1].to_string())
+                        } else {
+                            panic!("Invalid DMA signal: {}", signal);
+                        };
+
+                        let dma_channel = core::peripheral::DmaChannel {
+                            signal: signal.clone(),
+                            dma: Some(channel_name.split('_').next().unwrap().to_string()),
+                            channel: Some(channel_name.clone()),
+                            request: Some(remap),
+                        };
+                        dma_channels
+                            .entry(peripheral)
+                            .or_insert_with(Vec::new)
+                            .push(dma_channel);
+                    }
+
+                    let core_dma_channels = core::DmaChannels {
+                        name: channel_name.clone(),
+                        dma: channel_name.split('_').next().unwrap().to_string(),
+                        channel: channel_name.split('_').nth(1).unwrap().strip_prefix("CH").unwrap().parse::<u8>().unwrap() - 1u8,
+                    };
+
+                    core.dma_channels.push(core_dma_channels);
+                }
+                peripheral_dma_channels = Some(dma_channels);
             }
 
             // append peripherals from includes
@@ -142,6 +190,15 @@ fn main() -> anyhow::Result<()> {
                             if let Some(pins) = peripheral_afs.get(&peripheral.name) {
                                 // println!("successufully matched AF with peri: {:#?}", &peripheral.name);
                                 peripheral.pins = pins.clone();
+                            }
+                        }
+                    }
+
+                    if let Some(peripheral_dma_channels) = peripheral_dma_channels.as_ref() {
+                        for peripheral in &mut peripherals {
+                            if let Some(dma_channels) = peripheral_dma_channels.get(&peripheral.name) {
+                                println!("successufully matched DMA with peri: {:#?}", &peripheral.name);
+                                peripheral.dma_channels = dma_channels.clone();
                             }
                         }
                     }

@@ -104,6 +104,28 @@ LPTIM1:
   - af: 5
     pin: PA5
     signal: ETR
+RCC:
+  - af: 15
+    pin: PA1
+    signal: MCO
+  - af: 15
+    pin: PA5
+    signal: MCO
+  - af: 5
+    pin: PA8
+    signal: MCO
+  - af: 5
+    pin: PA9
+    signal: MCO
+  - af: 15
+    pin: PA13
+    signal: MCO
+  - af: 15
+    pin: PA14
+    signal: MCO
+  - af: 6
+    pin: PF2
+    signal: MCO
 RTC:
   - af: 15
     pin: PA4

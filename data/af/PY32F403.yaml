@@ -50,6 +50,10 @@ I2S2:
   - af: 15
     pin: PC6
     signal: MCK
+RCC:
+  - af: 0
+    pin: PA8
+    signal: MCO
 SPI1:
   - af: 3
     pin: PA4

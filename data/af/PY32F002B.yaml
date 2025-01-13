@@ -19,6 +19,13 @@ I2C1:
   - af: 6
     pin: PB6
     signal: SDA
+RCC:
+  - af: 4
+    pin: PA7
+    signal: MCO
+  - af: 4
+    pin: PB1
+    signal: MCO
 SPI1:
   - af: 0
     pin: PB0

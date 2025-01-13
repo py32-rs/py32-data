@@ -170,6 +170,16 @@ I2S2:
   - af: 11
     pin: PC9
     signal: WS
+RCC:
+  - af: 0
+    pin: PA8
+    signal: MCO
+  - af: 9
+    pin: PA9
+    signal: MCO
+  - af: 9
+    pin: PB13
+    signal: MCO
 SPI1:
   - af: 8
     pin: PA1

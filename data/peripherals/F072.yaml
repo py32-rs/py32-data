@@ -101,7 +101,7 @@
   address: 0x40015800
   registers:
     kind: dbgmcu
-    version: common
+    version: f072
     block: DBGMCU
   rcc:
     bus_clock: PCLK1

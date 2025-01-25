@@ -1,0 +1,108 @@
+block/DBGMCU:
+  description: Debug support.
+  items:
+  - name: IDCODE
+    description: MCU Device ID Code Register.
+    byte_offset: 0
+    access: Read
+    fieldset: IDCODE
+  - name: CR
+    description: Debug MCU Configuration Register.
+    byte_offset: 4
+    fieldset: CR
+  - name: APB_FZ1
+    description: APB Freeze Register1.
+    byte_offset: 8
+    fieldset: APB_FZ1
+  - name: APB_FZ2
+    description: APB Freeze Register2.
+    byte_offset: 12
+    fieldset: APB_FZ2
+fieldset/APB_FZ1:
+  description: APB Freeze Register1.
+  fields:
+  - name: DBG_TIMER2_STOP
+    description: Debug Timer 2 stopped when Core is halted.
+    bit_offset: 0
+    bit_size: 1
+  - name: DBG_TIMER3_STOP
+    description: Debug Timer 3 stopped when Core is halted.
+    bit_offset: 1
+    bit_size: 1
+  - name: DBG_TIMER6_STOP
+    description: Debug Timer 6 stopped when Core is halted.
+    bit_offset: 4
+    bit_size: 1
+  - name: DBG_TIMER7_STOP
+    description: Debug Timer 7 stopped when Core is halted.
+    bit_offset: 5
+    bit_size: 1
+  - name: DBG_RTC_STOP
+    description: Debug RTC stopped when Core is halted.
+    bit_offset: 10
+    bit_size: 1
+  - name: DBG_WWDG_STOP
+    description: Debug Window Wachdog stopped when Core is halted.
+    bit_offset: 11
+    bit_size: 1
+  - name: DBG_IWDG_STOP
+    description: Debug Independent Wachdog stopped when Core is halted.
+    bit_offset: 12
+    bit_size: 1
+  - name: DBG_CAN_STOP
+    description: DBG_CAN_STOP.
+    bit_offset: 19
+    bit_size: 1
+  - name: DBG_I2C1_SMBUS_TIMEOUT
+    description: DBG_I2C1_SMBUS_TIMEOUT.
+    bit_offset: 21
+    bit_size: 1
+  - name: DBG_I2C2_SMBUS_TIMEOUT
+    description: DBG_I2C2_SMBUS_TIMEOUT.
+    bit_offset: 22
+    bit_size: 1
+  - name: DBG_LPTIM_STOP
+    description: Debug LPTIM stopped when Core is halted.
+    bit_offset: 31
+    bit_size: 1
+fieldset/APB_FZ2:
+  description: APB Freeze Register2.
+  fields:
+  - name: DBG_TIMER1_STOP
+    description: Debug Timer 1 stopped when Core is halted.
+    bit_offset: 11
+    bit_size: 1
+  - name: DBG_TIMER14_STOP
+    description: Debug Timer 14 stopped when Core is halted.
+    bit_offset: 15
+    bit_size: 1
+  - name: DBG_TIMER15_STOP
+    description: Debug Timer 15 stopped when Core is halted.
+    bit_offset: 16
+    bit_size: 1
+  - name: DBG_TIMER16_STOP
+    description: Debug Timer 16 stopped when Core is halted.
+    bit_offset: 17
+    bit_size: 1
+  - name: DBG_TIMER17_STOP
+    description: Debug Timer 17 stopped when Core is halted.
+    bit_offset: 18
+    bit_size: 1
+fieldset/CR:
+  description: Debug MCU Configuration Register.
+  fields:
+  - name: DBG_SLEEP
+    description: Debug Sleep Mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: DBG_STOP
+    description: Debug Stop Mode.
+    bit_offset: 1
+    bit_size: 1
+fieldset/IDCODE:
+  description: MCU Device ID Code Register.
+  fields:
+  - name: REV_ID
+    description: REV_ID.
+    bit_offset: 0
+    bit_size: 31

@@ -4,7 +4,7 @@
 | --------------- | ----- | ---- | ----- | ---- | ---- | ---- | ---- | ----- | ------ | -------- | ---- |
 | F002B           |       | v1   | v1    |      | v1   | v1?  | v1   |       |        |          |      |
 | F030/F003/F002A | f030  | v1   | v1    | f030 | v1   | v1   | v1   | v1    | f030   |          | v1   |
-| F040/F07x/MD410 | f072  | v1   | v1    | f072 | v1   | v2   | v1   | v1    | f072   | py32f07x |      |
+| F040/F07x/MD410 | f072  | v1   | v1    | f072 | v1   | v2   | v1   | v1    | f072   | py32f07x | v2   |
 | F403            | f403? | v1   | v1    |      |      | v2   | v2?  |       |        | py32f403 |      |
 
 Degree of IP Core similarity
@@ -20,5 +20,6 @@ Degree of IP Core similarity
 | I2C        | v1        | embassy-stm32::i2c_v1                                        | B          |
 | EXTI       | v1        | embassy-stm32::exti_g0+u5                                    | A          |
 | USART      | v1        | embassy-stm32::usart_v2                                      | B          |
-| USB        | v1        | [musb](https://github.com/decaday/musb)::builtin-py32f07x/py32f403 | musb IP    |
-|            |           |                                                              |            |
+| SPI        | v1        | embassy-stm32::spi_v2                                        | C          |
+| SPI        | v2        | embassy-stm32::spi_v2                                        | B          |
+| USB        | v1        | [musb](https://github.com/decaday/musb)::builtin-py32f07x/py32f403 | -          |

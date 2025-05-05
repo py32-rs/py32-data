@@ -484,7 +484,7 @@
   address: 0x40013000
   registers:
     kind: spi
-    version: common
+    version: v1
     block: SPI
   rcc:
     bus_clock: PCLK1
@@ -503,7 +503,7 @@
   address: 0x40003800
   registers:
     kind: spi
-    version: common
+    version: v1
     block: SPI
   rcc:
     bus_clock: PCLK1

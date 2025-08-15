@@ -586,3 +586,10 @@ ADC1:
     signal: IN8
   - pin: PB1
     signal: IN9
+DBGMCU:
+  - af: 0
+    pin: PA13
+    signal: SWDIO
+  - af: 0
+    pin: PA14
+    signal: SWCLK

@@ -455,3 +455,10 @@ USART5:
   - af: 1
     pin: PD5
     signal: RTS
+DBGMCU:
+  - af: 0
+    pin: PA13
+    signal: SWDIO
+  - af: 0
+    pin: PA14
+    signal: SWCLK

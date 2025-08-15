@@ -826,3 +826,10 @@ USB:
     signal: DM
   - pin: PA12
     signal: DP
+DBGMCU:
+  - af: 0
+    pin: PA13
+    signal: SWDIO
+  - af: 0
+    pin: PA14
+    signal: SWCLK

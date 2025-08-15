@@ -165,3 +165,10 @@ USART1:
   - af: 1
     pin: PB6
     signal: TX
+DBGMCU:
+  - af: 0
+    pin: PA2
+    signal: SWCLK
+  - af: 0
+    pin: PB6
+    signal: SWDIO

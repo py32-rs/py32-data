@@ -52,14 +52,23 @@ block/ADC:
     byte_offset: 76
     access: Read
     fieldset: CALRR2
+  - name: CALRR3
+    description: ADC calibration result register 3.
+    byte_offset: 80
+    access: Read
+    fieldset: CALRR3
   - name: CALFIR1
     description: ADC calibration factor input register 1.
-    byte_offset: 80
+    byte_offset: 84
     fieldset: CALFIR1
   - name: CALFIR2
     description: ADC calibration factor input register 2.
-    byte_offset: 84
+    byte_offset: 88
     fieldset: CALFIR2
+  - name: CALFIR3
+    description: ADC calibration factor input register 2.
+    byte_offset: 92
+    fieldset: CALFIR3
   - name: CCR
     description: common configuration register
     byte_offset: 776
@@ -67,70 +76,84 @@ block/ADC:
 fieldset/CALFIR1:
   description: ADC calibration factor input register 1.
   fields:
-  - name: CALC4IO
+  - name: CALC9IO
     description: Calibration C4 factor input.
     bit_offset: 0
     bit_size: 8
-  - name: CALC5IO
+  - name: CALC10IO
     description: Calibration C5 factor input.
-    bit_offset: 8
+    bit_offset: 9
     bit_size: 8
-  - name: CALBIO
+  - name: CALC11IO
     description: Calibration offset factor input.
-    bit_offset: 16
-    bit_size: 7
+    bit_offset: 18
+    bit_size: 8
 fieldset/CALFIR2:
   description: ADC calibration factor input register 2.
   fields:
-  - name: CALC0IO
-    description: Calibration C0 factor input.
+  - name: CALC6IO
+    description: Calibration C1 factor input.
     bit_offset: 0
     bit_size: 8
-  - name: CALC1IO
-    description: Calibration C1 factor input.
-    bit_offset: 8
-    bit_size: 8
-  - name: CALC2IO
+  - name: CALC7IO
     description: Calibration C2 factor input.
-    bit_offset: 16
+    bit_offset: 9
     bit_size: 8
-  - name: CALC3IO
+  - name: CALC8IO
     description: Calibration C3 factor input.
-    bit_offset: 24
+    bit_offset: 18
+    bit_size: 8
+fieldset/CALFIR3:
+  description: ADC calibration factor input register 2.
+  fields:
+  - name: CALCBIO
+    description: Calibration C0 factor input.
+    bit_offset: 0
     bit_size: 8
 fieldset/CALRR1:
   description: ADC calibration result register 1.
   fields:
-  - name: CALC4OUT
-    description: C4 result.
+  - name: CALC9OUT
+    description: C9 result.
     bit_offset: 0
     bit_size: 8
-  - name: CALC5OUT
-    description: C5 result.
-    bit_offset: 8
+  - name: CALC10OUT
+    description: C10 result.
+    bit_offset: 9
     bit_size: 8
-  - name: CALBOUT
-    description: offset result.
-    bit_offset: 16
+  - name: CALC11OUT
+    description: C11 result.
+    bit_offset: 18
     bit_size: 7
 fieldset/CALRR2:
   description: ADC calibration result register 2.
   fields:
-  - name: CALC0OUT
-    description: C0 result.
+  - name: CALC6UT
+    description: C6 result.
     bit_offset: 0
     bit_size: 8
-  - name: CALC1OUT
-    description: C1 result.
-    bit_offset: 8
+  - name: CALC7OUT
+    description: C7 result.
+    bit_offset: 9
     bit_size: 8
-  - name: CALC2OUT
-    description: C2 result.
-    bit_offset: 16
+  - name: CALC8OUT
+    description: C8 result.
+    bit_offset: 18
     bit_size: 8
-  - name: CALC3OUT
-    description: C3 result.
-    bit_offset: 24
+fieldset/CALRR3:
+  description: ADC calibration result register 3.
+  fields:
+  - name: CALC6UT
+    description: C6 result.
+    bit_offset: 0
+    bit_size: 8
+  - name: CALC7OUT
+    description: C7 result.
+    bit_offset: 9
+    bit_size: 8
+  - name: CALC8OUT
+    description: C8 result.
+    bit_offset: 18
     bit_size: 8
 fieldset/CCSR:
   description: ADC calibration configuration and status register.
@@ -169,15 +192,6 @@ fieldset/CCR:
 fieldset/CFGR1:
   description: configuration register 1
   fields:
-  - name: DMAEN
-    description: Direct memory access enable
-    bit_offset: 0
-    bit_size: 1
-  - name: DMACFG
-    description: Direct memory access configuration
-    bit_offset: 1
-    bit_size: 1
-    enum: DMACFG
   - name: SCANDIR
     description: Scan sequence direction
     bit_offset: 2
@@ -257,6 +271,10 @@ fieldset/CR:
     description: ADC enable command
     bit_offset: 0
     bit_size: 1
+  - name: ADDIS
+    description: ADC disable.
+    bit_offset: 1
+    bit_size: 1
   - name: ADSTART
     description: ADC start conversion command
     bit_offset: 2
@@ -265,6 +283,18 @@ fieldset/CR:
     description: ADC stop conversion command
     bit_offset: 4
     bit_size: 1
+  - name: VREF_BUFFERE
+    description: desc VREF_BUFFERE.
+    bit_offset: 5
+    bit_size: 1
+  - name: VERBUFF_SEL
+    description: desc VERBUFF_SEL.
+    bit_offset: 6
+    bit_size: 2
+  - name: VERBUFF_TRIM
+    description: desc VERBUFF_TRIM.
+    bit_offset: 8
+    bit_size: 5
   - name: ADCAL
     description: ADC calibration
     bit_offset: 31
@@ -404,15 +434,6 @@ enum/CKMODE:
   - name: HSI_Div64
     description: Asynchronous clock mode (HSI/64)
     value: 14
-enum/DMACFG:
-  bit_size: 1
-  variants:
-  - name: OneShot
-    description: DMA One Shot mode selected
-    value: 0
-  - name: Circular
-    description: DMA Circular mode selected
-    value: 1
 enum/EXTEN:
   bit_size: 2
   variants:

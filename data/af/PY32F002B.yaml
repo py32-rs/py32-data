@@ -172,3 +172,20 @@ DBGMCU:
   - af: 0
     pin: PB6
     signal: SWDIO
+ADC1:
+  - pin: PB1
+    signal: IN0
+  - pin: PA3
+    signal: IN1
+  - pin: PA4
+    signal: IN2
+  - pin: PA6
+    signal: IN3
+  - pin: PA7
+    signal: IN4
+  - pin: PC0
+    signal: IN5
+  - pin: PB6
+    signal: IN6
+  - pin: PB0
+    signal: IN7

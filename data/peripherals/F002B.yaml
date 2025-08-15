@@ -2,7 +2,7 @@
   address: 0x40012400
   registers:
     kind: adc
-    version: v1
+    version: v1b
     block: ADC
   rcc:
     bus_clock: PCLK1

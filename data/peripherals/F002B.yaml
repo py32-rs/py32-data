@@ -368,8 +368,15 @@
       register: APBRSTR1
       field: DBGRST
 
-- name: CONFIGBYTES
+- name: UID
   address: 0x1FFF0000
+  registers:
+    kind: uid
+    version: v1
+    block: UID
+
+- name: CONFIGBYTES
+  address: 0x1FFF0100
   registers:
     kind: configbytes
     version: f002b

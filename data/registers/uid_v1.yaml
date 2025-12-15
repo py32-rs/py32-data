@@ -1,0 +1,107 @@
+block/UID:
+  description: Unique Device ID.
+  items:
+  - name: WORD0
+    description: UID Word 0 (Offset 0x00).
+    byte_offset: 0
+    fieldset: UID_WORD0
+    access: Read
+  - name: WORD1
+    description: UID Word 1 (Offset 0x04).
+    byte_offset: 4
+    fieldset: UID_WORD1
+    access: Read
+  - name: WORD2
+    description: UID Word 2 (Offset 0x08).
+    byte_offset: 8
+    fieldset: UID_WORD2
+    access: Read
+  - name: WORD3
+    description: UID Word 3 (Offset 0x0C).
+    byte_offset: 12
+    fieldset: UID_WORD3
+    access: Read
+
+fieldset/UID_WORD0:
+  description: Lot Number (Bytes 0-3).
+  fields:
+  - name: LOT_NUM_ASCII_0
+    description: Lot Number ASCII Code (Byte 0).
+    bit_offset: 0
+    bit_size: 8
+  - name: LOT_NUM_ASCII_1
+    description: Lot Number ASCII Code (Byte 1).
+    bit_offset: 8
+    bit_size: 8
+  - name: LOT_NUM_ASCII_2
+    description: Lot Number ASCII Code (Byte 2).
+    bit_offset: 16
+    bit_size: 8
+  - name: LOT_NUM_ASCII_3
+    description: Lot Number ASCII Code (Byte 3).
+    bit_offset: 24
+    bit_size: 8
+
+fieldset/UID_WORD1:
+  description: Wafer Number and Lot Number (Bytes 4-7).
+  fields:
+  - name: WAFER_NUM
+    description: Wafer Number.
+    bit_offset: 0
+    bit_size: 8
+  - name: LOT_NUM_ASCII_4
+    description: Lot Number ASCII Code (Byte 4).
+    bit_offset: 8
+    bit_size: 8
+  - name: LOT_NUM_ASCII_5
+    description: Lot Number ASCII Code (Byte 5).
+    bit_offset: 16
+    bit_size: 8
+  - name: LOT_NUM_ASCII_6
+    description: Lot Number ASCII Code (Byte 6).
+    bit_offset: 24
+    bit_size: 8
+
+fieldset/UID_WORD2:
+  description: Coordinates and Internal Coding (Bytes 8-11).
+  fields:
+  - name: INTERNAL_CODE_0
+    description: Internal Coding (Byte 0).
+    bit_offset: 0
+    bit_size: 8
+  - name: Y_COORD_LOW
+    description: Y Coordinate Low bits.
+    bit_offset: 8
+    bit_size: 8
+  - name: X_COORD_LOW
+    description: X Coordinate Low bits.
+    bit_offset: 16
+    bit_size: 8
+  - name: X_COORD_HIGH
+    description: X Coordinate High bits.
+    bit_offset: 24
+    bit_size: 4
+  - name: Y_COORD_HIGH
+    description: Y Coordinate High bits.
+    bit_offset: 28
+    bit_size: 4
+
+fieldset/UID_WORD3:
+  description: Internal Coding and Fixed Code (Bytes 12-15).
+  fields:
+  - name: FIXED_CODE
+    description: Fixed Code (0x78).
+    bit_offset: 0
+    bit_size: 8
+  - name: INTERNAL_CODE_1
+    description: Internal Coding (Byte 1).
+    bit_offset: 8
+    bit_size: 8
+  - name: INTERNAL_CODE_2
+    description: Internal Coding (Byte 2).
+    bit_offset: 16
+    bit_size: 8
+  - name: INTERNAL_CODE_3
+    description: Internal Coding (Byte 3).
+    bit_offset: 24
+    bit_size: 8

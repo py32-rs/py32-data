@@ -1,6 +1,17 @@
 block/UID:
   description: Unique Device ID.
   items:
+
+  # STM32-style UID registers
+  - name: UID
+    description: Factory programmed 96-bit unique device identifier words.
+    array:
+      len: 3
+      stride: 4
+    byte_offset: 0
+    access: Read
+
+  # Detailed UID registers
   - name: WORD0
     description: UID Word 0 (Offset 0x00).
     byte_offset: 0

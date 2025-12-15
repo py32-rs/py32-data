@@ -775,6 +775,13 @@
   - signal: CH7
     interrupt: DMA1_Channel4_5_6_7
 
+- name:  UID
+  address: 0x1fff3000
+  registers:
+    kind: uid
+    version: v1
+    block: UID
+
 - name: CONFIGBYTES
   address: 0x1fff3200
   registers:

@@ -3,12 +3,12 @@ block/CONFIGBYTES:
   items:
   - name: HSI_TRIMMING
     description: HSI 24 Hz frequency selection control and corresponding trimming value
-    byte_offset: 256
+    byte_offset: 0
     fieldset: HSI_TRIMMING
     access: Read
   - name: EPPARA
     description: FLASH configuration values. 24MHz.
-    byte_offset: 284
+    byte_offset: 28
     block: EPPARA
     access: Read
 

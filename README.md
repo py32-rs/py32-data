@@ -51,6 +51,8 @@ Date: 20240312
 
 - Set up configurations for cut-down variants such as PY32F003, PY32F002A, PY32F040.
 
+- The py32f07x reference manual does not describe the exact layout of the UID; it only specifies the base address (0x1FFF3000).  
+
 ## Contirbute
 
 You can refer to the relevant descriptions and explanations in[embassy-rs/stm32-data](https://github.com/embassy-rs/stm32-data) repo.

@@ -270,7 +270,7 @@
   address: 0x40010000
   registers:
     kind: syscfg
-    version: common
+    version: f002b
     block: SYSCFG
   rcc:
     bus_clock: PCLK1

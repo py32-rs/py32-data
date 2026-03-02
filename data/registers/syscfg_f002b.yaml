@@ -1,0 +1,64 @@
+block/SYSCFG:
+  description: System configuration controller.
+  items:
+  - name: CFGR1
+    description: SYSCFG configuration register 1.
+    byte_offset: 0
+    fieldset: CFGR1
+  - name: CFGR2
+    description: SYSCFG configuration register 2.
+    byte_offset: 24
+    fieldset: CFGR2
+  - name: GPIO_ENS
+    description: desc GPIO_ENS.
+    byte_offset: 28
+    fieldset: GPIO_ENS
+fieldset/CFGR1:
+  description: SYSCFG configuration register 1.
+  fields:
+  - name: MEM_MODE
+    description: Memory mapping selection bits.
+    bit_offset: 0
+    bit_size: 2
+  - name: I2C_PA2_FMP
+    description: desc I2C_PA2_FMP.
+    bit_offset: 16
+    bit_size: 1
+  - name: I2C_PB3_FMP
+    description: desc I2C_PB3_FMP.
+    bit_offset: 17
+    bit_size: 1
+  - name: I2C_PB4_FMP
+    description: desc I2C_PB4_FMP.
+    bit_offset: 18
+    bit_size: 1
+  - name: I2C_PB6_FMP
+    description: desc I2C_PB6_FMP.
+    bit_offset: 19
+    bit_size: 1
+fieldset/CFGR2:
+  description: SYSCFG configuration register 2.
+  fields:
+  - name: LOCKUP_LOCK
+    description: Cortex-M0+ LOCKUP bit enable bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: ETR_SRC_TIM1
+    description: TIM1 ETR source selection.
+    bit_offset: 9
+    bit_size: 2
+fieldset/GPIO_ENS:
+  description: desc GPIO_ENS.
+  fields:
+  - name: PA_ENS
+    description: desc PA_ENS.
+    bit_offset: 0
+    bit_size: 8
+  - name: PB_ENS
+    description: desc PB_ENS.
+    bit_offset: 8
+    bit_size: 8
+  - name: PC_ENS
+    description: desc PC_ENS.
+    bit_offset: 16
+    bit_size: 2

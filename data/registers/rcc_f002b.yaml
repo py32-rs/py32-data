@@ -424,7 +424,7 @@ fieldset/IOPENR:
     bit_size: 1
   - name: GPIOCEN
     description: I/O port C clock enable.
-    bit_offset: 5
+    bit_offset: 2
     bit_size: 1
 fieldset/IOPRSTR:
   description: GPIO reset register.

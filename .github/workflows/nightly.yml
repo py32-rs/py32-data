@@ -29,7 +29,6 @@ jobs:
         COMMIT_MESSAGE=$(git log -1 --pretty=%B)
         ./d gen
         cd build/py32-metapac/
-        cp -v ../../README.md .
         cp -v ../../LICENSE* .
         find src -iname '*.rs' -exec rustfmt -v {} \;
         git init

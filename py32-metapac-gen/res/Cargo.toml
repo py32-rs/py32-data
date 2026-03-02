@@ -4,13 +4,14 @@ version = "0.4.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/py32-rs/py32-data"
-readme = "../../README.md"
+readme = "README.md"
 description = "Peripheral Access Crate (PAC) for all PY32 chips, including metadata."
 
 # `cargo publish` is unable to figure out which .rs files are needed due to the include! magic.
 include = [
     "**/*.rs",
     "**/*.x",
+    "README.md",
     "Cargo.toml",
 ]
 

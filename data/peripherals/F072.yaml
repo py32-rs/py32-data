@@ -733,7 +733,7 @@
     enable:
       register: APBENR1
       field: USBEN
-    disable:
+    reset:
       register: APBRSTR1
       field: USBRST
   interrupts:

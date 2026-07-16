@@ -1,20 +1,6 @@
 name: PY32F002B
-family: Low-Cost
-line: PY32F002B
+generic: PY32F002Bx5
 device_id: 1485
-keywords:
-  - GPTM
-  - ADTM
-  - Systic
-  - LPTIMER
-  - PWM
-  - WDG
-  - USART
-  - I2C
-  - SPI
-  - 12bitADCUnitsCHs
-  - TempSensor
-  - CMP
 packages:
   - name: PY32F002BD15S6
     package: SOP14
@@ -28,32 +14,12 @@ packages:
   - name: PY32F002BW15S6
     package: SOP16
     pins: 14
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x1000
-      erase_value: 0
-      page_size: 0x80
-    size: 24576
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 3072
 docs:
   - name: PY32F002B&nbsp;datasheet&nbsp;V0.9.pdf
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F002B&nbsp;datasheet&nbsp;V0.9.pdf
-cores:
-  - max_clock: 24000000
-    name: cm0p
-    nvic_priority_bits: 2
-    include_interrupts: "../interrupts/PY32F002Bxx.yaml"
-    include_peripherals:
-      - "../peripherals/F002B.yaml"
-    include_afs: "../af/PY32F002B.yaml"
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32F002B&nbsp;datasheet&nbsp;V0.9.pdf"
 _raw:
   12bitADCUnitsCHs: 1(5+2)
   12bitDACUnitsCHs: '-'
@@ -87,6 +53,7 @@ _raw:
   USART: '1'
   USB20: '-'
   WDG: '1'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F002B&nbsp;datasheet&nbsp;V0.9.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32F002B&nbsp;datasheet&nbsp;V0.9.pdf"
   id: 1485
   pro_status: MP

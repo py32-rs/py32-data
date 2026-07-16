@@ -1,0 +1,4 @@
+die: DIE030
+disabled_peripherals: []
+disabled_interrupts: []
+family: Low-Cost

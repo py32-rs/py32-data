@@ -1,71 +1,16 @@
 name: PY32M010A15
-family: Motor-Control
-line: PY32M010
+generic: PY32M010Ax5
 device_id: 2248
-keywords:
-  - GPTM
-  - ADTM
-  - Systic
-  - LPTIMER
-  - PWM
-  - WDG
-  - USART
-  - I2C
-  - SPI
-  - 12bitADCUnitsCHs
-  - TempSensor
-  - CMP
 packages:
   - name: PY32M010A15N6
     package: MSOP10
     pins: 8
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x1000
-      erase_value: 0
-      page_size: 0x80
-    size: 24576
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 3072
 docs:
   - name: PY32M010&nbsp;datasheet&nbsp;V0.5.pdf
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32M010&nbsp;datasheet&nbsp;V0.5.pdf
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 24000000
-    name: cm0p
-    nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: v1
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32M010&nbsp;datasheet&nbsp;V0.5.pdf"
 _raw:
   12bitADCUnitsCHs: 1(7+2)
   12bitDACUnitsCHs: '-'
@@ -99,6 +44,7 @@ _raw:
   USART: '1'
   USB20: '-'
   WDG: '1'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32M010&nbsp;datasheet&nbsp;V0.5.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32M010&nbsp;datasheet&nbsp;V0.5.pdf"
   id: 2248
   pro_status: MP

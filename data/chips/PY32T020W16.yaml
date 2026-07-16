@@ -1,71 +1,16 @@
 name: PY32T020W16
-family: Touch
-line: PY32T020
+generic: PY32T020x6
 device_id: 2130
-keywords:
-  - GPTM
-  - ADTM
-  - Systic
-  - PWM
-  - WDG
-  - RTC
-  - USART
-  - I2C
-  - SPI
-  - 12bitADCUnitsCHs
-  - TempSensor
-  - CMP
 packages:
   - name: PY32T020W16S7
     package: SOP16
     pins: 14
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x1000
-      erase_value: 0
-      page_size: 0x80
-    size: 32768
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 4096
 docs:
-  - name: PY32T020 系列数据手册_Rev0.7.pdf
+  - name: "PY32T020 \u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.7.pdf"
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32T020 系列数据手册_Rev0.7.pdf
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 48000000
-    name: cm0p
-    nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: t020
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32T020 \u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.7.pdf"
 _raw:
   12bitADCUnitsCHs: 1(5+3)
   12bitDACUnitsCHs: '-'
@@ -99,6 +44,7 @@ _raw:
   USART: '3'
   USB20: '-'
   WDG: '1'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32T020 系列数据手册_Rev0.7.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32T020 \u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.7.pdf"
   id: 2130
   pro_status: ES

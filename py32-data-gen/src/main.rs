@@ -2,24 +2,9 @@ use std::collections::HashMap;
 use std::path::Path;
 
 use py32_data_serde::chip::core;
+use py32_data_serde::{Chip, ChipConfig, Generic, Series};
 
-// mod chips;
-// mod docs;
-// mod header;
-// mod interrupts;
-// mod memory;
-// mod rcc;
 mod registers;
-
-#[macro_export]
-macro_rules! regex {
-    ($re:literal) => {{
-        ::ref_thread_local::ref_thread_local! {
-            static managed REGEX: ::regex::Regex = ::regex::Regex::new($re).unwrap();
-        }
-        <REGEX as ::ref_thread_local::RefThreadLocal<::regex::Regex>>::borrow(&REGEX)
-    }};
-}
 
 struct Stopwatch {
     start: std::time::Instant,
@@ -83,130 +68,201 @@ fn main() -> anyhow::Result<()> {
     println!("chips: {:?}", chip_meta_files);
 
     std::fs::create_dir_all("build/data/chips")?;
+    
+    // Caching loaded files to avoid re-reading
+    let mut generics: HashMap<String, Generic> = HashMap::new();
+    let mut series_map: HashMap<String, Series> = HashMap::new();
+    let mut die_peripherals: HashMap<String, Vec<py32_data_serde::chip::core::Peripheral>> = HashMap::new();
+    let mut die_interrupts: HashMap<String, Vec<py32_data_serde::chip::core::Interrupt>> = HashMap::new();
+    let mut die_dma_channels: HashMap<String, Vec<py32_data_serde::chip::core::DmaChannels>> = HashMap::new();
+    let mut die_afs: HashMap<String, HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>>> = HashMap::new();
+    let mut die_dma_requests: HashMap<String, HashMap<String, Vec<py32_data_serde::chip::core::peripheral::DmaChannel>>> = HashMap::new();
 
     for name in &chip_meta_files {
-        let meta_yaml_path = data_dir.join(&format!("chips/{}.yaml", name));
+        let meta_yaml_path = data_dir.join(format!("chips/{}.yaml", name));
         let content = std::fs::read_to_string(&meta_yaml_path)?;
-        let mut chip: py32_data_serde::Chip = serde_yaml::from_str(&content)?;
+        let chip_cfg: ChipConfig = serde_yaml::from_str(&content)?;
 
-        // handle include_x
-        for core in &mut chip.cores {
-            let mut peripheral_afs = None;
-
-            // peripheral name: Vec<(signal, remap)>
-            let mut peripheral_dma_channels = None;
-
-            if let Some(inc_path) = core.include_interrupts.take() {
-                let interrupts_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
-                let content = std::fs::read_to_string(&interrupts_yaml_path)?;
-                let interrupts: HashMap<String, u8> = serde_yaml::from_str(&content)?;
-                let mut interrupts: Vec<(String, u8)> = interrupts.into_iter().collect();
-                interrupts.sort_by_key(|(_, number)| *number);
-
-                // println!("interrupts: {:#?}", interrupts);
-                for (name, number) in interrupts {
-                    core.interrupts
-                        .push(py32_data_serde::chip::core::Interrupt { name, number });
-                }
-                // core.interrupts.extend(interrupts.interrupts);
+        // Load generic
+        let generic = if let Some(g) = generics.get(&chip_cfg.generic) {
+            g.clone()
+        } else {
+            let gen_path = data_dir.join(format!("generics/{}.yaml", chip_cfg.generic));
+            let gen_content = std::fs::read_to_string(&gen_path)?;
+            let g: Generic = serde_yaml::from_str(&gen_content)?;
+            generics.insert(chip_cfg.generic.clone(), g.clone());
+            g
+        };
+        
+        // Load series
+        let series = if let Some(s) = series_map.get(&generic.series) {
+            s.clone()
+        } else {
+            let s_path = data_dir.join(format!("series/{}.yaml", generic.series));
+            let s_content = std::fs::read_to_string(&s_path)?;
+            let s: Series = serde_yaml::from_str(&s_content)?;
+            series_map.insert(generic.series.clone(), s.clone());
+            s
+        };
+        
+        let die_name = &series.die;
+        
+        // Load die components
+        if !die_peripherals.contains_key(die_name) {
+            let p_path = data_dir.join(format!("dies/{}/peripherals.yaml", die_name));
+            if p_path.exists() {
+                let p_content = std::fs::read_to_string(&p_path)?;
+                let peris: Vec<py32_data_serde::chip::core::Peripheral> = serde_yaml::from_str(&p_content)?;
+                die_peripherals.insert(die_name.clone(), peris);
+            } else {
+                die_peripherals.insert(die_name.clone(), vec![]);
             }
-
-            // append AF from includes
-            if let Some(inc_path) = &mut core.include_afs.take() {
-                let afs_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
-                let content = std::fs::read_to_string(&afs_yaml_path)?;
-                let afs: HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> =
-                    serde_yaml::from_str(&content)?;
-
-                peripheral_afs = Some(afs);
+        }
+        
+        if !die_interrupts.contains_key(die_name) {
+            let i_path = data_dir.join(format!("dies/{}/interrupts.yaml", die_name));
+            if i_path.exists() {
+                let i_content = std::fs::read_to_string(&i_path)?;
+                let mut ints: Vec<py32_data_serde::chip::core::Interrupt> = serde_yaml::from_str(&i_content)?;
+                ints.sort_by_key(|i| i.number);
+                die_interrupts.insert(die_name.clone(), ints);
+            } else {
+                die_interrupts.insert(die_name.clone(), vec![]);
             }
-
-            // append DMA channels from includes
-            if let Some(dma_channels_inc) = &mut core.include_dma_channels.take() {
-                let mut dma_channels = HashMap::new();
-                for (channel_name, inc_path) in dma_channels_inc {
-                    let dma_channels_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
-                    let content = std::fs::read_to_string(&dma_channels_yaml_path)?;
-                    let dma_channel_map: HashMap<String, u8> = serde_yaml::from_str(&content)?;
-
-                    for (signal, &remap) in &dma_channel_map {
-                        let parts: Vec<&str> = signal.split('_').collect();
-
-                        // e.g USART1_TX, ADC1
-                        let (peripheral, signal) = if parts.len() == 1 {
-                            (parts[0].to_string(), parts[0].to_string())
-                        } else if parts.len() == 2 {
-                            (parts[0].to_string(), parts[1].to_string())
-                        } else {
-                            panic!("Invalid DMA signal: {}", signal);
-                        };
-
-                        let dma_channel = core::peripheral::DmaChannel {
-                            signal: signal.clone(),
-                            dma: Some(channel_name.split('_').next().unwrap().to_string()),
-                            channel: Some(channel_name.clone()),
+        }
+        
+        if !die_dma_channels.contains_key(die_name) {
+            let d_path = data_dir.join(format!("dies/{}/dma_channels.yaml", die_name));
+            if d_path.exists() {
+                let d_content = std::fs::read_to_string(&d_path)?;
+                let dmas: Vec<py32_data_serde::chip::core::DmaChannels> = serde_yaml::from_str(&d_content)?;
+                die_dma_channels.insert(die_name.clone(), dmas);
+            } else {
+                die_dma_channels.insert(die_name.clone(), vec![]);
+            }
+        }
+        
+        if !die_afs.contains_key(die_name) {
+            let af_path = data_dir.join(format!("dies/{}/af.yaml", die_name));
+            if af_path.exists() {
+                let content = std::fs::read_to_string(&af_path)?;
+                let afs: HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>> = serde_yaml::from_str(&content)?;
+                die_afs.insert(die_name.clone(), afs);
+            } else {
+                die_afs.insert(die_name.clone(), HashMap::new());
+            }
+        }
+        
+        if !die_dma_requests.contains_key(die_name) {
+            let req_path = data_dir.join(format!("dies/{}/dma_requests.yaml", die_name));
+            let mut peripheral_dma_reqs = HashMap::new();
+            if req_path.exists() {
+                let content = std::fs::read_to_string(&req_path)?;
+                let reqs: HashMap<String, u8> = serde_yaml::from_str(&content)?;
+                
+                let physical_channels = die_dma_channels.get(die_name).unwrap();
+                
+                for (signal, &remap) in &reqs {
+                    let parts: Vec<&str> = signal.split('_').collect();
+                    let (peripheral, sig) = if parts.len() == 1 {
+                        (parts[0].to_string(), parts[0].to_string())
+                    } else if parts.len() == 2 {
+                        (parts[0].to_string(), parts[1].to_string())
+                    } else {
+                        panic!("Invalid DMA signal: {}", signal);
+                    };
+                    
+                    if physical_channels.is_empty() {
+                        let dma_channel = py32_data_serde::chip::core::peripheral::DmaChannel {
+                            signal: sig.clone(),
+                            dma: None,
+                            channel: None,
                             request: Some(remap),
                         };
-                        dma_channels
-                            .entry(peripheral)
+                        peripheral_dma_reqs
+                            .entry(peripheral.clone())
                             .or_insert_with(Vec::new)
                             .push(dma_channel);
+                    } else {
+                        for phys in physical_channels {
+                            let dma_channel = py32_data_serde::chip::core::peripheral::DmaChannel {
+                                signal: sig.clone(),
+                                dma: Some(phys.dma.clone()),
+                                channel: Some(phys.name.clone()),
+                                request: Some(remap),
+                            };
+                            peripheral_dma_reqs
+                                .entry(peripheral.clone())
+                                .or_insert_with(Vec::new)
+                                .push(dma_channel);
+                        }
                     }
-
-                    let core_dma_channels = core::DmaChannels {
-                        name: channel_name.clone(),
-                        dma: channel_name.split('_').next().unwrap().to_string(),
-                        channel: channel_name.split('_').nth(1).unwrap().strip_prefix("CH").unwrap().parse::<u8>().unwrap() - 1u8,
-                    };
-
-                    core.dma_channels.push(core_dma_channels);
                 }
-                peripheral_dma_channels = Some(dma_channels);
             }
-
-            // append peripherals from includes
-            if let Some(inc_paths) = &mut core.include_peripherals.take() {
-                for inc_path in inc_paths {
-                    let peripheral_yaml_path = meta_yaml_path.parent().unwrap().join(&inc_path);
-                    let content = std::fs::read_to_string(&peripheral_yaml_path)?;
-                    let mut peripherals: Vec<py32_data_serde::chip::core::Peripheral> =
-                        serde_yaml::from_str(&content)?;
-
-                    // remove unused peripherals
-                    for i in (0..(peripherals.len())).rev() {
-                        if let Some(registers) = &peripherals[i].registers {
-                            let path = Path::new(data_dir)
-                                .join("registers")
-                                .join(&format!("{}_{}.yaml", registers.kind, registers.version));
-                            if !path.exists() {
-                                // Remove the peripheral if the register file does not exist
-                                peripherals.remove(i);
-                            }
-                        }
+            die_dma_requests.insert(die_name.clone(), peripheral_dma_reqs);
+        }
+        
+        // Build the Core
+        let mut final_peripherals = Vec::new();
+        let current_afs = die_afs.get(die_name).unwrap();
+        let current_dma_reqs = die_dma_requests.get(die_name).unwrap();
+        
+        for mut p in die_peripherals.get(die_name).unwrap().clone() {
+            if !series.disabled_peripherals.contains(&p.name) {
+                // inject afs
+                if let Some(pins) = current_afs.get(&p.name) {
+                    p.pins = pins.clone();
+                }
+                // inject dma requests
+                if let Some(reqs) = current_dma_reqs.get(&p.name) {
+                    p.dma_channels = reqs.clone();
+                }
+                
+                // remove unused peripherals
+                if let Some(registers) = &p.registers {
+                    let path = Path::new(data_dir)
+                        .join("registers")
+                        .join(&format!("{}_{}.yaml", registers.kind, registers.version));
+                    if path.exists() {
+                        final_peripherals.push(p);
                     }
-
-                    if let Some(peripheral_afs) = peripheral_afs.as_ref() {
-                        for peripheral in &mut peripherals {
-                            if let Some(pins) = peripheral_afs.get(&peripheral.name) {
-                                // println!("successufully matched AF with peri: {:#?}", &peripheral.name);
-                                peripheral.pins = pins.clone();
-                            }
-                        }
-                    }
-
-                    if let Some(peripheral_dma_channels) = peripheral_dma_channels.as_ref() {
-                        for peripheral in &mut peripherals {
-                            if let Some(dma_channels) = peripheral_dma_channels.get(&peripheral.name) {
-                                println!("successufully matched DMA with peri: {:#?}", &peripheral.name);
-                                peripheral.dma_channels = dma_channels.clone();
-                            }
-                        }
-                    }
-
-                    core.peripherals.extend(peripherals);
+                } else {
+                    final_peripherals.push(p);
                 }
             }
         }
+        
+        let mut final_interrupts = Vec::new();
+        for i in die_interrupts.get(die_name).unwrap() {
+            if !series.disabled_interrupts.contains(&i.name) {
+                final_interrupts.push(i.clone());
+            }
+        }
+        
+        let final_dma_channels = die_dma_channels.get(die_name).unwrap().clone();
+        
+        let core = py32_data_serde::chip::Core {
+            name: "cm0p".to_string(), // Py32 uses Cortex-M0+
+            peripherals: final_peripherals,
+            nvic_priority_bits: Some(2), // typically 2
+            interrupts: final_interrupts,
+            dma_channels: final_dma_channels,
+            include_interrupts: None,
+            include_dma_channels: None,
+            include_peripherals: None,
+            include_afs: None,
+        };
+
+        let chip = Chip {
+            name: chip_cfg.name,
+            family: series.family.clone(),
+            line: generic.series.clone(),
+            device_id: chip_cfg.device_id,
+            packages: chip_cfg.packages,
+            memory: generic.memory,
+            docs: chip_cfg.docs,
+            cores: vec![core],
+        };
 
         // generate chip json
         println!(
@@ -217,51 +273,6 @@ fn main() -> anyhow::Result<()> {
         let dump = serde_json::to_string_pretty(&chip)?;
         std::fs::write(format!("build/data/chips/{name}.json"), dump)?;
     }
-
-    /*
-    stopwatch.section("Parsing headers");
-    let headers = header::Headers::parse()?;
-
-    stopwatch.section("Parsing other stuff");
-
-    // stopwatch.section("Parsing registers");
-    let registers = registers::Registers::parse()?;
-    registers.write()?;
-
-    // stopwatch.section("Parsing memories");
-    let memories = memory::Memories::parse()?;
-
-    // stopwatch.section("Parsing interrupts");
-    let chip_interrupts = interrupts::ChipInterrupts::parse()?;
-
-    // stopwatch.section("Parsing RCC registers");
-    let peripheral_to_clock = rcc::ParsedRccs::parse(&registers)?;
-
-    // stopwatch.section("Parsing docs");
-    let docs = docs::Docs::parse()?;
-
-    // stopwatch.section("Parsing DMA");
-    let dma_channels = dma::DmaChannels::parse()?;
-
-    // stopwatch.section("Parsing GPIO AF");
-    let af = gpio_af::Af::parse()?;
-
-    stopwatch.section("Parsing chip groups");
-    let (chips, chip_groups) = chips::parse_groups()?;
-
-    stopwatch.section("Processing chips");
-    chips::dump_all_chips(
-        chip_groups,
-        headers,
-        af,
-        chip_interrupts,
-        peripheral_to_clock,
-        dma_channels,
-        chips,
-        memories,
-        docs,
-    )?;
-    */
 
     stopwatch.stop();
 

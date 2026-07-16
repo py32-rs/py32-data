@@ -1,0 +1,4 @@
+die: DIE403
+disabled_peripherals: []
+disabled_interrupts: []
+family: Mainstream

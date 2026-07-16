@@ -1,77 +1,16 @@
 name: PY32F040K1B
-family: Mainstream
-line: PY32F040
+generic: PY32F040xB
 device_id: 1046
-keywords:
-  - DMA
-  - GPTM
-  - ADTM
-  - BasicTM
-  - Systic
-  - LPTIMER
-  - PWM
-  - WDG
-  - RTC
-  - USART
-  - I2C
-  - SPI
-  - I2S
-  - 12bitADCUnitsCHs
-  - LCD
-  - TempSensor
-  - CMP
-  - OPA
 packages:
   - name: PY32F040K1BU6
     package: QFN32(5*5)
     pins: 28
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x2000
-      erase_value: 0
-      page_size: 0x100
-    size: 131072
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 16384
 docs:
-  - name: PY32F040系列数据手册_Rev.0.7.pdf
+  - name: "PY32F040\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev.0.7.pdf"
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F040系列数据手册_Rev.0.7.pdf
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 72000000
-    name: cm0p
-    nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: v1
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32F040\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev.0.7.pdf"
 _raw:
   12bitADCUnitsCHs: 1(10+5)
   12bitDACUnitsCHs: '-'
@@ -105,6 +44,7 @@ _raw:
   USART: '4'
   USB20: '-'
   WDG: '2'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F040系列数据手册_Rev.0.7.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32F040\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev.0.7.pdf"
   id: 1046
   pro_status: MP

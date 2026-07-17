@@ -129,16 +129,16 @@ def parse_svd(svd_path):
     
     return svd_peripherals, global_interrupts
 
-def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_dict):
+def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_dict, mode='merge'):
     out_dir = os.path.join("data", "dies", die)
     os.makedirs(out_dir, exist_ok=True)
 
     peri_yaml = os.path.join(out_dir, "peripherals.yaml")
     int_yaml = os.path.join(out_dir, "interrupts.yaml")
 
-    # 1. Load existing peripherals to preserve manual overrides
+    # 1. Load existing peripherals based on the mode
     existing_peripherals = []
-    if os.path.exists(peri_yaml):
+    if mode != 'rebuild' and os.path.exists(peri_yaml):
         try:
             with open(peri_yaml, 'r', encoding='utf-8') as f:
                 existing_peripherals = yaml.safe_load(f) or []
@@ -165,12 +165,12 @@ def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_
         processed_old_names.add(name)
         
         new_p = {
-            'name': name,
+            'name': svd_name if mode == 'overwrite' else name,
             'address': svd_addr or old_p.get('address', 0)
         }
 
         # Keep manual 'registers' fields: kind, version, block
-        old_regs = old_p.get('registers', {})
+        old_regs = old_p.get('registers', {}) if mode != 'rebuild' else {}
         kind = old_regs.get('kind', svd_p.get('groupName', svd_name.lower()) or svd_name.lower())
         version = old_regs.get('version', 'common')
         block = old_regs.get('block', 'TODO')
@@ -183,7 +183,7 @@ def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_
 
 
         # Merge rcc
-        rcc_block = old_p.get('rcc', {}).copy()
+        rcc_block = old_p.get('rcc', {}).copy() if mode != 'rebuild' else {}
         if 'bus_clock' not in rcc_block:
             rcc_block['bus_clock'] = 'PCLK1'
         if 'kernel_clock' not in rcc_block:
@@ -208,19 +208,26 @@ def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_
 
         # Merge interrupts
         svd_ints = svd_p.get('interrupts', [])
-        old_ints = old_p.get('interrupts', [])
+        old_ints = old_p.get('interrupts', []) if mode != 'rebuild' else []
         
         merged_ints = []
         old_int_names = {oi.get('interrupt'): oi for oi in old_ints}
         
-        # Keep ALL old interrupts intact exactly as they were manually defined
-        for oi in old_ints:
-            merged_ints.append(oi)
-            
-        # Append any newly discovered SVD interrupts
-        for i_name in svd_ints:
-            if i_name not in old_int_names:
-                merged_ints.append({'signal': 'GLOBAL', 'interrupt': i_name})
+        if mode == 'overwrite':
+            # In overwrite mode, strictly use SVD interrupts. We lose manual 'signal' names if they are not in SVD.
+            for i_name in svd_ints:
+                # Retain the signal from old if it exists, otherwise 'GLOBAL'
+                old_sig = old_int_names.get(i_name, {}).get('signal', 'GLOBAL')
+                merged_ints.append({'signal': old_sig, 'interrupt': i_name})
+        else:
+            # merge mode: keep ALL old interrupts intact exactly as they were manually defined
+            for oi in old_ints:
+                merged_ints.append(oi)
+                
+            # Append any newly discovered SVD interrupts
+            for i_name in svd_ints:
+                if i_name not in old_int_names:
+                    merged_ints.append({'signal': 'GLOBAL', 'interrupt': i_name})
                 
         if merged_ints:
             new_p['interrupts'] = merged_ints
@@ -228,10 +235,12 @@ def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_
         final_peripherals.append(new_p)
 
     # Append any old peripherals that were NOT in the SVD at all (e.g., UID, CONFIGBYTES)
-    for old_p in existing_peripherals:
-        if old_p['name'] not in processed_old_names:
-            final_peripherals.append(old_p)
-            processed_old_names.add(old_p['name'])
+    if mode != 'rebuild':
+        for old_p in existing_peripherals:
+            if old_p['name'] not in processed_old_names:
+                # In overwrite mode, if an old peripheral is NOT in SVD, we still keep it (since SVD might be missing it)
+                final_peripherals.append(old_p)
+                processed_old_names.add(old_p['name'])
             
     # Sort by address for consistency
     final_peripherals.sort(key=lambda x: x.get('address', 0) if isinstance(x.get('address'), int) else 0)
@@ -257,14 +266,26 @@ def merge_and_write(die, svd_peripherals, global_interrupts, enable_dict, reset_
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Extract Die Peripheral and Interrupt data from SVD and Header.")
+    parser = argparse.ArgumentParser(
+        description="Extract Die Peripheral and Interrupt data from SVD and Header.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("--die", required=True, help="Target Die (e.g., DIE030)")
     parser.add_argument("--svd", required=True, help="Path to SVD file")
     parser.add_argument("--rcc-header", required=False, help="Path to RCC HAL header file")
+    parser.add_argument(
+        "--mode", 
+        choices=['merge', 'overwrite', 'rebuild'], 
+        default='merge',
+        help="""Mode of extraction:
+  merge (Default): Preserves local YAML customizations (e.g., manual name overrides like ADC1, custom interrupts). Appends missing SVD data.
+  overwrite: Trusts SVD data over local YAML. Reverts manual name overrides back to SVD names, strictly aligns interrupts with SVD, but preserves 'registers' definitions.
+  rebuild: Completely discards the local YAML and rebuilds entirely from SVD (all local configurations will be lost)."""
+    )
     args = parser.parse_args()
 
-    enable_dict, reset_dict = get_rcc_h_define(args.rcc_header)
+    enable_dict, reset_dict = get_rcc_h_define(args.rcc_header) if args.rcc_header else ({}, {})
     svd_peripherals, global_interrupts = parse_svd(args.svd)
     
-    merge_and_write(args.die, svd_peripherals, global_interrupts, enable_dict, reset_dict)
-    print(f"Extraction for {args.die} completed successfully!")
+    merge_and_write(args.die, svd_peripherals, global_interrupts, enable_dict, reset_dict, args.mode)
+    print(f"Extraction for {args.die} completed successfully in {args.mode} mode!")

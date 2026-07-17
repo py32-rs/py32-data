@@ -72,8 +72,12 @@ def main():
                 capture_output=True,
                 text=True
             )
-            # You can print result.stdout here if you want verbose output
-            # print(result.stdout.strip())
+            
+            # Print any warnings from the underlying script
+            for line in result.stdout.splitlines():
+                if line.startswith("WARNING:"):
+                    print(f"[{series_name}] {line}")
+                    
             success_count += 1
         except subprocess.CalledProcessError as e:
             print(f"[{series_name}] ERROR: extract_series.py failed with exit code {e.returncode}.")

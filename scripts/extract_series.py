@@ -47,15 +47,21 @@ def extract_series(die, series, svd_path):
     root = tree.getroot()
     svd_peris_names = set()
     svd_peris_addrs = set()
+    svd_peris_list = []
     svd_ints = set()
     
     for peripheral in root.findall(".//peripheral"):
         name_elem = peripheral.find('name')
         addr_elem = peripheral.find('baseAddress')
-        if name_elem is not None:
-            svd_peris_names.add(name_elem.text)
-        if addr_elem is not None:
-            svd_peris_addrs.add(int(addr_elem.text, 16))
+        
+        name = name_elem.text if name_elem is not None else None
+        addr = int(addr_elem.text, 16) if addr_elem is not None else None
+        
+        if name:
+            svd_peris_names.add(name)
+            svd_peris_list.append({'name': name, 'address': addr})
+        if addr is not None:
+            svd_peris_addrs.add(addr)
             
         for interrupt in peripheral.findall('interrupt'):
             i_elem = interrupt.find('name')
@@ -63,6 +69,17 @@ def extract_series(die, series, svd_path):
                 svd_ints.add(i_elem.text)
                 
     # 3. Calculate differences
+    die_peris_names = {p['name'] for p in die_peris}
+    die_peris_addrs = {p['address'] for p in die_peris if 'address' in p}
+    
+    extra_peripherals = []
+    for sp in svd_peris_list:
+        if sp['name'] not in die_peris_names and sp.get('address') not in die_peris_addrs:
+            extra_peripherals.append(sp['name'])
+            
+    if extra_peripherals:
+        print(f"WARNING: Series SVD contains peripherals not found in Die {die}: {', '.join(extra_peripherals)}")
+        
     disabled_peripherals = []
     for p in die_peris:
         name = p['name']

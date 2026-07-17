@@ -14,7 +14,7 @@
   number: 13
 - name: TIM1_CC
   number: 14
-- name: LPTIM1
+- name: LPTIM1_DAC
   number: 17
 - name: TIM14
   number: 19

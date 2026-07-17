@@ -42,7 +42,5 @@
   number: 27
 - name: USART2
   number: 28
-- name: AES_LPUART1
-  number: 29
 - name: LED
   number: 30

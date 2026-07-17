@@ -1,4 +1,8 @@
 die: DIE030
-disabled_peripherals: []
-disabled_interrupts: []
+disabled_peripherals:
+- LED
+- SPI2
+disabled_interrupts:
+- LED
+- SPI2
 family: Low-Cost

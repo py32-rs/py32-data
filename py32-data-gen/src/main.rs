@@ -1,7 +1,6 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::path::Path;
 
-use py32_data_serde::chip::core;
 use py32_data_serde::{Chip, ChipConfig, Generic, Series};
 
 mod registers;
@@ -77,6 +76,7 @@ fn main() -> anyhow::Result<()> {
     let mut die_dma_channels: HashMap<String, Vec<py32_data_serde::chip::core::DmaChannels>> = HashMap::new();
     let mut die_afs: HashMap<String, HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Pin>>> = HashMap::new();
     let mut die_dma_requests: HashMap<String, HashMap<String, Vec<py32_data_serde::chip::core::peripheral::DmaChannel>>> = HashMap::new();
+    let mut processed_generics = HashSet::new();
 
     for name in &chip_meta_files {
         let meta_yaml_path = data_dir.join(format!("chips/{}.yaml", name));
@@ -259,9 +259,9 @@ fn main() -> anyhow::Result<()> {
             line: generic.series.clone(),
             device_id: chip_cfg.device_id,
             packages: chip_cfg.packages,
-            memory: generic.memory,
+            memory: generic.memory.clone(),
             docs: chip_cfg.docs,
-            cores: vec![core],
+            cores: vec![core.clone()],
         };
 
         // generate chip json
@@ -272,6 +272,21 @@ fn main() -> anyhow::Result<()> {
         );
         let dump = serde_json::to_string_pretty(&chip)?;
         std::fs::write(format!("build/data/chips/{name}.json"), dump)?;
+        
+        if processed_generics.insert(chip_cfg.generic.clone()) {
+            let generic_chip = Chip {
+                name: chip_cfg.generic.clone(),
+                family: series.family.clone(),
+                line: generic.series.clone(),
+                device_id: 0,
+                packages: vec![],
+                memory: generic.memory.clone(),
+                docs: vec![],
+                cores: vec![core.clone()],
+            };
+            let gen_dump = serde_json::to_string_pretty(&generic_chip)?;
+            std::fs::write(format!("build/data/chips/{}.json", chip_cfg.generic), gen_dump)?;
+        }
     }
 
     stopwatch.stop();

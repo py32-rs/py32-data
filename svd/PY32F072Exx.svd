@@ -2,7 +2,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Puya</vendor>
   <vendorID>Puya</vendorID>
-  <name>PY32F071Cxx</name>
+  <name>PY32F072Exx</name>
   <series>PY32F0</series>
   <version>1.0.0</version>
   <description>Arm 32-bit Cortex-M0+ Microcontroller based device, CPU clock up to 48 MHz.</description>
@@ -701,6 +701,642 @@
               <description>desc CALON</description>
               <bitRange>[31:31]</bitRange>
               <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>CAN</name>
+      <description>desc CAN</description>
+      <groupName>CAN</groupName>
+      <baseAddress>0x40006400</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>CAN</name>
+        <description>CAN global Interrupt</description>
+        <value>30</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>TSNCR</name>
+          <description>desc TSNCR</description>
+          <addressOffset>0x0</addressOffset>
+          <resetValue>0x2010801</resetValue>
+          <fields>
+            <field>
+              <name>VERSION</name>
+              <description>desc VERSION</description>
+              <bitRange>[15:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CES</name>
+              <description>desc CES</description>
+              <bitRange>[16:16]</bitRange>
+            </field>
+            <field>
+              <name>ROP</name>
+              <description>desc ROP</description>
+              <bitRange>[17:17]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACBTR</name>
+          <description>desc ACBTR</description>
+          <addressOffset>0x4</addressOffset>
+          <resetValue>0x5050008</resetValue>
+          <fields>
+            <field>
+              <name>AC_SEG_1</name>
+              <description>desc AC_SEG_1</description>
+              <bitRange>[8:0]</bitRange>
+            </field>
+            <field>
+              <name>AC_SEG_2</name>
+              <description>desc AC_SEG_2</description>
+              <bitRange>[22:16]</bitRange>
+            </field>
+            <field>
+              <name>AC_SJW</name>
+              <description>desc AC_SJW</description>
+              <bitRange>[30:24]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RLSSP</name>
+          <description>desc RLSSP</description>
+          <addressOffset>0x10</addressOffset>
+          <resetValue>0x77000000</resetValue>
+          <fields>
+            <field>
+              <name>PRESC</name>
+              <description>desc PRESC</description>
+              <bitRange>[4:0]</bitRange>
+            </field>
+            <field>
+              <name>REALIM</name>
+              <description>desc REALIM</description>
+              <bitRange>[26:24]</bitRange>
+            </field>
+            <field>
+              <name>RETLIM</name>
+              <description>desc RETLIM</description>
+              <bitRange>[30:28]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IFR</name>
+          <description>desc IFR</description>
+          <addressOffset>0x14</addressOffset>
+          <fields>
+            <field>
+              <name>AIF</name>
+              <description>desc AIF</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>EIF</name>
+              <description>desc EIF</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>TSIF</name>
+              <description>desc TSIF</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TPIF</name>
+              <description>desc TPIF</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RAFIF</name>
+              <description>desc RAFIF</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>RFIF</name>
+              <description>desc RFIF</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>ROIF</name>
+              <description>desc ROIF</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RIF</name>
+              <description>desc RIF</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>BEIF</name>
+              <description>desc BEIF</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>ALIF</name>
+              <description>desc ALIF</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>EPIF</name>
+              <description>desc EPIF</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>TTIF</name>
+              <description>desc TTIF</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TEIF</name>
+              <description>desc TEIF</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>WTIF</name>
+              <description>desc WTIF</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>EPASS</name>
+              <description>desc EPASS</description>
+              <bitRange>[30:30]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>EWARN</name>
+              <description>desc EWARN</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IER</name>
+          <description>desc IER</description>
+          <addressOffset>0x18</addressOffset>
+          <resetValue>0x468FE</resetValue>
+          <fields>
+            <field>
+              <name>EIE</name>
+              <description>desc EIE</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>TSIE</name>
+              <description>desc TSIE</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TPIE</name>
+              <description>desc TPIE</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RAFIE</name>
+              <description>desc RAFIE</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>RFIE</name>
+              <description>desc RFIE</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>ROIE</name>
+              <description>desc ROIE</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RIE</name>
+              <description>desc RIE</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>BEIE</name>
+              <description>desc BEIE</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>ALIE</name>
+              <description>desc ALIE</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>EPIE</name>
+              <description>desc EPIE</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>TTIE</name>
+              <description>desc TTIE</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>WTIE</name>
+              <description>desc WTIE</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TSR</name>
+          <description>desc TSR</description>
+          <addressOffset>0x1C</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>HANDLE_L</name>
+              <description>desc HANDLE_L</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TSTAT_L</name>
+              <description>desc TSTAT_L</description>
+              <bitRange>[10:8]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>HANDLE_H</name>
+              <description>desc HANDLE_H</description>
+              <bitRange>[23:16]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TSTAT_H</name>
+              <description>desc TSTAT_H</description>
+              <bitRange>[26:24]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MCR</name>
+          <description>desc MCR</description>
+          <addressOffset>0x28</addressOffset>
+          <resetValue>0x900080</resetValue>
+          <fields>
+            <field>
+              <name>BUSOFF</name>
+              <description>desc BUSOFF</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>LBMI</name>
+              <description>desc LBMI</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>LBME</name>
+              <description>desc LBME</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RESET</name>
+              <description>desc RESET</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>TSA</name>
+              <description>desc TSA</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>TSALL</name>
+              <description>desc TSALL</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>TSONE</name>
+              <description>desc TSONE</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>TPA</name>
+              <description>desc TPA</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TPE</name>
+              <description>desc TPE</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>STBY</name>
+              <description>desc STBY</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>LOM</name>
+              <description>desc LOM</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>TBSEL</name>
+              <description>desc TBSEL</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+            <field>
+              <name>TSSTAT</name>
+              <description>desc TSSTAT</description>
+              <bitRange>[17:16]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TSFF</name>
+              <description>desc TSFF</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TTTBM</name>
+              <description>desc TTTBM</description>
+              <bitRange>[20:20]</bitRange>
+            </field>
+            <field>
+              <name>TSMODE</name>
+              <description>desc TSMODE</description>
+              <bitRange>[21:21]</bitRange>
+            </field>
+            <field>
+              <name>TSNEXT</name>
+              <description>desc TSNEXT</description>
+              <bitRange>[22:22]</bitRange>
+            </field>
+            <field>
+              <name>RSTAT</name>
+              <description>desc RSTAT</description>
+              <bitRange>[25:24]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RBALL</name>
+              <description>desc RBALL</description>
+              <bitRange>[27:27]</bitRange>
+            </field>
+            <field>
+              <name>RREL</name>
+              <description>desc RREL</description>
+              <bitRange>[28:28]</bitRange>
+            </field>
+            <field>
+              <name>ROV</name>
+              <description>desc ROV</description>
+              <bitRange>[29:29]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ROM</name>
+              <description>desc ROM</description>
+              <bitRange>[30:30]</bitRange>
+            </field>
+            <field>
+              <name>SACK</name>
+              <description>desc SACK</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WECR</name>
+          <description>desc WECR</description>
+          <addressOffset>0x2C</addressOffset>
+          <resetValue>0x1B</resetValue>
+          <fields>
+            <field>
+              <name>EWL</name>
+              <description>desc EWL</description>
+              <bitRange>[3:0]</bitRange>
+            </field>
+            <field>
+              <name>AFWL</name>
+              <description>desc AFWL</description>
+              <bitRange>[7:4]</bitRange>
+            </field>
+            <field>
+              <name>ALC</name>
+              <description>desc ALC</description>
+              <bitRange>[12:8]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>KOER</name>
+              <description>desc KOER</description>
+              <bitRange>[15:13]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RECNT</name>
+              <description>desc RECNT</description>
+              <bitRange>[23:16]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TECNT</name>
+              <description>desc TECNT</description>
+              <bitRange>[31:24]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REFMSG</name>
+          <description>desc REFMSG</description>
+          <addressOffset>0x30</addressOffset>
+          <fields>
+            <field>
+              <name>REF_ID</name>
+              <description>desc REF_ID</description>
+              <bitRange>[28:0]</bitRange>
+            </field>
+            <field>
+              <name>REF_IDE</name>
+              <description>desc REF_IDE</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TTCR</name>
+          <description>desc TTCR</description>
+          <addressOffset>0x34</addressOffset>
+          <fields>
+            <field>
+              <name>TTPTR</name>
+              <description>desc TTPTR</description>
+              <bitRange>[5:0]</bitRange>
+            </field>
+            <field>
+              <name>TTYPE</name>
+              <description>desc TTYPE</description>
+              <bitRange>[10:8]</bitRange>
+            </field>
+            <field>
+              <name>TEW</name>
+              <description>desc TEW</description>
+              <bitRange>[15:12]</bitRange>
+            </field>
+            <field>
+              <name>TBPTR</name>
+              <description>desc TBPTR</description>
+              <bitRange>[21:16]</bitRange>
+            </field>
+            <field>
+              <name>TBF</name>
+              <description>desc TBF</description>
+              <bitRange>[22:22]</bitRange>
+            </field>
+            <field>
+              <name>TBE</name>
+              <description>desc TBE</description>
+              <bitRange>[23:23]</bitRange>
+            </field>
+            <field>
+              <name>TTEN</name>
+              <description>desc TTEN</description>
+              <bitRange>[24:24]</bitRange>
+            </field>
+            <field>
+              <name>T_PRESC</name>
+              <description>desc T_PRESC</description>
+              <bitRange>[26:25]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TTTR</name>
+          <description>desc TTTR</description>
+          <addressOffset>0x38</addressOffset>
+          <resetValue>0xFFFF0000</resetValue>
+          <fields>
+            <field>
+              <name>TT_TRIG</name>
+              <description>desc TT_TRIG</description>
+              <bitRange>[15:0]</bitRange>
+            </field>
+            <field>
+              <name>TT_WTRIG</name>
+              <description>desc TT_WTRIG</description>
+              <bitRange>[31:16]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SCMS</name>
+          <description>desc SCMS</description>
+          <addressOffset>0x3C</addressOffset>
+          <fields>
+            <field>
+              <name>FSTIM</name>
+              <description>desc FSTIM</description>
+              <bitRange>[3:1]</bitRange>
+            </field>
+            <field>
+              <name>ACFA</name>
+              <description>desc ACFA</description>
+              <bitRange>[24:24]</bitRange>
+            </field>
+            <field>
+              <name>TXS</name>
+              <description>desc TXS</description>
+              <bitRange>[25:25]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TXB</name>
+              <description>desc TXB</description>
+              <bitRange>[26:26]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>HELOC</name>
+              <description>desc HELOC</description>
+              <bitRange>[28:27]</bitRange>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACFCR</name>
+          <description>desc ACFCR</description>
+          <addressOffset>0x44</addressOffset>
+          <resetValue>0x10000</resetValue>
+          <fields>
+            <field>
+              <name>ACFADR</name>
+              <description>desc ACFADR</description>
+              <bitRange>[3:0]</bitRange>
+            </field>
+            <field>
+              <name>AE_0</name>
+              <description>desc AE_0</description>
+              <bitRange>[16:16]</bitRange>
+            </field>
+            <field>
+              <name>AE_1</name>
+              <description>desc AE_1</description>
+              <bitRange>[17:17]</bitRange>
+            </field>
+            <field>
+              <name>AE_2</name>
+              <description>desc AE_2</description>
+              <bitRange>[18:18]</bitRange>
+            </field>
+            <field>
+              <name>AE_3</name>
+              <description>desc AE_3</description>
+              <bitRange>[19:19]</bitRange>
+            </field>
+            <field>
+              <name>AE_4</name>
+              <description>desc AE_4</description>
+              <bitRange>[20:20]</bitRange>
+            </field>
+            <field>
+              <name>AE_5</name>
+              <description>desc AE_5</description>
+              <bitRange>[21:21]</bitRange>
+            </field>
+            <field>
+              <name>AE_6</name>
+              <description>desc AE_6</description>
+              <bitRange>[22:22]</bitRange>
+            </field>
+            <field>
+              <name>AE_7</name>
+              <description>desc AE_7</description>
+              <bitRange>[23:23]</bitRange>
+            </field>
+            <field>
+              <name>AE_8</name>
+              <description>desc AE_8</description>
+              <bitRange>[24:24]</bitRange>
+            </field>
+            <field>
+              <name>AE_9</name>
+              <description>desc AE_9</description>
+              <bitRange>[25:25]</bitRange>
+            </field>
+            <field>
+              <name>AE_10</name>
+              <description>desc AE_10</description>
+              <bitRange>[26:26]</bitRange>
+            </field>
+            <field>
+              <name>AE_11</name>
+              <description>desc AE_11</description>
+              <bitRange>[27:27]</bitRange>
             </field>
           </fields>
         </register>
@@ -1584,6 +2220,11 @@
               <name>DBG_IWDG_STOP</name>
               <description>Debug Independent Wachdog stopped when Core is halted</description>
               <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>DBG_CAN_STOP</name>
+              <description>DBG_CAN_STOP</description>
+              <bitRange>[19:19]</bitRange>
             </field>
             <field>
               <name>DBG_I2C1_SMBUS_TIMEOUT</name>
@@ -6786,6 +7427,11 @@
               <bitRange>[23:23]</bitRange>
             </field>
             <field>
+              <name>CANRST</name>
+              <description>CANRST</description>
+              <bitRange>[25:25]</bitRange>
+            </field>
+            <field>
               <name>CTCRST</name>
               <description>CTCRST</description>
               <bitRange>[27:27]</bitRange>
@@ -7023,6 +7669,11 @@
               <bitRange>[23:23]</bitRange>
             </field>
             <field>
+              <name>CANEN</name>
+              <description>CAN clock enable</description>
+              <bitRange>[25:25]</bitRange>
+            </field>
+            <field>
               <name>CTCEN</name>
               <description>CTC clock enable</description>
               <bitRange>[27:27]</bitRange>
@@ -7133,6 +7784,11 @@
           <description>Peripherals independent clock configuration register</description>
           <addressOffset>0x54</addressOffset>
           <fields>
+            <field>
+              <name>CANSEL</name>
+              <description>CAN detect clock source selection</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
             <field>
               <name>PVDSEL</name>
               <description>PVD detect clock source selection</description>
@@ -9596,7 +10252,7 @@
             <field>
               <name>CNT</name>
               <description>desc CNT</description>
-              <bitRange>[15:0]</bitRange>
+              <bitRange>[31:0]</bitRange>
             </field>
           </fields>
         </register>

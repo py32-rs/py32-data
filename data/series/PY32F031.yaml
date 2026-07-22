@@ -1,0 +1,26 @@
+die: DIE072
+disabled_peripherals:
+- CAN
+- COMP3
+- CTC
+- DAC
+- GPIOC
+- TIM15
+- TIM3
+- TIM6
+- TIM7
+- USART4
+- USB
+disabled_interrupts:
+- CAN
+- DMA1_Channel1
+- DMA1_Channel2_3
+- DMA1_Channel4_5_6_7
+- RCC_CTC
+- TIM15
+- TIM3
+- TIM6_LPTIM1_DAC
+- TIM7
+- USART3_4
+- USB
+family: Mainstream

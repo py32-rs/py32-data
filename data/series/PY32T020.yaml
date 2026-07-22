@@ -1,0 +1,20 @@
+die: DIE030
+disabled_peripherals:
+- DMA1
+- LED
+- TIM17
+- TIM3
+- WWDG
+disabled_interrupts:
+- DMA_Channel1
+- DMA_Channel2_3
+- LED
+- PVD
+- SPI2
+- TIM16
+- TIM17
+- TIM3
+- USART1
+- USART2
+- WWDG
+family: Touch

@@ -1,76 +1,16 @@
 name: PY32M031E18
-family: Motor-Control
-line: PY32M031
+generic: PY32M031x8
 device_id: 1562
-keywords:
-  - DMA
-  - GPTM
-  - ADTM
-  - BasicTM
-  - Systic
-  - LPTIMER
-  - PWM
-  - WDG
-  - RTC
-  - USART
-  - I2C
-  - SPI
-  - I2S
-  - 12bitADCUnitsCHs
-  - TempSensor
-  - CMP
-  - OPA
 packages:
   - name: PY32M031E18M7
     package: SSOP24
     pins: 22
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x2000
-      erase_value: 0
-      page_size: 0x100
-    size: 65536
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 8192
 docs:
-  - name: PY32M031系列数据手册_Rev0.6.pdf
+  - name: "PY32M031\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.6.pdf"
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32M031系列数据手册_Rev0.6.pdf
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 72000000
-    name: cm0p
-    nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: v1
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32M031\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.6.pdf"
 _raw:
   12bitADCUnitsCHs: 1(10+5)
   12bitDACUnitsCHs: '-'
@@ -104,6 +44,7 @@ _raw:
   USART: '3'
   USB20: '-'
   WDG: '2'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32M031系列数据手册_Rev0.6.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32M031\u7CFB\u5217\u6570\u636E\u624B\u518C_Rev0.6.pdf"
   id: 1562
   pro_status: ES

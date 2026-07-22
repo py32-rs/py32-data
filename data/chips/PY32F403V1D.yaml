@@ -1,77 +1,16 @@
 name: PY32F403V1D
-family: Mainstream
-line: PY32F403
+generic: PY32F403xD
 device_id: 1054
-keywords:
-  - DMA
-  - GPTM
-  - ADTM
-  - BasicTM
-  - Systic
-  - PWM
-  - WDG
-  - RTC
-  - USART
-  - I2C
-  - SPI
-  - I2S
-  - USB20
-  - CAN20
-  - SDIO
-  - ESMC
-  - 12bitADCUnitsCHs
-  - TempSensor
 packages:
   - name: PY32F403V1DT6
     package: LQFP100
     pins: 80
-memory:
-  - address: 134217728
-    kind: flash
-    name: BANK_1
-    settings:
-      sector_size: 0x800
-      erase_value: 0
-      page_size: 0x100
-    size: 393216
-  - address: 536870912
-    kind: ram
-    name: SRAM
-    size: 65536
 docs:
   - name: PY32F403 datasheet Rev.1.4.pdf
     title: Datasheet
     type: datasheet
-    url: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F403 datasheet Rev.1.4.pdf
-cores:
-  - dma_channels:
-      - channel: 0
-        dma: DMA1
-        name: DMA1_CH1
-    interrupts:
-      - name: WWDG
-        number: 0
-      - name: AES_LPUART1
-        number: 29
-    max_clock: 144000000
-    name: cm0p
-    nvic_priority_bits: 2
-    peripherals:
-      - address: 1342177280
-        name: GPIOA
-        rcc:
-          bus_clock: GPIO
-          enable:
-            field: GPIOAEN
-            register: GPIOENR
-          kernel_clock: GPIO
-          reset:
-            field: GPIOARST
-            register: GPIORSTR
-        registers:
-          block: GPIO
-          kind: gpio
-          version: v1
+    url: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU \u5FAE\
+      \u5904\u7406\u5668/PY32F403 datasheet Rev.1.4.pdf"
 _raw:
   12bitADCUnitsCHs: 3(16+3)
   12bitDACUnitsCHs: '-'
@@ -105,7 +44,7 @@ _raw:
   USART: '5'
   USB20: '1'
   WDG: '2'
-  datasheet: https://www.puyasemi.com/download_path/数据手册/MCU 微处理器/PY32F403 datasheet
-    Rev.1.4.pdf
+  datasheet: "https://www.puyasemi.com/download_path/\u6570\u636E\u624B\u518C/MCU\
+    \ \u5FAE\u5904\u7406\u5668/PY32F403 datasheet Rev.1.4.pdf"
   id: 1054
   pro_status: MP

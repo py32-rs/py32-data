@@ -19,12 +19,39 @@ pub struct Chip {
     pub name: String,
     pub family: String,
     pub line: String,
-    // pub die: String,
     pub device_id: u16,
     pub packages: Vec<chip::Package>,
     pub memory: Vec<chip::Memory>,
     pub docs: Vec<chip::Doc>,
     pub cores: Vec<chip::Core>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+pub struct ChipConfig {
+    pub name: String,
+    pub generic: String,
+    pub device_id: u16,
+    pub packages: Vec<chip::Package>,
+    #[serde(default)]
+    pub docs: Vec<chip::Doc>,
+    #[serde(default)]
+    pub _raw: std::collections::BTreeMap<String, serde_json::Value>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+pub struct Generic {
+    pub series: String,
+    pub memory: Vec<chip::Memory>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+pub struct Series {
+    pub die: String,
+    pub family: String,
+    #[serde(default)]
+    pub disabled_peripherals: Vec<String>,
+    #[serde(default)]
+    pub disabled_interrupts: Vec<String>,
 }
 
 pub mod chip {

@@ -1,0 +1,25 @@
+die: DIE030
+disabled_peripherals:
+- DMA1
+- LED
+- PWR
+- RTC
+- SPI2
+- TIM14
+- TIM17
+- TIM3
+- USART2
+- WWDG
+disabled_interrupts:
+- DMA_Channel1
+- DMA_Channel2_3
+- LED
+- PVD
+- RTC
+- SPI2
+- TIM14
+- TIM17
+- TIM3
+- USART2
+- WWDG
+family: Low-Cost

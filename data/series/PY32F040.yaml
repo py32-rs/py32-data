@@ -1,0 +1,11 @@
+die: DIE072
+disabled_peripherals:
+- CAN
+- COMP3
+- DAC
+- USB
+disabled_interrupts:
+- CAN
+- TIM6_LPTIM1_DAC
+- USB
+family: Mainstream

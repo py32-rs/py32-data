@@ -1,0 +1,31 @@
+die: DIE002B
+disabled_peripherals:
+  - ADC1
+  - CONFIGBYTES
+  - DBGMCU
+  - EXTI
+  - FLASH
+  - GPIOB
+  - GPIOC
+  - I2C1
+  - RCC
+  - SYSCFG
+  - TIM1
+  - TIM14
+  - UID
+  - USART1
+disabled_interrupts:
+  - ADC_COMP
+  - EXTI0_1
+  - EXTI2_3
+  - EXTI4_15
+  - FLASH
+  - I2C1
+  - LPTIM1
+  - RCC
+  - SPI1
+  - TIM14
+  - TIM1_BRK_UP_TRG_COM
+  - TIM1_CC
+  - USART1
+family: Motor-Control

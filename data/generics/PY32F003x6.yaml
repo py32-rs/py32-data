@@ -1,0 +1,14 @@
+series: PY32F003
+memory:
+  - address: 134217728
+    kind: flash
+    name: BANK_1
+    settings:
+      sector_size: 4096
+      erase_value: 0
+      page_size: 128
+    size: 32768
+  - address: 536870912
+    kind: ram
+    name: SRAM
+    size: 4096

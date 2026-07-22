@@ -1,0 +1,15 @@
+- name: GPIOA
+  address: 1342177280
+  registers:
+    kind: gpio
+    version: v1
+    block: GPIO
+  rcc:
+    bus_clock: GPIO
+    kernel_clock: GPIO
+    enable:
+      register: GPIOENR
+      field: GPIOAEN
+    reset:
+      register: GPIORSTR
+      field: GPIOARST

@@ -1,0 +1,6 @@
+die: DIE072
+disabled_peripherals:
+- CAN
+disabled_interrupts:
+- CAN
+family: Motor-Control

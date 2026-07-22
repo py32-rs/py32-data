@@ -1,4 +1,4 @@
-block/DBGMCU:
+block/DBGMCU_F071:
   description: Debug support.
   items:
   - name: IDCODE
@@ -13,12 +13,20 @@ block/DBGMCU:
   - name: APB_FZ1
     description: APB Freeze Register1.
     byte_offset: 8
-    fieldset: APB_FZ1
+    fieldset: APB_FZ1_F071
   - name: APB_FZ2
     description: APB Freeze Register2.
     byte_offset: 12
     fieldset: APB_FZ2
-fieldset/APB_FZ1:
+block/DBGMCU:
+  extends: DBGMCU_F071
+  description: Debug support with CAN.
+  items:
+  - name: APB_FZ1
+    description: APB Freeze Register1.
+    byte_offset: 8
+    fieldset: APB_FZ1
+fieldset/APB_FZ1_F071:
   description: APB Freeze Register1.
   fields:
   - name: DBG_TIMER2_STOP
@@ -49,10 +57,6 @@ fieldset/APB_FZ1:
     description: Debug Independent Wachdog stopped when Core is halted.
     bit_offset: 12
     bit_size: 1
-  - name: DBG_CAN_STOP
-    description: DBG_CAN_STOP.
-    bit_offset: 19
-    bit_size: 1
   - name: DBG_I2C1_SMBUS_TIMEOUT
     description: DBG_I2C1_SMBUS_TIMEOUT.
     bit_offset: 21
@@ -64,6 +68,14 @@ fieldset/APB_FZ1:
   - name: DBG_LPTIM_STOP
     description: Debug LPTIM stopped when Core is halted.
     bit_offset: 31
+    bit_size: 1
+fieldset/APB_FZ1:
+  extends: APB_FZ1_F071
+  description: APB Freeze Register1 with CAN.
+  fields:
+  - name: DBG_CAN_STOP
+    description: DBG_CAN_STOP.
+    bit_offset: 19
     bit_size: 1
 fieldset/APB_FZ2:
   description: APB Freeze Register2.

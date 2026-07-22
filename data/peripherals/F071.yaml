@@ -1,15 +1,9 @@
-- name: CAN
-  address: 0x40006400
-  interrupts:
-  - signal: GLOBAL
-    interrupt: CAN
-
 - name: DBGMCU
   address: 0x40015800
   registers:
     kind: dbgmcu
     version: f072
-    block: DBGMCU
+    block: DBGMCU_F071
   rcc:
     bus_clock: PCLK1
     kernel_clock: PCLK1
@@ -25,7 +19,7 @@
   registers:
     kind: rcc
     version: f072
-    block: RCC
+    block: RCC_F071
   pins:
   - pin: PA1
     signal: MCO

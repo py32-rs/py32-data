@@ -23,9 +23,14 @@ jobs:
         ./d gen
     - name: Test
       run: |
+        cargo test --workspace
         cd build/py32-metapac/
         cargo build --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
         cargo doc --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
+        cargo build --features pac,metadata,rt,memory-x,py32f071r1b --target thumbv6m-none-eabi
+        cargo doc --features pac,metadata,rt,memory-x,py32f071r1b --target thumbv6m-none-eabi
+        cargo build --features pac,metadata,rt,memory-x,py32f072c1b --target thumbv6m-none-eabi
+        cargo doc --features pac,metadata,rt,memory-x,py32f072c1b --target thumbv6m-none-eabi
 
   build-win:
     runs-on: windows-latest
@@ -41,6 +46,11 @@ jobs:
       shell: powershell
     - name: Test
       run: |
+        cargo test --workspace
         cd build/py32-metapac/
         cargo build --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
-        cargo doc --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi    
+        cargo doc --features pac,metadata,rt,memory-x,py32f030k28 --target thumbv6m-none-eabi
+        cargo build --features pac,metadata,rt,memory-x,py32f071r1b --target thumbv6m-none-eabi
+        cargo doc --features pac,metadata,rt,memory-x,py32f071r1b --target thumbv6m-none-eabi
+        cargo build --features pac,metadata,rt,memory-x,py32f072c1b --target thumbv6m-none-eabi
+        cargo doc --features pac,metadata,rt,memory-x,py32f072c1b --target thumbv6m-none-eabi

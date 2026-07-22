@@ -306,7 +306,7 @@ mod tests {
 
     #[test]
     fn test_one() {
-        let path = Path::new(CHIPS_DIR).join("STM32F030C6.json");
+        let path = Path::new(CHIPS_DIR).join("PY32F071R1B.json");
         check_file(path);
     }
 

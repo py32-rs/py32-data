@@ -1,4 +1,4 @@
-block/RCC:
+block/RCC_F071:
   description: Reset and clock control.
   items:
   - name: CR
@@ -46,7 +46,7 @@ block/RCC:
   - name: APBRSTR1
     description: APB peripheral reset register 1.
     byte_offset: 44
-    fieldset: APBRSTR1
+    fieldset: APBRSTR1_F071
   - name: APBRSTR2
     description: APB peripheral reset register 2.
     byte_offset: 48
@@ -62,7 +62,7 @@ block/RCC:
   - name: APBENR1
     description: APB peripheral clock enable register 1.
     byte_offset: 60
-    fieldset: APBENR1
+    fieldset: APBENR1_F071
   - name: APBENR2
     description: APB peripheral clock enable register 2.
     byte_offset: 64
@@ -70,7 +70,7 @@ block/RCC:
   - name: CCIPR
     description: Peripherals independent clock configuration register.
     byte_offset: 84
-    fieldset: CCIPR
+    fieldset: CCIPR_F071
   - name: BDCR
     description: RTC domain control register.
     byte_offset: 92
@@ -79,6 +79,22 @@ block/RCC:
     description: Control/status register.
     byte_offset: 96
     fieldset: CSR
+block/RCC:
+  extends: RCC_F071
+  description: Reset and clock control with CAN.
+  items:
+  - name: APBRSTR1
+    description: APB peripheral reset register 1.
+    byte_offset: 44
+    fieldset: APBRSTR1
+  - name: APBENR1
+    description: APB peripheral clock enable register 1.
+    byte_offset: 60
+    fieldset: APBENR1
+  - name: CCIPR
+    description: Peripherals independent clock configuration register.
+    byte_offset: 84
+    fieldset: CCIPR
 fieldset/AHBENR:
   description: AHB peripheral clock enable register.
   fields:
@@ -117,7 +133,7 @@ fieldset/AHBRSTR:
     description: DIV reset.
     bit_offset: 24
     bit_size: 1
-fieldset/APBENR1:
+fieldset/APBENR1_F071:
   description: APB peripheral clock enable register 1.
   fields:
   - name: TIM2EN
@@ -172,10 +188,6 @@ fieldset/APBENR1:
     description: USB clock enable.
     bit_offset: 23
     bit_size: 1
-  - name: CANEN
-    description: CAN clock enable.
-    bit_offset: 25
-    bit_size: 1
   - name: CTCEN
     description: CTC clock enable.
     bit_offset: 27
@@ -195,6 +207,14 @@ fieldset/APBENR1:
   - name: LPTIMEN
     description: LPTIM clock enable.
     bit_offset: 31
+    bit_size: 1
+fieldset/APBENR1:
+  extends: APBENR1_F071
+  description: APB peripheral clock enable register 1 with CAN.
+  fields:
+  - name: CANEN
+    description: CAN clock enable.
+    bit_offset: 25
     bit_size: 1
 fieldset/APBENR2:
   description: APB peripheral clock enable register 2.
@@ -255,7 +275,7 @@ fieldset/APBENR2:
     description: LCD clock enable.
     bit_offset: 23
     bit_size: 1
-fieldset/APBRSTR1:
+fieldset/APBRSTR1_F071:
   description: APB peripheral reset register 1.
   fields:
   - name: TIM2RST
@@ -310,10 +330,6 @@ fieldset/APBRSTR1:
     description: USB reset.
     bit_offset: 23
     bit_size: 1
-  - name: CANRST
-    description: CANRST.
-    bit_offset: 25
-    bit_size: 1
   - name: CTCRST
     description: CTCRST.
     bit_offset: 27
@@ -333,6 +349,14 @@ fieldset/APBRSTR1:
   - name: LPTIMRST
     description: Low Power Timer reset.
     bit_offset: 31
+    bit_size: 1
+fieldset/APBRSTR1:
+  extends: APBRSTR1_F071
+  description: APB peripheral reset register 1 with CAN.
+  fields:
+  - name: CANRST
+    description: CANRST.
+    bit_offset: 25
     bit_size: 1
 fieldset/APBRSTR2:
   description: APB peripheral reset register 2.
@@ -437,14 +461,9 @@ fieldset/BDCR:
     description: Low-speed clock output selection.
     bit_offset: 25
     bit_size: 1
-fieldset/CCIPR:
+fieldset/CCIPR_F071:
   description: Peripherals independent clock configuration register.
   fields:
-  - name: CANSEL
-    description: CAN detect clock source selection.
-    bit_offset: 6
-    bit_size: 1
-    enum: CANSEL
   - name: PVDSEL
     description: PVD detect clock source selection.
     bit_offset: 7
@@ -470,6 +489,15 @@ fieldset/CCIPR:
     bit_offset: 18
     bit_size: 2
     enum: LPTIM1SEL
+fieldset/CCIPR:
+  extends: CCIPR_F071
+  description: Peripherals independent clock configuration register with CAN.
+  fields:
+  - name: CANSEL
+    description: CAN detect clock source selection.
+    bit_offset: 6
+    bit_size: 1
+    enum: CANSEL
 fieldset/CFGR:
   description: Clock configuration register.
   fields:

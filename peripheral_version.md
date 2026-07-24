@@ -1,11 +1,11 @@
 # Peripheral Version
 
-| Chip\Peripheral | RCC   | GPIO | TIMER | DMA  | I2C  | ADC  | EXTI | USART | SYSCFG | USB      | SPI  |
-| --------------- | ----- | ---- | ----- | ---- | ---- | ---- | ---- | ----- | ------ | -------- | ---- |
-| F002B           | f002b | v1   | v1    |      | v1   | v1b  | v1   |       | f002b  |          |      |
-| F030/F003/F002A | f030  | v1   | v1    | f030 | v1   | v1   | v1   | v1    | f030   |          | v1   |
-| F040/F07x/MD410 | f072  | v1   | v1    | f072 | v1   | v2   | v1   | v1    | f072   | py32f07x | v2   |
-| F403            | f403? | v1   | v1    |      |      | v2   | v2?  |       |        | py32f403 |      |
+| Chip\Peripheral | RCC   | GPIO | TIMER | DMA  | I2C  | ADC  | DAC  | EXTI | USART | SYSCFG | USB      | SPI  |
+| --------------- | ----- | ---- | ----- | ---- | ---- | ---- | ---- | ---- | ----- | ------ | -------- | ---- |
+| F002B           | f002b | v1   | v1    |      | v1   | v1b  |      | v1   |       | f002b  |          |      |
+| F030/F003/F002A | f030  | v1   | v1    | f030 | v1   | v1   |      | v1   | v1    | f030   |          | v1   |
+| F040/F07x/MD410 | f072  | v1   | v1    | f072 | v1   | v2   | v1   | v1   | v1    | f072   | py32f07x | v2   |
+| F403            | f403? | v1   | v1    |      |      | v2   |      | v2?  |       |        | py32f403 |      |
 
 Degree of IP Core similarity
 
@@ -17,6 +17,7 @@ Degree of IP Core similarity
 | TIMER      | v1        | embassy-stm32::timer_v1                                      | A          |
 | ADC        | v1        | embassy-stm32::adc_v1                                        | C          |
 | ADC        | v2        | embassy-stm32::adc_v2                                        | C          |
+| DAC        | v1        | embassy-stm32::dac_v2                                        | A          |
 | I2C        | v1        | embassy-stm32::i2c_v1                                        | B          |
 | EXTI       | v1        | embassy-stm32::exti_g0+u5                                    | A          |
 | USART      | v1        | embassy-stm32::usart_v2                                      | B          |

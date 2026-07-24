@@ -383,7 +383,7 @@
   address: 0x40007400
   registers:
     kind: dac
-    version: common
+    version: v1
     block: DAC
   rcc:
     bus_clock: PCLK1

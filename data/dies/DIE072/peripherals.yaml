@@ -383,8 +383,17 @@
   address: 0x40007400
   registers:
     kind: dac
-    version: common
-    block: TODO
+    version: v1
+    block: DAC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: DACEN
+    reset:
+      register: APBRSTR1
+      field: DACRST
   interrupts:
   - signal: GLOBAL
     interrupt: TIM6_LPTIM1_DAC

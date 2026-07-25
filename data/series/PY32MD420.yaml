@@ -3,6 +3,7 @@ disabled_peripherals:
   - ADC1
   - CAN
   - CONFIGBYTES
+  - DAC
   - DBGMCU
   - DMA1
   - EXTI

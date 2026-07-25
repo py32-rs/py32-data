@@ -1,3 +1,8 @@
+DAC:
+  - pin: PA4
+    signal: OUT1
+  - pin: PA5
+    signal: OUT2
 I2C1:
   - af: 6
     pin: PA1

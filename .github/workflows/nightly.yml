@@ -25,7 +25,7 @@ jobs:
         ssh-keyscan -t rsa github.com
     - name: Build
       run: |
-        git clone --depth=1 https://github.com/py32-rs/py32-metapac build/py32-metapac -q
+        git clone --depth=1 git@github.com:py32-rs/py32-metapac.git build/py32-metapac -q
         rm -rf build/py32-metapac/*
         COMMIT=$(git rev-parse HEAD)
         COMMIT_MESSAGE=$(git log -1 --pretty=%B)

@@ -25,19 +25,18 @@ jobs:
         ssh-keyscan -t rsa github.com
     - name: Build
       run: |
+        git clone --depth=1 https://github.com/py32-rs/py32-metapac build/py32-metapac -q
+        rm -rf build/py32-metapac/*
         COMMIT=$(git rev-parse HEAD)
         COMMIT_MESSAGE=$(git log -1 --pretty=%B)
         ./d gen
         cd build/py32-metapac/
         cp -v ../../LICENSE* .
         find src -iname '*.rs' -exec rustfmt -v {} \;
-        git init
         git add .
         git config user.name "py32-data builder"
         git config user.email "action@github.com"
         git commit -m "py32-rs/py32-data master $COMMIT"
-        git branch -M main
-        git remote add origin git@github.com:py32-rs/py32-metapac.git
     - name: Test
       run: |
         cd build/py32-metapac/
@@ -45,4 +44,4 @@ jobs:
     - name: Push
       run: |
         cd build/py32-metapac/
-        git push --force origin main
+        git push origin main

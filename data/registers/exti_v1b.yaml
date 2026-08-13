@@ -1,0 +1,76 @@
+block/EXTI:
+  description: External interrupt/event controller (MS32C001B, per RM chapter 9)
+  items:
+  - name: RTSR
+    description: Rising trigger selection register (configurable lines)
+    byte_offset: 0
+    fieldset: LINES_CFG
+  - name: FTSR
+    description: Falling trigger selection register (configurable lines)
+    byte_offset: 4
+    fieldset: LINES_CFG
+  - name: SWIER
+    description: Software interrupt event register (configurable lines)
+    byte_offset: 8
+    fieldset: LINES_CFG
+  - name: PR
+    description: EXTI pending register (configurable lines, write 1 to clear)
+    byte_offset: 12
+    fieldset: LINES_CFG
+  - name: EXTICR
+    description: EXTI external interrupt selection register
+    array:
+      len: 2
+      stride: 4
+    byte_offset: 96
+    fieldset: EXTICR
+  - name: IMR
+    description: EXTI interrupt mask register
+    byte_offset: 128
+    fieldset: LINES_MSK
+  - name: EMR
+    description: EXTI event mask register
+    byte_offset: 132
+    fieldset: LINES_MSK
+fieldset/LINES_CFG:
+  description: Configurable EXTI lines register (lines 0-7 GPIO + line 16 PVD), 1 bit per line
+  fields:
+  - name: LINE
+    description: EXTI line
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 8
+      stride: 1
+  - name: LINE16
+    description: EXTI line 16 (PVD)
+    bit_offset: 16
+    bit_size: 1
+fieldset/LINES_MSK:
+  description: EXTI mask register (lines 0-7 GPIO, line 16 PVD, line 29 LPTIM direct), 1 bit per line
+  fields:
+  - name: LINE
+    description: EXTI line
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 8
+      stride: 1
+  - name: LINE16
+    description: EXTI line 16 (PVD)
+    bit_offset: 16
+    bit_size: 1
+  - name: LINE29
+    description: EXTI line 29 (LPTIM, direct type)
+    bit_offset: 29
+    bit_size: 1
+fieldset/EXTICR:
+  description: External interrupt configuration register (one 2-bit port selector per line)
+  fields:
+  - name: EXTI
+    description: EXTI configuration bits
+    bit_offset: 0
+    bit_size: 2
+    array:
+      len: 4
+      stride: 8

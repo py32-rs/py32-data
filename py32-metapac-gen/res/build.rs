@@ -29,7 +29,7 @@ fn main() {
 
     let chip_core_name = match env::vars()
         .map(|(a, _)| a)
-        .filter(|x| x.starts_with("CARGO_FEATURE_PY32"))
+        .filter(|x| x.starts_with("CARGO_FEATURE_PY32") || x.starts_with("CARGO_FEATURE_MS32"))
         .get_one()
     {
         Ok(x) => x,
@@ -54,7 +54,10 @@ fn main() {
         crate_dir.display(),
         chip_core_name
     );
-    println!("cargo:rustc-env=PY32_METAPAC_PAC_PATH=chips/{}/pac.rs", chip_core_name);
+    println!(
+        "cargo:rustc-env=PY32_METAPAC_PAC_PATH=chips/{}/pac.rs",
+        chip_core_name
+    );
     println!(
         "cargo:rustc-env=PY32_METAPAC_METADATA_PATH=chips/{}/metadata.rs",
         chip_core_name

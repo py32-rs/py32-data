@@ -1,0 +1,7 @@
+name: MS32C001W14
+generic: MS32C001x4
+device_id: 0
+packages:
+  - name: MS32C001W14U6
+    package: QFN16
+    pins: 15

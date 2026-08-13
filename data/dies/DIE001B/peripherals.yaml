@@ -1,0 +1,313 @@
+- name: UID
+  address: 536805376
+  registers:
+    kind: uid
+    version: v1
+    block: UID
+
+- name: CONFIGBYTES
+  address: 536805440
+  registers:
+    kind: configbytes
+    version: ms32c001b
+    block: CONFIGBYTES
+
+- name: TIM14
+  address: 0x40002000
+  registers:
+    kind: timer
+    version: v1b
+    block: TIM_1CH
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM14EN
+    reset:
+      register: APBRSTR2
+      field: TIM14RST
+  interrupts:
+  - signal: UP
+    interrupt: TIM14
+  - signal: CC
+    interrupt: TIM14
+
+- name: PWM1
+  address: 0x40002800
+  registers:
+    kind: pwm
+    version: v1
+    block: PWM
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: PWMEN
+    reset:
+      register: APBRSTR2
+      field: PWMRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: PWM1
+
+- name: IWDG
+  address: 0x40003000
+  registers:
+    kind: iwdg
+    version: common
+    block: IWDG
+
+- name: UART1
+  address: 0x40004800
+  registers:
+    kind: usart
+    version: v2
+    block: UART
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: UART1EN
+    reset:
+      register: APBRSTR1
+      field: UART1RST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: UART1
+
+- name: PWR
+  address: 0x40007000
+  registers:
+    kind: pwr
+    version: common
+    block: PWR
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: PWREN
+    reset:
+      register: APBRSTR1
+      field: PWRRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: PVD
+
+- name: LPTIM
+  address: 0x40007c00
+  registers:
+    kind: lptim
+    version: common
+    block: LPTIM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR1
+      field: LPTIMEN
+    reset:
+      register: APBRSTR1
+      field: LPTIMRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: LPTIM1
+
+- name: SYSCFG
+  address: 0x40010000
+  registers:
+    kind: syscfg
+    version: f002b
+    block: SYSCFG
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: SYSCFGEN
+    reset:
+      register: APBRSTR2
+      field: SYSCFGRST
+
+- name: VREF
+  address: 0x40010100
+  registers:
+    kind: vref
+    version: v1
+    block: VREF
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: VREFBUFEN
+    reset:
+      register: APBRSTR2
+      field: VREFBUFRST
+
+- name: ADC1
+  address: 0x40012400
+  registers:
+    kind: adc
+    version: v3
+    block: ADC
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR2
+      field: ADCEN
+    reset:
+      register: APBRSTR2
+      field: ADCRST
+  interrupts:
+  - signal: GLOBAL
+    interrupt: ADC1
+
+- name: TIM1
+  address: 0x40012c00
+  registers:
+    kind: timer
+    version: v1b
+    block: TIM_ADV
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
+    enable:
+      register: APBENR2
+      field: TIM1EN
+    reset:
+      register: APBRSTR2
+      field: TIM1RST
+  interrupts:
+  - signal: BRK
+    interrupt: TIM1_BRK_UP_TRG_COM
+  - signal: UP
+    interrupt: TIM1_BRK_UP_TRG_COM
+  - signal: TRG
+    interrupt: TIM1_BRK_UP_TRG_COM
+  - signal: COM
+    interrupt: TIM1_BRK_UP_TRG_COM
+  - signal: CC
+    interrupt: TIM1_CC
+
+- name: DBGMCU
+  address: 0x40015800
+  registers:
+    kind: dbgmcu
+    version: f002b
+    block: DBGMCU
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: APBENR1
+      field: DBGEN
+    reset:
+      register: APBRSTR1
+      field: DBGRST
+
+- name: RCC
+  address: 0x40021000
+  registers:
+    kind: rcc
+    version: ms32c001b
+    block: RCC
+  interrupts:
+  - signal: GLOBAL
+    interrupt: RCC
+
+- name: EXTI
+  address: 0x40021800
+  registers:
+    kind: exti
+    version: v1b
+    block: EXTI
+  interrupts:
+  - signal: EXTI0
+    interrupt: EXTI0_1
+  - signal: EXTI1
+    interrupt: EXTI0_1
+  - signal: EXTI2
+    interrupt: EXTI2_3
+  - signal: EXTI3
+    interrupt: EXTI2_3
+  - signal: EXTI4
+    interrupt: EXTI4_7
+  - signal: EXTI5
+    interrupt: EXTI4_7
+  - signal: EXTI6
+    interrupt: EXTI4_7
+  - signal: EXTI7
+    interrupt: EXTI4_7
+  - signal: EXTI16
+    interrupt: PVD
+  - signal: EXTI29
+    interrupt: LPTIM1
+
+- name: FLASH
+  address: 0x40022000
+  registers:
+    kind: flash
+    version: ms32c001b
+    block: FLASH
+  rcc:
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
+    enable:
+      register: AHBENR
+      field: FLASHEN
+  interrupts:
+  - signal: GLOBAL
+    interrupt: FLASH
+
+- name: GPIOA
+  address: 0x50000000
+  registers:
+    kind: gpio
+    version: v1b
+    block: GPIO
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: IOPENR
+      field: GPIOAEN
+    reset:
+      register: IOPRSTR
+      field: GPIOARST
+
+- name: GPIOB
+  address: 0x50000400
+  registers:
+    kind: gpio
+    version: v1b
+    block: GPIO
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: IOPENR
+      field: GPIOBEN
+    reset:
+      register: IOPRSTR
+      field: GPIOBRST
+
+- name: GPIOC
+  address: 0x50000800
+  registers:
+    kind: gpio
+    version: v1b
+    block: GPIO
+  rcc:
+    bus_clock: PCLK1
+    kernel_clock: PCLK1
+    enable:
+      register: IOPENR
+      field: GPIOCEN
+    reset:
+      register: IOPRSTR
+      field: GPIOCRST

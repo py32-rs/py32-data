@@ -1,0 +1,206 @@
+block/UART:
+  description: Universal asynchronous receiver transmitter (MS32C001B new IP)
+  items:
+  - name: DR
+    description: Receive/send data register
+    byte_offset: 0
+    fieldset: DR
+  - name: BRR
+    description: Baud rate register
+    byte_offset: 4
+    fieldset: BRR
+  - name: SR
+    description: Status register
+    byte_offset: 16
+    fieldset: SR
+  - name: CR1
+    description: Control register 1
+    byte_offset: 20
+    fieldset: CR1
+  - name: CR2
+    description: Control register 2
+    byte_offset: 24
+    fieldset: CR2
+  - name: CR3
+    description: Control register 3
+    byte_offset: 28
+    fieldset: CR3
+  - name: RAR
+    description: Receive address matching register
+    byte_offset: 32
+    fieldset: RAR
+  - name: TAR
+    description: Transmit address matching register
+    byte_offset: 36
+    fieldset: TAR
+  - name: BRRF
+    description: Baud rate fractional register
+    byte_offset: 40
+    fieldset: BRRF
+fieldset/BRR:
+  description: Baud rate register
+  fields:
+  - name: BRR
+    description: Baud rate register
+    bit_offset: 0
+    bit_size: 16
+fieldset/BRRF:
+  description: Baud rate fractional register
+  fields:
+  - name: BRRF
+    description: Baud rate fractional register
+    bit_offset: 0
+    bit_size: 4
+fieldset/CR1:
+  description: Control register 1
+  fields:
+  - name: M
+    description: Data Length Select
+    bit_offset: 0
+    bit_size: 2
+  - name: STOP
+    description: Number of stop bits
+    bit_offset: 2
+    bit_size: 1
+  - name: PCE
+    description: Parity Enable
+    bit_offset: 3
+    bit_size: 1
+  - name: PS
+    description: Even Parity Select
+    bit_offset: 4
+    bit_size: 1
+  - name: SP
+    description: Stick Parity
+    bit_offset: 5
+    bit_size: 1
+  - name: SBK
+    description: Send Break
+    bit_offset: 6
+    bit_size: 1
+  - name: SWAP
+    description: TX/RX pin swap
+    bit_offset: 8
+    bit_size: 1
+  - name: MSBFIRST
+    description: MSB first mode
+    bit_offset: 9
+    bit_size: 1
+fieldset/CR2:
+  description: Control register 2
+  fields:
+  - name: RXNEIE
+    description: Enable Received Data Available Interrupt
+    bit_offset: 0
+    bit_size: 1
+  - name: TDREIE
+    description: Enable Transmit Holding Register Empty Interrupt
+    bit_offset: 1
+    bit_size: 1
+  - name: LSIE
+    description: Enable Receiver Line Status Interrupt
+    bit_offset: 2
+    bit_size: 1
+  - name: BUSYERRIE
+    description: Enable Busyerr state interruption
+    bit_offset: 3
+    bit_size: 1
+  - name: TXEIE
+    description: Enable tx empty interruption
+    bit_offset: 4
+    bit_size: 1
+fieldset/CR3:
+  description: Control register 3
+  fields:
+  - name: M_E
+    description: Extension for DLS
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDR_MATCH
+    description: Address Match Mode
+    bit_offset: 1
+    bit_size: 1
+  - name: SEND_ADDR
+    description: Send address control bit
+    bit_offset: 2
+    bit_size: 1
+  - name: TX_MODE
+    description: Transmit mode control bit
+    bit_offset: 3
+    bit_size: 1
+  - name: DMAR
+    description: DMA receive enable
+    bit_offset: 4
+    bit_size: 1
+  - name: DMAT
+    description: DMA transmit enable
+    bit_offset: 5
+    bit_size: 1
+  - name: DMA_SOFT_ACK
+    description: DMA software ack
+    bit_offset: 6
+    bit_size: 1
+fieldset/DR:
+  description: Receive/send data register
+  fields:
+  - name: DR
+    description: Receive/send data register
+    bit_offset: 0
+    bit_size: 9
+fieldset/RAR:
+  description: Receive address matching register
+  fields:
+  - name: RAR
+    description: Receive address matching register
+    bit_offset: 0
+    bit_size: 8
+fieldset/SR:
+  description: Status register
+  fields:
+  - name: RXNE
+    description: Receive register not empty
+    bit_offset: 0
+    bit_size: 1
+  - name: ORE
+    description: Overrun error bit
+    bit_offset: 1
+    bit_size: 1
+  - name: PE
+    description: Parity Error bit
+    bit_offset: 2
+    bit_size: 1
+  - name: FE
+    description: Framing Error bit
+    bit_offset: 3
+    bit_size: 1
+  - name: BRI
+    description: Break Interrupt bit
+    bit_offset: 4
+    bit_size: 1
+  - name: TDRE
+    description: Transmit Holding Register Empty bit
+    bit_offset: 5
+    bit_size: 1
+  - name: TXE
+    description: Transmitter Empty bit
+    bit_offset: 6
+    bit_size: 1
+  - name: ADDR_RCVD
+    description: Address Received Bit
+    bit_offset: 8
+    bit_size: 1
+  - name: BUSY
+    description: UART Busy
+    bit_offset: 9
+    bit_size: 1
+  - name: BUSY_ERR
+    description: Busy Detect Error
+    bit_offset: 10
+    bit_size: 1
+fieldset/TAR:
+  description: Transmit address matching register
+  fields:
+  - name: TAR
+    description: Transmit address matching register
+    bit_offset: 0
+    bit_size: 8

@@ -22,7 +22,7 @@ case "$CMD" in
         rm -rf tmp/$peri
         mkdir -p tmp/$peri
 
-        for f in `ls svd/PY32*`; do
+        for f in `ls svd/*.svd`; do
             echo $f
             svd_path=$f
             f=${f#"svd/PY32"}
@@ -47,6 +47,7 @@ case "$CMD" in
     ;;
     gen)
         rm -rf build/data
+        rm -rf build/py32-metapac/src
         cargo run -p py32-data-gen && cargo run -p py32-metapac-gen
     ;;
     ci)

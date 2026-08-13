@@ -1,0 +1,326 @@
+block/ADC:
+  description: Analog to Digital Converter
+  items:
+  - name: ISR
+    description: ADC interrupt and status register
+    byte_offset: 0
+    fieldset: ISR
+  - name: IER
+    description: ADC interrupt enable register
+    byte_offset: 4
+    fieldset: IER
+  - name: CR
+    description: ADC control register
+    byte_offset: 8
+    fieldset: CR
+  - name: CFGR1
+    description: ADC configuration register 1
+    byte_offset: 12
+    fieldset: CFGR1
+  - name: CFGR2
+    description: ADC configuration register 2
+    byte_offset: 16
+    fieldset: CFGR2
+  - name: SMPR
+    description: ADC sampling time register
+    byte_offset: 20
+    fieldset: SMPR
+  - name: TR
+    description: ADC analog watchdog 1 threshold register
+    byte_offset: 24
+    fieldset: TR
+  - name: SQR1
+    description: ADC regular sequence register 1
+    byte_offset: 28
+    fieldset: SQR1
+  - name: SQR2
+    description: ADC regular sequence register 2
+    byte_offset: 32
+    fieldset: SQR2
+  - name: SQR3
+    description: ADC regular sequence register 3
+    byte_offset: 36
+    fieldset: SQR3
+  - name: DR
+    description: ADC regular data register
+    byte_offset: 40
+    fieldset: DR
+  - name: CALFACT
+    description: ADC calibration factor register
+    byte_offset: 68
+    fieldset: CALFACT
+  - name: CCR
+    description: ADC common configuration register
+    byte_offset: 72
+    fieldset: CCR
+fieldset/CALFACT:
+  description: ADC calibration factor register
+  fields:
+  - name: WCALFACT
+    description: Write calibration factor
+    bit_offset: 0
+    bit_size: 9
+  - name: FACTSEL
+    description: Factor selection
+    bit_offset: 9
+    bit_size: 5
+  - name: WRVLD
+    description: Write valid
+    bit_offset: 14
+    bit_size: 1
+  - name: RDVLD
+    description: Read valid
+    bit_offset: 15
+    bit_size: 1
+  - name: CAPSUC
+    description: Calibration success
+    bit_offset: 21
+    bit_size: 1
+  - name: RCALFACT
+    description: Read calibration factor
+    bit_offset: 23
+    bit_size: 9
+fieldset/CCR:
+  description: ADC common configuration register
+  fields:
+  - name: VREFEN
+    description: VREFINT enable
+    bit_offset: 22
+    bit_size: 1
+  - name: TSEN
+    description: Temperature sensor enable
+    bit_offset: 23
+    bit_size: 1
+  - name: VREFSEL
+    description: VREF selection
+    bit_offset: 24
+    bit_size: 1
+  - name: PWRMODE
+    description: Power mode
+    bit_offset: 25
+    bit_size: 3
+fieldset/CFGR1:
+  description: ADC configuration register 1
+  fields:
+  - name: RES
+    description: Data resolution
+    bit_offset: 3
+    bit_size: 2
+  - name: ALIGN
+    description: Data alignment
+    bit_offset: 5
+    bit_size: 1
+  - name: EXTSEL
+    description: External trigger selection
+    bit_offset: 6
+    bit_size: 3
+  - name: EXTEN
+    description: External trigger enable and polarity selection
+    bit_offset: 10
+    bit_size: 2
+  - name: OVRMOD
+    description: Overrun management mode
+    bit_offset: 12
+    bit_size: 1
+  - name: CONT
+    description: Continuous conversion mode
+    bit_offset: 13
+    bit_size: 1
+  - name: WAIT
+    description: Wait conversion mode
+    bit_offset: 14
+    bit_size: 1
+  - name: DISCEN
+    description: Discontinuous mode enable
+    bit_offset: 16
+    bit_size: 1
+  - name: CALNUM
+    description: Number of calibration samples
+    bit_offset: 17
+    bit_size: 3
+  - name: AWDSGL
+    description: Analog watchdog single channel enable
+    bit_offset: 22
+    bit_size: 1
+  - name: AWDEN
+    description: Analog watchdog enable
+    bit_offset: 23
+    bit_size: 1
+  - name: AWDCH
+    description: Analog watchdog channel selection
+    bit_offset: 26
+    bit_size: 4
+fieldset/CFGR2:
+  description: ADC configuration register 2
+  fields:
+  - name: CKMODE
+    description: ADC clock mode
+    bit_offset: 28
+    bit_size: 4
+fieldset/CR:
+  description: ADC control register
+  fields:
+  - name: ADEN
+    description: ADC enable
+    bit_offset: 0
+    bit_size: 1
+  - name: ADDIS
+    description: ADC disable
+    bit_offset: 1
+    bit_size: 1
+  - name: ADSTART
+    description: ADC start conversion
+    bit_offset: 2
+    bit_size: 1
+  - name: ADSTP
+    description: ADC stop conversion
+    bit_offset: 4
+    bit_size: 1
+  - name: RSTCAL
+    description: Reset calibration
+    bit_offset: 29
+    bit_size: 1
+  - name: ADCAL_START
+    description: Calibration start
+    bit_offset: 30
+    bit_size: 1
+  - name: ADCAL
+    description: Calibration status
+    bit_offset: 31
+    bit_size: 1
+fieldset/DR:
+  description: ADC regular data register
+  fields:
+  - name: DATA
+    description: Regular data converted
+    bit_offset: 0
+    bit_size: 16
+fieldset/IER:
+  description: ADC interrupt enable register
+  fields:
+  - name: EOSMPIE
+    description: End of sampling interrupt enable
+    bit_offset: 1
+    bit_size: 1
+  - name: EOCIE
+    description: End of conversion interrupt enable
+    bit_offset: 2
+    bit_size: 1
+  - name: EOSEQIE
+    description: End of sequence interrupt enable
+    bit_offset: 3
+    bit_size: 1
+  - name: OVRIE
+    description: Overrun interrupt enable
+    bit_offset: 4
+    bit_size: 1
+  - name: AWDIE
+    description: Analog watchdog interrupt enable
+    bit_offset: 7
+    bit_size: 1
+  - name: EOHIE
+    description: End of hardware conversion interrupt enable
+    bit_offset: 8
+    bit_size: 1
+fieldset/ISR:
+  description: ADC interrupt and status register
+  fields:
+  - name: EOSMP
+    description: End of sampling flag
+    bit_offset: 1
+    bit_size: 1
+  - name: EOC
+    description: End of conversion flag
+    bit_offset: 2
+    bit_size: 1
+  - name: EOSEQ
+    description: End of sequence flag
+    bit_offset: 3
+    bit_size: 1
+  - name: OVR
+    description: Overrun flag
+    bit_offset: 4
+    bit_size: 1
+  - name: AWD
+    description: Analog watchdog flag
+    bit_offset: 7
+    bit_size: 1
+  - name: EOH
+    description: End of hardware conversion flag
+    bit_offset: 8
+    bit_size: 1
+fieldset/SMPR:
+  description: ADC sampling time register
+  fields:
+  - name: SMP
+    description: Sampling time selection
+    bit_offset: 0
+    bit_size: 3
+fieldset/SQR1:
+  description: ADC regular sequence register 1
+  fields:
+  - name: L
+    description: Regular channel sequence length
+    bit_offset: 0
+    bit_size: 4
+  - name: SQ1
+    description: 1st conversion in regular sequence
+    bit_offset: 6
+    bit_size: 4
+  - name: SQ2
+    description: 2nd conversion in regular sequence
+    bit_offset: 12
+    bit_size: 4
+  - name: SQ3
+    description: 3rd conversion in regular sequence
+    bit_offset: 18
+    bit_size: 4
+  - name: SQ4
+    description: 4th conversion in regular sequence
+    bit_offset: 24
+    bit_size: 4
+fieldset/SQR2:
+  description: ADC regular sequence register 2
+  fields:
+  - name: SQ5
+    description: 5th conversion in regular sequence
+    bit_offset: 0
+    bit_size: 4
+  - name: SQ6
+    description: 6th conversion in regular sequence
+    bit_offset: 6
+    bit_size: 4
+  - name: SQ7
+    description: 7th conversion in regular sequence
+    bit_offset: 12
+    bit_size: 4
+  - name: SQ8
+    description: 8th conversion in regular sequence
+    bit_offset: 18
+    bit_size: 4
+  - name: SQ9
+    description: 9th conversion in regular sequence
+    bit_offset: 24
+    bit_size: 4
+fieldset/SQR3:
+  description: ADC regular sequence register 3
+  fields:
+  - name: SQ10
+    description: 10th conversion in regular sequence
+    bit_offset: 0
+    bit_size: 4
+  - name: SQ11
+    description: 11th conversion in regular sequence
+    bit_offset: 6
+    bit_size: 4
+fieldset/TR:
+  description: ADC analog watchdog 1 threshold register
+  fields:
+  - name: LT1
+    description: Analog watchdog 1 lower threshold
+    bit_offset: 0
+    bit_size: 12
+  - name: HT1
+    description: Analog watchdog 1 higher threshold
+    bit_offset: 16
+    bit_size: 12

@@ -1,0 +1,410 @@
+block/RCC:
+  description: Reset and clock control (MS32C001B)
+  items:
+  - name: CR
+    description: Clock control register
+    byte_offset: 0
+    fieldset: CR
+  - name: ICSCR
+    description: Internal clock sources calibration register
+    byte_offset: 4
+    fieldset: ICSCR
+  - name: CFGR
+    description: Clock configuration register
+    byte_offset: 8
+    fieldset: CFGR
+  - name: ECSCR
+    description: External clock source control register
+    byte_offset: 16
+    fieldset: ECSCR
+  - name: CIER
+    description: Clock interrupt enable register
+    byte_offset: 24
+    fieldset: CIER
+  - name: CIFR
+    description: Clock interrupt flag register
+    byte_offset: 28
+    fieldset: CIFR
+  - name: CICR
+    description: Clock interrupt clear register
+    byte_offset: 32
+    fieldset: CICR
+  - name: IOPRSTR
+    description: GPIO reset register
+    byte_offset: 36
+    fieldset: IOPRSTR
+  - name: APBRSTR1
+    description: APB peripheral reset register 1
+    byte_offset: 44
+    fieldset: APBRSTR1
+  - name: APBRSTR2
+    description: APB peripheral reset register 2
+    byte_offset: 48
+    fieldset: APBRSTR2
+  - name: IOPENR
+    description: GPIO clock enable register
+    byte_offset: 52
+    fieldset: IOPENR
+  - name: AHBENR
+    description: AHB peripheral clock enable register
+    byte_offset: 56
+    fieldset: AHBENR
+  - name: APBENR1
+    description: APB peripheral clock enable register 1
+    byte_offset: 60
+    fieldset: APBENR1
+  - name: APBENR2
+    description: APB peripheral clock enable register 2
+    byte_offset: 64
+    fieldset: APBENR2
+  - name: CCIPR
+    description: Peripherals independent clock configuration register
+    byte_offset: 84
+    fieldset: CCIPR
+  - name: BDCR
+    description: RTC domain control register
+    byte_offset: 92
+    fieldset: BDCR
+  - name: CSR
+    description: Control/status register
+    byte_offset: 96
+    fieldset: CSR
+fieldset/AHBENR:
+  description: AHB peripheral clock enable register
+  fields:
+  - name: FLASHEN
+    description: FLASH clock enable
+    bit_offset: 8
+    bit_size: 1
+  - name: SRAMEN
+    description: SRAM clock enable
+    bit_offset: 9
+    bit_size: 1
+fieldset/APBENR1:
+  description: APB peripheral clock enable register 1
+  fields:
+  - name: UART1EN
+    description: UART1 clock enable
+    bit_offset: 18
+    bit_size: 1
+  - name: DBGEN
+    description: MCU Debug module clock enable
+    bit_offset: 27
+    bit_size: 1
+  - name: PWREN
+    description: Power interface module clock enable
+    bit_offset: 28
+    bit_size: 1
+  - name: LPTIMEN
+    description: LPTIM clock enable
+    bit_offset: 31
+    bit_size: 1
+fieldset/APBENR2:
+  description: APB peripheral clock enable register 2
+  fields:
+  - name: SYSCFGEN
+    description: SYSCFG module clock enable
+    bit_offset: 0
+    bit_size: 1
+  - name: PWMEN
+    description: PWM module clock enable
+    bit_offset: 9
+    bit_size: 1
+  - name: TIM1EN
+    description: TIM1 module clock enable
+    bit_offset: 11
+    bit_size: 1
+  - name: TIM14EN
+    description: TIM14 module clock enable
+    bit_offset: 15
+    bit_size: 1
+  - name: ADCEN
+    description: ADC clock enable
+    bit_offset: 20
+    bit_size: 1
+  - name: VREFBUFEN
+    description: VREFBUF clock enable
+    bit_offset: 26
+    bit_size: 1
+fieldset/APBRSTR1:
+  description: APB peripheral reset register 1
+  fields:
+  - name: UART1RST
+    description: UART1 module reset
+    bit_offset: 18
+    bit_size: 1
+  - name: DBGRST
+    description: MCU Debug module reset
+    bit_offset: 27
+    bit_size: 1
+  - name: PWRRST
+    description: Power interface module reset
+    bit_offset: 28
+    bit_size: 1
+  - name: LPTIMRST
+    description: LPTIM module reset
+    bit_offset: 31
+    bit_size: 1
+fieldset/APBRSTR2:
+  description: APB peripheral reset register 2
+  fields:
+  - name: SYSCFGRST
+    description: SYSCFG module reset
+    bit_offset: 0
+    bit_size: 1
+  - name: PWMRST
+    description: PWM module reset
+    bit_offset: 9
+    bit_size: 1
+  - name: TIM1RST
+    description: TIM1 module reset
+    bit_offset: 11
+    bit_size: 1
+  - name: TIM14RST
+    description: TIM14 module reset
+    bit_offset: 15
+    bit_size: 1
+  - name: ADCRST
+    description: ADC reset
+    bit_offset: 20
+    bit_size: 1
+  - name: VREFBUFRST
+    description: VREFBUF reset
+    bit_offset: 26
+    bit_size: 1
+fieldset/BDCR:
+  description: RTC domain control register
+  fields:
+  - name: LSEON
+    description: LSE OSC enabled
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDY
+    description: LSE OSC ready
+    bit_offset: 1
+    bit_size: 1
+  - name: LSEBYP
+    description: LSE OSC bypass
+    bit_offset: 2
+    bit_size: 1
+  - name: LSECSSON
+    description: LSE CSS enable
+    bit_offset: 5
+    bit_size: 1
+  - name: LSECSSD
+    description: LSE CSS detection failed
+    bit_offset: 6
+    bit_size: 1
+  - name: LSCSEL
+    description: Low-speed clock selection
+    bit_offset: 25
+    bit_size: 1
+fieldset/CCIPR:
+  description: Peripherals independent clock configuration register
+  fields:
+  - name: PVDSEL
+    description: PVD module clock source selection
+    bit_offset: 7
+    bit_size: 1
+  - name: LPTIM1SEL
+    description: LPTIM1 clock source selection
+    bit_offset: 18
+    bit_size: 2
+fieldset/CFGR:
+  description: Clock configuration register
+  fields:
+  - name: SW
+    description: System clock source selection
+    bit_offset: 0
+    bit_size: 3
+  - name: SWS
+    description: System clock switch status
+    bit_offset: 3
+    bit_size: 3
+  - name: HPRE
+    description: AHB clock HCLK division factor
+    bit_offset: 8
+    bit_size: 4
+  - name: PPRE
+    description: APB clock division factor
+    bit_offset: 12
+    bit_size: 3
+  - name: MCOSEL
+    description: MCO output clock selection
+    bit_offset: 24
+    bit_size: 3
+  - name: MCOPRE
+    description: MCO output clock divider factor
+    bit_offset: 28
+    bit_size: 3
+fieldset/CICR:
+  description: Clock interrupt clear register
+  fields:
+  - name: LSIRDYC
+    description: LSI ready interrupt flag clear
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYC
+    description: LSE ready interrupt flag clear
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYC
+    description: HSI ready interrupt flag clear
+    bit_offset: 3
+    bit_size: 1
+  - name: LSECSSC
+    description: LSE CSS interrupt flag clear
+    bit_offset: 9
+    bit_size: 1
+fieldset/CIER:
+  description: Clock interrupt enable register
+  fields:
+  - name: LSIRDYIE
+    description: LSI clock ready interrupt enable
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYIE
+    description: LSE clock ready interrupt enable
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYIE
+    description: HSI clock ready interrupt enable
+    bit_offset: 3
+    bit_size: 1
+fieldset/CIFR:
+  description: Clock interrupt flag register
+  fields:
+  - name: LSIRDYF
+    description: LSI clock ready interrupt flag
+    bit_offset: 0
+    bit_size: 1
+  - name: LSERDYF
+    description: LSE clock ready interrupt flag
+    bit_offset: 1
+    bit_size: 1
+  - name: HSIRDYF
+    description: HSI clock ready interrupt flag
+    bit_offset: 3
+    bit_size: 1
+  - name: LSECSSF
+    description: LSE CSS interrupt flag
+    bit_offset: 9
+    bit_size: 1
+fieldset/CR:
+  description: Clock control register
+  fields:
+  - name: HSION
+    description: HSI clock enable
+    bit_offset: 8
+    bit_size: 1
+  - name: HSIRDY
+    description: HSI clock ready
+    bit_offset: 10
+    bit_size: 1
+  - name: HSIDIV
+    description: HSI divider for HSISYS clock
+    bit_offset: 11
+    bit_size: 3
+  - name: HSEON
+    description: HSE clock enable
+    bit_offset: 18
+    bit_size: 1
+fieldset/CSR:
+  description: Control/status register
+  fields:
+  - name: LSION
+    description: LSI OSC enabled
+    bit_offset: 0
+    bit_size: 1
+  - name: LSIRDY
+    description: LSI OSC ready
+    bit_offset: 1
+    bit_size: 1
+  - name: PINRST_FLTDIS
+    description: NRST filtering disable
+    bit_offset: 8
+    bit_size: 1
+  - name: RMVF
+    description: Clear reset flag
+    bit_offset: 23
+    bit_size: 1
+  - name: OBLRSTF
+    description: Option byte loader reset flag
+    bit_offset: 25
+    bit_size: 1
+  - name: PINRSTF
+    description: External NRST pin reset flag
+    bit_offset: 26
+    bit_size: 1
+  - name: PORRSTF
+    description: POR reset flag
+    bit_offset: 27
+    bit_size: 1
+  - name: SFTRSTF
+    description: Soft reset flag
+    bit_offset: 28
+    bit_size: 1
+  - name: IWDGRSTF
+    description: IWDG reset flag
+    bit_offset: 29
+    bit_size: 1
+fieldset/ECSCR:
+  description: External clock source control register
+  fields:
+  - name: LSE_DRIVER
+    description: LSE drive capability setting
+    bit_offset: 16
+    bit_size: 2
+  - name: LSE_STARTUP
+    description: LSE crystal oscillator stabilization time selection
+    bit_offset: 20
+    bit_size: 2
+fieldset/ICSCR:
+  description: Internal clock sources calibration register
+  fields:
+  - name: HSI_ABS_TRIMCR
+    description: HSI clock frequency calibration value
+    bit_offset: 0
+    bit_size: 12
+  - name: HSI_TC_TRIMCR
+    description: HSI temperature compensation trimming value
+    bit_offset: 12
+    bit_size: 4
+  - name: HSI_FS
+    description: HSI frequency selection
+    bit_offset: 16
+    bit_size: 1
+  - name: LSI_TRIM
+    description: LSI trimming value
+    bit_offset: 19
+    bit_size: 9
+fieldset/IOPENR:
+  description: GPIO clock enable register
+  fields:
+  - name: GPIOAEN
+    description: I/O PortA clock enable
+    bit_offset: 0
+    bit_size: 1
+  - name: GPIOBEN
+    description: I/O PortB clock enable
+    bit_offset: 1
+    bit_size: 1
+  - name: GPIOCEN
+    description: I/O PortC clock enable
+    bit_offset: 2
+    bit_size: 1
+fieldset/IOPRSTR:
+  description: GPIO reset register
+  fields:
+  - name: GPIOARST
+    description: I/O PortA reset
+    bit_offset: 0
+    bit_size: 1
+  - name: GPIOBRST
+    description: I/O PortB reset
+    bit_offset: 1
+    bit_size: 1
+  - name: GPIOCRST
+    description: I/O PortC reset
+    bit_offset: 2
+    bit_size: 1

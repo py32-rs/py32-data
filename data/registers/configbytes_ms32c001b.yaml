@@ -1,0 +1,99 @@
+block/CONFIGBYTES:
+  description: Flash option bytes (MS32C001B, mapped at 0x1FFF0040)
+  items:
+  - name: OPTR
+    description: User option bytes and complements (loaded into FLASH_OPTR at reset)
+    byte_offset: 0
+    access: Read
+    fieldset: OPTR
+  - name: SDKR
+    description: SDK area address option bytes and complements (loaded into FLASH_SDKR at reset)
+    byte_offset: 4
+    access: Read
+    fieldset: SDKR
+  - name: WRPR
+    description: WRP address option bytes and complements (loaded into FLASH_WRPR at reset)
+    byte_offset: 12
+    access: Read
+    fieldset: WRPR
+fieldset/OPTR:
+  description: User option bytes and complements
+  fields:
+  - name: RDP
+    description: "Read protection level (0xAA: level 0, no protection; otherwise: level 1, protection active)"
+    bit_offset: 0
+    bit_size: 8
+  - name: BOR_EN
+    description: "BOR enable (0: disabled; 1: enabled, BOR_LEV active)"
+    bit_offset: 8
+    bit_size: 1
+  - name: BOR_LEV
+    description: "BOR threshold level (000: 2.2V/2.1V ... 111: 3.6V/3.5V)"
+    bit_offset: 9
+    bit_size: 3
+  - name: IWDG_SW
+    description: "IWDG mode (0: hardware watchdog; 1: software watchdog)"
+    bit_offset: 12
+    bit_size: 1
+  - name: NRST_MODE
+    description: "NRST pin mode (0: reset input only; 1: GPIO function)"
+    bit_offset: 14
+    bit_size: 1
+  - name: IWDG_STOP
+    description: "IWDG behavior in Stop mode (0: freeze; 1: keep running)"
+    bit_offset: 15
+    bit_size: 1
+  - name: NRDP
+    description: Complemented read protection level
+    bit_offset: 16
+    bit_size: 8
+  - name: NBOR_EN
+    description: Complemented BOR enable
+    bit_offset: 24
+    bit_size: 1
+  - name: NBOR_LEV
+    description: Complemented BOR threshold level
+    bit_offset: 25
+    bit_size: 3
+  - name: NIWDG_SW
+    description: Complemented IWDG mode
+    bit_offset: 28
+    bit_size: 1
+  - name: NNRST_MODE
+    description: Complemented NRST pin mode
+    bit_offset: 30
+    bit_size: 1
+  - name: NIWDG_STOP
+    description: Complemented IWDG Stop mode behavior
+    bit_offset: 31
+    bit_size: 1
+fieldset/SDKR:
+  description: SDK area address option bytes and complements
+  fields:
+  - name: SDK_STRT
+    description: SDK area start address (step = 1 KB)
+    bit_offset: 0
+    bit_size: 4
+  - name: SDK_END
+    description: SDK area end address (step = 1 KB)
+    bit_offset: 8
+    bit_size: 4
+  - name: NSDK_STRT
+    description: Complemented SDK area start address
+    bit_offset: 16
+    bit_size: 4
+  - name: NSDK_END
+    description: Complemented SDK area end address
+    bit_offset: 24
+    bit_size: 4
+fieldset/WRPR:
+  description: WRP address option bytes and complements
+  fields:
+  - name: WRP
+    description: "Write protection bits (0: sector[y] protected; 1: unprotected; y = 0..15)"
+    bit_offset: 0
+    bit_size: 16
+  - name: NWRP
+    description: Complemented write protection bits
+    bit_offset: 16
+    bit_size: 16

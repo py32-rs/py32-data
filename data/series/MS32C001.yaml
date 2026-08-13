@@ -1,0 +1,12 @@
+die: DIE002B
+disabled_peripherals:
+- COMP1
+- COMP2
+- I2C1
+- SPI1
+- USART1
+disabled_interrupts:
+- I2C1
+- SPI1
+- USART1
+family: Low-Cost

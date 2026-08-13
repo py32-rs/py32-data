@@ -18,7 +18,7 @@ Switch ($CMD)
         rm -r -Force tmp/$peri -ErrorAction SilentlyContinue
         mkdir tmp/$peri | Out-Null
 
-        $files = Get-ChildItem -Path "svd/PY32*"
+        $files = Get-ChildItem -Path "svd/*.svd"
         foreach ($f in $files) {
             $svd_path = $f
             $f = $f.Name.TrimStart("svd/PY32").TrimEnd("xx.svd")
@@ -49,6 +49,7 @@ Switch ($CMD)
     }
     "gen" {
         Remove-Item -Recurse -Force "build/data" -ErrorAction SilentlyContinue
+        Remove-Item -Recurse -Force "build/py32-metapac/src" -ErrorAction SilentlyContinue
         cargo run -p py32-data-gen
         cargo run -p py32-metapac-gen
     }

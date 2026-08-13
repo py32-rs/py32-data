@@ -1,0 +1,18 @@
+block/VREF:
+  description: Voltage reference buffer (MS32C001B)
+  items:
+  - name: CR
+    description: VREF control register
+    byte_offset: 0
+    fieldset: CR
+fieldset/CR:
+  description: VREF control register
+  fields:
+  - name: VREFBUF_OUT_SEL
+    description: VREFBUF output level selection
+    bit_offset: 0
+    bit_size: 2
+  - name: VREFBUF_EN
+    description: VREFBUF enable
+    bit_offset: 3
+    bit_size: 1

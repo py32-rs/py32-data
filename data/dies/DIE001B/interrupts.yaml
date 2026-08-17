@@ -1,0 +1,30 @@
+# Interrupt vector table per CMSIS device header (ms32c001bx4.h) and
+# startup_ms32c001bxx.s from MS32C001B__Firmware_V0.5.0 / DFP 1.0.6.
+# NOTE: The SVD's interrupt numbers are stale copies of the MS32C001 table
+# and must NOT be used here.
+- name: PVD
+  number: 0
+- name: FLASH
+  number: 1
+- name: RCC
+  number: 2
+- name: EXTI0_1
+  number: 3
+- name: EXTI2_3
+  number: 4
+- name: EXTI4_7
+  number: 5
+- name: ADC1
+  number: 8
+- name: TIM1_BRK_UP_TRG_COM
+  number: 9
+- name: TIM1_CC
+  number: 10
+- name: LPTIM1
+  number: 11
+- name: TIM14
+  number: 12
+- name: PWM1
+  number: 16
+- name: UART1
+  number: 17

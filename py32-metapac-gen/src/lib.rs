@@ -57,7 +57,12 @@ impl Gen {
 
         let mut peripheral_versions: BTreeMap<String, String> = BTreeMap::new();
 
-        let gpio_base = core.peripherals.iter().find(|p| p.name == "GPIOA").unwrap().address as u32;
+        let gpio_base = core
+            .peripherals
+            .iter()
+            .find(|p| p.name == "GPIOA")
+            .unwrap()
+            .address as u32;
         let gpio_stride = 0x400;
 
         for p in &core.peripherals {
@@ -71,7 +76,9 @@ impl Gen {
             };
 
             if let Some(bi) = &p.registers {
-                if let Some(old_version) = peripheral_versions.insert(bi.kind.clone(), bi.version.clone()) {
+                if let Some(old_version) =
+                    peripheral_versions.insert(bi.kind.clone(), bi.version.clone())
+                {
                     if old_version != bi.version {
                         panic!(
                             "Peripheral {} has multiple versions: {} and {}",
@@ -107,7 +114,8 @@ impl Gen {
         );
 
         for (module, version) in &peripheral_versions {
-            self.all_peripheral_versions.insert((module.clone(), version.clone()));
+            self.all_peripheral_versions
+                .insert((module.clone(), version.clone()));
             writeln!(
                 &mut extra,
                 "#[path=\"../../peripherals/{}_{}.rs\"] pub mod {};",
@@ -129,21 +137,30 @@ impl Gen {
             .reduce(|acc, item| acc + item)
             .unwrap();
 
-        writeln!(&mut extra, "pub const FLASH_BASE: usize = {};", first_flash.address).unwrap();
-        writeln!(&mut extra, "pub const FLASH_SIZE: usize = {};", total_flash_size).unwrap();
+        writeln!(
+            &mut extra,
+            "pub const FLASH_BASE: usize = {};",
+            first_flash.address
+        )
+        .unwrap();
+        writeln!(
+            &mut extra,
+            "pub const FLASH_SIZE: usize = {};",
+            total_flash_size
+        )
+        .unwrap();
 
         let page_sizes: HashSet<_> = flash_regions
             .iter()
             .map(|r| r.settings.as_ref().unwrap().page_size)
             .collect();
         assert_eq!(1, page_sizes.len());
-        
-        let sector_sizes: HashSet<_> = flash_regions
-        .iter()
-        .map(|r| r.settings.as_ref().unwrap().sector_size)
-        .collect();
-            assert_eq!(1, sector_sizes.len());
 
+        let sector_sizes: HashSet<_> = flash_regions
+            .iter()
+            .map(|r| r.settings.as_ref().unwrap().sector_size)
+            .collect();
+        assert_eq!(1, sector_sizes.len());
 
         writeln!(
             &mut extra,
@@ -265,7 +282,11 @@ impl Gen {
     }
 
     fn load_chip(&mut self, name: &str) -> Chip {
-        let chip_path = self.opts.data_dir.join("chips").join(format!("{}.json", name));
+        let chip_path = self
+            .opts
+            .data_dir
+            .join("chips")
+            .join(format!("{}.json", name));
         let chip = fs::read(chip_path).unwrap_or_else(|_| panic!("Could not load chip {}", name));
         serde_json::from_slice(&chip).unwrap()
     }
@@ -319,7 +340,9 @@ impl Gen {
 
             let mut ir: ir::IR = serde_json::from_reader(File::open(regs_path).unwrap()).unwrap();
 
-            transform::expand_extends::ExpandExtends {}.run(&mut ir).unwrap();
+            transform::expand_extends::ExpandExtends {}
+                .run(&mut ir)
+                .unwrap();
 
             transform::map_names(&mut ir, |k, s| match k {
                 transform::NameKind::Block => *s = s.to_string(),
@@ -395,11 +418,19 @@ impl Gen {
         // Generate src/all_peripheral_versions.rs
         {
             let contents = gen_all_peripheral_versions(&self.all_peripheral_versions);
-            fs::write(self.opts.out_dir.join("src/all_peripheral_versions.rs"), contents).unwrap();
+            fs::write(
+                self.opts.out_dir.join("src/all_peripheral_versions.rs"),
+                contents,
+            )
+            .unwrap();
         }
 
         // copy misc files
-        fs::write(self.opts.out_dir.join("build.rs"), include_bytes!("../res/build.rs")).unwrap();
+        fs::write(
+            self.opts.out_dir.join("build.rs"),
+            include_bytes!("../res/build.rs"),
+        )
+        .unwrap();
         fs::write(
             self.opts.out_dir.join("README.md"),
             include_bytes!("../res/README.md"),
@@ -469,7 +500,11 @@ fn gen_memory_x(out_dir: &Path, chip: &Chip) {
 }
 
 fn get_memory_range(chip: &Chip, kind: MemoryRegionKind) -> (u32, u32, String) {
-    let mut mems: Vec<_> = chip.memory.iter().filter(|m| m.kind == kind && m.size != 0).collect();
+    let mut mems: Vec<_> = chip
+        .memory
+        .iter()
+        .filter(|m| m.kind == kind && m.size != 0)
+        .collect();
     mems.sort_by_key(|m| m.address);
 
     let mut start = u32::MAX;
@@ -477,7 +512,6 @@ fn get_memory_range(chip: &Chip, kind: MemoryRegionKind) -> (u32, u32, String) {
     let mut names = Vec::new();
     let mut best: Option<(u32, u32, String)> = None;
     for m in mems {
-
         if m.address != end {
             names = Vec::new();
             start = m.address;

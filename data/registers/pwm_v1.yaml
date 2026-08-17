@@ -1,0 +1,180 @@
+block/PWM:
+  description: LED-driving PWM timer (MS32C001B)
+  items:
+  - name: CR1
+    description: PWM control register 1
+    byte_offset: 0
+    fieldset: CR1
+  - name: DIER
+    description: PWM DMA/Interrupt enable register
+    byte_offset: 12
+    fieldset: DIER
+  - name: SR
+    description: PWM status register
+    byte_offset: 16
+    fieldset: SR
+  - name: EGR
+    description: PWM event generation register
+    byte_offset: 20
+    fieldset: EGR
+  - name: CMR
+    description: PWM compare mode register
+    byte_offset: 24
+    fieldset: CMR
+  - name: CER
+    description: PWM capture/compare enable register
+    byte_offset: 32
+    fieldset: CER
+  - name: CNT
+    description: PWM counter
+    byte_offset: 36
+    fieldset: CNT
+  - name: PSC
+    description: PWM prescaler
+    byte_offset: 40
+    fieldset: PSC
+  - name: ARR
+    description: PWM auto-reload register
+    byte_offset: 44
+    fieldset: ARR
+  - name: CCR1
+    description: PWM capture/compare register 1
+    byte_offset: 52
+    fieldset: CCR1
+  - name: LED1_DATA
+    description: PWM LED1 data register
+    byte_offset: 80
+    fieldset: LED1_DATA
+fieldset/ARR:
+  description: PWM auto-reload register
+  fields:
+  - name: ARR
+    description: Auto-reload value
+    bit_offset: 0
+    bit_size: 10
+fieldset/CCR1:
+  description: PWM capture/compare register 1
+  fields:
+  - name: CCR1
+    description: Capture/compare 1 value
+    bit_offset: 0
+    bit_size: 10
+fieldset/CER:
+  description: PWM capture/compare enable register
+  fields:
+  - name: C1E
+    description: Capture/compare 1 output enable
+    bit_offset: 0
+    bit_size: 1
+  - name: C1P
+    description: Capture/compare 1 output polarity
+    bit_offset: 1
+    bit_size: 1
+fieldset/CMR:
+  description: PWM compare mode register
+  fields:
+  - name: OC1M
+    description: Output compare 1 mode
+    bit_offset: 0
+    bit_size: 2
+  - name: OC1PE
+    description: Output compare 1 preload enable
+    bit_offset: 8
+    bit_size: 1
+fieldset/CNT:
+  description: PWM counter
+  fields:
+  - name: CNT
+    description: Counter value
+    bit_offset: 0
+    bit_size: 10
+fieldset/CR1:
+  description: PWM control register 1
+  fields:
+  - name: CEN
+    description: Counter enable
+    bit_offset: 0
+    bit_size: 1
+  - name: UDIS
+    description: Update disable
+    bit_offset: 1
+    bit_size: 1
+  - name: URS
+    description: Update request source
+    bit_offset: 2
+    bit_size: 1
+  - name: DIR
+    description: Direction
+    bit_offset: 4
+    bit_size: 1
+  - name: CMS
+    description: Center-aligned mode selection
+    bit_offset: 5
+    bit_size: 2
+  - name: ARPE
+    description: Auto-reload preload enable
+    bit_offset: 7
+    bit_size: 1
+  - name: LEDEN
+    description: LED output enable
+    bit_offset: 16
+    bit_size: 1
+  - name: LEDCEN
+    description: LED clock enable
+    bit_offset: 17
+    bit_size: 1
+  - name: LEDWORD
+    description: LED word length
+    bit_offset: 18
+    bit_size: 2
+fieldset/DIER:
+  description: PWM DMA/Interrupt enable register
+  fields:
+  - name: UIE
+    description: Update interrupt enable
+    bit_offset: 0
+    bit_size: 1
+  - name: OC1IE
+    description: Capture/compare 1 interrupt enable
+    bit_offset: 1
+    bit_size: 1
+  - name: LED1_ENDIE
+    description: LED1 end interrupt enable
+    bit_offset: 16
+    bit_size: 1
+fieldset/EGR:
+  description: PWM event generation register
+  fields:
+  - name: UG
+    description: Update generation
+    bit_offset: 0
+    bit_size: 1
+fieldset/LED1_DATA:
+  description: PWM LED1 data register
+  fields:
+  - name: LED1_DATA
+    description: LED1 data
+    bit_offset: 0
+    bit_size: 24
+fieldset/PSC:
+  description: PWM prescaler
+  fields:
+  - name: PSC
+    description: Prescaler value
+    bit_offset: 0
+    bit_size: 8
+fieldset/SR:
+  description: PWM status register
+  fields:
+  - name: UIF
+    description: Update interrupt flag
+    bit_offset: 0
+    bit_size: 1
+  - name: OC1IF
+    description: Capture/compare 1 interrupt flag
+    bit_offset: 1
+    bit_size: 1
+  - name: LED1_ENDIF
+    description: LED1 end interrupt flag
+    bit_offset: 16
+    bit_size: 1

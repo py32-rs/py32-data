@@ -1,0 +1,7 @@
+name: MS32C001BW24
+generic: MS32C001Bx4
+device_id: 0
+packages:
+  - name: MS32C001BW24S7
+    package: SOP16
+    pins: 14

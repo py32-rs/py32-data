@@ -1,0 +1,255 @@
+block/FLASH:
+  description: Flash (MS32C001B)
+  items:
+  - name: KEYR
+    description: Flash key register
+    byte_offset: 8
+    fieldset: KEYR
+  - name: OPTKEYR
+    description: Option byte key register
+    byte_offset: 12
+    fieldset: OPTKEYR
+  - name: SR
+    description: Status register
+    byte_offset: 16
+    fieldset: SR
+  - name: CR
+    description: Flash control register
+    byte_offset: 20
+    fieldset: CR
+  - name: OPTR
+    description: Flash option register
+    byte_offset: 32
+    fieldset: OPTR
+  - name: SDKR
+    description: Flash SDK address register
+    byte_offset: 36
+    fieldset: SDKR
+  - name: WRPR
+    description: Flash WRP address register
+    byte_offset: 44
+    fieldset: WRPR
+  - name: STCR
+    description: Flash sleep time config register
+    byte_offset: 144
+    fieldset: STCR
+  - name: TS0
+    description: Flash TS0 register
+    byte_offset: 256
+    fieldset: TS0
+  - name: TS1
+    description: Flash TS1 register
+    byte_offset: 260
+    fieldset: TS1
+  - name: TS2P
+    description: Flash TS2P register
+    byte_offset: 264
+    fieldset: TS2P
+  - name: TPS3
+    description: Flash TPS3 register
+    byte_offset: 268
+    fieldset: TPS3
+  - name: TS3
+    description: Flash TS3 register
+    byte_offset: 272
+    fieldset: TS3
+  - name: ERTPE
+    description: Flash ERTPE register
+    byte_offset: 276
+    fieldset: ERTPE
+  - name: PRGTPE
+    description: Flash PRGTPE register
+    byte_offset: 284
+    fieldset: PRGTPE
+  - name: PRETPE
+    description: Flash PRETPE register
+    byte_offset: 288
+    fieldset: PRETPE
+fieldset/CR:
+  description: Flash control register
+  fields:
+  - name: PG
+    description: Page Program
+    bit_offset: 0
+    bit_size: 1
+  - name: PER
+    description: Page Erase
+    bit_offset: 1
+    bit_size: 1
+  - name: MER
+    description: Mass Erase
+    bit_offset: 2
+    bit_size: 1
+  - name: SER
+    description: Sector Erase
+    bit_offset: 11
+    bit_size: 1
+  - name: OPTSTRT
+    description: Option bytes Programming Start
+    bit_offset: 17
+    bit_size: 1
+  - name: PGSTRT
+    description: Programming Start
+    bit_offset: 19
+    bit_size: 1
+  - name: EOPIE
+    description: End of operation interrupt enable
+    bit_offset: 24
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable
+    bit_offset: 25
+    bit_size: 1
+  - name: OBL_LAUNCH
+    description: Force the option bytes loading
+    bit_offset: 27
+    bit_size: 1
+  - name: OPTLOCK
+    description: Option Lock
+    bit_offset: 30
+    bit_size: 1
+  - name: LOCK
+    description: Lock
+    bit_offset: 31
+    bit_size: 1
+fieldset/ERTPE:
+  description: Flash ERTPE register
+  fields:
+  - name: ERTPE
+    description: ERTPE value
+    bit_offset: 0
+    bit_size: 16
+fieldset/KEYR:
+  description: Flash key register
+  fields:
+  - name: KEY
+    description: Flash CR key
+    bit_offset: 0
+    bit_size: 32
+fieldset/OPTKEYR:
+  description: Option byte key register
+  fields:
+  - name: OPTKEY
+    description: Flash Option key
+    bit_offset: 0
+    bit_size: 32
+fieldset/OPTR:
+  description: Flash option register
+  fields:
+  - name: RDP
+    description: Read Protection
+    bit_offset: 0
+    bit_size: 8
+  - name: BOR_EN
+    description: BOR enable
+    bit_offset: 8
+    bit_size: 1
+  - name: BOR_LEV
+    description: BOR level
+    bit_offset: 9
+    bit_size: 3
+  - name: IWDG_SW
+    description: IWDG software enable
+    bit_offset: 12
+    bit_size: 1
+  - name: NRST_MODE
+    description: NRST pin mode
+    bit_offset: 14
+    bit_size: 1
+  - name: IWDG_STOP
+    description: IWDG stop in debug
+    bit_offset: 15
+    bit_size: 1
+fieldset/PRETPE:
+  description: Flash PRETPE register
+  fields:
+  - name: PRETPE
+    description: PRETPE value
+    bit_offset: 0
+    bit_size: 14
+fieldset/PRGTPE:
+  description: Flash PRGTPE register
+  fields:
+  - name: PRGTPE
+    description: PRGTPE value
+    bit_offset: 0
+    bit_size: 16
+fieldset/SDKR:
+  description: Flash SDK address register
+  fields:
+  - name: SDK_STRT
+    description: SDK area start address
+    bit_offset: 0
+    bit_size: 4
+  - name: SDK_END
+    description: SDK area end address
+    bit_offset: 8
+    bit_size: 4
+fieldset/SR:
+  description: Status register
+  fields:
+  - name: EOP
+    description: End of operation
+    bit_offset: 0
+    bit_size: 1
+  - name: WRPERR
+    description: Write protection error
+    bit_offset: 4
+    bit_size: 1
+  - name: OPTVERR
+    description: Option and trimming bits loading validity error
+    bit_offset: 15
+    bit_size: 1
+  - name: BSY
+    description: Busy
+    bit_offset: 16
+    bit_size: 1
+fieldset/STCR:
+  description: Flash sleep time config register
+  fields:
+  - name: SLEEP_EN
+    description: Sleep enable
+    bit_offset: 0
+    bit_size: 1
+fieldset/TPS3:
+  description: Flash TPS3 register
+  fields:
+  - name: TPS3
+    description: TPS3 value
+    bit_offset: 0
+    bit_size: 10
+fieldset/TS0:
+  description: Flash TS0 register
+  fields:
+  - name: TS0
+    description: TS0 value
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS1:
+  description: Flash TS1 register
+  fields:
+  - name: TS1
+    description: TS1 value
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS2P:
+  description: Flash TS2P register
+  fields:
+  - name: TS2P
+    description: TS2P value
+    bit_offset: 0
+    bit_size: 8
+fieldset/TS3:
+  description: Flash TS3 register
+  fields:
+  - name: TS3
+    description: TS3 value
+    bit_offset: 0
+    bit_size: 8
+fieldset/WRPR:
+  description: Flash WRP address register
+  fields:
+  - name: WRP
+    description: Write protection address
+    bit_offset: 0
+    bit_size: 16

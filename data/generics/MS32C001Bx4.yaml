@@ -1,0 +1,14 @@
+series: MS32C001B
+memory:
+- address: 134217728
+  kind: flash
+  name: BANK_1
+  settings:
+    sector_size: 1024
+    erase_value: 0
+    page_size: 64
+  size: 16384
+- address: 536870912
+  kind: ram
+  name: SRAM
+  size: 2048

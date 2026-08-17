@@ -1,0 +1,7 @@
+name: MS32C001BF24
+generic: MS32C001Bx4
+device_id: 0
+packages:
+  - name: MS32C001BF24U7
+    package: QFN20
+    pins: 18

@@ -1,0 +1,7 @@
+name: MS32C001BL14
+generic: MS32C001Bx4
+device_id: 0
+packages:
+  - name: MS32C001BL14S7
+    package: SOP8
+    pins: 6

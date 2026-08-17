@@ -1,5 +1,5 @@
-use serde::Deserialize;
 use py32_data_macros::EnumDebug;
+use serde::Deserialize;
 
 pub mod ir {
     use super::*;
@@ -24,19 +24,25 @@ pub mod ir {
                             name: item.name.clone(),
                             description: item.description.clone(),
                             array: item.array.as_ref().map(|array| match &array {
-                                chiptool::ir::Array::Regular(regular_array) => Array::Regular(RegularArray {
-                                    len: regular_array.len,
-                                    stride: regular_array.stride,
-                                }),
-                                chiptool::ir::Array::Cursed(cursed_array) => Array::Cursed(CursedArray {
-                                    offsets: cursed_array.offsets.clone(),
-                                }),
+                                chiptool::ir::Array::Regular(regular_array) => {
+                                    Array::Regular(RegularArray {
+                                        len: regular_array.len,
+                                        stride: regular_array.stride,
+                                    })
+                                }
+                                chiptool::ir::Array::Cursed(cursed_array) => {
+                                    Array::Cursed(CursedArray {
+                                        offsets: cursed_array.offsets.clone(),
+                                    })
+                                }
                             }),
                             byte_offset: item.byte_offset,
                             inner: match &item.inner {
-                                chiptool::ir::BlockItemInner::Block(block) => BlockItemInner::Block(BlockItemBlock {
-                                    block: block.block.clone(),
-                                }),
+                                chiptool::ir::BlockItemInner::Block(block) => {
+                                    BlockItemInner::Block(BlockItemBlock {
+                                        block: block.block.clone(),
+                                    })
+                                }
                                 chiptool::ir::BlockItemInner::Register(register) => {
                                     BlockItemInner::Register(Register {
                                         access: match register.access {
@@ -45,10 +51,9 @@ pub mod ir {
                                             chiptool::ir::Access::Write => Access::Write,
                                         },
                                         bit_size: register.bit_size,
-                                        fieldset: register
-                                            .fieldset
-                                            .as_ref()
-                                            .map(|fieldset| fieldset.strip_prefix("regs::").unwrap().to_string()),
+                                        fieldset: register.fieldset.as_ref().map(|fieldset| {
+                                            fieldset.strip_prefix("regs::").unwrap().to_string()
+                                        }),
                                     })
                                 }
                             },
@@ -82,23 +87,28 @@ pub mod ir {
                                     BitOffset::Regular(RegularBitOffset { offset: *offset })
                                 }
                                 chiptool::ir::BitOffset::Cursed(ranges) => {
-                                    BitOffset::Cursed(CursedBitOffset { ranges: ranges.clone() })
+                                    BitOffset::Cursed(CursedBitOffset {
+                                        ranges: ranges.clone(),
+                                    })
                                 }
                             },
                             bit_size: field.bit_size,
                             array: field.array.as_ref().map(|array| match &array {
-                                chiptool::ir::Array::Regular(regular_array) => Array::Regular(RegularArray {
-                                    len: regular_array.len,
-                                    stride: regular_array.stride,
-                                }),
-                                chiptool::ir::Array::Cursed(cursed_array) => Array::Cursed(CursedArray {
-                                    offsets: cursed_array.offsets.clone(),
-                                }),
+                                chiptool::ir::Array::Regular(regular_array) => {
+                                    Array::Regular(RegularArray {
+                                        len: regular_array.len,
+                                        stride: regular_array.stride,
+                                    })
+                                }
+                                chiptool::ir::Array::Cursed(cursed_array) => {
+                                    Array::Cursed(CursedArray {
+                                        offsets: cursed_array.offsets.clone(),
+                                    })
+                                }
                             }),
-                            enumm: field
-                                .enumm
-                                .as_ref()
-                                .map(|fieldset| fieldset.strip_prefix("vals::").unwrap().to_string()),
+                            enumm: field.enumm.as_ref().map(|fieldset| {
+                                fieldset.strip_prefix("vals::").unwrap().to_string()
+                            }),
                         })
                         .collect();
 

@@ -105,7 +105,7 @@
   address: 0x40002c00
   registers:
     kind: wwdg
-    version: common
+    version: v1
     block: WWDG
   rcc:
     bus_clock: PCLK1

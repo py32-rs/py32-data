@@ -43,7 +43,7 @@
   address: 0x40003000
   registers:
     kind: iwdg
-    version: common
+    version: v1
     block: IWDG
 
 - name: I2C1

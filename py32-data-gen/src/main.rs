@@ -85,6 +85,10 @@ fn main() -> anyhow::Result<()> {
         String,
         HashMap<String, Vec<py32_data_serde::chip::core::peripheral::DmaChannel>>,
     > = HashMap::new();
+    let mut die_triggers: HashMap<
+        String,
+        HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Trigger>>,
+    > = HashMap::new();
     let mut processed_generics = HashSet::new();
 
     for name in &chip_meta_files {
@@ -215,10 +219,24 @@ fn main() -> anyhow::Result<()> {
             die_dma_requests.insert(die_name.clone(), peripheral_dma_reqs);
         }
 
+        if !die_triggers.contains_key(die_name) {
+            let trigger_path = data_dir.join(format!("dies/{}/triggers.yaml", die_name));
+            let triggers = if trigger_path.exists() {
+                let content = std::fs::read_to_string(&trigger_path)?;
+                let triggers = serde_yaml::from_str(&content)?;
+                validate_triggers(&triggers);
+                triggers
+            } else {
+                HashMap::new()
+            };
+            die_triggers.insert(die_name.clone(), triggers);
+        }
+
         // Build the Core
         let mut final_peripherals = Vec::new();
         let current_afs = die_afs.get(die_name).unwrap();
         let current_dma_reqs = die_dma_requests.get(die_name).unwrap();
+        let current_triggers = die_triggers.get(die_name).unwrap();
 
         for mut p in die_peripherals.get(die_name).unwrap().clone() {
             if !series.disabled_peripherals.contains(&p.name) {
@@ -229,6 +247,9 @@ fn main() -> anyhow::Result<()> {
                 // inject dma requests
                 if let Some(reqs) = current_dma_reqs.get(&p.name) {
                     p.dma_channels = reqs.clone();
+                }
+                if let Some(triggers) = current_triggers.get(&p.name) {
+                    p.triggers = triggers.clone();
                 }
 
                 // remove unused peripherals
@@ -308,4 +329,34 @@ fn main() -> anyhow::Result<()> {
     stopwatch.stop();
 
     Ok(())
+}
+
+fn validate_triggers(
+    peripherals: &HashMap<String, Vec<py32_data_serde::chip::core::peripheral::Trigger>>,
+) {
+    for (peripheral, triggers) in peripherals {
+        let mut trigger_sets: HashMap<&str, HashSet<&str>> = HashMap::new();
+
+        for trigger in triggers {
+            let signal = trigger
+                .signal
+                .trim_end_matches(|c: char| c.is_ascii_digit());
+            assert!(
+                signal.len() < trigger.signal.len()
+                    && trigger.signal[signal.len()..].parse::<u8>().is_ok(),
+                "trigger signal must end in a numeric selector value: {}:{}",
+                peripheral,
+                trigger.signal
+            );
+
+            let trigger_set = trigger_sets.entry(signal).or_default();
+            assert!(
+                trigger_set.insert(&trigger.source)
+                    && trigger.source == trigger.source.to_ascii_uppercase(),
+                "invalid or duplicate trigger source for {}: {}",
+                peripheral,
+                trigger.source
+            );
+        }
+    }
 }

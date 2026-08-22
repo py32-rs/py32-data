@@ -175,6 +175,7 @@ pub struct Peripheral {
     pub rcc: Option<PeripheralRcc>,
     pub pins: &'static [PeripheralPin],
     pub dma_channels: &'static [PeripheralDmaChannel],
+    pub triggers: &'static [PeripheralTrigger],
     pub interrupts: &'static [PeripheralInterrupt],
 }
 
@@ -190,6 +191,12 @@ pub struct PeripheralRegisters {
 pub struct PeripheralInterrupt {
     pub signal: &'static str,
     pub interrupt: &'static str,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub struct PeripheralTrigger {
+    pub signal: &'static str,
+    pub source: &'static str,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]

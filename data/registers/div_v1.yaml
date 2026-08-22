@@ -1,0 +1,44 @@
+block/DIV:
+  description: Hardware divider
+  items:
+  - name: DEND
+    description: Dividend register
+    byte_offset: 0
+  - name: SOR
+    description: Divisor register. Writing to it starts the division.
+    byte_offset: 4
+  - name: QUOT
+    description: Quotient register
+    byte_offset: 8
+    access: Read
+  - name: REMD
+    description: Remainder register
+    byte_offset: 12
+    access: Read
+  - name: SIGN
+    description: Sign register
+    byte_offset: 16
+    fieldset: SIGN
+  - name: STAT
+    description: Status register
+    byte_offset: 20
+    access: Read
+    fieldset: STAT
+fieldset/SIGN:
+  description: Sign register
+  fields:
+  - name: SIGN
+    description: "Division sign. 0: unsigned division, 1: signed division."
+    bit_offset: 0
+    bit_size: 1
+fieldset/STAT:
+  description: Status register
+  fields:
+  - name: DIV_END
+    description: Division end flag. Set when the division is finished. Reading QUOT/REMD before this flag is set returns the result of the last completed division.
+    bit_offset: 0
+    bit_size: 1
+  - name: DIV_ZERO
+    description: Division by zero flag. Set when the divisor is 0. The operation ends immediately with QUOT and REMD both 0.
+    bit_offset: 1
+    bit_size: 1

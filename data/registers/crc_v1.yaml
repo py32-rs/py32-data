@@ -1,0 +1,20 @@
+block/CRC:
+  description: Cyclic redundancy check calculation unit
+  items:
+  - name: DR
+    description: CRC data register
+    byte_offset: 0
+  - name: IDR
+    description: CRC independent data register
+    byte_offset: 4
+  - name: CR
+    description: CRC control register
+    byte_offset: 8
+    fieldset: CR
+fieldset/CR:
+  description: CRC control register
+  fields:
+  - name: RESET
+    description: Reset bit. Writing 1 resets the CRC calculation unit to 0xFFFF_FFFF. No effect on the independent data register.
+    bit_offset: 0
+    bit_size: 1

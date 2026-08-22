@@ -797,11 +797,11 @@
   address: 0x40023800
   registers:
     kind: div
-    version: common
-    block: TODO
+    version: v1
+    block: DIV
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: DIVEN

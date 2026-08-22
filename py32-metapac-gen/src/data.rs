@@ -380,6 +380,8 @@ pub struct Peripheral {
     #[serde(default)]
     pub dma_channels: Vec<PeripheralDmaChannel>,
     #[serde(default)]
+    pub triggers: Vec<PeripheralTrigger>,
+    #[serde(default)]
     pub interrupts: Vec<PeripheralInterrupt>,
 }
 
@@ -394,6 +396,7 @@ impl std::fmt::Debug for Peripheral {
             .field("rcc", &self.rcc)
             .field("pins", &self.pins)
             .field("dma_channels", &self.dma_channels)
+            .field("triggers", &self.triggers)
             .field("interrupts", &self.interrupts)
             .finish()
     }
@@ -403,6 +406,12 @@ impl std::fmt::Debug for Peripheral {
 pub struct PeripheralInterrupt {
     pub signal: String,
     pub interrupt: String,
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Deserialize)]
+pub struct PeripheralTrigger {
+    pub signal: String,
+    pub source: String,
 }
 
 #[derive(Debug, Eq, PartialEq, Clone, Deserialize)]

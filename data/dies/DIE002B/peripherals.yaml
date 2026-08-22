@@ -327,7 +327,7 @@
   address: 0x40023000
   registers:
     kind: crc
-    version: common
+    version: v1
     block: CRC
   rcc:
     bus_clock: HCLK1

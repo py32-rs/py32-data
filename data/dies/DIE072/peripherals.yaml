@@ -781,11 +781,11 @@
   address: 0x40023000
   registers:
     kind: crc
-    version: common
+    version: v1
     block: CRC
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: HCLK1
+    kernel_clock: HCLK1
     enable:
       register: AHBENR
       field: CRCEN

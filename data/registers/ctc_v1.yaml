@@ -1,0 +1,195 @@
+block/CTC:
+  description: Clock trimming controller.
+  items:
+  - name: CTL0
+    description: Control register 0.
+    byte_offset: 0
+    fieldset: CTL0
+  - name: CTL1
+    description: Control register 1.
+    byte_offset: 4
+    fieldset: CTL1
+  - name: SR
+    description: Status register.
+    byte_offset: 8
+    access: Read
+    fieldset: SR
+  - name: INTC
+    description: Interrupt clear register.
+    byte_offset: 12
+    access: Write
+    fieldset: INTC
+
+fieldset/CTL0:
+  description: Control register 0.
+  fields:
+  - name: TRIMVALUE
+    description: HSI48 clock trimming value. Hardware-controlled when AUTOTRIM is set.
+    bit_offset: 8
+    bit_size: 7
+  - name: SWREFPUL
+    description: Software reference pulse. Cleared by hardware after the pulse is generated.
+    bit_offset: 7
+    bit_size: 1
+  - name: AUTOTRIM
+    description: Automatic trimming enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: CNTEN
+    description: Counter enable. While set, CTL1 cannot be modified.
+    bit_offset: 5
+    bit_size: 1
+  - name: EREFIE
+    description: Reference signal presence interrupt enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: ERRIE
+    description: Error interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: CKWARNIE
+    description: Clock warning interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: CKOKIE
+    description: Clock OK interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+
+fieldset/CTL1:
+  description: Control register 1.
+  fields:
+  - name: REFPOL
+    description: Reference signal polarity.
+    bit_offset: 31
+    bit_size: 1
+    enum: REFPOL
+  - name: REFSEL
+    description: Reference signal source selection.
+    bit_offset: 28
+    bit_size: 2
+    enum: REFSEL
+  - name: REFPSC
+    description: Reference signal prescaler.
+    bit_offset: 24
+    bit_size: 3
+    enum: REFPSC
+  - name: CKLIM
+    description: Clock limit value. The counter compares against multiples of this limit.
+    bit_offset: 16
+    bit_size: 8
+  - name: RLVALUE
+    description: Counter reload value, captured on each reference pulse.
+    bit_offset: 0
+    bit_size: 16
+
+fieldset/SR:
+  description: Status register.
+  fields:
+  - name: REFCAP
+    description: Counter value captured on the last reference pulse.
+    bit_offset: 16
+    bit_size: 16
+  - name: REFDIR
+    description: Reference signal direction indicator.
+    bit_offset: 15
+    bit_size: 1
+  - name: TRIMERR
+    description: Trimming error. TRIMVALUE overflowed or underflowed during automatic trimming.
+    bit_offset: 10
+    bit_size: 1
+  - name: REFMISS
+    description: Reference signal missing. No sync pulse was detected within 128 x CKLIM counter cycles while counting up.
+    bit_offset: 9
+    bit_size: 1
+  - name: CKERR
+    description: Clock error. The counter reached 128 x CKLIM at a sync pulse, indicating the trimmed clock is too slow.
+    bit_offset: 8
+    bit_size: 1
+  - name: EREFIF
+    description: Reference signal presence flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: ERRIF
+    description: Error flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: CKWARNIF
+    description: Clock warning flag. The counter was between 3 x CKLIM and 128 x CKLIM at the sync pulse.
+    bit_offset: 1
+    bit_size: 1
+  - name: CKOKIF
+    description: Clock OK flag. The counter was below 3 x CKLIM at the sync pulse.
+    bit_offset: 0
+    bit_size: 1
+
+fieldset/INTC:
+  description: Interrupt clear register.
+  fields:
+  - name: EREFIC
+    description: Reference signal presence flag clear.
+    bit_offset: 3
+    bit_size: 1
+  - name: ERRIC
+    description: Error flag clear.
+    bit_offset: 2
+    bit_size: 1
+  - name: CKWARNIC
+    description: Clock warning flag clear.
+    bit_offset: 1
+    bit_size: 1
+  - name: CKOKIC
+    description: Clock OK flag clear.
+    bit_offset: 0
+    bit_size: 1
+
+enum/REFPOL:
+  bit_size: 1
+  variants:
+  - name: RisingEdge
+    description: Reference edge is rising.
+    value: 0
+  - name: FallingEdge
+    description: Reference edge is falling.
+    value: 1
+
+enum/REFSEL:
+  bit_size: 2
+  variants:
+  - name: Gpio
+    description: GPIO input as reference signal.
+    value: 0
+  - name: Lse
+    description: LSE oscillator as reference signal.
+    value: 1
+  - name: UsbdSof
+    description: USB start-of-frame signal as reference signal.
+    value: 2
+
+enum/REFPSC:
+  bit_size: 3
+  variants:
+  - name: Div1
+    description: Reference signal not divided.
+    value: 0
+  - name: Div2
+    description: Reference signal divided by 2.
+    value: 1
+  - name: Div4
+    description: Reference signal divided by 4.
+    value: 2
+  - name: Div8
+    description: Reference signal divided by 8.
+    value: 3
+  - name: Div16
+    description: Reference signal divided by 16.
+    value: 4
+  - name: Div32
+    description: Reference signal divided by 32.
+    value: 5
+  - name: Div64
+    description: Reference signal divided by 64.
+    value: 6
+  - name: Div128
+    description: Reference signal divided by 128.
+    value: 7

@@ -1,0 +1,31 @@
+block/OPA:
+  description: Operational amplifiers
+  items:
+  - name: CR0
+    description: OPA output enable register
+    byte_offset: 48
+    fieldset: CR0
+  - name: CR1
+    description: OPA control register
+    byte_offset: 52
+    fieldset: CR1
+fieldset/CR0:
+  description: OPA output enable register
+  fields:
+  - name: OPAOEN1
+    description: OPAx output 1 enable. Routes the amplifier output to its dedicated pad. The output always reaches the ADC and COMP internally regardless of this bit.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 3
+      stride: 5
+fieldset/CR1:
+  description: OPA control register
+  fields:
+  - name: EN
+    description: OPAx enable
+    bit_offset: 5
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1

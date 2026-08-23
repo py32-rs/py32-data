@@ -485,8 +485,8 @@
   address: 0x40010300
   registers:
     kind: opa
-    version: common
-    block: TODO
+    version: v1
+    block: OPA
   rcc:
     bus_clock: PCLK1
     kernel_clock: PCLK1

@@ -22,7 +22,7 @@ block/ADC:
     byte_offset: 16
     fieldset: SMPR2
   - name: SMPR3
-    description: desc SMPR2.
+    description: sample time register 3
     byte_offset: 20
     fieldset: SMPR3
   - name: JOFR
@@ -30,7 +30,7 @@ block/ADC:
     array:
       len: 4
       stride: 4
-    byte_offset: 20
+    byte_offset: 24
     fieldset: JOFR
   - name: HTR
     description: watchdog higher threshold register
@@ -274,7 +274,7 @@ fieldset/JSQR:
   - name: JL
     description: Injected sequence length
     bit_offset: 20
-    bit_size: 4
+    bit_size: 2
 fieldset/LTR:
   description: watchdog lower threshold register
   fields:
@@ -290,29 +290,29 @@ fieldset/SMPR1:
     bit_offset: 0
     bit_size: 3
     array:
-      len: 9
+      len: 4
       stride: 3
     enum: SAMPLE_TIME
 fieldset/SMPR2:
-  description: desc SMPR2.
+  description: sample time register 2
   fields:
   - name: SMP
     description:  Channel 10 sampling time selection
     bit_offset: 0
     bit_size: 3
     array:
-      len: 9
+      len: 10
       stride: 3
     enum: SAMPLE_TIME
 fieldset/SMPR3:
-  description: desc SMPR2.
+  description: sample time register 3
   fields:
   - name: SMP
     description:  Channel 0 sampling time selection
     bit_offset: 0
     bit_size: 3
     array:
-      len: 9
+      len: 10
       stride: 3
     enum: SAMPLE_TIME
 fieldset/SQR1:
@@ -430,8 +430,8 @@ enum/SAMPLE_TIME:
   - name: Cycles41_5
     description: 41.5 cycles
     value: 5
-  - name: Cycles71_5
-    description: 71.5 cycles
+  - name: Cycles134_5
+    description: 134.5 cycles
     value: 6
   - name: Cycles239_5
     description: 239.5 cycles

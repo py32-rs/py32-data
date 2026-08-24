@@ -136,8 +136,8 @@ fieldset/APBENR1:
     description: TIM7 timer clock enable.
     bit_offset: 5
     bit_size: 1
-  - name: RTCAPBEN
-    description: RTC APB clock enable.
+  - name: TIMDIV_EN
+    description: "TIMER PCLK frequency control. 0: TIMER PCLK is system PCLK*2, capped at HCLK; 1: TIMER PCLK is system PCLK*1."
     bit_offset: 10
     bit_size: 1
   - name: WWDGEN
@@ -208,7 +208,7 @@ fieldset/APBENR2:
     bit_offset: 9
     bit_size: 1
   - name: DBGEN
-    description: DBG clock enable.
+    description: MCU debug module clock enable.
     bit_offset: 10
     bit_size: 1
   - name: TIM1EN
@@ -346,7 +346,7 @@ fieldset/APBRSTR2:
     bit_offset: 9
     bit_size: 1
   - name: DBGRST
-    description: DBG reset.
+    description: MCU debug module reset.
     bit_offset: 10
     bit_size: 1
   - name: TIM1RST
@@ -496,7 +496,7 @@ fieldset/CFGR:
   - name: MCOSEL
     description: Microcontroller clock output.
     bit_offset: 24
-    bit_size: 3
+    bit_size: 4
     enum: MCOSEL
   - name: MCOPRE
     description: Microcontroller clock output prescaler.
@@ -620,7 +620,7 @@ fieldset/CR:
     description: Clock security system enable.
     bit_offset: 19
     bit_size: 1
-  - name: ADCDIV
+  - name: ADC_DIV
     description: ADC Frequency Division.
     bit_offset: 21
     bit_size: 2
@@ -644,8 +644,8 @@ fieldset/CSR:
     description: LSI oscillator ready.
     bit_offset: 1
     bit_size: 1
-  - name: NRST_FLTDIS
-    description: NRST_FLTDIS oscillator ready.
+  - name: PINRST_FLTDIS
+    description: "NRST 40 us filter disable. 0: filter enabled; 1: filter disabled, reset synchronized to the system clock."
     bit_offset: 8
     bit_size: 1
   - name: RMVF
@@ -872,7 +872,7 @@ enum/PPRE:
     value: 7
 
 enum/MCOSEL:
-  bit_size: 3
+  bit_size: 4
   variants:
   - name: NONE
     description: No clock, MCO output disabled
@@ -880,8 +880,8 @@ enum/MCOSEL:
   - name: SYSCLK
     description: System clock selected
     value: 1
-  - name: RESERVED
-    description: Reserved
+  - name: HSI10M
+    description: HSI 10M clock selected
     value: 2
   - name: HSI
     description: HSI clock selected
@@ -898,6 +898,12 @@ enum/MCOSEL:
   - name: LSE
     description: LSE clock selected
     value: 7
+  - name: HCLK
+    description: HCLK clock selected
+    value: 8
+  - name: PCLK
+    description: PCLK clock selected
+    value: 9
 
 enum/MCOPRE:
   bit_size: 3

@@ -13,6 +13,10 @@ block/I2C:
     description: Own address register 1.
     byte_offset: 8
     fieldset: OAR1
+  - name: OAR2
+    description: Own address register 2.
+    byte_offset: 12
+    fieldset: OAR2
   - name: DR
     description: Data register.
     byte_offset: 16
@@ -58,6 +62,18 @@ fieldset/CR1:
     description: Peripheral enable.
     bit_offset: 0
     bit_size: 1
+  - name: SMBUS
+    description: SMBus mode.
+    bit_offset: 1
+    bit_size: 1
+  - name: SMBTYPE
+    description: SMBus type.
+    bit_offset: 3
+    bit_size: 1
+  - name: ENARP
+    description: ARP enable.
+    bit_offset: 4
+    bit_size: 1
   - name: ENPEC
     description: PEC enable.
     bit_offset: 5
@@ -90,6 +106,10 @@ fieldset/CR1:
   - name: PEC
     description: Packet error checking.
     bit_offset: 12
+    bit_size: 1
+  - name: ALERT
+    description: SMBus alert.
+    bit_offset: 13
     bit_size: 1
   - name: SWRST
     description: Software reset.
@@ -134,8 +154,27 @@ fieldset/OAR1:
   fields:
   - name: ADD
     description: Interface address.
+    bit_offset: 0
+    bit_size: 10
+  - name: ADDMODE
+    description: Addressing mode (slave mode).
+    bit_offset: 15
+    bit_size: 1
+fieldset/OAR2:
+  description: Own address register 2.
+  fields:
+  - name: ENDUAL
+    description: Dual addressing mode enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: ADD2
+    description: Interface address bits 7:1 in dual addressing mode.
     bit_offset: 1
     bit_size: 7
+  - name: OA2MSK
+    description: Own address 2 mask.
+    bit_offset: 8
+    bit_size: 3
 fieldset/SR1:
   description: Status register 1.
   fields:
@@ -150,6 +189,10 @@ fieldset/SR1:
   - name: BTF
     description: Byte transfer finished.
     bit_offset: 2
+    bit_size: 1
+  - name: ADD10
+    description: 10-bit header sent (master mode).
+    bit_offset: 3
     bit_size: 1
   - name: STOPF
     description: Stop detection (slave mode).
@@ -183,6 +226,14 @@ fieldset/SR1:
     description: PEC Error in reception.
     bit_offset: 12
     bit_size: 1
+  - name: TIMEOUT
+    description: Timeout or Tlow error.
+    bit_offset: 14
+    bit_size: 1
+  - name: SMBALERT
+    description: SMBus alert.
+    bit_offset: 15
+    bit_size: 1
 fieldset/SR2:
   description: Status register 2.
   fields:
@@ -201,6 +252,14 @@ fieldset/SR2:
   - name: GENCALL
     description: General call address (Slave mode).
     bit_offset: 4
+    bit_size: 1
+  - name: SMBDEFAULT
+    description: SMBus device default address.
+    bit_offset: 5
+    bit_size: 1
+  - name: SMBHOST
+    description: SMBus host header.
+    bit_offset: 6
     bit_size: 1
   - name: DUALF
     description: Dual flag (Slave mode).

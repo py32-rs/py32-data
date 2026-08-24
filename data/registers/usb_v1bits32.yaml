@@ -116,7 +116,7 @@ fieldset/EP0CSR:
   - name: COUNT0
     description: COUNT0.
     bit_offset: 8
-    bit_size: 1
+    bit_size: 7
 fieldset/FRAME:
   description: FRAME.
   fields:
@@ -264,7 +264,7 @@ fieldset/OUTCOUNT:
   - name: OUTCOUNT
     description: OUTCOUNT.
     bit_offset: 0
-    bit_size: 10
+    bit_size: 11
 fieldset/OUTEPxCSR:
   description: OUTEPxCSR.
   fields:

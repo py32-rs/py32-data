@@ -105,4 +105,4 @@ fieldset/IDCODE:
   - name: REV_ID
     description: REV_ID.
     bit_offset: 0
-    bit_size: 31
+    bit_size: 32

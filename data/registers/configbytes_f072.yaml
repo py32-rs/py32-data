@@ -14,8 +14,8 @@ block/CONFIGBYTES:
     byte_offset: 40
     fieldset: TSCAL
     access: Read
-  - name: TS_CAL_85C
-    description: Temperature sensor calibration value at 85°C.
+  - name: TS_CAL_105C
+    description: Temperature sensor calibration value at 105°C.
     byte_offset: 48
     fieldset: TSCAL
     access: Read
@@ -56,7 +56,7 @@ fieldset/HSI_TRIMMING:
   fields:
   - name: HSI_FS
     description: HSI frequency selection.
-    bit_offset: 13
+    bit_offset: 16
     bit_size: 3
   - name: HSI_TRIM
     description: HSI trimming value.

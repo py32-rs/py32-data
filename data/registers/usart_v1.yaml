@@ -37,10 +37,10 @@ block/USART:
     description: Control register 3
     byte_offset: 20
     fieldset: CR3_USART
-  # - name: GTPR
-  #   description: Guard time and prescaler register
-  #   byte_offset: 24
-  #   fieldset: GTPR
+  - name: GTPR
+    description: Guard time and prescaler register
+    byte_offset: 24
+    fieldset: GTPR
 fieldset/BRR:
   description: Baud rate register.
   fields:
@@ -126,6 +126,14 @@ fieldset/CR2_USART:
   extends: CR2
   description: Control register 2
   fields:
+  - name: LBDL
+    description: LIN break detection length.
+    bit_offset: 5
+    bit_size: 1
+  - name: LBDIE
+    description: LIN break detection interrupt enable.
+    bit_offset: 6
+    bit_size: 1
   - name: LBCL
     description: Last bit clock pulse.
     bit_offset: 8
@@ -147,8 +155,12 @@ fieldset/CR2_USART:
   - name: STOP
     description: STOP bits.
     bit_offset: 12
-    bit_size: 1
+    bit_size: 2
     enum: STOP
+  - name: LINEN
+    description: LIN mode enable.
+    bit_offset: 14
+    bit_size: 1
 fieldset/CR3:
   description: Control register 3.
   fields:
@@ -264,6 +276,10 @@ fieldset/SR:
     description: Automate baudrate detection requeset.
     bit_offset: 12
     bit_size: 1
+  - name: LBD
+    description: LIN break detection flag.
+    bit_offset: 8
+    bit_size: 1
 enum/CPHA:
   bit_size: 1
   variants:
@@ -328,14 +344,20 @@ enum/RWU:
     description: Receiver in mute mode
     value: 1
 enum/STOP:
-  bit_size: 1
+  bit_size: 2
   variants:
   - name: Stop1
     description: 1 stop bit
     value: 0
+  - name: Stop0P5
+    description: 0.5 stop bits
+    value: 1
   - name: Stop2
     description: 2 stop bits
-    value: 1
+    value: 2
+  - name: Stop1P5
+    description: 1.5 stop bits
+    value: 3
 enum/WAKE:
   bit_size: 1
   variants:
@@ -345,3 +367,14 @@ enum/WAKE:
   - name: AddressMark
     description: USART wakeup on address mark
     value: 1
+fieldset/GTPR:
+  description: Guard time and prescaler register
+  fields:
+  - name: PSC
+    description: Prescaler value.
+    bit_offset: 0
+    bit_size: 8
+  - name: GT
+    description: Guard time value.
+    bit_offset: 8
+    bit_size: 8

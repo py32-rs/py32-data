@@ -166,12 +166,20 @@ fieldset/CCSR:
     description: Calibration sample time selection.
     bit_offset: 12
     bit_size: 2
+  - name: CALBYP
+    description: Calibration bypass.
+    bit_offset: 14
+    bit_size: 1
   - name: CALSET
     description: Calibration factor selection.
     bit_offset: 15
     bit_size: 1
-  - name: CALFAIL
-    description: Calibration fail flag.
+  - name: OFFSUC
+    description: Offset calibration success flag.
+    bit_offset: 29
+    bit_size: 1
+  - name: CALSUC
+    description: Calibration success flag (0 = calibration failed).
     bit_offset: 30
     bit_size: 1
   - name: CALON

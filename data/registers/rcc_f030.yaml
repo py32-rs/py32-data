@@ -335,11 +335,11 @@ fieldset/CCIPR:
     bit_offset: 9
     bit_size: 1
     enum: COMP2SEL
-  - name: LPTIM1SEL
-    description: LPTIM1 clock source selection.
+  - name: LPTIMSEL
+    description: LPTIM clock source selection.
     bit_offset: 18
     bit_size: 2
-    enum: LPTIM1SEL
+    enum: LPTIMSEL
 fieldset/CFGR:
   description: Clock configuration register.
   fields:
@@ -793,20 +793,20 @@ enum/HSE_FREQ:
     description: 16MHz to 32MHz
     value: 3
 
-enum/LPTIM1SEL:
+enum/LPTIMSEL:
   bit_size: 2
   variants:
   - name: PCLK
-    description: PCLK selected as LPTIM1 clock source
+    description: PCLK selected as LPTIM clock source
     value: 0
   - name: LSI
-    description: LSI selected as LPTIM1 clock source
+    description: LSI selected as LPTIM clock source
     value: 1
   - name: NONE
     description: No clock
     value: 2
   - name: LSE
-    description: LSE selected as LPTIM1 clock source
+    description: LSE selected as LPTIM clock source
     value: 3
 
 enum/COMP2SEL:

@@ -235,8 +235,8 @@ fieldset/BDCR:
 fieldset/CCIPR:
   description: Peripherals independent clock configuration register.
   fields:
-  - name: LPTIM1SEL
-    description: LPTIM1 clock source selection.
+  - name: LPTIMSEL
+    description: LPTIM clock source selection.
     bit_offset: 18
     bit_size: 2
 fieldset/CFGR:

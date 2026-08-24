@@ -34,11 +34,11 @@ fieldset/SIGN:
 fieldset/STAT:
   description: Status register
   fields:
-  - name: DIV_END
+  - name: END
     description: Division end flag. Set when the division is finished. Reading QUOT/REMD before this flag is set returns the result of the last completed division.
     bit_offset: 0
     bit_size: 1
-  - name: DIV_ZERO
+  - name: ZERO
     description: Division by zero flag. Set when the divisor is 0. The operation ends immediately with QUOT and REMD both 0.
     bit_offset: 1
     bit_size: 1

@@ -206,8 +206,8 @@ fieldset/CCIPR:
     description: PVD module clock source selection
     bit_offset: 7
     bit_size: 1
-  - name: LPTIM1SEL
-    description: LPTIM1 clock source selection
+  - name: LPTIMSEL
+    description: LPTIM clock source selection
     bit_offset: 18
     bit_size: 2
 fieldset/CFGR:

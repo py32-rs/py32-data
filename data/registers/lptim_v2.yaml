@@ -1,0 +1,143 @@
+block/LPTIM:
+  description: Low-power timer.
+  items:
+  - name: ISR
+    description: Interrupt and status register.
+    byte_offset: 0
+    access: Read
+    fieldset: ISR
+  - name: ICR
+    description: Interrupt clear register.
+    byte_offset: 4
+    access: Write
+    fieldset: ICR
+  - name: IER
+    description: Interrupt enable register.
+    byte_offset: 8
+    fieldset: IER
+  - name: CFGR
+    description: Configuration register.
+    byte_offset: 12
+    fieldset: CFGR
+  - name: CR
+    description: Control register.
+    byte_offset: 16
+    fieldset: CR
+  - name: ARR
+    description: Auto-reload register.
+    byte_offset: 24
+    fieldset: ARR
+  - name: CNT
+    description: Counter register.
+    byte_offset: 28
+    access: Read
+    fieldset: CNT
+fieldset/ISR:
+  description: Interrupt and status register.
+  fields:
+  - name: ARRM
+    description: Auto-reload match. Set by hardware when CNT matches ARR. Cleared by writing 1 to ICR.ARRMCF.
+    bit_offset: 1
+    bit_size: 1
+  - name: ARROK
+    description: Auto-reload register update OK. Set by hardware once an APB write to ARR has completed. Cleared by writing 1 to ICR.ARROKCF.
+    bit_offset: 4
+    bit_size: 1
+fieldset/ICR:
+  description: Interrupt clear register.
+  fields:
+  - name: ARRMCF
+    description: Auto-reload match clear flag. Writing 1 clears ISR.ARRM.
+    bit_offset: 1
+    bit_size: 1
+  - name: ARROKCF
+    description: Auto-reload register update OK clear flag. Writing 1 clears ISR.ARROK.
+    bit_offset: 4
+    bit_size: 1
+fieldset/IER:
+  description: Interrupt enable register.
+  fields:
+  - name: ARRMIE
+    description: Auto-reload match interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: ARROKIE
+    description: Auto-reload register update OK interrupt enable.
+    bit_offset: 4
+    bit_size: 1
+fieldset/CFGR:
+  description: Configuration register.
+  fields:
+  - name: PRESC
+    description: Clock prescaler division factor.
+    bit_offset: 9
+    bit_size: 3
+    enum: PRESC
+  - name: PRELOAD
+    description: "Register update mode. 0: ARR is updated after each APB write access; 1: ARR is updated at the end of the current LPTIM cycle."
+    bit_offset: 22
+    bit_size: 1
+fieldset/CR:
+  description: Control register.
+  fields:
+  - name: ENABLE
+    description: LPTIM enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: SNGSTRT
+    description: Start LPTIM in single-pulse mode. Set by software, cleared by hardware; only settable while ENABLE is set.
+    bit_offset: 1
+    bit_size: 1
+  - name: CNTSTRT
+    description: Start LPTIM in continuous mode. Set by software, cleared by hardware; only settable while ENABLE is set.
+    bit_offset: 2
+    bit_size: 1
+  - name: COUNTRST
+    description: Synchronous counter reset. Takes at least three LPTIM clock periods; do not set it again before the previous reset has completed.
+    bit_offset: 3
+    bit_size: 1
+  - name: RSTARE
+    description: Reset after read enable. While set, any read of CNT asynchronously resets its contents.
+    bit_offset: 4
+    bit_size: 1
+fieldset/ARR:
+  description: Auto-reload register.
+  fields:
+  - name: ARR
+    description: Auto-reload value. Reset value is 1.
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNT:
+  description: Counter register.
+  fields:
+  - name: CNT
+    description: Counter value. Read twice and compare, since the counter is in a different clock domain.
+    bit_offset: 0
+    bit_size: 16
+enum/PRESC:
+  bit_size: 3
+  variants:
+  - name: DIV1
+    description: Divide by 1
+    value: 0
+  - name: DIV2
+    description: Divide by 2
+    value: 1
+  - name: DIV4
+    description: Divide by 4
+    value: 2
+  - name: DIV8
+    description: Divide by 8
+    value: 3
+  - name: DIV16
+    description: Divide by 16
+    value: 4
+  - name: DIV32
+    description: Divide by 32
+    value: 5
+  - name: DIV64
+    description: Divide by 64
+    value: 6
+  - name: DIV128
+    description: Divide by 128
+    value: 7

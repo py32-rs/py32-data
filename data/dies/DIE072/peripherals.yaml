@@ -162,7 +162,7 @@
   address: 0x40002800
   registers:
     kind: rtc
-    version: common
+    version: v1
     block: RTC
   rcc:
     bus_clock: PCLK1

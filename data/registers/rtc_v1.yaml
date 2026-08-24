@@ -1,0 +1,171 @@
+block/RTC:
+  description: Real-time clock.
+  items:
+  - name: CRH
+    description: Control register high.
+    byte_offset: 0
+    fieldset: CRH
+  - name: CRL
+    description: Control register low.
+    byte_offset: 4
+    fieldset: CRL
+  - name: PRLH
+    description: Prescaler load register high.
+    byte_offset: 8
+    access: Write
+    fieldset: PRLH
+  - name: PRLL
+    description: Prescaler load register low.
+    byte_offset: 12
+    access: Write
+    fieldset: PRLL
+  - name: DIVH
+    description: Prescaler divider register high.
+    byte_offset: 16
+    access: Read
+    fieldset: DIVH
+  - name: DIVL
+    description: Prescaler divider register low.
+    byte_offset: 20
+    access: Read
+    fieldset: DIVL
+  - name: CNTH
+    description: Counter register high.
+    byte_offset: 24
+    fieldset: CNTH
+  - name: CNTL
+    description: Counter register low.
+    byte_offset: 28
+    fieldset: CNTL
+  - name: ALRH
+    description: Alarm register high.
+    byte_offset: 32
+    access: Write
+    fieldset: ALRH
+  - name: ALRL
+    description: Alarm register low.
+    byte_offset: 36
+    access: Write
+    fieldset: ALRL
+  - name: BKP_RTCCR
+    description: Clock calibration and output configuration register.
+    byte_offset: 44
+    fieldset: BKP_RTCCR
+fieldset/CRH:
+  description: Control register high.
+  fields:
+  - name: SECIE
+    description: Second interrupt enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: ALRIE
+    description: Alarm interrupt enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: OWIE
+    description: Overflow interrupt enable.
+    bit_offset: 2
+    bit_size: 1
+fieldset/CRL:
+  description: Control register low.
+  fields:
+  - name: SECF
+    description: Second flag. Set by hardware once per prescaler period; cleared by writing 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: ALRF
+    description: Alarm flag. Set by hardware when the counter reaches the alarm value; cleared by writing 0.
+    bit_offset: 1
+    bit_size: 1
+  - name: OWF
+    description: Overflow flag. Set by hardware when the counter overflows; cleared by writing 0.
+    bit_offset: 2
+    bit_size: 1
+  - name: RSF
+    description: Registers synchronized flag. Set by hardware once CNT and DIV have been synchronized; cleared by writing 0.
+    bit_offset: 3
+    bit_size: 1
+  - name: CNF
+    description: Configuration flag. Set to enter configuration mode before writing PRL, CNT, ALR or BKP_RTCCR; clear it to commit.
+    bit_offset: 4
+    bit_size: 1
+  - name: RTOFF
+    description: RTC operation off. Reads 1 when the last write has completed and a new write may start. Reset value is 1.
+    bit_offset: 5
+    bit_size: 1
+    access: Read
+fieldset/PRLH:
+  description: Prescaler load register high.
+  fields:
+  - name: PRL
+    description: Prescaler reload value, high bits (PRL[19:16]).
+    bit_offset: 0
+    bit_size: 4
+fieldset/PRLL:
+  description: Prescaler load register low.
+  fields:
+  - name: PRL
+    description: Prescaler reload value, low bits (PRL[15:0]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/DIVH:
+  description: Prescaler divider register high.
+  fields:
+  - name: DIV
+    description: Current prescaler divider value, high bits (DIV[19:16]).
+    bit_offset: 0
+    bit_size: 4
+fieldset/DIVL:
+  description: Prescaler divider register low.
+  fields:
+  - name: DIV
+    description: Current prescaler divider value, low bits (DIV[15:0]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTH:
+  description: Counter register high.
+  fields:
+  - name: CNT
+    description: Counter value, high bits (CNT[31:16]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/CNTL:
+  description: Counter register low.
+  fields:
+  - name: CNT
+    description: Counter value, low bits (CNT[15:0]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/ALRH:
+  description: Alarm register high.
+  fields:
+  - name: ALR
+    description: Alarm value, high bits (ALR[31:16]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/ALRL:
+  description: Alarm register low.
+  fields:
+  - name: ALR
+    description: Alarm value, low bits (ALR[15:0]).
+    bit_offset: 0
+    bit_size: 16
+fieldset/BKP_RTCCR:
+  description: Clock calibration and output configuration register.
+  fields:
+  - name: CAL
+    description: Calibration value. Slows the clock by CAL x 1/2^20, up to 121 ppm.
+    bit_offset: 0
+    bit_size: 7
+  - name: CCO
+    description: Calibration clock output. When set, outputs the RTC clock divided by 64.
+    bit_offset: 7
+    bit_size: 1
+  - name: ASOE
+    description: Second or alarm pulse output enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: ASOS
+    description: "Second or alarm pulse output selection. 0: second pulse; 1: alarm pulse."
+    bit_offset: 9
+    bit_size: 1

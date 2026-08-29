@@ -398,12 +398,23 @@
   - signal: GLOBAL
     interrupt: TIM6_LPTIM1_DAC
 
-- name: LPTIM1
+- name: LPTIM
   address: 0x40007c00
   registers:
-    kind: lptim1
-    version: common
-    block: TODO
+    kind: lptim
+    version: v2
+    block: LPTIM
+  rcc:
+    bus_clock: PCLK1_TIM
+    kernel_clock:
+      register: CCIPR
+      field: LPTIMSEL
+    enable:
+      register: APBENR1
+      field: LPTIMEN
+    reset:
+      register: APBRSTR1
+      field: LPTIMRST
   interrupts:
   - signal: GLOBAL
     interrupt: TIM6_LPTIM1_DAC

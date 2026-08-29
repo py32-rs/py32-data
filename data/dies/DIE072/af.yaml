@@ -838,3 +838,22 @@ DBGMCU:
   - af: 0
     pin: PA14
     signal: SWCLK
+OPA:
+  - pin: PA9
+    signal: VP1
+  - pin: PA10
+    signal: VN1
+  - pin: PA8
+    signal: VOUT1
+  - pin: PA7
+    signal: VP2
+  - pin: PA6
+    signal: VN2
+  - pin: PA5
+    signal: VOUT2
+  - pin: PB13
+    signal: VP3
+  - pin: PB12
+    signal: VN3
+  - pin: PB14
+    signal: VOUT3

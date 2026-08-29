@@ -348,11 +348,11 @@
   address: 0x40006c00
   registers:
     kind: ctc
-    version: common
-    block: TODO
+    version: v1
+    block: CTC
   rcc:
     bus_clock: PCLK1
-    kernel_clock: PCLK1
+    kernel_clock: PLL
     enable:
       register: APBENR1
       field: CTCEN

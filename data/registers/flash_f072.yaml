@@ -26,11 +26,11 @@ block/FLASH:
     byte_offset: 32
     access: Read
     fieldset: OPTR
-  - name: SDKR
-    description: desc SDKR.
+  - name: BORCR
+    description: Flash BORCR address register.
     byte_offset: 36
     access: Read
-    fieldset: SDKR
+    fieldset: BORCR
   - name: WRPR
     description: desc WRPR.
     byte_offset: 44
@@ -177,23 +177,15 @@ fieldset/PRGTPE:
     description: desc PRGTPE.
     bit_offset: 0
     bit_size: 16
-fieldset/SDKR:
-  description: desc SDKR.
+fieldset/BORCR:
+  description: Flash BORCR address register.
   fields:
-  - name: SDK_STRT
-    description: desc SDK_STRT.
-    bit_offset: 0
-    bit_size: 5
   - name: BOR_EN
-    description: desc BOR_EN.
+    description: BOR enable.
     bit_offset: 5
     bit_size: 1
-  - name: SDK_END
-    description: desc SDK_END.
-    bit_offset: 8
-    bit_size: 5
   - name: BOR_LEV
-    description: desc BOR_LEV.
+    description: BOR level.
     bit_offset: 13
     bit_size: 3
 fieldset/SMERTPE:

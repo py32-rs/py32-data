@@ -168,8 +168,11 @@
     bus_clock: PCLK1
     kernel_clock: PCLK1
     enable:
-      register: APBENR1
-      field: RTCAPBEN
+      register: BDCR
+      field: RTCEN
+    reset:
+      register: APBRSTR1
+      field: RTCAPBRST
   interrupts:
   - signal: GLOBAL
     interrupt: RTC

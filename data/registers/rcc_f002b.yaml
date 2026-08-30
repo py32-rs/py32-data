@@ -201,6 +201,14 @@ fieldset/APBRSTR2:
     description: ADC reset.
     bit_offset: 20
     bit_size: 1
+  - name: COMP1RST
+    description: COMP1 reset.
+    bit_offset: 21
+    bit_size: 1
+  - name: COMP2RST
+    description: COMP2 reset.
+    bit_offset: 22
+    bit_size: 1
 fieldset/BDCR:
   description: RTC domain control register.
   fields:
@@ -235,6 +243,14 @@ fieldset/BDCR:
 fieldset/CCIPR:
   description: Peripherals independent clock configuration register.
   fields:
+  - name: COMP1SEL
+    description: COMP1 clock source selection.
+    bit_offset: 10
+    bit_size: 1
+  - name: COMP2SEL
+    description: COMP2 clock source selection.
+    bit_offset: 11
+    bit_size: 1
   - name: LPTIM1SEL
     description: LPTIM1 clock source selection.
     bit_offset: 18
@@ -390,6 +406,10 @@ fieldset/ECSCR:
   - name: LSE_DRIVER
     description: desc LSE_DRIVER.
     bit_offset: 16
+    bit_size: 2
+  - name: LSE_STARTUP
+    description: LSE startup time.
+    bit_offset: 20
     bit_size: 2
 fieldset/ICSCR:
   description: Internal clock sources calibration register.

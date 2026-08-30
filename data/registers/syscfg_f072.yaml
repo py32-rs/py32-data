@@ -33,6 +33,10 @@ block/SYSCFG:
     description: desc PFENS.
     byte_offset: 28
     fieldset: PFENS
+  - name: EIIC
+    description: I2C configuration register.
+    byte_offset: 32
+    fieldset: EIIC
 fieldset/CFGR1:
   description: desc CFGR1.
   fields:
@@ -210,4 +214,19 @@ fieldset/PFENS:
   - name: PF_ENS
     description: desc PF_ENS.
     bit_offset: 0
-    bit_size: 16
+    bit_size: 10
+fieldset/EIIC:
+  description: I2C configuration register.
+  fields:
+  - name: PA_EIIC
+    description: EIIC control signal for PA.
+    bit_offset: 0
+    bit_size: 2
+  - name: PB_EIIC
+    description: EIIC control signal for PB.
+    bit_offset: 8
+    bit_size: 8
+  - name: PF_EIIC
+    description: EIIC control signal for PF.
+    bit_offset: 24
+    bit_size: 2

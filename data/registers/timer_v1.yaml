@@ -1346,7 +1346,7 @@ fieldset/RCR_ADV:
   - name: REP
     description: Repetition counter value
     bit_offset: 0
-    bit_size: 16
+    bit_size: 8
 fieldset/SMCR_2CH:
   description: slave mode control register
   fields:

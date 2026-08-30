@@ -84,8 +84,8 @@ fieldset/CR1:
     bit_offset: 10
     bit_size: 1
     enum: RXONLY
-  - name: DDF
-    description: desc DDF.
+  - name: DFF
+    description: Data frame format.
     bit_offset: 11
     bit_size: 1
   - name: CRCNEXT

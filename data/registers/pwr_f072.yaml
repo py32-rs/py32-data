@@ -1,0 +1,77 @@
+block/PWR:
+  description: Power control.
+  items:
+  - name: CR1
+    description: Power control register 1.
+    byte_offset: 0
+    fieldset: CR1
+  - name: CR2
+    description: Power control register 2.
+    byte_offset: 4
+    fieldset: CR2
+  - name: SR
+    description: Power status register.
+    byte_offset: 20
+    access: Read
+    fieldset: SR
+fieldset/CR1:
+  description: Power control register 1.
+  fields:
+  - name: BIAS_CR
+    description: MR Bias current.
+    bit_offset: 0
+    bit_size: 3
+  - name: BIAS_CR_SEL
+    description: MR Bias current selection.
+    bit_offset: 4
+    bit_size: 1
+  - name: DBP
+    description: Disable backup domain write protection.
+    bit_offset: 8
+    bit_size: 1
+  - name: VOS
+    description: Voltage scaling range selection.
+    bit_offset: 9
+    bit_size: 2
+  - name: FLS_SLPTIME
+    description: Flash wait time after wakeup from the stop mode.
+    bit_offset: 12
+    bit_size: 2
+  - name: LPR
+    description: Low-power run.
+    bit_offset: 14
+    bit_size: 1
+  - name: HSION_CTRL
+    description: HSI open time control.
+    bit_offset: 19
+    bit_size: 1
+fieldset/CR2:
+  description: Power control register 2.
+  fields:
+  - name: PVDE
+    description: Power voltage detector enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: SRCSEL
+    description: Power voltage detector voltage selection.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVDT
+    description: Power voltage detector threshold selection.
+    bit_offset: 4
+    bit_size: 3
+  - name: FLTEN
+    description: Digital filter enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: FLT_TIME
+    description: Digital filter time configuration.
+    bit_offset: 9
+    bit_size: 3
+fieldset/SR:
+  description: Power status register.
+  fields:
+  - name: PVDO
+    description: PVD output.
+    bit_offset: 11
+    bit_size: 1

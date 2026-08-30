@@ -1,0 +1,38 @@
+block/PWR:
+  description: Power control.
+  items:
+  - name: CR1
+    description: Power control register 1.
+    byte_offset: 0
+    fieldset: CR1
+fieldset/CR1:
+  description: Power control register 1.
+  fields:
+  - name: BIAS_CR
+    description: MR Bias current.
+    bit_offset: 0
+    bit_size: 4
+  - name: BIAS_CR_SEL
+    description: MR Bias current selection.
+    bit_offset: 4
+    bit_size: 1
+  - name: FLS_SLPTIME
+    description: Flash wait time after wakeup from the stop mode.
+    bit_offset: 12
+    bit_size: 2
+  - name: LPR
+    description: Low-power run.
+    bit_offset: 14
+    bit_size: 2
+  - name: SRAM_RETV
+    description: SRAM retention voltage control in stop mode.
+    bit_offset: 17
+    bit_size: 1
+  - name: SRAM_RETV_DLP
+    description: SRAM retention voltage control in deep-stop mode. Present on PY32L020.
+    bit_offset: 18
+    bit_size: 1
+  - name: HSION_CTRL
+    description: HSI open time control.
+    bit_offset: 19
+    bit_size: 1

@@ -69,7 +69,7 @@
   address: 0x40007000
   registers:
     kind: pwr
-    version: common
+    version: f002b
     block: PWR
   rcc:
     bus_clock: PCLK1

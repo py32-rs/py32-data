@@ -404,6 +404,9 @@ TIM1:
   - af: 2
     pin: PF5
     signal: BKIN2
+  - af: 11
+    pin: PF7
+    signal: CH1N
 TIM14:
   - af: 4
     pin: PA4
@@ -536,9 +539,6 @@ TIM2:
   - af: 14
     pin: PC7
     signal: CH4
-  - af: 11
-    pin: PF7
-    signal: CH1N
 TIM3:
   - af: 1
     pin: PA6

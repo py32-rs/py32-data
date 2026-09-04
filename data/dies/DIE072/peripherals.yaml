@@ -15,12 +15,12 @@
 - name: TIM2
   address: 0x40000000
   registers:
-    kind: tim
-    version: common
-    block: TODO
+    kind: timer
+    version: v1
+    block: TIM_GP32
   rcc:
-    bus_clock: PCLK1
-    kernel_clock: PCLK1
+    bus_clock: PCLK1_TIM
+    kernel_clock: PCLK1_TIM
     enable:
       register: APBENR1
       field: TIM2EN
@@ -28,7 +28,11 @@
       register: APBRSTR1
       field: TIM2RST
   interrupts:
-  - signal: GLOBAL
+  - signal: UP
+    interrupt: TIM2
+  - signal: TRG
+    interrupt: TIM2
+  - signal: CC
     interrupt: TIM2
 
 - name: TIM3

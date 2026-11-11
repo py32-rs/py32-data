@@ -1,0 +1,9 @@
+- name: DMA1_CH1
+  dma: DMA1
+  channel: 0
+- name: DMA1_CH2
+  dma: DMA1
+  channel: 1
+- name: DMA1_CH3
+  dma: DMA1
+  channel: 2

@@ -6,6 +6,5 @@ disabled_peripherals:
 - USB
 disabled_interrupts:
 - CAN
-- TIM6_LPTIM1_DAC
 - USB
 family: Mainstream

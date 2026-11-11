@@ -834,19 +834,14 @@
           <addressOffset>0x8</addressOffset>
           <fields>
             <field>
+              <name>DBG_RTC_STOP</name>
+              <description>Debug RTC stopped whenCore is halted</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
               <name>DBG_IWDG_STOP</name>
               <description>Debug Independent Wachdog stopped whenCore is halted</description>
               <bitRange>[12:12]</bitRange>
-            </field>
-            <field>
-              <name>DBG_I2C1_TIMEOUT</name>
-              <description>Debug I2C1 TIMEOUT stopped when Core ishalted</description>
-              <bitRange>[21:21]</bitRange>
-            </field>
-            <field>
-              <name>DBG_LPTIM_STOP</name>
-              <description>Debug LPTIM stopped when Core ishalted</description>
-              <bitRange>[31:31]</bitRange>
             </field>
           </fields>
         </register>

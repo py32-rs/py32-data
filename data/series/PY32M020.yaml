@@ -1,47 +1,4 @@
 die: DIE030
-disabled_peripherals:
-  - ADC1
-  - CONFIGBYTES
-  - DBGMCU
-  - DMA1
-  - EXTI
-  - FLASH
-  - GPIOB
-  - GPIOF
-  - I2C1
-  - RCC
-  - SPI1
-  - SPI2
-  - SYSCFG
-  - TIM1
-  - TIM14
-  - TIM16
-  - TIM17
-  - TIM3
-  - UID
-  - USART1
-  - USART2
-disabled_interrupts:
-  - ADC_COMP
-  - DMA_Channel1
-  - DMA_Channel2_3
-  - EXTI0_1
-  - EXTI2_3
-  - EXTI4_15
-  - FLASH
-  - I2C1
-  - LED
-  - PVD
-  - RCC
-  - RTC
-  - SPI1
-  - SPI2
-  - TIM14
-  - TIM16
-  - TIM17
-  - TIM1_BRK_UP_TRG_COM
-  - TIM1_CC
-  - TIM3
-  - USART1
-  - USART2
+disabled_peripherals: []
+disabled_interrupts: []
 family: Motor-Control

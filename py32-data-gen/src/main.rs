@@ -238,6 +238,27 @@ fn main() -> anyhow::Result<()> {
         let current_dma_reqs = die_dma_requests.get(die_name).unwrap();
         let current_triggers = die_triggers.get(die_name).unwrap();
 
+        let disabled_ports: HashSet<char> = series
+            .disabled_peripherals
+            .iter()
+            .filter_map(|n| n.strip_prefix("GPIO").and_then(|port| port.chars().next()))
+            .collect();
+        let disabled_irqs = &series.disabled_interrupts;
+        let disabled_dma_channels: HashSet<String> = die_peripherals
+            .get(die_name)
+            .unwrap()
+            .iter()
+            .filter(|p| p.registers.as_ref().is_some_and(|r| r.kind == "dma"))
+            .flat_map(|p| {
+                let peri_disabled = series.disabled_peripherals.contains(&p.name);
+                p.interrupts
+                    .iter()
+                    .flatten()
+                    .filter(move |i| peri_disabled || disabled_irqs.contains(&i.interrupt))
+                    .map(move |i| format!("{}_{}", p.name, i.signal))
+            })
+            .collect();
+
         for mut p in die_peripherals.get(die_name).unwrap().clone() {
             if !series.disabled_peripherals.contains(&p.name) {
                 // inject afs
@@ -251,6 +272,20 @@ fn main() -> anyhow::Result<()> {
                 if let Some(triggers) = current_triggers.get(&p.name) {
                     p.triggers = triggers.clone();
                 }
+
+                // drop references to things this series disables
+                if let Some(irqs) = &mut p.interrupts {
+                    irqs.retain(|i| !series.disabled_interrupts.contains(&i.interrupt));
+                }
+                p.pins.retain(|pin| {
+                    !pin.pin
+                        .strip_prefix('P')
+                        .and_then(|rest| rest.chars().next())
+                        .is_some_and(|port| disabled_ports.contains(&port))
+                });
+                p.dma_channels.retain(|c| {
+                    !c.channel.as_ref().is_some_and(|ch| disabled_dma_channels.contains(ch))
+                });
 
                 // remove unused peripherals
                 if let Some(registers) = &p.registers {
@@ -273,7 +308,13 @@ fn main() -> anyhow::Result<()> {
             }
         }
 
-        let final_dma_channels = die_dma_channels.get(die_name).unwrap().clone();
+        let final_dma_channels: Vec<_> = die_dma_channels
+            .get(die_name)
+            .unwrap()
+            .iter()
+            .filter(|c| !disabled_dma_channels.contains(&c.name))
+            .cloned()
+            .collect();
 
         let core = py32_data_serde::chip::Core {
             name: "cm0p".to_string(), // Py32 uses Cortex-M0+

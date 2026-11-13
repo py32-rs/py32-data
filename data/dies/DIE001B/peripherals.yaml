@@ -101,11 +101,13 @@
   address: 0x40007c00
   registers:
     kind: lptim
-    version: common
+    version: v2
     block: LPTIM
   rcc:
     bus_clock: PCLK1_TIM
-    kernel_clock: PCLK1_TIM
+    kernel_clock:
+      register: CCIPR
+      field: LPTIMSEL
     enable:
       register: APBENR1
       field: LPTIMEN

@@ -23,12 +23,14 @@ provides a cross-family HAL implementation depending on py32-metapac.
 
 ## Families
 
-Date: 20240312
+Date: 20261112
 
 - Low Cost
   - PY32F002A
   - PY32F002B
   - PY32F003
+  - MS32C001
+  - MS32C001B
 - Mainstream
   - PY32F030
   - PY32F031
@@ -38,13 +40,16 @@ Date: 20240312
   - PY32F403
 - Low Power
   - PY32L020
-- Moter Control
-  - PY32M010
+- Motor Control
+  - PY32M010A
   - PY32M020
   - PY32M030
   - PY32M031
   - PY32M070
-  - PY32MD
+  - PY32MD310
+  - PY32MD320
+  - PY32MD410
+  - PY32MD420
 - Touch Control
   - PY32T020
 
